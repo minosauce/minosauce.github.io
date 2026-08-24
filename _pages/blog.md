@@ -1,7 +1,7 @@
 ---
 layout: default
 permalink: https://velog.io/@minosauce
-title: blog
+title: Blog
 nav: true
 nav_order: 5
 ---
