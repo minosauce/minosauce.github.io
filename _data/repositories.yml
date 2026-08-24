@@ -9,5 +9,6 @@ github_repos:
   - minosauce/LMPC.jl
   - minosauce/HNN.jl
 
+github_repos:
   # Recommended research repositories
   - OpenFAST/openfast
