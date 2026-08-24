@@ -120,3 +120,19 @@ samp {
 .latest-publications .title {
   font-weight: 700 !important;
 }
+
+
+/* =========================================================
+   Profile photo size
+   ========================================================= */
+
+@media (min-width: 576px) {
+  .profile {
+    width: 24% !important;
+  }
+
+  .profile img {
+    width: 100% !important;
+    height: auto !important;
+  }
+}
