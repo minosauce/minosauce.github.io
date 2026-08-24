@@ -1,7 +1,7 @@
 ---
 
 layout: about
-title: about
+title: About
 permalink: /
 subtitle: Guidance, Navigation, and Control (GNC) Research Engineer
 
