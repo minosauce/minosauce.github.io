@@ -27,11 +27,19 @@ latest_posts:
   limit: 3 # leave blank to include all the blog posts
 ---
 
-[𝐁𝐢𝐨𝐠𝐫𝐚𝐩𝐡𝐲]
+## Biography
+
   He received the B.S. degree in electronics and computer engineering from Chonnam National University, Gwangju, Republic of Korea, in 2021, and the M.S. degree in aerospace engineering from Sejong University, Seoul, Republic of Korea, in 2025. 
 
   He is currently working as a satellite system engineer at the Satellite Technology Research Center (SaTRec), KAIST, Daejeon, Republic of Korea. His research interests include guidance, navigation, and control (GNC), with a focus on optimal control theory and its applications to missile and satellite systems.
 
-Professional Experience:
-• Peer Reviewer for international journals
+## Professional Experience:
+- Peer Reviewer for international journals
    -  IEEE Access
+
+
+## Latest Publications
+
+<div class="publications">
+  {% bibliography --max 3 %}
+</div>
