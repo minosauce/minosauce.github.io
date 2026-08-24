@@ -12,3 +12,4 @@ github_repos:
 open_repos:
   # Recommended research repositories
   - OpenFAST/openfast
+  - OpenFAST/r-test
