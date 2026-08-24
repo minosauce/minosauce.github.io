@@ -6,7 +6,7 @@ subtitle: <a href="https://satrec.kaist.ac.kr/" target="_blank">KAIST Satellite 
 
 profile:
   align: left
-  image: minho_jang.JPG
+  image: minho_jang.jpg
   image_circular: false
   more_info: >
     <p><strong>Guidance, Navigation, and Control (GNC)</strong></p>
