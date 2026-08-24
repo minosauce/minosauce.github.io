@@ -97,3 +97,21 @@ samp {
   font-size: 1.35rem;
 }
 
+/* =========================================================
+   Search button: "ctrl k" -> "Search"
+   ========================================================= */
+
+#search-toggle .nav-link {
+  font-size: 0;
+}
+
+#search-toggle .nav-link::before {
+  content: "Search";
+  font-size: 1rem;
+  font-family: "Times New Roman", Times, serif;
+}
+
+#search-toggle .nav-link i {
+  font-size: 0.9rem;
+  margin-left: 0.25rem;
+}
