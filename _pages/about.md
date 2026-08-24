@@ -2,7 +2,7 @@
 layout: about
 title: about
 permalink: /
-subtitle: Guidance, Navigation, and Control (GNC) Engineer
+subtitle: Guidance, Navigation, and Control (GNC) Research Engineer
 
 profile:
   align: left
