@@ -2,14 +2,13 @@
 layout: about
 title: about
 permalink: /
-subtitle: <a href="https://satrec.kaist.ac.kr/" target="_blank">KAIST Satellite Technology Research Center (SaTReC)</a>
+subtitle: Guidance, Navigation, and Control (GNC) Engineer
 
 profile:
   align: left
   image: minho_jang.jpg
   image_circular: true
   more_info: >
-    <p><strong>Guidance, Navigation, and Control (GNC)</strong></p>
     <p>Satellite System Engineer<br>@ KAIST SaTReC</p>
 
 selected_papers: false
