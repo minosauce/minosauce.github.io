@@ -35,11 +35,11 @@ cv:
         studyType: M.S.
         start_date: 2021
         end_date: 2025
-        courses: "Flight Dynamics and Control, Classical Mechanics"
         highlights:
           - "Advisor: Prof. Sungsu Park"
-          - "Lab: Flight Dynamics and Control Laboratory"
+          - "Lab: Flight Dynamics and Control Laboratory (FDCL)"
           - "Thesis: Nonlinear Model Predictive Control for Guidance Law with Target Input Estimation"
+          - "Courseworks: Flight Dynamics and Control; Guidance, Navigation, and Control (GNC); Optimal/Nonlinear Control; Orbital Mechanics; Classical Mechanics"
 
       - institution: Chonnam National University
         location: Gwangju, Republic of Korea
@@ -51,55 +51,37 @@ cv:
         highlights:
           - "Advisor: Prof. Jinyoung Kim"
           - "Lab: Intelligent Electronics Laboratory"
+          - "Courseworks: Control Theory; Digital Signal Process (DSP); Electrical/Electronic Circuit Theory; Microprocessor; Dynamics"
 
     Experience:
-      - company: Institute for Advanced Study, Princeton University
-        position: Professor of Theoretical Physics
-        location: Princeton University, NJ
-        start_date: 1933
-        end_date: 1955
-        summary: Teaching at Palmer Physical Laboratory (now 302 Frist Campus Center). While not a professor at Princeton, I associated with the physics professors and continued to give lectures on campus.
+      - company: Satellite Technology Research Center (SaTRec), KAIST
+        position: Assistant Research Engineer
+        location: Daejeon, Republic of Korea
+        start_date: 2025.12
+        end_date: current
+        summary: Project Experience
         highlights:
-          - Relativity
-          - Description 2.
+          - Development of Microsatellite Constellation System
 
-      - company: California Institute of Technology
-        position: Visiting Professor
-        location: Pasadena, California, US
-        start_date: 1933
-        end_date: 1933
+      - company: Sejong University
+        position: Research Assistant
+        location: Seoul, Republic of Korea
+        start_date: 2025.11
+        end_date: 2025.12
+        summary: Project Experience
         highlights:
-          - Description 1.
-          - Description 2.
+          - Safe Reinforcement Learning for Threat-Responsive Satellite Maneuvering
 
-      - company: Kaiser Wilhelm Institute for Physics
-        position: Director
-        location: Berlin, Germany
-        start_date: 1917
-        end_date: 1933
-
-      - company: Karl-Ferdinand University
-        position: Professor of Theoretical Physics
-        location: Prague, Czechoslovakia
-        start_date: 1911
-        end_date: 1917
-
-      - company: University of Zurich
-        position: Associate Professor of Theoretical Physics
-        location: Zurich, Switzerland
-        start_date: 1909
-        end_date: 1911
-
-    Volunteer:
-      - company: People's Climate March
-        position: Lead Organizer
-        location: Zurich, Switzerland
-        start_date: 2014-04-01
-        end_date: 2015-07-01
-        summary: Lead organizer for the New York City branch of the People's Climate March, the largest climate march in history.
+      - company: Seoul National University
+        position: Exchange Student Program 
+        location: Seoul, Republic of Korea
+        summary: Department of Mechanical and Aerospace Engineering
+        start_date: 2020.09
+        end_date: 2020.12
         highlights:
-          - "Awarded 'Climate Hero' award by Greenpeace for my efforts organizing the march."
-          - "Men of the year 2014 by Time magazine"
+          - Completed advanced coursework in model predictive control as part of a control systems curriculum (ECE430.456)
+          - Bridged academic backgrounds in electronics engineering with aerospace applications through coursework in Aerospace Traffic and Navigation Systems (MAE2795.004600)
+          - Gained interdisciplinary exposure to modern control theory and aerospace engineering, deepening understanding of autonomous systems and guidance technologies
 
     Awards:
       - title: Nobel Prize in Physics
