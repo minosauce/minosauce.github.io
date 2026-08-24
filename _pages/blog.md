@@ -1,13 +1,13 @@
 ---
 layout: default
-permalink: /blog/
+permalink: https://velog.io/@minosauce/posts
 title: blog
 nav: true
 nav_order: 5
 pagination:
   enabled: true
   collection: posts
-  permalink: /page/:num/
+  permalink: https://velog.io/@minosauce/posts
   per_page: 5
   sort_field: date
   sort_reverse: true
