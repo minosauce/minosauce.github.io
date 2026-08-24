@@ -13,3 +13,6 @@ open_repos:
   # Recommended research repositories
   - OpenFAST/openfast
   - OpenFAST/r-test
+  - zeromq/f77_zmq
+  - AVSLab/basilisk
+  - px4/px4-autopilot
