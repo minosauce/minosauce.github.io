@@ -4,7 +4,13 @@ cv:
   email: minho.jang.official@gmail.com
   location: Daejeon, Republic of Korea
   image: ""
-  summary: Guidance, Navigation, and Control (GNC)
+  summary:
+    - Guidance, Navigation, and Control of Missile and Satellite
+    - Guidance Law Design: Nonlinear Model Predictive Control, Optimal Trajectory Generation
+    - Navigation Filtering: Extended Kalman Filter Design, Interacting Multiple Model Algorithms
+    - Autopilot Design (Three-Loop Architecture) and Trajectory Optimization
+    - 6-DOF Missile Modeling and Simulation
+    - Data-Driven and Learning-Based Control: Reinforcement Learning, Deep Neural Networks
 
   social_networks:
     - network: X
@@ -29,11 +35,11 @@ cv:
         studyType: M.S.
         start_date: 2021
         end_date: 2025
-        score: ""
-        courses: "Theory of Relativity"
+        courses: "Flight Dynamics and Control; Guidance, Navigation, and Control (GNC); Optimal/Nonlinear Control; Orbital Mechanics; Classical Mechanics"
         highlights:
-          - Description 1.
-          - Description 2.
+          - "Advisor: Prof. Sungsu Park"
+          - "Lab: Flight Dynamics and Control Laboratory"
+          - "Thesis: Nonlinear Model Predictive Control for Guidance Law with Target Input Estimation"
 
       - institution: Chonnam National University
         location: Gwangju, Republic of Korea
@@ -41,9 +47,10 @@ cv:
         studyType: B.S.
         start_date: 2015
         end_date: 2021
+        score: 3.91
         highlights:
-          - Description 1.
-          - Description 2.
+          - "Advisor: Prof. Jinyoung Kim"
+          - "Lab: Intelligent Electronics Laboratory"
 
     Experience:
       - company: Institute for Advanced Study, Princeton University
