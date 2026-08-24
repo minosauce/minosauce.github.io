@@ -21,14 +21,6 @@ cv:
     countryCode: Republic of Korea
 
   sections:
-    Research Interests:
-    - bullet: "Guidance, Navigation, and Control of Missile and Satellite Systems"
-    - bullet: "Guidance Law Design: Nonlinear Model Predictive Control and Optimal Trajectory Generation"
-    - bullet: "Navigation Filtering: Extended Kalman Filter and Interacting Multiple Model Algorithms"
-    - bullet: "Autopilot Design: Three-Loop Architecture and Trajectory Optimization"
-    - bullet: "6-DOF Missile Modeling and Simulation"
-    - bullet: "Data-Driven Control: Reinforcement Learning and Deep Neural Networks"
-    
     Education:
       - institution: Sejong University
         location: Seoul, Republic of Korea
@@ -72,6 +64,15 @@ cv:
         summary: Project Experience
         highlights:
           - Safe Reinforcement Learning for Threat-Responsive Satellite Maneuvering
+
+
+      - company: Sejong University
+        position: Graduate Research Assistant & Teaching Assistant
+        location: Seoul, Republic of Korea
+        start_date: 2021.09
+        end_date: 2025.08
+        summary: Member of Flight Dynamics and Control Lab (FDCL)
+          
 
       - company: Seoul National University
         position: Exchange Student Program 
