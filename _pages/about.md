@@ -37,7 +37,6 @@ He is currently working as a satellite system engineer at the Satellite Technolo
 
 ---
 
-## latest publications
 <h2>
   <a href="{{ '/publications/' | relative_url }}" style="color: inherit">
     Latest Publications
