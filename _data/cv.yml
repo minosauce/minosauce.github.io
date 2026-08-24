@@ -47,8 +47,8 @@ cv:
           - "Courseworks: Control Theory; Digital Signal Process (DSP); Electrical/Electronic Circuit Theory; Microprocessor; Dynamics"
 
     Professional Service:
-      - company: IEEE Access
-        position: Peer Reviewer
+      - label: IEEE Access
+        details: Peer Reviewer
 
     Experience:
       - company: Satellite Technology Research Center (SaTRec), KAIST
