@@ -26,8 +26,8 @@ cv:
         location: Seoul, Republic of Korea
         area: Aerospace Engineering
         studyType: M.S.
-        start_date: 2021
-        end_date: 2025
+        start_date: 2021-09
+        end_date: 2025-08
         highlights:
           - "Advisor: Prof. Sungsu Park"
           - "Lab: Flight Dynamics and Control Laboratory (FDCL)"
@@ -38,8 +38,8 @@ cv:
         location: Gwangju, Republic of Korea
         area: Electronics and Computer Engineering
         studyType: B.S.
-        start_date: 2015
-        end_date: 2021
+        start_date: 2015-03
+        end_date: 2021-08
         score: 3.91
         highlights:
           - "Advisor: Prof. Jinyoung Kim"
@@ -50,7 +50,7 @@ cv:
       - company: Satellite Technology Research Center (SaTRec), KAIST
         position: Assistant Research Engineer
         location: Daejeon, Republic of Korea
-        start_date: 2025.12
+        start_date: 2025-12
         end_date: current
         summary: Project Experience
         highlights:
@@ -59,8 +59,8 @@ cv:
       - company: Sejong University
         position: Research Assistant
         location: Seoul, Republic of Korea
-        start_date: 2025.11
-        end_date: 2025.12
+        start_date: 2025-11
+        end_date: 2025-12
         summary: Project Experience
         highlights:
           - Safe Reinforcement Learning for Threat-Responsive Satellite Maneuvering
@@ -69,8 +69,8 @@ cv:
       - company: Sejong University
         position: Graduate Research Assistant & Teaching Assistant
         location: Seoul, Republic of Korea
-        start_date: 2021.09
-        end_date: 2025.08
+        start_date: 2021-09
+        end_date: 2025-08
         summary: Member of Flight Dynamics and Control Lab (FDCL)
           
 
@@ -78,8 +78,8 @@ cv:
         position: Exchange Student Program 
         location: Seoul, Republic of Korea
         summary: Department of Mechanical and Aerospace Engineering
-        start_date: 2020.09
-        end_date: 2020.12
+        start_date: 2020-09
+        end_date: 2020-12
         highlights:
           - Completed advanced coursework in model predictive control as part of a control systems curriculum (ECE430.456)
           - Bridged academic backgrounds in electronics engineering with aerospace applications through coursework in Aerospace Traffic and Navigation Systems (MAE2795.004600)
@@ -98,7 +98,6 @@ cv:
         level: Master
         icon: fa-solid fa-hashtag
         keywords: "JuMP.jl, Ipopt.jl"
-
 
       - name: Matlab
         level: Master
@@ -123,22 +122,22 @@ cv:
         
         
     Interests:
-      - name: Guidance, Navigation, and Control of Missile and Satellite Systems
+      - name: "Guidance, Navigation, and Control of Missile and Satellite Systems"
         icon: fa-solid fa-tag
         
-      - name: Guidance Law Design: Nonlinear Model Predictive Control and Optimal Trajectory Generation
+      - name: "Guidance Law Design: Nonlinear Model Predictive Control and Optimal Trajectory Generation"
         icon: fa-solid fa-tag
 
-      - name: Navigation Filtering: Extended Kalman Filter and Interacting Multiple Model Algorithms
+      - name: "Navigation Filtering: Extended Kalman Filter and Interacting Multiple Model Algorithms"
         icon: fa-solid fa-tag
 
-      - name: Autopilot Design: Three-Loop Architecture and Trajectory Optimization
+      - name: "Autopilot Design: Three-Loop Architecture and Trajectory Optimization"
         icon: fa-solid fa-tag
 
-      - name: 6-DOF Missile Modeling and Simulation
+      - name: "6-DOF Missile Modeling and Simulation"
         icon: fa-solid fa-tag
 
-      - name: Data-Driven Control: Reinforcement Learning and Deep Neural Networks
+      - name: "Data-Driven Control: Reinforcement Learning and Deep Neural Networks"
         icon: fa-solid fa-tag
         
 
