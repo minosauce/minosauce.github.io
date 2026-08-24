@@ -68,12 +68,31 @@ samp {
   font-family: "Courier New", Courier, monospace !important;
 }
 
-/* Social icons below profile image */
+/* =========================================================
+   Social icons below profile photo
+   ========================================================= */
+
 .profile .profile-social {
   margin-top: 0.8rem;
+  margin-bottom: 0.8rem;
   text-align: center;
 }
 
 .profile .profile-social .contact-icons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+
+  font-size: 1.35rem;
+}
+
+.profile .profile-social .contact-icons a {
+  margin: 0;
+}
+
+.profile .profile-social .contact-icons i,
+.profile .profile-social .contact-icons svg {
   font-size: 1.35rem;
 }
