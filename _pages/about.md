@@ -2,40 +2,44 @@
 layout: about
 title: about
 permalink: /
-subtitle: <a href='#'>Affiliations</a>. KAIST SaTReC
+subtitle: <a href="https://satrec.kaist.ac.kr/" target="_blank">KAIST Satellite Technology Research Center (SaTReC)</a>
 
 profile:
   align: left
   image: minho_jang.JPG
-  image_circular: false # crops the image to make it circular
+  image_circular: false
   more_info: >
-    <p>Guidance, Navigation, and Control (GNC)</p>
-    <p>Satellite System Engineer @ KAIST SaTReC</p>
+    <p><strong>Guidance, Navigation, and Control (GNC)</strong></p>
+    <p>Satellite System Engineer<br>@ KAIST SaTReC</p>
 
-selected_papers: false # includes a list of papers marked as "selected={true}"
-social: true # includes social icons at the bottom of the page
+selected_papers: false
+social: true
 
 announcements:
-  enabled: true # includes a list of news items
-  scrollable: true # adds a vertical scroll bar if there are more than 3 news items
-  limit: 5 # leave blank to include all the news in the `_news` folder
+  enabled: true
+  scrollable: true
+  limit: 5
 
 latest_posts:
   enabled: true
-  scrollable: true # adds a vertical scroll bar if there are more than 3 new posts items
-  limit: 3 # leave blank to include all the blog posts
+  scrollable: true
+  limit: 3
 ---
 
 ## Biography
 
-  He received the B.S. degree in electronics and computer engineering from Chonnam National University, Gwangju, Republic of Korea, in 2021, and the M.S. degree in aerospace engineering from Sejong University, Seoul, Republic of Korea, in 2025. 
+He received the B.S. degree in electronics and computer engineering from Chonnam National University, Gwangju, Republic of Korea, in 2021, and the M.S. degree in aerospace engineering from Sejong University, Seoul, Republic of Korea, in 2025.
 
-  He is currently working as a satellite system engineer at the Satellite Technology Research Center (SaTRec), KAIST, Daejeon, Republic of Korea. His research interests include guidance, navigation, and control (GNC), with a focus on optimal control theory and its applications to missile and satellite systems.
+He is currently working as a satellite system engineer at the Satellite Technology Research Center (SaTReC), KAIST, Daejeon, Republic of Korea. His research interests include guidance, navigation, and control (GNC), with a focus on optimal control theory and its applications to missile and satellite systems.
 
-## Professional Experience:
-- Peer Reviewer for international journals
-   -  IEEE Access
+<div style="clear: both;"></div>
 
+---
+
+## Professional Experience
+
+- **Peer Reviewer**
+  - IEEE Access
 
 ## Latest Publications
 
