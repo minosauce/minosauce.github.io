@@ -4,13 +4,6 @@ cv:
   email: minho.jang.official@gmail.com
   location: Daejeon, Republic of Korea
   image: ""
-  summary:
-    - Guidance, Navigation, and Control of Missile and Satellite
-    - Guidance Law Design: Nonlinear Model Predictive Control, Optimal Trajectory Generation
-    - Navigation Filtering: Extended Kalman Filter Design, Interacting Multiple Model Algorithms
-    - Autopilot Design (Three-Loop Architecture) and Trajectory Optimization
-    - 6-DOF Missile Modeling and Simulation
-    - Data-Driven and Learning-Based Control: Reinforcement Learning, Deep Neural Networks
 
   social_networks:
     - network: X
@@ -28,6 +21,14 @@ cv:
     countryCode: Republic of Korea
 
   sections:
+    Research Interests:
+    - bullet: "Guidance, Navigation, and Control of Missile and Satellite Systems"
+    - bullet: "Guidance Law Design: Nonlinear Model Predictive Control and Optimal Trajectory Generation"
+    - bullet: "Navigation Filtering: Extended Kalman Filter and Interacting Multiple Model Algorithms"
+    - bullet: "Autopilot Design: Three-Loop Architecture and Trajectory Optimization"
+    - bullet: "6-DOF Missile Modeling and Simulation"
+    - bullet: "Data-Driven Control: Reinforcement Learning and Deep Neural Networks"
+    
     Education:
       - institution: Sejong University
         location: Seoul, Republic of Korea
