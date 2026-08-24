@@ -39,7 +39,7 @@ nav_order: 2
     position: absolute;
     left: 0;
     top: 0;
-    font-weight: 600;
+    font-weight: 400;
   }
 
   .conference-pubs {
@@ -57,7 +57,7 @@ nav_order: 2
     position: absolute;
     left: 0;
     top: 0;
-    font-weight: 600;
+    font-weight: 400;
   }
 
   .publication-section {
@@ -68,6 +68,10 @@ nav_order: 2
   .publication-section h2 {
     margin-bottom: 1.5rem;
   }
+
+  .publications ol.bibliography li .title {
+  font-weight: 700 !important;
+}
 </style>
 
 
