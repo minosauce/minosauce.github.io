@@ -46,10 +46,6 @@ cv:
           - "Lab: Intelligent Electronics Laboratory"
           - "Courseworks: Control Theory; Digital Signal Process (DSP); Electrical/Electronic Circuit Theory; Microprocessor; Dynamics"
 
-    Professional Service:
-      - label: IEEE Access
-        details: Peer Reviewer
-
     Experience:
       - company: Satellite Technology Research Center (SaTRec), KAIST
         position: Assistant Research Engineer
@@ -88,6 +84,14 @@ cv:
           - Completed advanced coursework in model predictive control as part of a control systems curriculum (ECE430.456)
           - Bridged academic backgrounds in electronics engineering with aerospace applications through coursework in Aerospace Traffic and Navigation Systems (MAE2795.004600)
           - Gained interdisciplinary exposure to modern control theory and aerospace engineering, deepening understanding of autonomous systems and guidance technologies
+
+
+
+Professional Service:
+  - subheading: Peer Review
+    bullets:
+      - IEEE Access
+
 
     Awards:
       - title: 2020 Capstone Design Competition
