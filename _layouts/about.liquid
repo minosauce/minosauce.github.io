@@ -1,0 +1,19 @@
+{% if page.profile %}
+  <div class="profile float-{% if page.profile.align == 'left' %}left{% else %}right{% endif %}">
+
+    {% if page.profile.image %}
+      ...
+    {% endif %}
+
+    {% if page.profile.more_info %}
+      <div class="more-info">{{ page.profile.more_info }}</div>
+    {% endif %}
+
+    {% if page.social %}
+      <div class="social profile-social">
+        <div class="contact-icons">{% social_links %}</div>
+      </div>
+    {% endif %}
+
+  </div>
+{% endif %}
