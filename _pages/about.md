@@ -1,4 +1,5 @@
 ---
+
 layout: about
 title: about
 permalink: /
@@ -23,6 +24,7 @@ latest_posts:
   enabled: true
   scrollable: true
   limit: 3
+  
 ---
 
 ## Biography
@@ -36,7 +38,12 @@ He is currently working as a satellite system engineer at the Satellite Technolo
 ---
 
 ## latest publications
+<h2>
+  <a href="{{ '/publications/' | relative_url }}" style="color: inherit">
+    Latest Publications
+  </a>
+</h2>
 
-<div class="publications latest-publications">
+<div class="publications">
   {% bibliography --max 3 %}
 </div>
