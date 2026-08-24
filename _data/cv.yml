@@ -132,16 +132,34 @@ cv:
         keywords: "Quantum Mechanics, Quantum Computing, Quantum Information, Quantum Cryptography, Quantum Communication, Quantum Teleportation"
 
     Languages:
-      - name: German
-        summary: "Native speaker"
-
       - name: English
         summary: "Fluent"
 
+      - name: Julia
+        summary: "Native"
+
+      - name: Matlab
+        summary: "Native"
+        
+      - name: Python
+        summary: "Native"
+
+      - name: Fortran
+        summary: "Advanced"        
+        
     Interests:
       - name: Physics
         icon: fa-solid fa-tag
-        keywords: "Quantum Mechanics, Quantum Computing, Quantum Information, Quantum Cryptography, Quantum Communication, Quantum Teleportation"
+        keywords: "Quantum Mechanics
+        
+      - name: Physics
+        icon: fa-solid fa-tag
+        keywords: "Quantum Mechanics
+
+      - name: Physics
+        icon: fa-solid fa-tag
+        keywords: "Quantum Mechanics
+        
 
     Certificates:
       - name: Machine Learning
