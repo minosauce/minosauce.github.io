@@ -88,7 +88,7 @@ cv:
 
 
     Professional Service:
-      - subheading: Peer Review
+      - label: Peer Review
         bullets:
           - IEEE Access
 
