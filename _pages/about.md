@@ -35,10 +35,6 @@ He is currently working as a satellite system engineer at the Satellite Technolo
 
 <div style="clear: both;"></div>
 
----
-
-## Latest
-
 
 <h2 class="home-section-title">
   <a href="{{ '/publications/' | relative_url }}" style="color: inherit">
