@@ -5,8 +5,8 @@ permalink: /
 subtitle: <a href='#'>Affiliations</a>. KAIST SaTReC
 
 profile:
-  align: right
-  image: minho_jang.jpg
+  align: left
+  image: minho_jang.JPG
   image_circular: false # crops the image to make it circular
   more_info: >
     <p>Guidance, Navigation, and Control (GNC)</p>
