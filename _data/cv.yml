@@ -88,11 +88,10 @@ cv:
 
 
     Professional Service:
-      - label: Peer Review
-        details: |
-          <ul>
-            <li>IEEE Access</li>
-          </ul>
+      - bullet: "**Peer Review**"
+      - bullet: "IEEE Access"
+      - bullet: "Another Journal 1"
+      - bullet: "Another Journal 2"
 
 
     Awards:
