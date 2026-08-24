@@ -115,17 +115,23 @@ cv:
         summary: "Advanced"        
         
     Interests:
-      - name: Physics
+      - name: Guidance, Navigation, and Control of Missile and Satellite Systems
         icon: fa-solid fa-tag
-        keywords: "Quantum Mechanics"
         
-      - name: Physics1
+      - name: Guidance Law Design: Nonlinear Model Predictive Control and Optimal Trajectory Generation
         icon: fa-solid fa-tag
-        keywords: "Quantum Mechanics"
 
-      - name: Physics2
+      - name: Navigation Filtering: Extended Kalman Filter and Interacting Multiple Model Algorithms
         icon: fa-solid fa-tag
-        keywords: "Quantum Mechanics"
+
+      - name: Autopilot Design: Three-Loop Architecture and Trajectory Optimization
+        icon: fa-solid fa-tag
+
+      - name: 6-DOF Missile Modeling and Simulation
+        icon: fa-solid fa-tag
+
+      - name: Data-Driven Control: Reinforcement Learning and Deep Neural Networks
+        icon: fa-solid fa-tag
         
 
     Certificates:
