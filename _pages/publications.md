@@ -31,7 +31,7 @@ nav_order: 2
   .journal-pubs ol.bibliography > li {
     counter-increment: journal-counter -1;
     position: relative;
-    padding-left: 3.0rem;
+    padding-left: 3.2rem;
   }
 
   .journal-pubs ol.bibliography > li::before {
@@ -49,7 +49,7 @@ nav_order: 2
   .conference-pubs ol.bibliography > li {
     counter-increment: conference-counter -1;
     position: relative;
-    padding-left: 3.0rem;
+    padding-left: 3.5rem;
   }
 
   .conference-pubs ol.bibliography > li::before {
