@@ -97,17 +97,3 @@ samp {
   font-size: 1.35rem;
 }
 
-/* =========================================================
-   Publication numbering
-   ========================================================= */
-
-/* [J.1], [C.1] 번호: 일반체 */
-.journal-pubs ol.bibliography > li::before,
-.conference-pubs ol.bibliography > li::before {
-  font-weight: 400 !important;
-}
-
-/* 논문 제목: Bold */
-.publications ol.bibliography li .title {
-  font-weight: 700 !important;
-}
