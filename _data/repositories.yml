@@ -4,6 +4,10 @@ github_users:
 repo_description_lines_max: 2
 
 github_repos:
+  # My repositories
   - minosauce/Kalman-Filter
   - minosauce/LMPC.jl
   - minosauce/HNN.jl
+
+  # Recommended research repositories
+  - OpenFAST/openfast
