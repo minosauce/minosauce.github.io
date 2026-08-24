@@ -11,7 +11,6 @@ profile:
   more_info: >
     <p>Guidance, Navigation, and Control (GNC)</p>
     <p>Satellite System Engineer @ KAIST SaTReC</p>
-    # <p>Your City, State 12345</p>
 
 selected_papers: false # includes a list of papers marked as "selected={true}"
 social: true # includes social icons at the bottom of the page
