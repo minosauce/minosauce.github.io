@@ -117,15 +117,15 @@ cv:
     Interests:
       - name: Physics
         icon: fa-solid fa-tag
-        keywords: "Quantum Mechanics
+        keywords: "Quantum Mechanics"
         
       - name: Physics1
         icon: fa-solid fa-tag
-        keywords: "Quantum Mechanics
+        keywords: "Quantum Mechanics"
 
       - name: Physics2
         icon: fa-solid fa-tag
-        keywords: "Quantum Mechanics
+        keywords: "Quantum Mechanics"
         
 
     Certificates:
