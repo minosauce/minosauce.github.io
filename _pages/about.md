@@ -36,13 +36,8 @@ He is currently working as a satellite system engineer at the Satellite Technolo
 
 ---
 
-## Professional Experience
+## latest publications
 
-- **Peer Reviewer**
-  - IEEE Access
-
-## Latest Publications
-
-<div class="publications">
+<div class="publications latest-publications">
   {% bibliography --max 3 %}
 </div>
