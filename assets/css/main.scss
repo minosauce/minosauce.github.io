@@ -1,0 +1,69 @@
+---
+---
+
+@charset "utf-8";
+
+@use "sass:math";
+@use "sass:string";
+
+@use "variables" with (
+  $max-content-width: {{ site.max_width | default: "930px" }}
+);
+
+@use "themes";
+@use "layout";
+@use "typography";
+@use "navbar";
+@use "footer";
+@use "blog";
+@use "publications";
+@use "components";
+@use "utilities";
+@use "tabs";
+@use "teachings";
+@use "typograms";
+
+
+/* ==================================================
+   Minho Jang - Custom Theme
+   ================================================== */
+
+/* KAIST-style blue */
+:root {
+  --global-theme-color: #004294;
+  --global-hover-color: #00346f;
+}
+
+/* Brighter KAIST blue for dark mode */
+html[data-theme="dark"] {
+  --global-theme-color: #0097dc;
+  --global-hover-color: #0097dc;
+}
+
+
+/* Times New Roman for general text */
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+li,
+a,
+td,
+th,
+input,
+textarea,
+button {
+  font-family: "Times New Roman", Times, serif !important;
+}
+
+/* Keep source code monospaced */
+code,
+pre,
+kbd,
+samp {
+  font-family: "Courier New", Courier, monospace !important;
+}
