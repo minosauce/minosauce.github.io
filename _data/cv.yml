@@ -92,6 +92,25 @@ cv:
         date: 2020-12
         awarder: Chonnam National University
         summary: Recognized for developing an innovative engineering project in the 2020 Capstone Design Competition hosted by the Engineering Education Innovation Center
+
+
+
+    Certificates:
+      - name: Design Your Dream Corporate Experience Program
+        date: 2015-08
+        issuer: Samsung Electronics
+        icon: fa-solid fa-location-dot
+
+      - name: Glocal Specialization Exploration Program
+        date: 2017-07
+        issuer: Chonnam National University
+        icon: fa-solid fa-tag
+
+      - name: Industry–Academia Internship Program | Future Space Navigation & Satellite Technology Research Center
+        date: 2023-07
+        issuer: LIG Defense&Aerospace
+        icon: fa-solid fa-envelope
+
     
     Skills:
       - name: Julia
@@ -140,19 +159,3 @@ cv:
       - name: "Data-Driven Control: Reinforcement Learning and Deep Neural Networks"
         icon: fa-solid fa-tag
         
-
-    Certificates:
-      - name: Design Your Dream Corporate Experience Program
-        date: 2015-08
-        issuer: Samsung Electronics
-        icon: fa-solid fa-location-dot
-
-      - name: Glocal Specialization Exploration Program
-        date: 2017-07
-        issuer: Chonnam National University
-        icon: fa-solid fa-tag
-
-      - name: Industry–Academia Internship Program | Future Space Navigation & Satellite Technology Research Center
-        date: 2023-07
-        issuer: LIG Defense&Aerospace
-        icon: fa-solid fa-envelope
