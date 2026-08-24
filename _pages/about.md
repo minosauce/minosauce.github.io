@@ -18,12 +18,12 @@ social: true
 announcements:
   enabled: true
   scrollable: true
-  limit: 5
+  limit: 4
 
 latest_posts:
   enabled: true
   scrollable: true
-  limit: 3
+  limit: 4
   
 ---
 
@@ -37,12 +37,12 @@ He is currently working as a satellite system engineer at the Satellite Technolo
 
 ---
 
-<h2>
+<h2 class="home-section-title">
   <a href="{{ '/publications/' | relative_url }}" style="color: inherit">
     Latest Publications
   </a>
 </h2>
 
 <div class="publications">
-  {% bibliography --max 3 %}
+  {% bibliography --max 4 %}
 </div>
