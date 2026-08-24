@@ -76,8 +76,8 @@ layout: default
 
     <!-- News -->
     {% if page.announcements and page.announcements.enabled %}
-      <h2>
-        <a href="{{ '/news/' | relative_url }}" style="color: inherit">news</a>
+      <h2 class="home-section-title">
+        <a href="{{ '/news/' | relative_url }}" style="color: inherit">News</a>
       </h2>
       {% include news.liquid limit=true %}
     {% endif %}
@@ -85,12 +85,12 @@ layout: default
 
     <!-- Latest posts -->
     {% if page.latest_posts and page.latest_posts.enabled %}
-      <h2>
+      <h2 class="home-section-title">
         <a href="https://velog.io/@minosauce"
            target="_blank"
            rel="noopener noreferrer"
            style="color: inherit">
-          latest posts
+          Posts
         </a>
       </h2>
       {% include latest_posts.liquid %}
