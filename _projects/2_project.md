@@ -1,10 +1,11 @@
 ---
 layout: page
 title: project 2
+date: 2025-11-03
+category: Funded
+importance: 2
 description: a project with a background image and giscus comments
 img: assets/img/3.jpg
-importance: 2
-category: Funded
 giscus_comments: true
 ---
 
