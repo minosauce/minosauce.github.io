@@ -1,10 +1,11 @@
 ---
 layout: page
 title: project 1
+date: 2025-11-01
+category: Funded
 description: with background image
 img: assets/img/12.jpg
 importance: 1
-category: Funded
 related_publications: true
 ---
 
