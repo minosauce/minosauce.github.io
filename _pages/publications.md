@@ -4,7 +4,7 @@ permalink: /publications/
 title: Publications
 description: Journal and conference publications.
 nav: true
-nav_order: 2
+nav_order: 20
 ---
 
 {% include bib_search.liquid %}
