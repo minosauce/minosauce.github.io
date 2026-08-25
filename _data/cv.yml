@@ -49,7 +49,7 @@ cv:
       - company: Satellite Technology Research Center (SaTRec), KAIST
         position: Assistant Research Engineer
         location: Daejeon, Republic of Korea
-        logo: /assets/img/ui/KAIST.png
+        logo: /assets/img/ui/kaist.png
         start_date: 2025-12
         end_date: present
         summary: Project Experience
