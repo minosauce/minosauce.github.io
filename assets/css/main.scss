@@ -143,3 +143,79 @@ samp {
   padding-top: 1.0rem;
   border-top: 1px solid var(--global-divider-color);
 }
+
+
+/* =========================================================
+   News thumbnail layout
+   ========================================================= */
+
+.news-list-custom {
+  width: 100%;
+}
+
+.news-item {
+  display: grid;
+  grid-template-columns: 120px 120px minmax(0, 1fr);
+  column-gap: 1.2rem;
+  align-items: center;
+
+  padding: 0.9rem 0;
+
+  border-bottom: 1px solid var(--global-divider-color);
+}
+
+/* 사진 없는 뉴스 */
+.news-item-no-preview {
+  grid-template-columns: 120px minmax(0, 1fr);
+}
+
+.news-date {
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.news-thumbnail img {
+  display: block;
+
+  width: 120px;
+  height: 76px;
+
+  object-fit: cover;
+  object-position: center;
+
+  border-radius: 6px;
+}
+
+.news-content {
+  min-width: 0;
+}
+
+.news-title {
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+/* Mobile */
+@media (max-width: 576px) {
+  .news-item {
+    grid-template-columns: 82px 90px minmax(0, 1fr);
+    column-gap: 0.7rem;
+  }
+
+  .news-item-no-preview {
+    grid-template-columns: 82px minmax(0, 1fr);
+  }
+
+  .news-date {
+    font-size: 0.78rem;
+  }
+
+  .news-thumbnail img {
+    width: 90px;
+    height: 60px;
+  }
+
+  .news-title {
+    font-size: 0.95rem;
+  }
+}
