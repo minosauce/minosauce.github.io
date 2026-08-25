@@ -8,57 +8,42 @@ display_categories: [Funded, Independent]
 horizontal: false
 ---
 
-<!-- pages/projects.md -->
 <div class="projects">
-{% if site.enable_project_categories and page.display_categories %}
-  <!-- Display categorized projects -->
-  {% for category in page.display_categories %}
-  <a id="{{ category }}" href=".#{{ category }}">
-    <h2 class="category">{{ category }}</h2>
-  </a>
-  {% assign categorized_projects = site.projects | where: "category", category %}
-  {% assign  = categorized_projects | sort: "date" | reverse %}
-  <!-- Generate cards for each project -->
-  {% if page.horizontal %}
-  <div class="container">
-    <div class="row row-cols-1 row-cols-md-2">
-    {% for project in  %}
-      {% include projects_horizontal.liquid %}
+
+  {% if page.display_categories %}
+    {% for category in page.display_categories %}
+
+      <h2 class="category">
+        {{ category }}
+      </h2>
+
+      {% assign categorized_projects = site.projects | where: 'category', category %}
+      {% assign sorted_projects = categorized_projects | sort: 'date' | reverse %}
+
+      <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for project in sorted_projects %}
+          {% include projects.liquid
+            project=project
+            project_number=forloop.rindex
+          %}
+        {% endfor %}
+      </div>
+
     {% endfor %}
-    </div>
-  </div>
+
   {% else %}
-  <div class="row row-cols-1 row-cols-md-3">
-    {% for project in  %}
-      {% include projects.liquid %}
-    {% endfor %}
-  </div>
-  {% endif %}
-  {% endfor %}
 
-{% else %}
+    {% assign sorted_projects = site.projects | sort: 'date' | reverse %}
 
-<!-- Display projects without categories -->
-
-{% assign sorted_projects = site.projects | sort: "date" | reverse %}
-
-  <!-- Generate cards for each project -->
-
-{% if page.horizontal %}
-
-  <div class="container">
-    <div class="row row-cols-1 row-cols-md-2">
+    <div class="row row-cols-1 row-cols-md-3 g-4">
       {% for project in sorted_projects %}
-        {% include projects.liquid project=project project_number=forloop.rindex %}
+        {% include projects.liquid
+          project=project
+          project_number=forloop.rindex
+        %}
       {% endfor %}
     </div>
-  </div>
-  {% else %}
-  <div class="row row-cols-1 row-cols-md-3">
-    {% for project in  %}
-      {% include projects.liquid %}
-    {% endfor %}
-  </div>
+
   {% endif %}
-{% endif %}
+
 </div>
