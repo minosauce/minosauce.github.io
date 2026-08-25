@@ -66,7 +66,6 @@ samp {
   font-family: "Courier New", Courier, monospace !important;
 }
 
-
 /* =========================================================
    Social icons below profile photo
    ========================================================= */
@@ -96,8 +95,6 @@ samp {
   font-size: 1.35rem;
 }
 
-
-
 /* =========================================================
    Search button: "ctrl k" -> "Search"
    ========================================================= */
@@ -122,8 +119,6 @@ samp {
   font-weight: 700 !important;
 }
 
-
-
 /* =========================================================
    Profile photo size
    ========================================================= */
@@ -131,7 +126,7 @@ samp {
 @media (min-width: 576px) {
   .profile {
     width: 20% !important;
-    margin-right: 3.0rem !important;
+    margin-right: 3rem !important;
   }
 
   .profile img {
@@ -151,13 +146,11 @@ samp {
   border-top: 1px solid var(--global-divider-color);
 }
 
-
 /* About page - Publications */
 .home-publications .title,
 .home-publications .title a {
   font-weight: 700 !important;
 }
-
 
 /* =========================================================
    News thumbnail layout
@@ -213,7 +206,6 @@ samp {
   line-height: 1.4;
 }
 
-
 /* =========================================================
    Mobile
    ========================================================= */
@@ -247,9 +239,6 @@ samp {
   }
 }
 
-
-
-
 /* =========================================================
    CV grouped layout
    Experience / Education / Awards / Professional Service
@@ -260,7 +249,6 @@ samp {
   margin: 0;
   padding: 0;
 }
-
 
 /* =========================================================
    Organization group
@@ -278,7 +266,6 @@ samp {
 .cv-org-group:last-child {
   border-bottom: 1px solid var(--global-divider-color);
 }
-
 
 /* =========================================================
    Organization header
@@ -348,7 +335,6 @@ samp {
   color: var(--global-text-color) !important;
 }
 
-
 /* =========================================================
    Roles / Degrees / Awards / Service
    ========================================================= */
@@ -374,7 +360,6 @@ samp {
   padding-bottom: 0;
 }
 
-
 /* =========================================================
    Date
    ========================================================= */
@@ -391,7 +376,6 @@ samp {
 
   white-space: nowrap;
 }
-
 
 /* =========================================================
    Main content
@@ -460,7 +444,6 @@ samp {
   padding-left: 0.1rem;
 }
 
-
 /* =========================================================
    CV TOC sidebar
    Reduce wasted left-side width
@@ -494,7 +477,6 @@ samp {
     max-width: 170px;
   }
 }
-
 
 /* =========================================================
    Mobile CV
