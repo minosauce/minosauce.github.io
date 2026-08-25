@@ -9,7 +9,7 @@ thumbnail_fit: contain
 related_publications: true
 ---
 
-<strong>Managing Institution: Korea Institute of Energy Technology Evaluation and Planning (KETEP)</strong>
+**Managing Institution: Korea Institute of Energy Technology Evaluation and Planning (KETEP)**
 
 <br>
 
@@ -29,7 +29,7 @@ related_publications: true
 
 - Published the research as a journal paper in collaboration with graduate researchers at Sejong University [J.1]
 
-- Tools & Software Used: MATLAB, Fortran, Python, OpenFAST, FAST.Farm, ZeroMQ
+- **Tools & Software Used:** MATLAB, Fortran, Python, OpenFAST, FAST.Farm, ZeroMQ
 
 <br>
 
