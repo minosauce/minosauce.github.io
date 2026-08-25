@@ -37,7 +37,10 @@ html[data-theme="dark"] {
   --global-hover-color: #0097dc;
 }
 
-/* Times New Roman for general text */
+/* =========================================================
+   Typography
+   ========================================================= */
+
 body,
 h1,
 h2,
@@ -66,6 +69,7 @@ samp {
 
 /* =========================================================
    Social icons below profile photo
+   Maximum 3 items per row
    ========================================================= */
 
 .profile .profile-social {
@@ -119,12 +123,14 @@ samp {
 
 #search-toggle .nav-link::before {
   content: "Search";
+
   font-family: "Times New Roman", Times, serif;
   font-size: 1rem;
 }
 
 #search-toggle .nav-link i {
   margin-left: 0.25rem;
+
   font-size: 0.9rem;
 }
 
@@ -135,6 +141,7 @@ samp {
 @media (min-width: 576px) {
   .profile {
     width: 20% !important;
+
     margin-right: 3rem !important;
   }
 
@@ -148,7 +155,10 @@ samp {
   }
 }
 
-/* Major section headings */
+/* =========================================================
+   About - Major section headings
+   ========================================================= */
+
 .home-section-title {
   margin-top: 2rem !important;
   margin-bottom: 1.5rem !important;
@@ -161,10 +171,14 @@ samp {
 /* Posts is slightly closer to News */
 .posts-section-title {
   margin-top: 1.1rem !important;
+
   padding-top: 0.9rem !important;
 }
 
-/* About page publication titles */
+/* =========================================================
+   About - Publications
+   ========================================================= */
+
 .home-publications .title,
 .home-publications .title a {
   font-weight: 700 !important;
@@ -175,17 +189,22 @@ samp {
   font-weight: 700 !important;
 }
 
-/* About News dates */
+/* =========================================================
+   About - News / Posts dates
+   ========================================================= */
+
 .about-page .news-date {
   font-weight: 400 !important;
 }
 
-/* About Posts dates */
 .about-page .table th {
   font-weight: 400 !important;
 }
 
-/* About Posts vertical spacing */
+/* =========================================================
+   About - Posts vertical spacing
+   ========================================================= */
+
 .about-page .table.table-sm.table-borderless th,
 .about-page .table.table-sm.table-borderless td {
   padding-top: 0.75rem !important;
@@ -193,7 +212,7 @@ samp {
 }
 
 /* =========================================================
-   Publications - vertical spacing
+   Publications - Vertical spacing
    ========================================================= */
 
 .publications ol.bibliography > li {
@@ -216,20 +235,30 @@ samp {
 
 .news-item {
   display: grid;
+
+  /*
+   * Date | Title | Thumbnail
+   *
+   * 20% date column matches About Posts.
+   */
   grid-template-columns: 20% minmax(0, 1fr) 100px;
 
   align-items: center;
 
   padding: 0.75rem 0;
 
-  border-bottom: 1px solid color-mix(in srgb, var(--global-divider-color) 55%, transparent);
+  border-bottom: 1px solid
+    color-mix(in srgb, var(--global-divider-color) 55%, transparent);
 }
 
 .news-item:last-child {
   border-bottom: none;
 }
 
-/* Date */
+/* =========================================================
+   News - Date
+   ========================================================= */
+
 .news-date {
   grid-column: 1;
 
@@ -242,7 +271,10 @@ samp {
   white-space: nowrap;
 }
 
-/* Title */
+/* =========================================================
+   News - Title
+   ========================================================= */
+
 .news-content {
   grid-column: 2;
 
@@ -256,21 +288,27 @@ samp {
   line-height: 1.4;
 }
 
-/* No-thumbnail items keep the same title alignment */
+/*
+ * If there is no thumbnail,
+ * preserve the same title starting position.
+ */
 .news-item-no-preview .news-content {
   grid-column: 2;
 }
 
 /* =========================================================
    News - Fixed thumbnail
+   Applies to:
+   - About page News
+   - /news/ page
    ========================================================= */
 
 /*
- * Every News image is displayed as the same 100 × 64 px
- * thumbnail regardless of the original image aspect ratio.
+ * All News thumbnails use exactly the same visible size,
+ * regardless of the original image aspect ratio.
  */
 
-.about-page .news-thumbnail {
+.news-thumbnail {
   grid-column: 3;
 
   justify-self: end;
@@ -287,16 +325,18 @@ samp {
 }
 
 /*
- * figure.liquid can generate:
+ * figure.liquid may generate:
  *
  * figure
  *   picture
  *     img
  *
- * Make every wrapper fill the thumbnail box.
+ * All wrappers therefore need to fill
+ * the fixed thumbnail container.
  */
-.about-page .news-thumbnail figure,
-.about-page .news-thumbnail picture {
+
+.news-thumbnail figure,
+.news-thumbnail picture {
   display: block;
 
   width: 100% !important;
@@ -306,7 +346,7 @@ samp {
   padding: 0 !important;
 }
 
-.about-page .news-thumbnail img {
+.news-thumbnail img {
   display: block !important;
 
   width: 100% !important;
@@ -349,7 +389,7 @@ samp {
     font-size: 0.95rem;
   }
 
-  .about-page .news-thumbnail {
+  .news-thumbnail {
     width: 80px;
     height: 55px;
   }
@@ -437,6 +477,10 @@ samp {
   margin: 0 !important;
 }
 
+/*
+ * Do NOT force display:block.
+ * al-folio uses light/dark image variants.
+ */
 .home-repository-item .repo img {
   width: 100% !important;
   max-width: 100% !important;
@@ -465,7 +509,7 @@ samp {
 }
 
 /* =========================================================
-   CV grouped layout
+   CV - Grouped layout
    ========================================================= */
 
 .cv-group-list {
@@ -498,6 +542,7 @@ samp {
 
 .cv-org-header {
   display: grid;
+
   grid-template-columns: 56px minmax(0, 1fr);
   column-gap: 0.85rem;
 
@@ -573,8 +618,17 @@ samp {
   padding: 0;
 }
 
+/*
+ * Common columns:
+ *
+ * 18px  = timeline
+ * 125px = date
+ * rest  = content
+ */
+
 .cv-role-row {
   display: grid;
+
   grid-template-columns: 18px 125px minmax(0, 1fr);
   column-gap: 0.5rem;
 
@@ -709,6 +763,15 @@ html[data-theme="dark"] .cv-role-dot {
   font-weight: 700 !important;
 }
 
+/*
+ * Example:
+ *
+ * M.S.   Aerospace Engineering
+ *
+ * Degree = bold
+ * Major  = bold + italic
+ */
+
 .cv-degree-area {
   margin-left: 0.8rem !important;
 
@@ -747,11 +810,13 @@ html[data-theme="dark"] .cv-role-dot {
 
 .cv-role-highlights {
   margin: 0.45rem 0 0;
+
   padding-left: 1.15rem;
 }
 
 .cv-role-highlights li {
   margin: 0 0 0.25rem;
+
   padding-left: 0.1rem;
 }
 
@@ -797,7 +862,7 @@ html[data-theme="dark"] .cv-role-dot {
 }
 
 /* =========================================================
-   CV TOC sidebar
+   CV - TOC sidebar
    ========================================================= */
 
 @media (min-width: 576px) {
@@ -860,6 +925,13 @@ html[data-theme="dark"] .cv-role-dot {
     max-height: 36px !important;
   }
 
+  /*
+   * Mobile:
+   *
+   * [timeline] [date]
+   *            [content]
+   */
+
   .cv-role-row {
     grid-template-columns: 16px minmax(0, 1fr);
     column-gap: 0.55rem;
@@ -901,16 +973,28 @@ html[data-theme="dark"] .cv-role-dot {
 }
 
 /* =========================================================
-   Project detail images
+   Project detail page
    ========================================================= */
 
 .post img {
   max-width: 100%;
+
   height: auto;
 }
 
+/* Markdown / HTML bold */
+.post strong,
+.post b {
+  font-weight: 700 !important;
+}
+
+/* Hide citation inserted only for Related Publications */
+.hidden-project-citation {
+  display: none;
+}
+
 /* =========================================================
-   Projects - Cards and thumbnails
+   Projects - Cards
    ========================================================= */
 
 .projects .project-card {
@@ -918,6 +1002,10 @@ html[data-theme="dark"] .cv-role-dot {
 
   overflow: hidden;
 }
+
+/* =========================================================
+   Projects - Consistent thumbnail container
+   ========================================================= */
 
 .projects .project-thumbnail-wrapper {
   position: relative;
@@ -931,7 +1019,10 @@ html[data-theme="dark"] .cv-role-dot {
   background-color: #fff;
 }
 
-.projects .project-thumbnail-wrapper figure {
+.projects .project-thumbnail-wrapper figure,
+.projects .project-thumbnail-wrapper picture {
+  display: block;
+
   width: 100%;
   height: 100%;
 
@@ -939,6 +1030,7 @@ html[data-theme="dark"] .cv-role-dot {
   padding: 0 !important;
 }
 
+/* Common thumbnail dimensions */
 .projects .project-thumbnail {
   display: block;
 
@@ -947,6 +1039,10 @@ html[data-theme="dark"] .cv-role-dot {
 
   margin: 0 !important;
 }
+
+/* =========================================================
+   Projects - Thumbnail fit
+   ========================================================= */
 
 /* Normal photographs */
 .projects .project-thumbnail-cover {
@@ -962,7 +1058,10 @@ html[data-theme="dark"] .cv-role-dot {
   padding: 0.35rem;
 }
 
-/* Card content */
+/* =========================================================
+   Projects - Card content
+   ========================================================= */
+
 .projects .project-card .card-body {
   display: flex;
   flex-direction: column;
@@ -978,7 +1077,10 @@ html[data-theme="dark"] .cv-role-dot {
   color: inherit;
 }
 
-/* GitHub */
+/* =========================================================
+   Projects - GitHub
+   ========================================================= */
+
 .projects .project-github {
   display: flex;
   align-items: center;
@@ -996,14 +1098,16 @@ html[data-theme="dark"] .cv-role-dot {
   gap: 0.25rem;
 }
 
-/* Hide inline citation used for Related Publications */
-.hidden-project-citation {
-  display: none;
-}
-
 /* =========================================================
    Projects - Thumbnail index
    ========================================================= */
+
+/*
+ * Modern semi-transparent project number badge.
+ *
+ * Numbers are passed automatically from the
+ * reverse-date-sorted Projects loop.
+ */
 
 .projects .project-index {
   position: absolute;
@@ -1039,9 +1143,4 @@ html[data-theme="dark"] .cv-role-dot {
   line-height: 1;
 
   pointer-events: none;
-}
-
-.post strong,
-.post b {
-  font-weight: 700 !important;
 }
