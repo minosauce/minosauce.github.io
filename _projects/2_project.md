@@ -5,6 +5,7 @@ date: 2025-11-03
 category: Funded
 description: "Funded by: Ministry of Trade, Industry and Energy (MOTIE)"
 img: /assets/pdf/projects/windfarm_mpc.pdf
+related_publications: true
 ---
 
 Managing Institution: Korea Institute of Energy Technology Evaluation and Planning (KETEP)
