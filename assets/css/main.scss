@@ -193,6 +193,25 @@ samp {
   font-weight: 400 !important;
 }
 
+
+/* =========================================================
+   Publications - vertical spacing
+   ========================================================= */
+
+/* About + Publications page 모두 적용 */
+.publications ol.bibliography > li {
+  margin-top: 0.35rem;
+  margin-bottom: 1.35rem;
+}
+
+/* 마지막 논문 아래는 너무 많이 벌어지지 않게 */
+.publications ol.bibliography > li:last-child {
+  margin-bottom: 0.6rem;
+}
+
+
+
+
 /* =========================================================
    News layout
    Date | Title | Thumbnail
