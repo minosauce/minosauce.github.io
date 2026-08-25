@@ -3,7 +3,7 @@ layout: page
 title: Projects
 permalink: /projects/
 nav: true
-nav_order: 3
+nav_order: 30
 display_categories: [Funded, Independent]
 horizontal: false
 ---
