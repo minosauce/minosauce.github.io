@@ -1,0 +1,63 @@
+<div class="news">
+  {% if site.news != blank %}
+    {% assign news_size = site.news | size %}
+
+    <div
+      class="news-list-custom"
+      {% if include.limit and page.announcements.scrollable and news_size > 3 %}
+        style="max-height: 60vw; overflow-y: auto;"
+      {% endif %}
+    >
+      {% assign news = site.news | reverse %}
+
+      {% if include.limit and page.announcements.limit %}
+        {% assign news_limit = page.announcements.limit %}
+      {% else %}
+        {% assign news_limit = news_size %}
+      {% endif %}
+
+      {% for item in news limit: news_limit %}
+        <div class="news-item{% unless item.preview %} news-item-no-preview{% endunless %}">
+
+          <div class="news-date">
+            {{ item.date | date: '%b %d, %Y' }}
+          </div>
+
+          {% if item.preview %}
+            <div class="news-thumbnail">
+              {% if item.inline %}
+                <img
+                  src="{{ item.preview | relative_url }}"
+                  alt="{{ item.title | default: 'News image' }}"
+                  loading="lazy"
+                >
+              {% else %}
+                <a href="{{ item.url | relative_url }}">
+                  <img
+                    src="{{ item.preview | relative_url }}"
+                    alt="{{ item.title }}"
+                    loading="lazy"
+                  >
+                </a>
+              {% endif %}
+            </div>
+          {% endif %}
+
+          <div class="news-content">
+            {% if item.inline %}
+              {{ item.content | remove: '<p>' | remove: '</p>' | emojify }}
+            {% else %}
+              <a class="news-title" href="{{ item.url | relative_url }}">
+                {{ item.title }}
+              </a>
+            {% endif %}
+          </div>
+
+        </div>
+      {% endfor %}
+    </div>
+
+  {% else %}
+    <p>No news so far...</p>
+  {% endif %}
+</div>
