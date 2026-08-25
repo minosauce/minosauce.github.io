@@ -1,10 +1,10 @@
 ---
 layout: page
 title: project 4
+date: 2024-11-01
+category: Funded
 description: another without an image
 img:
-importance: 3
-category: Funded
 ---
 
 Every project has a beautiful feature showcase page.
