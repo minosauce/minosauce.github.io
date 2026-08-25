@@ -8,7 +8,7 @@ img:
 related_publications: true
 ---
 
-# Research Overview
+# Project Overview
 
 - Implemented and applied an artificial potential field (APF) algorithm, a classical collision avoidance technique, to enable missile evasion maneuvers
 
