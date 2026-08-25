@@ -1,10 +1,10 @@
 ---
 layout: page
 title: project 8
+date: 2024-11-01
+category: Independent
 description: an other project with a background image and giscus comments
 img: assets/img/9.jpg
-importance: 2
-category: Independent
 giscus_comments: true
 ---
 
