@@ -109,8 +109,8 @@ cv:
       - name: Design Your Dream Corporate Experience Program
         date: 2015-08
         issuer: Samsung Electronics
-        icon: fa-solid fa-location-dot
-
+        icon: fa-solid fa-tag
+        
       - name: Glocal Specialization Exploration Program
         date: 2017-07
         issuer: Chonnam National University
@@ -119,7 +119,7 @@ cv:
       - name: Industry–Academia Internship Program | Future Space Navigation & Satellite Technology Research Center
         date: 2023-07
         issuer: LIG Defense&Aerospace
-        icon: fa-solid fa-envelope
+        icon: fa-solid fa-tag
 
     
     Skills:
@@ -140,7 +140,7 @@ cv:
         keywords: "Pytorch, Basilisk"
         
       - name: Fortran
-        level: Master
+        level: Advanced
         icon: fa-solid fa-hashtag
         keywords: "Missile DATCOM, FAST.Farm, OpenFAST, ZeroMQ"
 
