@@ -18,10 +18,23 @@
 
       {% for item in news limit: news_limit %}
         <div class="news-item{% unless item.preview %} news-item-no-preview{% endunless %}">
+          <!-- Date -->
           <div class="news-date">
             {{ item.date | date: '%b %d, %Y' }}
           </div>
 
+          <!-- Title / content -->
+          <div class="news-content">
+            {% if item.inline %}
+              {{ item.content | remove: '<p>' | remove: '</p>' | emojify }}
+            {% else %}
+              <a class="news-title" href="{{ item.url | relative_url }}">
+                {{ item.title }}
+              </a>
+            {% endif %}
+          </div>
+
+          <!-- Thumbnail -->
           {% if item.preview %}
             <div class="news-thumbnail">
               {% if item.inline %}
@@ -41,20 +54,9 @@
               {% endif %}
             </div>
           {% endif %}
-
-          <div class="news-content">
-            {% if item.inline %}
-              {{ item.content | remove: '<p>' | remove: '</p>' | emojify }}
-            {% else %}
-              <a class="news-title" href="{{ item.url | relative_url }}">
-                {{ item.title }}
-              </a>
-            {% endif %}
-          </div>
         </div>
       {% endfor %}
     </div>
-
   {% else %}
     <p>No news so far...</p>
   {% endif %}
