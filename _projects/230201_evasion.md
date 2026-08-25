@@ -4,7 +4,8 @@ title: A Study on Missile Evasion Strategies for Unmanned Aircraft
 date: 2023-02-01
 category: Independent
 description: Independent Research
-img: assets/img/9.jpg
+img: 
+related_publications: true
 ---
 
 # Research Overview
@@ -16,3 +17,10 @@ img: assets/img/9.jpg
 - Explored missile evasion strategies using reinforcement learning approaches to enhance autonomous response capabilities
             
 - Tools & Software Used: Python, Tensorflow, Pytorch
+
+
+<br>
+
+<span class="hidden-project-citation">
+  {% cite C5 %}
+</span>
