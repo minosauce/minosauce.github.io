@@ -9,7 +9,7 @@ thumbnail_fit: contain
 related_publications: true
 ---
 
-#### Managing Institution: Korea Institute of Energy Technology Evaluation and Planning (KETEP)
+** Managing Institution: Korea Institute of Energy Technology Evaluation and Planning (KETEP) **
 
 <br>
 
@@ -28,6 +28,7 @@ related_publications: true
 - Engineered real-time socket communication (ZeroMQ) between the central control server and distributed wind turbine controllers
 
 - Published the research as a journal paper in collaboration with graduate researchers at Sejong University [J.1]
+
 - Tools & Software Used: MATLAB, Fortran, Python, OpenFAST, FAST.Farm, ZeroMQ
 
 
