@@ -1,10 +1,10 @@
-<ul class="card-text font-weight-light list-group list-group-flush">
+<ul class="card-text font-weight-light cv-entry-list">
   {% for entry in entries %}
-    <li class="list-group-item">
-      <div class="row">
+    <li class="cv-entry-block">
+      <div class="row cv-entry-row">
 
         <!-- Left column: date / location / logo -->
-        <div class="col-xs-2 col-sm-2 col-md-2 text-center date-column">
+        <div class="col-xs-2 col-sm-2 col-md-2 text-center cv-entry-meta">
 
           {% assign start_date = entry.start_date | default: entry.startDate %}
           {% assign end_date = entry.end_date | default: entry.endDate %}
@@ -27,60 +27,41 @@
             {% assign date_text = '' %}
           {% endif %}
 
-          <table class="table-cv">
-            <tbody>
+          {% if date_text != '' %}
+            <div class="cv-entry-date">
+              <span class="badge font-weight-bold danger-color-dark text-uppercase">
+                {{ date_text }}
+              </span>
+            </div>
+          {% endif %}
 
-              {% if date_text != '' %}
-                <tr>
-                  <td>
-                    <span
-                      class="badge font-weight-bold danger-color-dark text-uppercase align-middle"
-                      style="min-width: 75px"
-                    >
-                      {{ date_text }}
-                    </span>
-                  </td>
-                </tr>
-              {% endif %}
+          {% if entry.location %}
+            <div class="cv-entry-location">
+              <i class="fa-solid fa-location-dot iconlocation"></i>
+              {{ entry.location }}
+            </div>
+          {% endif %}
 
-              {% if entry.location %}
-                <tr>
-                  <td>
-                    <p class="location">
-                      <i class="fa-solid fa-location-dot iconlocation"></i>
-                      {{ entry.location }}
-                    </p>
-                  </td>
-                </tr>
-              {% endif %}
+          {% if entry.logo %}
+            <div class="cv-logo-wrapper">
+              <img
+                class="cv-entry-logo"
+                src="{{ entry.logo | relative_url }}"
+                alt="{{ entry.institution }} logo"
+                loading="lazy"
+              >
+            </div>
+          {% endif %}
 
-              <!-- Institution logo -->
-              {% if entry.logo %}
-                <tr>
-                  <td>
-                    <div class="cv-logo-wrapper">
-                      <img
-                        class="cv-entry-logo"
-                        src="{{ entry.logo | relative_url }}"
-                        alt="{{ entry.institution }} logo"
-                        loading="lazy"
-                      >
-                    </div>
-                  </td>
-                </tr>
-              {% endif %}
-
-            </tbody>
-          </table>
         </div>
 
-        <!-- Right column: degree / institution / major / details -->
-        <div class="col-xs-10 col-sm-10 col-md-10 mt-2 mt-md-0">
+        <!-- Right column -->
+        <div class="col-xs-10 col-sm-10 col-md-10 cv-entry-main">
 
           {% assign study_type = entry.studyType | default: entry.degree %}
 
           {% if study_type %}
-            <h6 class="title font-weight-bold ml-1 ml-md-4">
+            <h6 class="cv-entry-title font-weight-bold">
               {% if entry.url %}
                 <a href="{{ entry.url }}" target="_blank" rel="noopener noreferrer">
                   {{ study_type }}
@@ -92,16 +73,13 @@
           {% endif %}
 
           {% if entry.institution %}
-            <h6 class="ml-1 ml-md-4" style="font-size: 0.95rem">
+            <h6 class="cv-entry-organization">
               {{ entry.institution }}
             </h6>
           {% endif %}
 
           {% if entry.area %}
-            <h6
-              class="ml-1 ml-md-4"
-              style="font-size: 0.95rem; font-style: italic"
-            >
+            <h6 class="cv-entry-summary">
               {{ entry.area }}
             </h6>
           {% endif %}
