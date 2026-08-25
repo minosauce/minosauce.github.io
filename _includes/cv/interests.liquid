@@ -1,0 +1,13 @@
+<div class="cv-interests-list">
+  {% for entry in entries %}
+    <div class="cv-interest-item">
+      {% if entry.icon %}
+        <i class="{{ entry.icon }} cv-interest-icon"></i>
+      {% endif %}
+
+      <span class="cv-interest-name">
+        {{ entry.name }}
+      </span>
+    </div>
+  {% endfor %}
+</div>
