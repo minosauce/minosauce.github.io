@@ -33,3 +33,6 @@ related_publications: true
 
 - Published the research as a journal paper in collaboration with graduate researchers at Sejong University [J.1]
 - Tools & Software Used: MATLAB, Fortran, Python, OpenFAST, FAST.Farm, ZeroMQ
+
+
+{% cite J1 %}
