@@ -1,44 +1,63 @@
-<ul class="card-text font-weight-light cv-entry-list">
+<div class="cv-entry-list">
   {% for entry in entries %}
-    <li class="cv-entry-block">
-      <div class="row cv-entry-row">
-
-        <!-- Left column: date / location / logo -->
-        <div class="col-xs-2 col-sm-2 col-md-2 text-center cv-entry-meta">
-
+    <div class="cv-entry-block">
+      <div class="cv-entry-grid">
+        <!-- =========================
+             Left: date / location / logo
+             ========================= -->
+        <div class="cv-entry-meta">
           {% assign start_date = entry.start_date | default: entry.startDate %}
           {% assign end_date = entry.end_date | default: entry.endDate %}
 
           {% if start_date %}
-            {% assign start_year = start_date | split: '-' | first %}
+            {% assign start_date_string = start_date | append: '' %}
+            {% assign start_parts = start_date_string | split: '-' %}
+            {% assign start_year = start_parts[0] %}
+            {% assign start_month = start_parts[1] %}
 
-            {% if end_date == 'present' or end_date == 'current' %}
-              {% assign end_year = 'Present' %}
-            {% elsif end_date %}
-              {% assign end_year = end_date | split: '-' | first %}
+            {% if start_month %}
+              {% assign start_text = start_year | append: '.' | append: start_month %}
             {% else %}
-              {% assign end_year = 'Present' %}
+              {% assign start_text = start_year %}
             {% endif %}
 
-            {% assign date_text = start_year | append: ' - ' | append: end_year %}
+            {% assign end_date_string = end_date | append: '' %}
+            {% assign end_date_lower = end_date_string | downcase %}
+
+            {% if end_date_lower == 'present' or end_date_lower == 'current' %}
+              {% assign end_text = 'Present' %}
+            {% elsif end_date %}
+              {% assign end_parts = end_date_string | split: '-' %}
+              {% assign end_year = end_parts[0] %}
+              {% assign end_month = end_parts[1] %}
+
+              {% if end_month %}
+                {% assign end_text = end_year | append: '.' | append: end_month %}
+              {% else %}
+                {% assign end_text = end_year %}
+              {% endif %}
+            {% else %}
+              {% assign end_text = 'Present' %}
+            {% endif %}
+
+            {% assign date_text = start_text | append: ' – ' | append: end_text %}
+
           {% elsif entry.date %}
-            {% assign date_text = entry.date | split: '-' | first %}
+            {% assign date_text = entry.date %}
           {% else %}
             {% assign date_text = '' %}
           {% endif %}
 
           {% if date_text != '' %}
             <div class="cv-entry-date">
-              <span class="badge font-weight-bold danger-color-dark text-uppercase">
-                {{ date_text }}
-              </span>
+              {{ date_text }}
             </div>
           {% endif %}
 
           {% if entry.location %}
             <div class="cv-entry-location">
-              <i class="fa-solid fa-location-dot iconlocation"></i>
-              {{ entry.location }}
+              <i class="fa-solid fa-location-dot"></i>
+              <span>{{ entry.location }}</span>
             </div>
           {% endif %}
 
@@ -52,14 +71,14 @@
               >
             </div>
           {% endif %}
-
         </div>
 
-        <!-- Right column -->
-        <div class="col-xs-10 col-sm-10 col-md-10 cv-entry-main">
-
+        <!-- =========================
+             Right: position / company / details
+             ========================= -->
+        <div class="cv-entry-main">
           {% if entry.position %}
-            <h6 class="cv-entry-title font-weight-bold">
+            <h6 class="cv-entry-title">
               {% if entry.url %}
                 <a href="{{ entry.url }}" target="_blank" rel="noopener noreferrer">
                   {{ entry.position }}
@@ -73,31 +92,28 @@
           {% assign company_name = entry.company | default: entry.name | default: entry.organization %}
 
           {% if company_name %}
-            <h6 class="cv-entry-organization">
+            <div class="cv-entry-organization">
               {{ company_name }}
-            </h6>
+            </div>
           {% endif %}
 
           {% if entry.summary %}
-            <h6 class="cv-entry-summary">
+            <div class="cv-entry-summary">
               {{ entry.summary | markdownify | remove: '<p>' | remove: '</p>' }}
-            </h6>
+            </div>
           {% endif %}
 
           {% if entry.highlights %}
-            <ul class="items">
+            <ul class="cv-entry-highlights">
               {% for item in entry.highlights %}
                 <li>
-                  <span class="item">
-                    {{ item | markdownify | remove: '<p>' | remove: '</p>' }}
-                  </span>
+                  {{ item | markdownify | remove: '<p>' | remove: '</p>' }}
                 </li>
               {% endfor %}
             </ul>
           {% endif %}
-
         </div>
       </div>
-    </li>
+    </div>
   {% endfor %}
-</ul>
+</div>
