@@ -1,0 +1,96 @@
+<div class="cv-group-list">
+  {% assign sorted_entries = entries | al_cv_sort_by_date %}
+  {% assign organization_groups = sorted_entries | group_by: 'issuer' %}
+
+  {% for group in organization_groups %}
+    {% assign first_entry = group.items | first %}
+    {% assign group_entries = group.items | al_cv_sort_by_date %}
+    {% assign role_count = group.items | size %}
+
+    <div class="cv-org-group">
+      <!-- Issuer header -->
+      <div class="cv-org-header">
+        <div class="cv-org-logo-box">
+          {% if first_entry.logo %}
+            <img
+              class="cv-org-logo"
+              src="{{ first_entry.logo | relative_url }}"
+              alt="{{ group.name }} logo"
+              loading="lazy"
+            >
+          {% endif %}
+        </div>
+
+        <div class="cv-org-info">
+          <div class="cv-org-name">
+            {{ group.name }}
+          </div>
+
+          {% if first_entry.location %}
+            <div class="cv-org-location">
+              <i class="fa-solid fa-location-dot"></i>
+              <span>{{ first_entry.location }}</span>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+
+      <!-- Certificates -->
+      <div class="cv-role-list">
+        {% for entry in group_entries %}
+          <div class="cv-role-row">
+            <div class="cv-role-rail">
+              {% if role_count > 1 %}
+                <span class="cv-role-dot"></span>
+
+                {% unless forloop.last %}
+                  <span class="cv-role-line"></span>
+                {% endunless %}
+              {% endif %}
+            </div>
+
+            <div class="cv-role-date">
+              {% include cv/date_range.liquid entry=entry %}
+            </div>
+
+            <div class="cv-role-body">
+              {% if entry.name %}
+                <div class="cv-role-title">
+                  {% if entry.url %}
+                    <a href="{{ entry.url }}" target="_blank" rel="noopener noreferrer">
+                      {{ entry.name }}
+                    </a>
+                  {% else %}
+                    {{ entry.name }}
+                  {% endif %}
+                </div>
+              {% endif %}
+
+              {% if entry.credential_id %}
+                <div class="cv-role-detail">
+                  Credential ID: {{ entry.credential_id }}
+                </div>
+              {% endif %}
+
+              {% if entry.summary %}
+                <div class="cv-role-summary cv-certificate-summary">
+                  {{ entry.summary | markdownify | remove: '<p>' | remove: '</p>' }}
+                </div>
+              {% endif %}
+
+              {% if entry.highlights %}
+                <ul class="cv-role-highlights">
+                  {% for item in entry.highlights %}
+                    <li>
+                      {{ item | markdownify | remove: '<p>' | remove: '</p>' }}
+                    </li>
+                  {% endfor %}
+                </ul>
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  {% endfor %}
+</div>
