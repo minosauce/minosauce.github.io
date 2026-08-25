@@ -5,6 +5,7 @@ date: 2021-09-02
 category: Funded
 description: "Funded by: Ministry of Trade, Industry and Energy (MOTIE)"
 img: /assets/img/projects/windfarm_mpc.png
+thumbnail_fit: contain
 related_publications: true
 ---
 
