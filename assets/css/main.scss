@@ -7,7 +7,7 @@
 @use "sass:string";
 
 @use "variables" with (
-  $max-content-width: {{ site.max_width | default: "930px" }}
+  $max-content-width: {{site.max_width | default: "930px"}}
 );
 
 @use "themes";
@@ -22,7 +22,6 @@
 @use "tabs";
 @use "teachings";
 @use "typograms";
-
 
 /* ==================================================
    Minho Jang - Custom Theme
@@ -39,7 +38,6 @@ html[data-theme="dark"] {
   --global-theme-color: #0097dc;
   --global-hover-color: #0097dc;
 }
-
 
 /* Times New Roman for general text */
 body,
@@ -121,7 +119,6 @@ samp {
   font-weight: 700 !important;
 }
 
-
 /* =========================================================
    Profile photo size
    ========================================================= */
@@ -140,7 +137,7 @@ samp {
 .home-section-title {
   margin-top: 1.5rem !important;
   margin-bottom: 1.5rem !important;
-  padding-top: 1.0rem;
+  padding-top: 1rem;
   border-top: 1px solid var(--global-divider-color);
 }
 

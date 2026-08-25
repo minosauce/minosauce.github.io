@@ -1,7 +1,6 @@
 ---
 layout: default
 ---
-
 <div class="post">
   <header class="post-header">
     <h1 class="post-title">
@@ -17,10 +16,8 @@ layout: default
   </header>
 
   <article>
-
     {% if page.profile %}
       <div class="profile float-{% if page.profile.align == 'left' %}left{% else %}right{% endif %}">
-
         {% if page.profile.image %}
           {% assign profile_image_path = page.profile.image | prepend: 'assets/img/' %}
 
@@ -48,7 +45,6 @@ layout: default
           %}
         {% endif %}
 
-
         <!-- Social icons directly below profile image -->
         {% if page.social %}
           <div class="social profile-social">
@@ -58,21 +54,17 @@ layout: default
           </div>
         {% endif %}
 
-
         {% if page.profile.more_info %}
           <div class="more-info">
             {{ page.profile.more_info }}
           </div>
         {% endif %}
-
       </div>
     {% endif %}
-
 
     <div class="clearfix">
       {{ content }}
     </div>
-
 
     <!-- News -->
     {% if page.announcements and page.announcements.enabled %}
@@ -82,31 +74,28 @@ layout: default
       {% include news.liquid limit=true %}
     {% endif %}
 
-
     <!-- Latest posts -->
     {% if page.latest_posts and page.latest_posts.enabled %}
       <h2 class="home-section-title">
-        <a href="https://velog.io/@minosauce"
-           target="_blank"
-           rel="noopener noreferrer"
-           style="color: inherit">
+        <a
+          href="https://velog.io/@minosauce"
+          target="_blank"
+          rel="noopener noreferrer"
+          style="color: inherit"
+        >
           Posts
         </a>
       </h2>
       {% include latest_posts.liquid %}
     {% endif %}
 
-
     <!-- Selected papers -->
     {% if page.selected_papers %}
       <h2>
-        <a href="{{ '/publications/' | relative_url }}" style="color: inherit">
-          selected publications
-        </a>
+        <a href="{{ '/publications/' | relative_url }}" style="color: inherit"> selected publications </a>
       </h2>
       {% include selected_papers.liquid %}
     {% endif %}
-
 
     {% if site.newsletter and site.newsletter.enabled and site.footer_fixed %}
       {% if site.plugins contains 'al_newsletter' %}
@@ -115,6 +104,5 @@ layout: default
         {% include newsletter.liquid center=true %}
       {% endif %}
     {% endif %}
-
   </article>
 </div>

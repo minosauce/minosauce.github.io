@@ -20,7 +20,7 @@ nav_order: 4
 ---
 
 {% if site.repo_trophies.enabled %}
-  {% for user in site.data.repositories.github_users %}
+{% for user in site.data.repositories.github_users %}
 
     {% if site.data.repositories.github_users.size > 1 %}
       <h4>{{ user }}</h4>
@@ -32,11 +32,10 @@ nav_order: 4
 
     ---
 
-  {% endfor %}
+{% endfor %}
 {% endif %}
 
 {% endif %}
-
 
 {% if site.data.repositories.github_repos %}
 
@@ -49,7 +48,6 @@ nav_order: 4
 </div>
 
 {% endif %}
-
 
 {% if site.data.repositories.open_repos %}
 

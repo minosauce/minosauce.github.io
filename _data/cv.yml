@@ -64,17 +64,15 @@ cv:
         highlights:
           - Safe Reinforcement Learning for Threat-Responsive Satellite Maneuvering
 
-
       - company: Sejong University
         position: Graduate Research Assistant & Teaching Assistant
         location: Seoul, Republic of Korea
         start_date: 2021-09
         end_date: 2025-08
         summary: Member of Flight Dynamics and Control Lab (FDCL)
-          
 
       - company: Seoul National University
-        position: Exchange Student Program 
+        position: Exchange Student Program
         location: Seoul, Republic of Korea
         summary: Department of Mechanical and Aerospace Engineering
         start_date: 2020-09
@@ -84,15 +82,12 @@ cv:
           - Bridged academic backgrounds in electronics engineering with aerospace applications through coursework in Aerospace Traffic and Navigation Systems (MAE2795.004600)
           - Gained interdisciplinary exposure to modern control theory and aerospace engineering, deepening understanding of autonomous systems and guidance technologies
 
-
-
     Professional Service:
       - label: Peer Review
         details: |
           <ul>
             <li>IEEE Access</li>
           </ul>
-
 
     Awards:
       - title: 2020 Capstone Design Competition
@@ -102,14 +97,12 @@ cv:
         awarder: Chonnam National University
         summary: Recognized for developing an innovative engineering project in the 2020 Capstone Design Competition hosted by the Engineering Education Innovation Center
 
-
-
     Certificates:
       - name: Design Your Dream Corporate Experience Program
         date: 2015-08
         issuer: Samsung Electronics
         icon: fa-solid fa-tag
-        
+
       - name: Glocal Specialization Exploration Program
         date: 2017-07
         issuer: Chonnam National University
@@ -120,7 +113,6 @@ cv:
         issuer: LIG Defense&Aerospace
         icon: fa-solid fa-tag
 
-    
     Skills:
       - name: Julia
         level: Master
@@ -132,27 +124,24 @@ cv:
         icon: fa-solid fa-hashtag
         keywords: "Simulink, STK"
 
-
       - name: Python
         level: Master
         icon: fa-solid fa-hashtag
         keywords: "Pytorch, Basilisk"
-        
+
       - name: Fortran
         level: Advanced
         icon: fa-solid fa-hashtag
         keywords: "Missile DATCOM, FAST.Farm, OpenFAST, ZeroMQ"
 
-
     Languages:
       - name: English
         summary: "Fluent"
-        
-        
+
     Interests:
       - name: "Guidance, Navigation, and Control of Missile and Satellite Systems"
         icon: fa-solid fa-tag
-        
+
       - name: "Guidance Law Design: Nonlinear Model Predictive Control and Optimal Trajectory Generation"
         icon: fa-solid fa-tag
 
@@ -167,4 +156,3 @@ cv:
 
       - name: "Data-Driven Control: Reinforcement Learning and Deep Neural Networks"
         icon: fa-solid fa-tag
-        

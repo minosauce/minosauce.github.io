@@ -17,7 +17,6 @@ nav_order: 2
 {% assign conference_count = conference_count_raw | strip | plus: 0 %}
 {% assign conference_start = conference_count | plus: 1 %}
 
-
 <style>
   .pub-numbered ol.bibliography {
     list-style: none;
@@ -74,8 +73,8 @@ nav_order: 2
 }
 </style>
 
-
 {% if journal_count > 0 %}
+
 <div class="publication-section">
   <h2>Journal</h2>
 
@@ -88,8 +87,8 @@ nav_order: 2
 </div>
 {% endif %}
 
-
 {% if conference_count > 0 %}
+
 <div class="publication-section">
   <h2>Conference</h2>
 

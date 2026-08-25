@@ -1,5 +1,4 @@
 ---
-
 layout: about
 title: About
 permalink: /
@@ -24,7 +23,6 @@ latest_posts:
   enabled: true
   scrollable: true
   limit: 4
-  
 ---
 
 ## Biography
@@ -34,7 +32,6 @@ He received the B.S. degree in electronics and computer engineering from Chonnam
 He is currently working as a satellite system engineer at the Satellite Technology Research Center (SaTReC), KAIST, Daejeon, Republic of Korea. His research interests include guidance, navigation, and control (GNC), with a focus on optimal control theory and its applications to missile and satellite systems.
 
 <div style="clear: both;"></div>
-
 
 <h2 class="home-section-title">
   <a href="{{ '/publications/' | relative_url }}" style="color: inherit">
