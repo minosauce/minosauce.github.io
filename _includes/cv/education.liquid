@@ -1,134 +1,85 @@
-<div class="cv-entry-list">
-  {% for entry in entries %}
-    <div class="cv-entry-block">
-      <div class="cv-entry-grid">
-        <!-- =========================
-             Left: date / location / logo
-             ========================= -->
-        <div class="cv-entry-meta">
-          {% assign start_date = entry.start_date | default: entry.startDate %}
-          {% assign end_date = entry.end_date | default: entry.endDate %}
+<div class="cv-group-list">
+  {% assign organization_groups = entries | group_by: 'institution' %}
 
-          {% if start_date %}
-            {% assign start_date_string = start_date | append: '' %}
-            {% assign start_parts = start_date_string | split: '-' %}
-            {% assign start_year = start_parts[0] %}
-            {% assign start_month = start_parts[1] %}
+  {% for group in organization_groups %}
+    {% assign first_entry = group.items | first %}
+    {% assign group_entries = group.items | al_cv_sort_by_date %}
 
-            {% if start_month %}
-              {% assign start_text = start_year | append: '.' | append: start_month %}
-            {% else %}
-              {% assign start_text = start_year %}
-            {% endif %}
+    <div class="cv-org-group">
+      <!-- Institution header -->
+      <div class="cv-org-header">
+        {% if first_entry.logo %}
+          <div class="cv-org-logo-box">
+            <img
+              class="cv-org-logo"
+              src="{{ first_entry.logo | relative_url }}"
+              alt="{{ group.name }} logo"
+              loading="lazy"
+            >
+          </div>
+        {% endif %}
 
-            {% assign end_date_string = end_date | append: '' %}
-            {% assign end_date_lower = end_date_string | downcase %}
+        <div class="cv-org-info">
+          <div class="cv-org-name">
+            {{ group.name }}
+          </div>
 
-            {% if end_date_lower == 'present' or end_date_lower == 'current' %}
-              {% assign end_text = 'Present' %}
-            {% elsif end_date %}
-              {% assign end_parts = end_date_string | split: '-' %}
-              {% assign end_year = end_parts[0] %}
-              {% assign end_month = end_parts[1] %}
-
-              {% if end_month %}
-                {% assign end_text = end_year | append: '.' | append: end_month %}
-              {% else %}
-                {% assign end_text = end_year %}
-              {% endif %}
-            {% else %}
-              {% assign end_text = 'Present' %}
-            {% endif %}
-
-            {% assign date_text = start_text | append: ' – ' | append: end_text %}
-
-          {% elsif entry.date %}
-            {% assign date_text = entry.date %}
-          {% else %}
-            {% assign date_text = '' %}
-          {% endif %}
-
-          {% if date_text != '' %}
-            <div class="cv-entry-date">
-              {{ date_text }}
-            </div>
-          {% endif %}
-
-          {% if entry.location %}
-            <div class="cv-entry-location">
+          {% if first_entry.location %}
+            <div class="cv-org-location">
               <i class="fa-solid fa-location-dot"></i>
-              <span>{{ entry.location }}</span>
-            </div>
-          {% endif %}
-
-          {% if entry.logo %}
-            <div class="cv-logo-wrapper">
-              <img
-                class="cv-entry-logo"
-                src="{{ entry.logo | relative_url }}"
-                alt="{{ entry.institution }} logo"
-                loading="lazy"
-              >
+              <span>{{ first_entry.location }}</span>
             </div>
           {% endif %}
         </div>
+      </div>
 
-        <!-- =========================
-             Right: degree / institution / major / details
-             ========================= -->
-        <div class="cv-entry-main">
+      <!-- Degrees -->
+      <div class="cv-role-list">
+        {% for entry in group_entries %}
           {% assign study_type = entry.studyType | default: entry.degree %}
 
-          {% if study_type %}
-            <h6 class="cv-entry-title">
-              {% if entry.url %}
-                <a href="{{ entry.url }}" target="_blank" rel="noopener noreferrer">
-                  {{ study_type }}
-                </a>
-              {% else %}
-                {{ study_type }}
-              {% endif %}
-            </h6>
-          {% endif %}
-
-          {% if entry.institution %}
-            <div class="cv-entry-organization">
-              {{ entry.institution }}
+          <div class="cv-role-row">
+            <div class="cv-role-date">
+              {% include cv/date_range.liquid entry=entry %}
             </div>
-          {% endif %}
 
-          {% if entry.area %}
-            {% assign show_area = true %}
+            <div class="cv-role-body">
+              {% if study_type %}
+                <div class="cv-role-title">
+                  {{ study_type }}
 
-            {% if study_type and study_type contains entry.area %}
-              {% assign show_area = false %}
-            {% endif %}
-
-            {% if show_area %}
-              <div class="cv-entry-summary">
-                {{ entry.area }}
-              </div>
-            {% endif %}
-          {% endif %}
-
-          {% if entry.courses or entry.highlights %}
-            <ul class="cv-entry-highlights">
-              {% if entry.courses %}
-                {% for item in entry.courses %}
-                  <li>{{ item }}</li>
-                {% endfor %}
+                  {% if entry.area %}
+                    <span class="cv-degree-area">[{{ entry.area }}]</span>
+                  {% endif %}
+                </div>
               {% endif %}
 
-              {% if entry.highlights %}
-                {% for item in entry.highlights %}
-                  <li>
-                    {{ item | markdownify | remove: '<p>' | remove: '</p>' }}
-                  </li>
-                {% endfor %}
+              {% if entry.score %}
+                <div class="cv-role-detail">
+                  GPA: {{ entry.score }}
+                </div>
               {% endif %}
-            </ul>
-          {% endif %}
-        </div>
+
+              {% if entry.courses or entry.highlights %}
+                <ul class="cv-role-highlights">
+                  {% if entry.courses %}
+                    {% for item in entry.courses %}
+                      <li>{{ item }}</li>
+                    {% endfor %}
+                  {% endif %}
+
+                  {% if entry.highlights %}
+                    {% for item in entry.highlights %}
+                      <li>
+                        {{ item | markdownify | remove: '<p>' | remove: '</p>' }}
+                      </li>
+                    {% endfor %}
+                  {% endif %}
+                </ul>
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
       </div>
     </div>
   {% endfor %}
