@@ -1,10 +1,11 @@
 ---
 layout: page
 title: project 7
+date: 2025-11-02
+category: Independent
 description: with background image
 img: assets/img/4.jpg
 importance: 1
-category: Independent
 related_publications: true
 ---
 
