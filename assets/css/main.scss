@@ -174,8 +174,8 @@ samp {
 .news-thumbnail img {
   display: block;
 
-  width: 80px;
-  height: 40px;
+  width: 100px;
+  height: 60px;
 
   object-fit: cover;
 
@@ -194,12 +194,12 @@ samp {
 /* Mobile */
 @media (max-width: 576px) {
   .news-item {
-    grid-template-columns: 82px 90px minmax(0, 1fr);
-    column-gap: 0.7rem;
+    grid-template-columns: 72px 80px minmax(0, 1fr);
+    column-gap: 0.6rem;
   }
 
   .news-item-no-preview {
-    grid-template-columns: 82px minmax(0, 1fr);
+    grid-template-columns: 72px minmax(0, 1fr);
   }
 
   .news-date {
@@ -207,8 +207,10 @@ samp {
   }
 
   .news-thumbnail img {
-    width: 90px;
-    height: 60px;
+    width: 80px;
+    height: 55px;
+    object-fit: cover;
+    border-radius: 6px;
   }
 
   .news-title {
