@@ -338,6 +338,120 @@ samp {
   }
 }
 
+
+/* =========================================================
+   About - Recent Projects
+   ========================================================= */
+
+.home-project-list {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.home-project-item {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+
+  width: 100%;
+
+  padding: 0.5rem 0.3rem;
+
+  border-bottom: 1px solid var(--global-divider-color);
+
+  overflow: hidden;
+}
+
+.home-project-item:first-child {
+  border-top: 1px solid var(--global-divider-color);
+}
+
+.home-project-title {
+  flex: 0 0 auto;
+
+  color: var(--global-text-color);
+
+  font-size: 1rem;
+  font-weight: 700;
+
+  white-space: nowrap;
+}
+
+.home-project-description {
+  min-width: 0;
+
+  color: var(--global-text-color);
+
+  font-size: 1rem;
+  font-weight: 400;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* =========================================================
+   About - Repositories
+   ========================================================= */
+
+.home-repositories {
+  display: grid;
+
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+
+  width: 100%;
+}
+
+.home-repositories .repo {
+  width: 100%;
+
+  margin: 0;
+  padding: 0 !important;
+}
+
+.home-repositories .repo img {
+  display: block;
+
+  width: 100% !important;
+  height: auto;
+}
+
+/* =========================================================
+   About - Projects / Repositories mobile
+   ========================================================= */
+
+@media (max-width: 576px) {
+  .home-project-item {
+    gap: 0.3rem;
+  }
+
+  .home-project-title,
+  .home-project-description {
+    font-size: 0.95rem;
+  }
+
+  .home-repositories {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* =========================================================
    CV grouped layout
 
