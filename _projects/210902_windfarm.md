@@ -9,7 +9,6 @@ related_publications: true
 ---
 
 Managing Institution: Korea Institute of Energy Technology Evaluation and Planning (KETEP)
-        
 
 - Designed and deployed the FAST.Farm mid-fidelity simulator for wind farm dynamics, enabling online environmental modeling and data collection
 
@@ -22,6 +21,4 @@ Managing Institution: Korea Institute of Energy Technology Evaluation and Planni
 - Engineered real-time socket communication (ZeroMQ) between the central control server and distributed wind turbine controllers
 
 - Published the research as a journal paper in collaboration with graduate researchers at Sejong University [J.1]
-            
 - Tools & Software Used: MATLAB, Fortran, Python, OpenFAST, FAST.Farm, ZeroMQ
-

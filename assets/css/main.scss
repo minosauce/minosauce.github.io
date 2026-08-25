@@ -228,8 +228,7 @@ samp {
   padding: 0.75rem 0;
 
   /* Individual news divider is intentionally lighter */
-  border-bottom: 1px solid
-    color-mix(in srgb, var(--global-divider-color) 55%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--global-divider-color) 55%, transparent);
 }
 
 /* Last news item has no internal divider */
@@ -241,7 +240,6 @@ samp {
   margin-top: 1.1rem !important;
   padding-top: 0.9rem !important;
 }
-
 
 /* =========================================================
    News - Date
