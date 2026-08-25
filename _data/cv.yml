@@ -36,6 +36,7 @@ cv:
 
       - institution: Chonnam National University
         location: Gwangju, Republic of Korea
+        logo: /assets/img/ui/cnu.png
         area: Electronics and Computer Engineering
         studyType: B.S.
         start_date: 2015-03
