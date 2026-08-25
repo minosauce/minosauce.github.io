@@ -7,6 +7,8 @@ description: Independent Research
 img: /assets/img/projects/simSSile.png
 ---
 
+**2024.06**
+
 # Project Overview
 
 ![Model Predictive Control-Based Guidance Law](/assets/img/projects/simSSile.png)
