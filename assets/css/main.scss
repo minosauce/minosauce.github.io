@@ -97,12 +97,9 @@ samp {
 /*
  * Always maximum 3 items per row.
  *
- * 6 links  -> 3 + 3
- * 7 links  -> 3 + 3 + 1
- * 8 links  -> 3 + 3 + 2
- *
- * Because justify-content is center,
- * an incomplete final row also stays centered.
+ * 6 links -> 3 + 3
+ * 7 links -> 3 + 3 + 1
+ * 8 links -> 3 + 3 + 2
  */
 .profile .profile-social .contact-icons > a {
   display: flex;
@@ -162,10 +159,11 @@ samp {
   }
 }
 
-/* Section headings */
+/* Major section headings */
 .home-section-title {
-  margin-top: 2.0rem !important;
+  margin-top: 2rem !important;
   margin-bottom: 1.5rem !important;
+
   padding-top: 1.25rem;
 
   border-top: 1px solid var(--global-divider-color);
@@ -183,34 +181,28 @@ samp {
   font-weight: 700 !important;
 }
 
-/* News date */
+/* About page News dates */
 .about-page .news-date {
   font-weight: 400 !important;
 }
 
-/* Posts date */
+/* About page Posts dates */
 .about-page .table th {
   font-weight: 400 !important;
 }
-
 
 /* =========================================================
    Publications - vertical spacing
    ========================================================= */
 
-/* About + Publications page 모두 적용 */
 .publications ol.bibliography > li {
   margin-top: 0.35rem;
   margin-bottom: 1.35rem;
 }
 
-/* 마지막 논문 아래는 너무 많이 벌어지지 않게 */
 .publications ol.bibliography > li:last-child {
   margin-bottom: 0.6rem;
 }
-
-
-
 
 /* =========================================================
    News layout
@@ -225,11 +217,9 @@ samp {
   display: grid;
 
   /*
-   * Posts uses a 20% date column.
-   * Using the same width here aligns
-   * News titles with Posts titles.
-   *
    * Date | Title | Thumbnail
+   *
+   * 20% date column matches Posts.
    */
   grid-template-columns: 20% minmax(0, 1fr) 100px;
 
@@ -237,12 +227,15 @@ samp {
 
   padding: 0.75rem 0;
 
+  /* Individual news divider is intentionally lighter */
   border-bottom: 1px solid
     color-mix(in srgb, var(--global-divider-color) 55%, transparent);
 }
 
+/* Last news item has no internal divider */
 .news-item:last-child {
   border-bottom: none;
+}
 
 /* =========================================================
    News - Date
@@ -251,10 +244,6 @@ samp {
 .news-date {
   grid-column: 1;
 
-  /*
-   * Match Bootstrap table-sm cell padding
-   * used by the Posts section.
-   */
   padding: 0.3rem;
 
   font-size: 1rem;
@@ -273,10 +262,6 @@ samp {
 
   min-width: 0;
 
-  /*
-   * Posts title is inside a table-sm <td>,
-   * so use matching padding.
-   */
   padding: 0.3rem;
 }
 
@@ -312,12 +297,6 @@ samp {
    News - No thumbnail
    ========================================================= */
 
-/*
- * When an item has no image,
- * the title still remains in column 2.
- * Therefore every News title keeps
- * exactly the same starting position.
- */
 .news-item-no-preview .news-content {
   grid-column: 2;
 }
@@ -328,9 +307,6 @@ samp {
 
 @media (max-width: 576px) {
   .news-item {
-    /*
-     * Keep the same 20% date column as Posts.
-     */
     grid-template-columns: 20% minmax(0, 1fr) 80px;
 
     padding: 0.55rem 0;
@@ -367,6 +343,7 @@ samp {
 
 .home-project-list {
   width: 100%;
+
   margin: 0;
   padding: 0;
 }
@@ -380,9 +357,9 @@ samp {
 
   padding: 0.5rem 0.3rem;
 
-  border-bottom: 1px solid var(--global-divider-color);
-
   overflow: hidden;
+
+  border-bottom: 1px solid var(--global-divider-color);
 }
 
 .home-project-item:first-child {
@@ -403,13 +380,14 @@ samp {
 .home-project-description {
   min-width: 0;
 
+  overflow: hidden;
+
   color: var(--global-text-color);
 
   font-size: 1rem;
   font-weight: 400;
 
   white-space: nowrap;
-  overflow: hidden;
   text-overflow: ellipsis;
 }
 
@@ -442,8 +420,8 @@ samp {
 }
 
 /*
- * Do NOT force display:block here.
- * al-folio uses light/dark variants internally.
+ * Do NOT force display: block here.
+ * al-folio uses separate light/dark variants internally.
  */
 .home-repository-item .repo img {
   width: 100% !important;
@@ -452,19 +430,7 @@ samp {
 }
 
 /* =========================================================
-   About - Repositories mobile
-   ========================================================= */
-
-@media (max-width: 576px) {
-  .home-repositories {
-    grid-template-columns: 1fr;
-    gap: 0.8rem;
-  }
-}
-
-
-/* =========================================================
-   About - Projects / Repositories mobile
+   About - Projects / Repositories Mobile
    ========================================================= */
 
 @media (max-width: 576px) {
@@ -486,7 +452,7 @@ samp {
 /* =========================================================
    CV grouped layout
 
-   동일한 공통 구조:
+   Common structure:
    Experience
    Education
    Professional Service
@@ -527,7 +493,7 @@ samp {
 .cv-org-header {
   display: grid;
 
-  /* Logo | organization */
+  /* Logo | Organization */
   grid-template-columns: 56px minmax(0, 1fr);
   column-gap: 0.85rem;
 
@@ -553,9 +519,6 @@ samp {
   width: auto !important;
   height: auto !important;
 
-  /*
-   * 기존 44 x 36보다 살짝 확대
-   */
   max-width: 50px !important;
   max-height: 40px !important;
 
@@ -595,7 +558,7 @@ samp {
   line-height: 1.3;
 }
 
-/* Location icon: black / normal text color */
+/* Location icon: normal text color */
 .cv-org-location i {
   color: var(--global-text-color) !important;
 }
@@ -612,14 +575,11 @@ samp {
 }
 
 /*
- * 모든 섹션에서 완전히 동일한 열을 사용
+ * All CV sections use exactly the same columns.
  *
  * 18px  = timeline
  * 125px = date
  * rest  = title / degree / award / certificate
- *
- * 날짜는 기존보다 오른쪽으로 이동하지만,
- * date-content 사이의 실제 빈 공간은 더 좁아짐.
  */
 .cv-role-row {
   display: grid;
@@ -637,11 +597,7 @@ samp {
   padding-bottom: 0;
 }
 
-/*
- * DOM에 rail이 없는 섹션에서도
- * date/content 위치가 Experience/Education과
- * 절대 달라지지 않도록 column을 강제 지정.
- */
+/* Explicit columns */
 .cv-role-rail {
   grid-column: 1;
 }
@@ -686,7 +642,7 @@ samp {
   border-radius: 50%;
 }
 
-/* Vertical connection between multiple entries */
+/* Vertical connection between entries */
 .cv-role-line {
   position: absolute;
 
@@ -701,7 +657,7 @@ samp {
   background-color: var(--global-divider-color);
 }
 
-/* Slightly brighter timeline in dark mode */
+/* Timeline in dark mode */
 html[data-theme="dark"] .cv-role-dot {
   background-color: #999;
 }
@@ -717,14 +673,7 @@ html[data-theme="dark"] .cv-role-dot {
   color: var(--global-text-color) !important;
 
   font-size: 0.9rem;
-
-  /* Date should NOT be bold */
   font-weight: 400;
-
-  /*
-   * Same line-height as role title.
-   * Keeps date and title on exactly the same horizontal line.
-   */
   line-height: 1.35;
 
   white-space: nowrap;
@@ -741,14 +690,6 @@ html[data-theme="dark"] .cv-role-dot {
   padding: 0;
 }
 
-/*
- * Role / Degree / Award / Certificate
- *
- * Date and title:
- * identical top margin
- * identical padding
- * identical line-height
- */
 .cv-role-title {
   margin: 0 0 0.4rem !important;
   padding: 0 !important;
@@ -768,13 +709,6 @@ html[data-theme="dark"] .cv-role-dot {
    CV - Education
    ========================================================= */
 
-/*
- * Example:
- *
- * M.S.     Aerospace Engineering
- *
- * Both bold.
- */
 .cv-degree-title {
   display: flex;
   align-items: baseline;
@@ -788,12 +722,7 @@ html[data-theme="dark"] .cv-role-dot {
   font-weight: 700 !important;
 }
 
-/*
- * Major:
- * no brackets
- * bold
- * visible space after degree
- */
+/* Major */
 .cv-degree-area {
   margin-left: 0.8rem !important;
 
@@ -815,7 +744,7 @@ html[data-theme="dark"] .cv-role-dot {
   line-height: 1.4;
 }
 
-/* Award / Certificate descriptions are normal text */
+/* Award / Certificate descriptions */
 .cv-award-summary,
 .cv-certificate-summary {
   font-style: normal;
@@ -848,6 +777,7 @@ html[data-theme="dark"] .cv-role-dot {
 
 .cv-interests-list {
   width: 100%;
+
   margin: 0;
   padding: 0;
 }
@@ -892,7 +822,7 @@ html[data-theme="dark"] .cv-role-dot {
 
     /*
      * Sidebar outer width: 180px
-     * TOC actual width:    170px
+     * TOC actual width: 170px
      */
     grid-template-columns: 180px minmax(0, 1fr);
     column-gap: 1.25rem;
@@ -933,7 +863,7 @@ html[data-theme="dark"] .cv-role-dot {
     padding: 1.1rem 0 1.3rem;
   }
 
-  /* Logo | institution/company */
+  /* Logo | Institution/Company */
   .cv-org-header {
     grid-template-columns: 50px minmax(0, 1fr);
     column-gap: 0.7rem;
