@@ -1042,3 +1042,51 @@ html[data-theme="dark"] .cv-role-dot {
 .hidden-project-citation {
   display: none;
 }
+
+
+/* =========================================================
+   Projects - Thumbnail index
+   ========================================================= */
+
+.projects .project-thumbnail-wrapper {
+  position: relative;
+}
+
+/*
+ * Minimal glass-style project number.
+ * Automatically displays N ... 2, 1.
+ */
+.projects .project-index {
+  position: absolute;
+  top: 0.8rem;
+  left: 0.8rem;
+
+  z-index: 10;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 34px;
+  height: 34px;
+
+  padding: 0 0.55rem;
+
+  color: #fff;
+  background: rgb(20 20 20 / 58%);
+
+  border: 1px solid rgb(255 255 255 / 22%);
+  border-radius: 8px;
+
+  box-shadow: 0 2px 10px rgb(0 0 0 / 12%);
+
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  font-size: 0.9rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+
+  pointer-events: none;
+}
