@@ -1,10 +1,10 @@
-<ul class="card-text font-weight-light list-group list-group-flush">
+<ul class="card-text font-weight-light cv-entry-list">
   {% for entry in entries %}
-    <li class="list-group-item">
-      <div class="row">
+    <li class="cv-entry-block">
+      <div class="row cv-entry-row">
 
         <!-- Left column: date / location / logo -->
-        <div class="col-xs-2 col-sm-2 col-md-2 text-center date-column">
+        <div class="col-xs-2 col-sm-2 col-md-2 text-center cv-entry-meta">
 
           {% assign start_date = entry.start_date | default: entry.startDate %}
           {% assign end_date = entry.end_date | default: entry.endDate %}
@@ -27,58 +27,39 @@
             {% assign date_text = '' %}
           {% endif %}
 
-          <table class="table-cv">
-            <tbody>
+          {% if date_text != '' %}
+            <div class="cv-entry-date">
+              <span class="badge font-weight-bold danger-color-dark text-uppercase">
+                {{ date_text }}
+              </span>
+            </div>
+          {% endif %}
 
-              {% if date_text != '' %}
-                <tr>
-                  <td>
-                    <span
-                      class="badge font-weight-bold danger-color-dark text-uppercase align-middle"
-                      style="min-width: 75px"
-                    >
-                      {{ date_text }}
-                    </span>
-                  </td>
-                </tr>
-              {% endif %}
+          {% if entry.location %}
+            <div class="cv-entry-location">
+              <i class="fa-solid fa-location-dot iconlocation"></i>
+              {{ entry.location }}
+            </div>
+          {% endif %}
 
-              {% if entry.location %}
-                <tr>
-                  <td>
-                    <p class="location">
-                      <i class="fa-solid fa-location-dot iconlocation"></i>
-                      {{ entry.location }}
-                    </p>
-                  </td>
-                </tr>
-              {% endif %}
+          {% if entry.logo %}
+            <div class="cv-logo-wrapper">
+              <img
+                class="cv-entry-logo"
+                src="{{ entry.logo | relative_url }}"
+                alt="{{ entry.company | default: entry.name }} logo"
+                loading="lazy"
+              >
+            </div>
+          {% endif %}
 
-              <!-- Company / institution logo -->
-              {% if entry.logo %}
-                <tr>
-                  <td>
-                    <div class="cv-logo-wrapper">
-                      <img
-                        class="cv-entry-logo"
-                        src="{{ entry.logo | relative_url }}"
-                        alt="{{ entry.company | default: entry.name }} logo"
-                        loading="lazy"
-                      >
-                    </div>
-                  </td>
-                </tr>
-              {% endif %}
-
-            </tbody>
-          </table>
         </div>
 
         <!-- Right column -->
-        <div class="col-xs-10 col-sm-10 col-md-10 mt-2 mt-md-0">
+        <div class="col-xs-10 col-sm-10 col-md-10 cv-entry-main">
 
           {% if entry.position %}
-            <h6 class="title font-weight-bold ml-1 ml-md-4">
+            <h6 class="cv-entry-title font-weight-bold">
               {% if entry.url %}
                 <a href="{{ entry.url }}" target="_blank" rel="noopener noreferrer">
                   {{ entry.position }}
@@ -92,16 +73,13 @@
           {% assign company_name = entry.company | default: entry.name | default: entry.organization %}
 
           {% if company_name %}
-            <h6 class="ml-1 ml-md-4" style="font-size: 0.95rem">
+            <h6 class="cv-entry-organization">
               {{ company_name }}
             </h6>
           {% endif %}
 
           {% if entry.summary %}
-            <h6
-              class="ml-1 ml-md-4"
-              style="font-size: 0.95rem; font-style: italic"
-            >
+            <h6 class="cv-entry-summary">
               {{ entry.summary | markdownify | remove: '<p>' | remove: '</p>' }}
             </h6>
           {% endif %}
