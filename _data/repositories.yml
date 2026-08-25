@@ -9,7 +9,6 @@ github_repos:
   - minosauce/LMPC.jl
   - minosauce/Kalman-Filter
 
-
 open_repos:
   # Recommended research repositories
   - OpenFAST/openfast

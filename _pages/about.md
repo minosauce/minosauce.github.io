@@ -33,9 +33,6 @@ He is currently working as a satellite system engineer at the Satellite Technolo
 
 <div style="clear: both;"></div>
 
-
-
-
 <h2 class="home-section-title">
   <a href="{{ '/publications/' | relative_url }}" style="color: inherit">
     Publications
@@ -45,8 +42,6 @@ He is currently working as a satellite system engineer at the Satellite Technolo
 <div class="publications home-publications">
   {% bibliography --max 5 %}
 </div>
-
-
 
 <h2 class="home-section-title">
   <a href="{{ '/projects/' | relative_url }}" style="color: inherit">
@@ -64,18 +59,14 @@ He is currently working as a satellite system engineer at the Satellite Technolo
   </div>
 </div>
 
-
-
-
 <h2 class="home-section-title">
   <a href="{{ '/repositories/' | relative_url }}" style="color: inherit">
     Repositories
   </a>
 </h2>
 
-
-
 {% if site.data.repositories.github_repos %}
+
   <div class="home-repositories">
     {% for repo in site.data.repositories.github_repos limit: 2 %}
       {% include repository/repo.liquid repository=repo %}
