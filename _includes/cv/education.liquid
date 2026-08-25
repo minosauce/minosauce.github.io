@@ -1,0 +1,137 @@
+<ul class="card-text font-weight-light list-group list-group-flush">
+  {% for entry in entries %}
+    <li class="list-group-item">
+      <div class="row">
+
+        <!-- Left column: date / location / logo -->
+        <div class="col-xs-2 col-sm-2 col-md-2 text-center date-column">
+
+          {% assign start_date = entry.start_date | default: entry.startDate %}
+          {% assign end_date = entry.end_date | default: entry.endDate %}
+
+          {% if start_date %}
+            {% assign start_year = start_date | split: '-' | first %}
+
+            {% if end_date == 'present' or end_date == 'current' %}
+              {% assign end_year = 'Present' %}
+            {% elsif end_date %}
+              {% assign end_year = end_date | split: '-' | first %}
+            {% else %}
+              {% assign end_year = 'Present' %}
+            {% endif %}
+
+            {% assign date_text = start_year | append: ' - ' | append: end_year %}
+          {% elsif entry.date %}
+            {% assign date_text = entry.date | split: '-' | first %}
+          {% else %}
+            {% assign date_text = '' %}
+          {% endif %}
+
+          <table class="table-cv">
+            <tbody>
+
+              {% if date_text != '' %}
+                <tr>
+                  <td>
+                    <span
+                      class="badge font-weight-bold danger-color-dark text-uppercase align-middle"
+                      style="min-width: 75px"
+                    >
+                      {{ date_text }}
+                    </span>
+                  </td>
+                </tr>
+              {% endif %}
+
+              {% if entry.location %}
+                <tr>
+                  <td>
+                    <p class="location">
+                      <i class="fa-solid fa-location-dot iconlocation"></i>
+                      {{ entry.location }}
+                    </p>
+                  </td>
+                </tr>
+              {% endif %}
+
+              <!-- Institution logo -->
+              {% if entry.logo %}
+                <tr>
+                  <td>
+                    <div class="cv-logo-wrapper">
+                      <img
+                        class="cv-entry-logo"
+                        src="{{ entry.logo | relative_url }}"
+                        alt="{{ entry.institution }} logo"
+                        loading="lazy"
+                      >
+                    </div>
+                  </td>
+                </tr>
+              {% endif %}
+
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Right column: degree / institution / major / details -->
+        <div class="col-xs-10 col-sm-10 col-md-10 mt-2 mt-md-0">
+
+          {% assign study_type = entry.studyType | default: entry.degree %}
+
+          {% if study_type %}
+            <h6 class="title font-weight-bold ml-1 ml-md-4">
+              {% if entry.url %}
+                <a href="{{ entry.url }}" target="_blank" rel="noopener noreferrer">
+                  {{ study_type }}
+                </a>
+              {% else %}
+                {{ study_type }}
+              {% endif %}
+            </h6>
+          {% endif %}
+
+          {% if entry.institution %}
+            <h6 class="ml-1 ml-md-4" style="font-size: 0.95rem">
+              {{ entry.institution }}
+            </h6>
+          {% endif %}
+
+          {% if entry.area %}
+            <h6
+              class="ml-1 ml-md-4"
+              style="font-size: 0.95rem; font-style: italic"
+            >
+              {{ entry.area }}
+            </h6>
+          {% endif %}
+
+          {% if entry.courses or entry.highlights %}
+            <ul class="items">
+
+              {% if entry.courses %}
+                {% for item in entry.courses %}
+                  <li>
+                    <span class="item">{{ item }}</span>
+                  </li>
+                {% endfor %}
+              {% endif %}
+
+              {% if entry.highlights %}
+                {% for item in entry.highlights %}
+                  <li>
+                    <span class="item">
+                      {{ item | markdownify | remove: '<p>' | remove: '</p>' }}
+                    </span>
+                  </li>
+                {% endfor %}
+              {% endif %}
+
+            </ul>
+          {% endif %}
+
+        </div>
+      </div>
+    </li>
+  {% endfor %}
+</ul>
