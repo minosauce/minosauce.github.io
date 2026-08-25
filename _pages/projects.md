@@ -10,8 +10,8 @@ horizontal: false
 
 <div class="projects">
 
-  {% if page.display_categories %}
-    {% for category in page.display_categories %}
+{% if page.display_categories %}
+{% for category in page.display_categories %}
 
       <h2 class="category">
         {{ category }}
@@ -31,7 +31,7 @@ horizontal: false
 
     {% endfor %}
 
-  {% else %}
+{% else %}
 
     {% assign sorted_projects = site.projects | sort: 'date' | reverse %}
 
@@ -44,6 +44,6 @@ horizontal: false
       {% endfor %}
     </div>
 
-  {% endif %}
+{% endif %}
 
 </div>

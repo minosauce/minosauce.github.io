@@ -40,7 +40,6 @@
 
 <div class="col">
   <div class="card h-100 hoverable project-card">
-
     {% if project.img %}
       <a
         href="{{ project_link }}"
@@ -51,13 +50,12 @@
         class="project-thumbnail-link"
       >
         <div class="project-thumbnail-wrapper">
-        
           {% if include.project_number %}
             <div class="project-index">
               {{ include.project_number }}
             </div>
           {% endif %}
-        
+
           {%
             include figure.liquid
             loading="eager"
@@ -66,13 +64,11 @@
             alt=project.title
             class=thumbnail_class
           %}
-        
         </div>
       </a>
     {% endif %}
 
     <div class="card-body">
-
       <h2 class="card-title">
         <a
           href="{{ project_link }}"
@@ -93,7 +89,6 @@
 
       {% if project.github %}
         <div class="project-github">
-
           <a
             href="{{ project.github }}"
             target="_blank"
@@ -110,10 +105,8 @@
               <span id="{{ project.github | split: '/' | last }}-stars"></span>
             </span>
           {% endif %}
-
         </div>
       {% endif %}
-
     </div>
   </div>
 </div>

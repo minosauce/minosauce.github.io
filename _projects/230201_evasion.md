@@ -15,9 +15,7 @@ related_publications: true
 - Published the research as a conference paper in collaboration with graduate researchers at Sejong University [C.5]
 
 - Explored missile evasion strategies using reinforcement learning approaches to enhance autonomous response capabilities
-            
 - Tools & Software Used: Python, Tensorflow, Pytorch
-
 
 <br>
 

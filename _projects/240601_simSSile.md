@@ -18,5 +18,4 @@ img: /assets/img/projects/simSSile.png
 - Designed an LQR-based autopilot for the interceptor missile to achieve stable trajectory control
 
 - Integrated Google Earth terrain data to visualize and analyze missile trajectories and attitudes
-            
 - Tools & Software Used: Julia, PRODAS, Google Earth

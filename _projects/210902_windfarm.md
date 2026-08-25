@@ -31,7 +31,6 @@ related_publications: true
 
 - Tools & Software Used: MATLAB, Fortran, Python, OpenFAST, FAST.Farm, ZeroMQ
 
-
 <br>
 
 <span class="hidden-project-citation">
