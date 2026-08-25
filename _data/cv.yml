@@ -23,7 +23,7 @@ cv:
     Education:
       - institution: Sejong University
         location: Seoul, Republic of Korea
-        logo: /assets/img/ui/sejong.png
+        logo: /assets/img/logo/sejong.png
         studyType: M.S.
         area: Aerospace Engineering
         start_date: 2021-09
@@ -36,7 +36,7 @@ cv:
 
       - institution: Chonnam National University
         location: Gwangju, Republic of Korea
-        logo: /assets/img/ui/cnu.png
+        logo: /assets/img/logo/cnu.png
         studyType: B.S.
         area: Electronics and Computer Engineering
         start_date: 2015-03
@@ -51,7 +51,7 @@ cv:
       - company: Satellite Technology Research Center (SaTRec), KAIST
         position: Assistant Research Engineer
         location: Daejeon, Republic of Korea
-        logo: /assets/img/ui/kaist.png
+        logo: /assets/img/logo/kaist.png
         start_date: 2025-12
         end_date: present
         summary: Project Experience
@@ -61,7 +61,7 @@ cv:
       - company: Sejong University
         position: Research Assistant
         location: Seoul, Republic of Korea
-        logo: /assets/img/ui/sejong.png
+        logo: /assets/img/logo/sejong.png
         start_date: 2025-11
         end_date: 2025-12
         summary: Project Experience
@@ -71,7 +71,7 @@ cv:
       - company: Sejong University
         position: Graduate Research Assistant & Teaching Assistant
         location: Seoul, Republic of Korea
-        logo: /assets/img/ui/sejong.png
+        logo: /assets/img/logo/sejong.png
         start_date: 2021-09
         end_date: 2025-08
         summary: Member of Flight Dynamics and Control Lab (FDCL)
@@ -79,7 +79,7 @@ cv:
       - company: Seoul National University
         position: Exchange Student Program
         location: Seoul, Republic of Korea
-        logo: /assets/img/ui/snu.png
+        logo: /assets/img/logo/snu.png
         summary: Department of Mechanical and Aerospace Engineering
         start_date: 2020-09
         end_date: 2020-12
@@ -91,7 +91,7 @@ cv:
     Professional Service:
       - organization: IEEE Access
         role: Peer Reviewer
-        logo: /assets/img/ui/ieee_access.png
+        logo: /assets/img/logo/ieee_access.png
         start_date: 2026.01
         end_date: 2026.02
 
@@ -99,7 +99,7 @@ cv:
       - title: 2020 Capstone Design Competition
         awarder: Chonnam National University
         location: Gwangju, Republic of Korea
-        logo: /assets/img/ui/cnu.png
+        logo: /assets/img/logo/cnu.png
         date: 2020-12
         summary: Recognized for developing an innovative engineering project in the 2020 Capstone Design Competition hosted by the Engineering Education Innovation Center
 
@@ -107,18 +107,18 @@ cv:
       - name: Industry–Academia Internship Program | Future Space Navigation & Satellite Technology Research Center
         date: 2023-07
         issuer: LIG Defense&Aerospace
-        logo: /assets/img/ui/lig.png
-    
+        logo: /assets/img/logo/lig.png
+
       - name: Glocal Specialization Exploration Program
         date: 2017-07
         issuer: Chonnam National University
         location: Gwangju, Republic of Korea
-        logo: /assets/img/ui/cnu.png
-    
+        logo: /assets/img/logo/cnu.png
+
       - name: Design Your Dream Corporate Experience Program
         date: 2015-08
         issuer: Samsung Electronics
-        logo: /assets/img/ui/samsung.png
+        logo: /assets/img/logo/samsung.png
 
     Skills:
       - name: Julia
