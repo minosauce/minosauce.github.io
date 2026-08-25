@@ -8,6 +8,8 @@ img: /assets/img/projects/evasion.png
 related_publications: true
 ---
 
+**2023.02**
+
 # Project Overview
 
 - Implemented and applied an artificial potential field (APF) algorithm, a classical collision avoidance technique, to enable missile evasion maneuvers
