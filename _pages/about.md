@@ -66,10 +66,11 @@ He is currently working as a satellite system engineer at the Satellite Technolo
 </h2>
 
 {% if site.data.repositories.github_repos %}
-
   <div class="home-repositories">
     {% for repo in site.data.repositories.github_repos limit: 2 %}
-      {% include repository/repo.liquid repository=repo %}
+      <div class="home-repository-item">
+        {% include repository/repo.liquid repository=repo %}
+      </div>
     {% endfor %}
   </div>
 {% endif %}
