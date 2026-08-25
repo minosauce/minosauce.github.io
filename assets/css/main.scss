@@ -273,6 +273,31 @@ samp {
   white-space: nowrap;
 }
 
+
+/* Desktop */
+.news-date-mobile {
+  display: none;
+}
+
+/* Mobile */
+@media (max-width: 576px) {
+  .news-date-desktop {
+    display: none;
+  }
+
+  .news-date-mobile {
+    display: inline;
+    line-height: 1.2;
+  }
+
+  .news-date {
+    width: 55px;
+    min-width: 55px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+}
+
 /* =========================================================
    News - Title
    ========================================================= */
