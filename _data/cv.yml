@@ -24,7 +24,8 @@ cv:
       - institution: Sejong University
         location: Seoul, Republic of Korea
         logo: /assets/img/ui/sejong.png
-        studyType: "M.S.   <em>Aerospace Engineering</em>"
+        studyType: M.S.
+        area: Aerospace Engineering
         start_date: 2021-09
         end_date: 2025-08
         highlights:
@@ -36,7 +37,8 @@ cv:
       - institution: Chonnam National University
         location: Gwangju, Republic of Korea
         logo: /assets/img/ui/cnu.png
-        studyType: "B.S.   <em>Electronics and Computer Engineering</em>"
+        studyType: B.S.
+        area: Electronics and Computer Engineering
         start_date: 2015-03
         end_date: 2021-08
         score: 3.91
