@@ -248,7 +248,15 @@ samp {
 
 /* =========================================================
    CV grouped layout
-   Experience / Education / Awards / Professional Service
+
+   동일한 공통 구조:
+   Experience
+   Education
+   Professional Service
+   Awards
+   Certificates
+
+   [timeline] [date] [content]
    ========================================================= */
 
 .cv-group-list {
@@ -282,32 +290,37 @@ samp {
 .cv-org-header {
   display: grid;
 
-  /* Logo | organization information */
-  grid-template-columns: 50px minmax(0, 1fr);
-  column-gap: 0.8rem;
+  /* Logo | organization */
+  grid-template-columns: 56px minmax(0, 1fr);
+  column-gap: 0.85rem;
 
   align-items: center;
 
-  margin-bottom: 1rem;
+  margin-bottom: 1.05rem;
 }
 
+/* Logo container */
 .cv-org-logo-box {
   display: flex;
   align-items: center;
   justify-content: center;
 
-  width: 50px;
-  height: 40px;
+  width: 56px;
+  height: 46px;
 }
 
+/* Logo */
 .cv-org-logo {
   display: block;
 
   width: auto !important;
   height: auto !important;
 
-  max-width: 44px !important;
-  max-height: 36px !important;
+  /*
+   * 기존 44 x 36보다 살짝 확대
+   */
+  max-width: 50px !important;
+  max-height: 40px !important;
 
   margin: 0 auto;
 
@@ -318,6 +331,7 @@ samp {
   min-width: 0;
 }
 
+/* Company / University / Issuer */
 .cv-org-name {
   margin: 0 0 0.2rem;
   padding: 0;
@@ -329,6 +343,7 @@ samp {
   line-height: 1.3;
 }
 
+/* Organization location */
 .cv-org-location {
   display: flex;
   align-items: center;
@@ -343,12 +358,13 @@ samp {
   line-height: 1.3;
 }
 
+/* Location icon: black / normal text color */
 .cv-org-location i {
   color: var(--global-text-color) !important;
 }
 
 /* =========================================================
-   CV - Roles / Degrees / Awards / Service
+   CV - Role list
    ========================================================= */
 
 .cv-role-list {
@@ -358,21 +374,99 @@ samp {
   padding: 0;
 }
 
+/*
+ * 모든 섹션에서 완전히 동일한 열을 사용
+ *
+ * 18px  = timeline
+ * 125px = date
+ * rest  = title / degree / award / certificate
+ *
+ * 날짜는 기존보다 오른쪽으로 이동하지만,
+ * date-content 사이의 실제 빈 공간은 더 좁아짐.
+ */
 .cv-role-row {
   display: grid;
 
-  /* Date | actual CV content */
-  grid-template-columns: 145px minmax(0, 1fr);
-  column-gap: 1.15rem;
+  grid-template-columns: 18px 125px minmax(0, 1fr);
+  column-gap: 0.5rem;
 
   align-items: start;
 
   margin: 0;
-  padding: 0 0 1.3rem;
+  padding: 0 0 1.35rem;
 }
 
 .cv-role-row:last-child {
   padding-bottom: 0;
+}
+
+/*
+ * DOM에 rail이 없는 섹션에서도
+ * date/content 위치가 Experience/Education과
+ * 절대 달라지지 않도록 column을 강제 지정.
+ */
+.cv-role-rail {
+  grid-column: 1;
+}
+
+.cv-role-date {
+  grid-column: 2;
+}
+
+.cv-role-body {
+  grid-column: 3;
+}
+
+/* =========================================================
+   CV - LinkedIn-style timeline
+   ========================================================= */
+
+.cv-role-rail {
+  position: relative;
+
+  align-self: stretch;
+
+  min-width: 18px;
+  min-height: 1.35rem;
+}
+
+/* Gray timeline dot */
+.cv-role-dot {
+  position: absolute;
+
+  top: 0.34rem;
+  left: 50%;
+
+  z-index: 2;
+
+  width: 8px;
+  height: 8px;
+
+  transform: translateX(-50%);
+
+  background-color: #aaa;
+
+  border-radius: 50%;
+}
+
+/* Vertical connection between multiple entries */
+.cv-role-line {
+  position: absolute;
+
+  top: 0.9rem;
+  bottom: -1.35rem;
+  left: 50%;
+
+  width: 2px;
+
+  transform: translateX(-50%);
+
+  background-color: var(--global-divider-color);
+}
+
+/* Slightly brighter timeline in dark mode */
+html[data-theme="dark"] .cv-role-dot {
+  background-color: #999;
 }
 
 /* =========================================================
@@ -386,7 +480,14 @@ samp {
   color: var(--global-text-color) !important;
 
   font-size: 0.9rem;
-  font-weight: 600;
+
+  /* Date should NOT be bold */
+  font-weight: 400;
+
+  /*
+   * Same line-height as role title.
+   * Keeps date and title on exactly the same horizontal line.
+   */
   line-height: 1.35;
 
   white-space: nowrap;
@@ -404,9 +505,13 @@ samp {
 }
 
 /*
-  Date and role/degree title have identical
-  top position and line-height.
-*/
+ * Role / Degree / Award / Certificate
+ *
+ * Date and title:
+ * identical top margin
+ * identical padding
+ * identical line-height
+ */
 .cv-role-title {
   margin: 0 0 0.4rem !important;
   padding: 0 !important;
@@ -422,20 +527,48 @@ samp {
   color: inherit;
 }
 
-/* Education degree */
-.cv-degree-type {
-  font-weight: 700;
+/* =========================================================
+   CV - Education
+   ========================================================= */
+
+/*
+ * Example:
+ *
+ * M.S.     Aerospace Engineering
+ *
+ * Both bold.
+ */
+.cv-degree-title {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+
+  margin-top: 0 !important;
+  padding-top: 0 !important;
 }
 
-/* Education major */
+.cv-degree-type {
+  font-weight: 700 !important;
+}
+
+/*
+ * Major:
+ * no brackets
+ * bold
+ * visible space after degree
+ */
 .cv-degree-area {
   margin-left: 0.8rem !important;
 
-  font-weight: 400 !important;
-  font-style: italic;
+  font-weight: 700 !important;
+  font-style: normal !important;
 }
 
-/* Project Experience / secondary information */
+/* =========================================================
+   CV - Secondary text
+   ========================================================= */
+
+/* Project Experience etc. */
 .cv-role-summary {
   margin: 0 0 0.45rem;
   padding: 0;
@@ -445,8 +578,9 @@ samp {
   line-height: 1.4;
 }
 
-/* Award description should not be italic */
-.cv-award-summary {
+/* Award / Certificate descriptions are normal text */
+.cv-award-summary,
+.cv-certificate-summary {
   font-style: normal;
 }
 
@@ -456,6 +590,10 @@ samp {
   font-size: 0.9rem;
   line-height: 1.35;
 }
+
+/* =========================================================
+   CV - Highlights
+   ========================================================= */
 
 .cv-role-highlights {
   margin: 0.45rem 0 0;
@@ -475,6 +613,10 @@ samp {
   .container[role="main"] > .row:has(.cv) {
     display: grid !important;
 
+    /*
+     * Sidebar outer width: 180px
+     * TOC actual width:    170px
+     */
     grid-template-columns: 180px minmax(0, 1fr);
     column-gap: 1.25rem;
   }
@@ -514,36 +656,63 @@ samp {
     padding: 1.1rem 0 1.3rem;
   }
 
+  /* Logo | institution/company */
   .cv-org-header {
-    grid-template-columns: 46px minmax(0, 1fr);
+    grid-template-columns: 50px minmax(0, 1fr);
     column-gap: 0.7rem;
 
-    margin-bottom: 0.9rem;
+    margin-bottom: 0.95rem;
   }
 
   .cv-org-logo-box {
-    width: 46px;
-    height: 38px;
+    width: 50px;
+    height: 42px;
   }
 
   .cv-org-logo {
-    max-width: 40px !important;
-    max-height: 32px !important;
+    max-width: 44px !important;
+    max-height: 36px !important;
   }
 
+  /*
+   * Mobile:
+   *
+   * [timeline] [date]
+   *            [content]
+   */
   .cv-role-row {
-    grid-template-columns: 1fr;
-    row-gap: 0.3rem;
+    grid-template-columns: 16px minmax(0, 1fr);
+    column-gap: 0.55rem;
+    row-gap: 0.25rem;
 
-    padding-bottom: 1.15rem;
+    padding-bottom: 1.2rem;
+  }
+
+  .cv-role-rail {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+
+    min-width: 16px;
   }
 
   .cv-role-date {
+    grid-column: 2;
+    grid-row: 1;
+
     font-size: 0.82rem;
+  }
+
+  .cv-role-body {
+    grid-column: 2;
+    grid-row: 2;
   }
 
   .cv-role-title {
     font-size: 0.97rem;
+  }
+
+  .cv-role-line {
+    bottom: -1.2rem;
   }
 
   .cv-degree-area {
