@@ -17,27 +17,19 @@ social: true
 announcements:
   enabled: true
   scrollable: true
-  limit: 4
+  limit: 5
 
 latest_posts:
   enabled: true
   scrollable: true
-  limit: 4
+  limit: 5
 ---
 
-<div class="biography-block">
+## Biography
 
-<h2>Biography</h2>
-
-<p>
 He received the B.S. degree in electronics and computer engineering from Chonnam National University, Gwangju, Republic of Korea, in 2021, and the M.S. degree in aerospace engineering from Sejong University, Seoul, Republic of Korea, in 2025.
-</p>
 
-<p>
 He is currently working as a satellite system engineer at the Satellite Technology Research Center (SaTReC), KAIST, Daejeon, Republic of Korea. His research interests include guidance, navigation, and control (GNC), with a focus on optimal control theory and its applications to missile and satellite systems.
-</p>
-
-</div>
 
 <div style="clear: both;"></div>
 
@@ -48,5 +40,57 @@ He is currently working as a satellite system engineer at the Satellite Technolo
 </h2>
 
 <div class="publications home-publications">
-  {% bibliography --max 4 %}
+  {% bibliography --max 5 %}
 </div>
+
+<h2 class="home-section-title">
+  <a href="{{ '/projects/' | relative_url }}" style="color: inherit">
+    Projects
+  </a>
+</h2>
+
+{% assign recent_projects = site.projects | sort: 'date' | reverse %}
+
+<div class="home-project-list">
+  {% for project in recent_projects limit: 3 %}
+    <div class="home-project-item">
+      {% if project.redirect %}
+        <a
+          class="home-project-title"
+          href="{{ project.redirect }}"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {{ project.title }}
+        </a>
+      {% else %}
+        <a
+          class="home-project-title"
+          href="{{ project.url | relative_url }}"
+        >
+          {{ project.title }}
+        </a>
+      {% endif %}
+
+      {% if project.description %}
+        <span class="home-project-description">
+          — {{ project.description }}
+        </span>
+      {% endif %}
+    </div>
+  {% endfor %}
+</div>
+
+<h2 class="home-section-title">
+  <a href="{{ '/repositories/' | relative_url }}" style="color: inherit">
+    Repositories
+  </a>
+</h2>
+
+{% if site.data.repositories.github_repos %}
+  <div class="home-repositories">
+    {% for repo in site.data.repositories.github_repos limit: 2 %}
+      {% include repository/repo.liquid repository=repo %}
+    {% endfor %}
+  </div>
+{% endif %}
