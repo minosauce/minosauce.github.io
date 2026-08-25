@@ -249,6 +249,42 @@ samp {
 
 
 
+
+/* =========================================================
+   CV sidebar width
+   ========================================================= */
+
+@media (min-width: 576px) {
+  /* CV 페이지에서만 왼쪽 TOC 폭 축소 */
+  body:has(.cv) .container[role="main"] > .row > .col-sm-3 {
+    flex: 0 0 175px !important;
+
+    width: 175px !important;
+    max-width: 175px !important;
+
+    padding-right: 0.75rem !important;
+  }
+
+  /* 남은 공간은 CV 본문이 전부 사용 */
+  body:has(.cv) .container[role="main"] > .row > .col-sm-9 {
+    flex: 1 1 0 !important;
+
+    width: auto !important;
+    max-width: none !important;
+
+    padding-left: 0.75rem !important;
+  }
+
+  body:has(.cv) #toc-sidebar {
+    width: 160px;
+    max-width: 160px;
+  }
+}
+
+
+
+
+
 /* =========================================================
    CV Education / Experience
    ========================================================= */
