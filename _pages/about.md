@@ -39,6 +39,6 @@ He is currently working as a satellite system engineer at the Satellite Technolo
   </a>
 </h2>
 
-<div class="publications">
+<div class="publications home-publications">
   {% bibliography --max 4 %}
 </div>
