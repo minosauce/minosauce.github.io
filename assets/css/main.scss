@@ -450,6 +450,16 @@ samp {
 }
 
 /* =========================================================
+   About - Posts vertical spacing
+   ========================================================= */
+
+.about-page .table.table-sm.table-borderless th,
+.about-page .table.table-sm.table-borderless td {
+  padding-top: 0.75rem !important;
+  padding-bottom: 0.75rem !important;
+}
+
+/* =========================================================
    CV grouped layout
 
    Common structure:
