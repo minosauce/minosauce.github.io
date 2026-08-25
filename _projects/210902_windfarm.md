@@ -8,7 +8,17 @@ img: /assets/img/projects/windfarm_mpc.png
 related_publications: true
 ---
 
-Managing Institution: Korea Institute of Energy Technology Evaluation and Planning (KETEP)
+### Managing Institution: Korea Institute of Energy Technology Evaluation and Planning (KETEP)
+
+## Project Overview
+
+<a href="/assets/pdf/projects/windfarm_mpc.pdf" target="_blank" rel="noopener noreferrer">
+  <img
+    src="/assets/img/projects/windfarm_mpc.png"
+    alt="Wind Farm MPC Project"
+    style="width: 100%; height: auto;"
+  >
+</a>
 
 - Designed and deployed the FAST.Farm mid-fidelity simulator for wind farm dynamics, enabling online environmental modeling and data collection
 
