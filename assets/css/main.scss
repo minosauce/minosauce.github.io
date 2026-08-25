@@ -27,13 +27,11 @@
    Minho Jang - Custom Theme
    ========================================================= */
 
-/* KAIST-style blue */
 :root {
   --global-theme-color: #004294;
   --global-hover-color: #00346f;
 }
 
-/* Brighter KAIST blue for dark mode */
 html[data-theme="dark"] {
   --global-theme-color: #0097dc;
   --global-hover-color: #0097dc;
@@ -68,7 +66,6 @@ samp {
 
 /* =========================================================
    Social icons below profile photo
-   3 items per row
    ========================================================= */
 
 .profile .profile-social {
@@ -94,13 +91,6 @@ samp {
   font-size: 1.35rem;
 }
 
-/*
- * Always maximum 3 items per row.
- *
- * 6 links -> 3 + 3
- * 7 links -> 3 + 3 + 1
- * 8 links -> 3 + 3 + 2
- */
 .profile .profile-social .contact-icons > a {
   display: flex;
   align-items: center;
@@ -120,7 +110,7 @@ samp {
 }
 
 /* =========================================================
-   Search button: "ctrl k" -> "Search"
+   Search button
    ========================================================= */
 
 #search-toggle .nav-link {
@@ -142,7 +132,6 @@ samp {
    About page
    ========================================================= */
 
-/* Profile photo + biography */
 @media (min-width: 576px) {
   .profile {
     width: 20% !important;
@@ -169,26 +158,38 @@ samp {
   border-top: 1px solid var(--global-divider-color);
 }
 
+/* Posts is slightly closer to News */
+.posts-section-title {
+  margin-top: 1.1rem !important;
+  padding-top: 0.9rem !important;
+}
+
 /* About page publication titles */
 .home-publications .title,
 .home-publications .title a {
   font-weight: 700 !important;
 }
 
-/* Fallback for Latest Publications */
 .latest-publications .title,
 .latest-publications .title a {
   font-weight: 700 !important;
 }
 
-/* About page News dates */
+/* About News dates */
 .about-page .news-date {
   font-weight: 400 !important;
 }
 
-/* About page Posts dates */
+/* About Posts dates */
 .about-page .table th {
   font-weight: 400 !important;
+}
+
+/* About Posts vertical spacing */
+.about-page .table.table-sm.table-borderless th,
+.about-page .table.table-sm.table-borderless td {
+  padding-top: 0.75rem !important;
+  padding-bottom: 0.75rem !important;
 }
 
 /* =========================================================
@@ -205,7 +206,7 @@ samp {
 }
 
 /* =========================================================
-   News layout
+   News
    Date | Title | Thumbnail
    ========================================================= */
 
@@ -215,36 +216,21 @@ samp {
 
 .news-item {
   display: grid;
-
-  /*
-   * Date | Title | Thumbnail
-   *
-   * 20% date column matches Posts.
-   */
   grid-template-columns: 20% minmax(0, 1fr) 100px;
 
   align-items: center;
 
   padding: 0.75rem 0;
 
-  /* Individual news divider is intentionally lighter */
-  border-bottom: 1px solid color-mix(in srgb, var(--global-divider-color) 55%, transparent);
+  border-bottom: 1px solid
+    color-mix(in srgb, var(--global-divider-color) 55%, transparent);
 }
 
-/* Last news item has no internal divider */
 .news-item:last-child {
   border-bottom: none;
 }
 
-.posts-section-title {
-  margin-top: 1.1rem !important;
-  padding-top: 0.9rem !important;
-}
-
-/* =========================================================
-   News - Date
-   ========================================================= */
-
+/* Date */
 .news-date {
   grid-column: 1;
 
@@ -257,10 +243,7 @@ samp {
   white-space: nowrap;
 }
 
-/* =========================================================
-   News - Title
-   ========================================================= */
-
+/* Title */
 .news-content {
   grid-column: 2;
 
@@ -274,35 +257,72 @@ samp {
   line-height: 1.4;
 }
 
+/* No-thumbnail items keep the same title alignment */
+.news-item-no-preview .news-content {
+  grid-column: 2;
+}
+
 /* =========================================================
-   News - Thumbnail
+   News - Fixed thumbnail
    ========================================================= */
 
-.news-thumbnail {
+/*
+ * Every News image is displayed as the same 100 × 64 px
+ * thumbnail regardless of the original image aspect ratio.
+ */
+
+.about-page .news-thumbnail {
   grid-column: 3;
 
   justify-self: end;
 
-  padding-left: 0.6rem;
+  width: 100px;
+  height: 64px;
+
+  margin: 0;
+  padding: 0;
+
+  overflow: hidden;
+
+  border-radius: 7px;
 }
 
-.news-thumbnail img {
+/*
+ * figure.liquid can generate:
+ *
+ * figure
+ *   picture
+ *     img
+ *
+ * Make every wrapper fill the thumbnail box.
+ */
+.about-page .news-thumbnail figure,
+.about-page .news-thumbnail picture {
   display: block;
 
-  width: 100px;
-  height: 60px;
+  width: 100% !important;
+  height: 100% !important;
 
-  object-fit: cover;
-
-  border-radius: 6px;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
-/* =========================================================
-   News - No thumbnail
-   ========================================================= */
+.about-page .news-thumbnail img {
+  display: block !important;
 
-.news-item-no-preview .news-content {
-  grid-column: 2;
+  width: 100% !important;
+  height: 100% !important;
+
+  min-width: 100% !important;
+  max-width: none !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  object-fit: cover !important;
+  object-position: center !important;
+
+  border-radius: 0 !important;
 }
 
 /* =========================================================
@@ -320,7 +340,6 @@ samp {
     padding: 0.3rem;
 
     font-size: 0.9rem;
-    font-weight: 400;
   }
 
   .news-content {
@@ -331,11 +350,7 @@ samp {
     font-size: 0.95rem;
   }
 
-  .news-thumbnail {
-    padding-left: 0.5rem;
-  }
-
-  .news-thumbnail img {
+  .about-page .news-thumbnail {
     width: 80px;
     height: 55px;
   }
@@ -423,13 +438,10 @@ samp {
   margin: 0 !important;
 }
 
-/*
- * Do NOT force display: block here.
- * al-folio uses separate light/dark variants internally.
- */
 .home-repository-item .repo img {
   width: 100% !important;
   max-width: 100% !important;
+
   height: auto;
 }
 
@@ -454,26 +466,7 @@ samp {
 }
 
 /* =========================================================
-   About - Posts vertical spacing
-   ========================================================= */
-
-.about-page .table.table-sm.table-borderless th,
-.about-page .table.table-sm.table-borderless td {
-  padding-top: 0.75rem !important;
-  padding-bottom: 0.75rem !important;
-}
-
-/* =========================================================
    CV grouped layout
-
-   Common structure:
-   Experience
-   Education
-   Professional Service
-   Awards
-   Certificates
-
-   [timeline] [date] [content]
    ========================================================= */
 
 .cv-group-list {
@@ -506,8 +499,6 @@ samp {
 
 .cv-org-header {
   display: grid;
-
-  /* Logo | Organization */
   grid-template-columns: 56px minmax(0, 1fr);
   column-gap: 0.85rem;
 
@@ -516,7 +507,6 @@ samp {
   margin-bottom: 1.05rem;
 }
 
-/* Logo container */
 .cv-org-logo-box {
   display: flex;
   align-items: center;
@@ -526,7 +516,6 @@ samp {
   height: 46px;
 }
 
-/* Logo */
 .cv-org-logo {
   display: block;
 
@@ -545,7 +534,6 @@ samp {
   min-width: 0;
 }
 
-/* Company / University / Issuer */
 .cv-org-name {
   margin: 0 0 0.2rem;
   padding: 0;
@@ -557,7 +545,6 @@ samp {
   line-height: 1.3;
 }
 
-/* Organization location */
 .cv-org-location {
   display: flex;
   align-items: center;
@@ -572,7 +559,6 @@ samp {
   line-height: 1.3;
 }
 
-/* Location icon: normal text color */
 .cv-org-location i {
   color: var(--global-text-color) !important;
 }
@@ -588,16 +574,8 @@ samp {
   padding: 0;
 }
 
-/*
- * All CV sections use exactly the same columns.
- *
- * 18px  = timeline
- * 125px = date
- * rest  = title / degree / award / certificate
- */
 .cv-role-row {
   display: grid;
-
   grid-template-columns: 18px 125px minmax(0, 1fr);
   column-gap: 0.5rem;
 
@@ -611,7 +589,6 @@ samp {
   padding-bottom: 0;
 }
 
-/* Explicit columns */
 .cv-role-rail {
   grid-column: 1;
 }
@@ -637,7 +614,6 @@ samp {
   min-height: 1.35rem;
 }
 
-/* Gray timeline dot */
 .cv-role-dot {
   position: absolute;
 
@@ -656,7 +632,6 @@ samp {
   border-radius: 50%;
 }
 
-/* Vertical connection between entries */
 .cv-role-line {
   position: absolute;
 
@@ -671,7 +646,6 @@ samp {
   background-color: var(--global-divider-color);
 }
 
-/* Timeline in dark mode */
 html[data-theme="dark"] .cv-role-dot {
   background-color: #999;
 }
@@ -736,7 +710,6 @@ html[data-theme="dark"] .cv-role-dot {
   font-weight: 700 !important;
 }
 
-/* Major */
 .cv-degree-area {
   margin-left: 0.8rem !important;
 
@@ -748,7 +721,6 @@ html[data-theme="dark"] .cv-role-dot {
    CV - Secondary text
    ========================================================= */
 
-/* Project Experience etc. */
 .cv-role-summary {
   margin: 0 0 0.45rem;
   padding: 0;
@@ -758,7 +730,6 @@ html[data-theme="dark"] .cv-role-dot {
   line-height: 1.4;
 }
 
-/* Award / Certificate descriptions */
 .cv-award-summary,
 .cv-certificate-summary {
   font-style: normal;
@@ -834,10 +805,6 @@ html[data-theme="dark"] .cv-role-dot {
   .container[role="main"] > .row:has(.cv) {
     display: grid !important;
 
-    /*
-     * Sidebar outer width: 180px
-     * TOC actual width: 170px
-     */
     grid-template-columns: 180px minmax(0, 1fr);
     column-gap: 1.25rem;
   }
@@ -877,7 +844,6 @@ html[data-theme="dark"] .cv-role-dot {
     padding: 1.1rem 0 1.3rem;
   }
 
-  /* Logo | Institution/Company */
   .cv-org-header {
     grid-template-columns: 50px minmax(0, 1fr);
     column-gap: 0.7rem;
@@ -895,12 +861,6 @@ html[data-theme="dark"] .cv-role-dot {
     max-height: 36px !important;
   }
 
-  /*
-   * Mobile:
-   *
-   * [timeline] [date]
-   *            [content]
-   */
   .cv-role-row {
     grid-template-columns: 16px minmax(0, 1fr);
     column-gap: 0.55rem;
@@ -942,26 +902,29 @@ html[data-theme="dark"] .cv-role-dot {
 }
 
 /* =========================================================
-   Projects
+   Project detail images
    ========================================================= */
+
 .post img {
   max-width: 100%;
   height: auto;
 }
 
-
 /* =========================================================
-   Projects - Consistent cards and thumbnails
+   Projects - Cards and thumbnails
    ========================================================= */
 
 .projects .project-card {
   height: 100%;
+
   overflow: hidden;
 }
 
-/* Every project gets exactly the same thumbnail area */
 .projects .project-thumbnail-wrapper {
+  position: relative;
+
   width: 100%;
+
   aspect-ratio: 16 / 9;
 
   overflow: hidden;
@@ -969,7 +932,6 @@ html[data-theme="dark"] .cv-role-dot {
   background-color: #fff;
 }
 
-/* Remove unwanted figure spacing */
 .projects .project-thumbnail-wrapper figure {
   width: 100%;
   height: 100%;
@@ -978,7 +940,6 @@ html[data-theme="dark"] .cv-role-dot {
   padding: 0 !important;
 }
 
-/* Common thumbnail dimensions */
 .projects .project-thumbnail {
   display: block;
 
@@ -1010,17 +971,15 @@ html[data-theme="dark"] .cv-role-dot {
   width: 100%;
 }
 
-/* Project title */
 .projects .project-card .card-title {
   margin-bottom: 0.75rem;
 }
 
-/* Keep title link styling consistent */
 .projects .project-card .card-title a {
   color: inherit;
 }
 
-/* GitHub link */
+/* GitHub */
 .projects .project-github {
   display: flex;
   align-items: center;
@@ -1038,26 +997,18 @@ html[data-theme="dark"] .cv-role-dot {
   gap: 0.25rem;
 }
 
-
+/* Hide inline citation used for Related Publications */
 .hidden-project-citation {
   display: none;
 }
-
 
 /* =========================================================
    Projects - Thumbnail index
    ========================================================= */
 
-.projects .project-thumbnail-wrapper {
-  position: relative;
-}
-
-/*
- * Minimal glass-style project number.
- * Automatically displays N ... 2, 1.
- */
 .projects .project-index {
   position: absolute;
+
   top: 0.8rem;
   left: 0.8rem;
 
