@@ -29,7 +29,7 @@ cv:
         start_date: 2021-09
         end_date: 2025-08
         highlights:
-          - "Advisor: Prof. Sungsu Park"
+          - "Advisor: [Prof. Sungsu Park](https://www.space.re.kr/)"
           - "Lab: Flight Dynamics and Control Laboratory (FDCL)"
           - "Thesis: [Nonlinear Model Predictive Control for Guidance Law with Target Input Estimation](https://www.riss.kr/link?id=T17287977)"
           - "Courseworks: Flight Dynamics and Control; Guidance, Navigation, and Control (GNC); Optimal/Nonlinear Control; Orbital Mechanics; Classical Mechanics"
@@ -43,7 +43,7 @@ cv:
         end_date: 2021-08
         score: 3.91
         highlights:
-          - "Advisor: Prof. Jinyoung Kim"
+          - "Advisor: [Prof. Jinyoung Kim](https://ee.jnu.ac.kr/ee/16634/subview.do?enc=Zm5jdDF8QEB8JTJGcHJvZiUyRmVlJTJGNDEyJTJGNDE1JTJGdmlldy5kbyUzRg==)"
           - "Lab: Intelligent Electronics Laboratory"
           - "Courseworks: Control Theory; Digital Signal Process (DSP); Electrical/Electronic Circuit Theory; Microprocessor; Dynamics"
 
