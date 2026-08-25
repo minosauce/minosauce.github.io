@@ -1,0 +1,125 @@
+<ul class="card-text font-weight-light list-group list-group-flush">
+  {% for entry in entries %}
+    <li class="list-group-item">
+      <div class="row">
+
+        <!-- Left column: date / location / logo -->
+        <div class="col-xs-2 col-sm-2 col-md-2 text-center date-column">
+
+          {% assign start_date = entry.start_date | default: entry.startDate %}
+          {% assign end_date = entry.end_date | default: entry.endDate %}
+
+          {% if start_date %}
+            {% assign start_year = start_date | split: '-' | first %}
+
+            {% if end_date == 'present' or end_date == 'current' %}
+              {% assign end_year = 'Present' %}
+            {% elsif end_date %}
+              {% assign end_year = end_date | split: '-' | first %}
+            {% else %}
+              {% assign end_year = 'Present' %}
+            {% endif %}
+
+            {% assign date_text = start_year | append: ' - ' | append: end_year %}
+          {% elsif entry.date %}
+            {% assign date_text = entry.date | split: '-' | first %}
+          {% else %}
+            {% assign date_text = '' %}
+          {% endif %}
+
+          <table class="table-cv">
+            <tbody>
+
+              {% if date_text != '' %}
+                <tr>
+                  <td>
+                    <span
+                      class="badge font-weight-bold danger-color-dark text-uppercase align-middle"
+                      style="min-width: 75px"
+                    >
+                      {{ date_text }}
+                    </span>
+                  </td>
+                </tr>
+              {% endif %}
+
+              {% if entry.location %}
+                <tr>
+                  <td>
+                    <p class="location">
+                      <i class="fa-solid fa-location-dot iconlocation"></i>
+                      {{ entry.location }}
+                    </p>
+                  </td>
+                </tr>
+              {% endif %}
+
+              <!-- Company / institution logo -->
+              {% if entry.logo %}
+                <tr>
+                  <td>
+                    <div class="cv-logo-wrapper">
+                      <img
+                        class="cv-entry-logo"
+                        src="{{ entry.logo | relative_url }}"
+                        alt="{{ entry.company | default: entry.name }} logo"
+                        loading="lazy"
+                      >
+                    </div>
+                  </td>
+                </tr>
+              {% endif %}
+
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Right column -->
+        <div class="col-xs-10 col-sm-10 col-md-10 mt-2 mt-md-0">
+
+          {% if entry.position %}
+            <h6 class="title font-weight-bold ml-1 ml-md-4">
+              {% if entry.url %}
+                <a href="{{ entry.url }}" target="_blank" rel="noopener noreferrer">
+                  {{ entry.position }}
+                </a>
+              {% else %}
+                {{ entry.position }}
+              {% endif %}
+            </h6>
+          {% endif %}
+
+          {% assign company_name = entry.company | default: entry.name | default: entry.organization %}
+
+          {% if company_name %}
+            <h6 class="ml-1 ml-md-4" style="font-size: 0.95rem">
+              {{ company_name }}
+            </h6>
+          {% endif %}
+
+          {% if entry.summary %}
+            <h6
+              class="ml-1 ml-md-4"
+              style="font-size: 0.95rem; font-style: italic"
+            >
+              {{ entry.summary | markdownify | remove: '<p>' | remove: '</p>' }}
+            </h6>
+          {% endif %}
+
+          {% if entry.highlights %}
+            <ul class="items">
+              {% for item in entry.highlights %}
+                <li>
+                  <span class="item">
+                    {{ item | markdownify | remove: '<p>' | remove: '</p>' }}
+                  </span>
+                </li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+
+        </div>
+      </div>
+    </li>
+  {% endfor %}
+</ul>
