@@ -411,14 +411,7 @@ samp {
   width: 100%;
 }
 
-/*
- * al-folio repository component가
- * 자체적으로 width를 가지고 있어도
- * About에서는 column 전체를 사용하도록 강제
- */
 .home-repository-item .repo {
-  display: block !important;
-
   width: 100% !important;
   max-width: 100% !important;
 
@@ -426,11 +419,10 @@ samp {
 }
 
 /*
- * Repository card image / generated GitHub card
+ * Do NOT force display:block here.
+ * al-folio uses light/dark variants internally.
  */
 .home-repository-item .repo img {
-  display: block;
-
   width: 100% !important;
   max-width: 100% !important;
   height: auto;
@@ -446,7 +438,6 @@ samp {
     gap: 0.8rem;
   }
 }
-
 
 
 /* =========================================================
