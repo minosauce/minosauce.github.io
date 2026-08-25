@@ -395,27 +395,59 @@ samp {
    ========================================================= */
 
 .home-repositories {
-  display: grid;
+  display: grid !important;
 
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
 
   width: 100%;
-}
-
-.home-repositories .repo {
-  width: 100%;
 
   margin: 0;
-  padding: 0 !important;
+  padding: 0;
 }
 
-.home-repositories .repo img {
+.home-repository-item {
+  min-width: 0;
+  width: 100%;
+}
+
+/*
+ * al-folio repository component가
+ * 자체적으로 width를 가지고 있어도
+ * About에서는 column 전체를 사용하도록 강제
+ */
+.home-repository-item .repo {
+  display: block !important;
+
+  width: 100% !important;
+  max-width: 100% !important;
+
+  margin: 0 !important;
+}
+
+/*
+ * Repository card image / generated GitHub card
+ */
+.home-repository-item .repo img {
   display: block;
 
   width: 100% !important;
+  max-width: 100% !important;
   height: auto;
 }
+
+/* =========================================================
+   About - Repositories mobile
+   ========================================================= */
+
+@media (max-width: 576px) {
+  .home-repositories {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+  }
+}
+
+
 
 /* =========================================================
    About - Projects / Repositories mobile
