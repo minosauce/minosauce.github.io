@@ -1040,3 +1040,8 @@ html[data-theme="dark"] .cv-role-dot {
 
   pointer-events: none;
 }
+
+.post strong,
+.post b {
+  font-weight: 700 !important;
+}
