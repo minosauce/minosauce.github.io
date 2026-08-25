@@ -66,6 +66,7 @@ samp {
   font-family: "Courier New", Courier, monospace !important;
 }
 
+
 /* =========================================================
    Social icons below profile photo
    ========================================================= */
@@ -95,6 +96,8 @@ samp {
   font-size: 1.35rem;
 }
 
+
+
 /* =========================================================
    Search button: "ctrl k" -> "Search"
    ========================================================= */
@@ -119,6 +122,8 @@ samp {
   font-weight: 700 !important;
 }
 
+
+
 /* =========================================================
    Profile photo size
    ========================================================= */
@@ -140,6 +145,14 @@ samp {
   padding-top: 1rem;
   border-top: 1px solid var(--global-divider-color);
 }
+
+
+/* About page - Publications */
+.home-publications .title,
+.home-publications .title a {
+  font-weight: 700 !important;
+}
+
 
 /* =========================================================
    News thumbnail layout
