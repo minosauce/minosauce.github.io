@@ -91,16 +91,16 @@ cv:
     Professional Service:
       - organization: IEEE Access
         role: Peer Reviewer
-        logo: /assets/img/cv_logos/ieee_access.png
+        logo: /assets/img/ui/ieee_access.png
         start_date: 2026.01
         end_date: 2026.02
 
     Awards:
       - title: 2020 Capstone Design Competition
-        authors:
-          - "Minho Jang"
-        date: 2020-12
         awarder: Chonnam National University
+        location: Gwangju, Republic of Korea
+        logo: /assets/img/ui/cnu.png
+        date: 2020-12
         summary: Recognized for developing an innovative engineering project in the 2020 Capstone Design Competition hosted by the Engineering Education Innovation Center
 
     Certificates:
