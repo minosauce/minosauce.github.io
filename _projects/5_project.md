@@ -1,9 +1,9 @@
 ---
 layout: page
-title: project 5
-date: 2024-11-01
-category: Funded
-description: a project with a background image
+title: Missile Aerodynamic Prediction Based on a Semi-Empirical Method
+date: 2024-12-01
+category: Independent
+description: Independent Research
 img: assets/img/1.jpg
 ---
 
