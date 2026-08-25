@@ -1,13 +1,12 @@
 cv:
-  name: "Minho Jang"
-  label: "Research Engineer"
-  email: "minho.jang.official@gmail.com"
-  location: "Daejeon, Republic of Korea"
-  image: ""
+  name: Minho Jang
+  label: Research Engineer
+  email: minho.jang.official@gmail.com
+  location: Daejeon, Republic of Korea
 
   social_networks:
     - network: X
-      username: AlbertEinstein
+      username: Minho Jang
     - network: GitHub
       username: minosauce
     - network: LinkedIn
