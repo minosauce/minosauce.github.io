@@ -1,0 +1,111 @@
+{% comment %}
+  ============================================================
+  Project Card
+  ============================================================
+
+  Supported front matter:
+
+  title:
+  description:
+  img:
+  thumbnail_fit: cover | contain
+  redirect:
+  github:
+  github_stars:
+
+  Default thumbnail behavior:
+  - cover   : photographs
+  - contain : diagrams, PDF previews, posters, slides
+{% endcomment %}
+
+{% assign project_link = project.url | relative_url %}
+
+{% if project.redirect %}
+  {% assign project_link = project.redirect %}
+{% endif %}
+
+{% assign thumbnail_fit = project.thumbnail_fit | default: 'cover' %}
+
+{% if thumbnail_fit == 'contain' %}
+  {% assign thumbnail_class = 'card-img-top project-thumbnail project-thumbnail-contain' %}
+{% else %}
+  {% assign thumbnail_class = 'card-img-top project-thumbnail project-thumbnail-cover' %}
+{% endif %}
+
+{% assign external_project_link = false %}
+
+{% if project_link contains '://' %}
+  {% assign external_project_link = true %}
+{% endif %}
+
+<div class="col">
+  <div class="card h-100 hoverable project-card">
+
+    {% if project.img %}
+      <a
+        href="{{ project_link }}"
+        {% if external_project_link %}
+          target="_blank"
+          rel="noopener noreferrer"
+        {% endif %}
+        class="project-thumbnail-link"
+      >
+        <div class="project-thumbnail-wrapper">
+          {%
+            include figure.liquid
+            loading="eager"
+            path=project.img
+            sizes="(min-width: 768px) 33vw, 100vw"
+            alt=project.title
+            class=thumbnail_class
+          %}
+        </div>
+      </a>
+    {% endif %}
+
+    <div class="card-body">
+
+      <h2 class="card-title">
+        <a
+          href="{{ project_link }}"
+          {% if external_project_link %}
+            target="_blank"
+            rel="noopener noreferrer"
+          {% endif %}
+        >
+          {{ project.title }}
+        </a>
+      </h2>
+
+      {% if project.description %}
+        <p class="card-text">
+          {{ project.description }}
+        </p>
+      {% endif %}
+
+      {% if project.github %}
+        <div class="project-github">
+
+          <a
+            href="{{ project.github }}"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub repository for {{ project.title }}"
+          >
+            <i class="fa-brands fa-github"></i>
+            GitHub
+          </a>
+
+          {% if project.github_stars %}
+            <span class="github-stars">
+              <i class="fa-solid fa-star"></i>
+              <span id="{{ project.github | split: '/' | last }}-stars"></span>
+            </span>
+          {% endif %}
+
+        </div>
+      {% endif %}
+
+    </div>
+  </div>
+</div>
