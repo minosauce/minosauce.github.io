@@ -6,7 +6,7 @@ category: Independent
 description: Independent Research
 img: /assets/img/projects/cover_simSSile.png
 ---
-Copyright AP Photo
+<small>Cover image — Copyright AP Photo</small>
 
 **2024.06**
 
