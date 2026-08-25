@@ -1,10 +1,10 @@
 ---
 layout: page
 title: project 9
+date: 2024-11-01
+category: Independent
 description: another project with an image 🎉
 img: assets/img/6.jpg
-importance: 4
-category: Independent
 ---
 
 Every project has a beautiful feature showcase page.
