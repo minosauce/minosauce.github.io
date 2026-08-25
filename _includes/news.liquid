@@ -20,7 +20,14 @@
         <div class="news-item{% unless item.preview %} news-item-no-preview{% endunless %}">
           <!-- Date -->
           <div class="news-date">
-            {{ item.date | date: '%b %d, %Y' }}
+            <span class="news-date-desktop">
+              {{ item.date | date: '%b %d, %Y' }}
+            </span>
+          
+            <span class="news-date-mobile">
+              {{ item.date | date: '%b %d,' }}<br>
+              {{ item.date | date: '%Y' }}
+            </span>
           </div>
 
           <!-- Title / content -->
