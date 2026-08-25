@@ -51,6 +51,13 @@
         class="project-thumbnail-link"
       >
         <div class="project-thumbnail-wrapper">
+        
+          {% if include.project_number %}
+            <div class="project-index">
+              {{ include.project_number }}
+            </div>
+          {% endif %}
+        
           {%
             include figure.liquid
             loading="eager"
@@ -59,6 +66,7 @@
             alt=project.title
             class=thumbnail_class
           %}
+        
         </div>
       </a>
     {% endif %}
