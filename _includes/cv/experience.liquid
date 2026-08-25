@@ -4,20 +4,21 @@
   {% for group in organization_groups %}
     {% assign first_entry = group.items | first %}
     {% assign group_entries = group.items | al_cv_sort_by_date %}
+    {% assign role_count = group.items | size %}
 
     <div class="cv-org-group">
       <!-- Organization header -->
       <div class="cv-org-header">
-        {% if first_entry.logo %}
-          <div class="cv-org-logo-box">
+        <div class="cv-org-logo-box">
+          {% if first_entry.logo %}
             <img
               class="cv-org-logo"
               src="{{ first_entry.logo | relative_url }}"
               alt="{{ group.name }} logo"
               loading="lazy"
             >
-          </div>
-        {% endif %}
+          {% endif %}
+        </div>
 
         <div class="cv-org-info">
           <div class="cv-org-name">
@@ -37,10 +38,23 @@
       <div class="cv-role-list">
         {% for entry in group_entries %}
           <div class="cv-role-row">
+            <!-- LinkedIn-style timeline -->
+            <div class="cv-role-rail">
+              {% if role_count > 1 %}
+                <span class="cv-role-dot"></span>
+
+                {% unless forloop.last %}
+                  <span class="cv-role-line"></span>
+                {% endunless %}
+              {% endif %}
+            </div>
+
+            <!-- Date -->
             <div class="cv-role-date">
               {% include cv/date_range.liquid entry=entry %}
             </div>
 
+            <!-- Role -->
             <div class="cv-role-body">
               {% if entry.position %}
                 <div class="cv-role-title">
