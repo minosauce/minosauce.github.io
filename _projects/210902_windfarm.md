@@ -33,4 +33,6 @@ related_publications: true
 
 <br>
 
-{% cite J1 %}
+<span class="hidden-project-citation">
+  {% cite J1 %}
+</span>
