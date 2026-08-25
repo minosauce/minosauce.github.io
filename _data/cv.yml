@@ -66,8 +66,7 @@ cv:
         end_date: 2025-12
         summary: Project Experience
         highlights:
-          - Development of Localization Technology for Wind Power Control Systems
-          - "Fundamental Research on Electromagnetic Modeling for Electronic Warfare Systems [EW42: Modeling of Radar-Guided Systems for Electronic Warfare]"
+          - "Safe Reinforcement Learning for Threat-Responsive Satellite Maneuvering"
 
       - company: Sejong University
         position: Graduate Research Assistant
@@ -77,10 +76,8 @@ cv:
         end_date: 2025-08
         summary: Member of Flight Dynamics and Control Lab (FDCL)
         highlights:
-          - "AE006885 - Flight Mechanics"
-          - "AE002390 - Aerospace Software Applications I"
-          - "AE004642 - Dynamics"
-          - Assisted with grading, programming assignments, and practical instruction across multiple key  aerospace engineering courses
+          - Development of Localization Technology for Wind Power Control Systems
+          - "Fundamental Research on Electromagnetic Modeling for Electronic Warfare Systems [EW42: Modeling of Radar-Guided Systems for Electronic Warfare]"
 
       - company: Sejong University
         position: Teaching Assistant
@@ -88,7 +85,11 @@ cv:
         logo: /assets/img/logo/sejong.png
         start_date: 2021-09
         end_date: 2025-08
-        summary: Member of Flight Dynamics and Control Lab (FDCL)
+        highlights:
+          - "AE006885 - Flight Mechanics"
+          - "AE002390 - Aerospace Software Applications I"
+          - "AE004642 - Dynamics"
+          - Assisted with grading, programming assignments, and practical instruction across multiple key  aerospace engineering courses
 
       - company: Seoul National University
         position: Exchange Student Program
