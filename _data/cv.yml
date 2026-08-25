@@ -66,10 +66,24 @@ cv:
         end_date: 2025-12
         summary: Project Experience
         highlights:
-          - Safe Reinforcement Learning for Threat-Responsive Satellite Maneuvering
+          - Development of Localization Technology for Wind Power Control Systems
+          - "Fundamental Research on Electromagnetic Modeling for Electronic Warfare Systems [EW42: Modeling of Radar-Guided Systems for Electronic Warfare]"
 
       - company: Sejong University
-        position: Graduate Research Assistant & Teaching Assistant
+        position: Graduate Research Assistant
+        location: Seoul, Republic of Korea
+        logo: /assets/img/logo/sejong.png
+        start_date: 2021-09
+        end_date: 2025-08
+        summary: Member of Flight Dynamics and Control Lab (FDCL)
+        highlights:
+          - "AE006885 - Flight Mechanics"
+          - "AE002390 - Aerospace Software Applications I"
+          - "AE004642 - Dynamics"
+          - Assisted with grading, programming assignments, and practical instruction across multiple key  aerospace engineering courses
+
+      - company: Sejong University
+        position: Teaching Assistant
         location: Seoul, Republic of Korea
         logo: /assets/img/logo/sejong.png
         start_date: 2021-09
@@ -97,28 +111,38 @@ cv:
 
     Awards:
       - title: 2020 Capstone Design Competition
+        date: 2020-12
         awarder: Chonnam National University
         location: Gwangju, Republic of Korea
         logo: /assets/img/logo/cnu.png
-        date: 2020-12
         summary: Recognized for developing an innovative engineering project in the 2020 Capstone Design Competition hosted by the Engineering Education Innovation Center
 
     Certificates:
-      - name: Industry–Academia Internship Program | Future Space Navigation & Satellite Technology Research Center
-        date: 2023-07
+      - name: Industry–Academia Internship Program
         issuer: LIG Defense&Aerospace
+        date: 2023-07
         logo: /assets/img/logo/lig.png
+        summary: "Future Space Navigation & Satellite Technology Research Center"
+        highlights:
+          - "Completed on-site internship training program focused on advanced technologies in space navigation and satellite technology"
 
       - name: Glocal Specialization Exploration Program
-        date: 2017-07
         issuer: Chonnam National University
+        date: 2017-07
         location: Gwangju, Republic of Korea
         logo: /assets/img/logo/cnu.png
+        summary: Selected for a university-sponsored overseas program aimed at exploring global research environments and cutting-edge industrial technologies
+        highlights:
+          - "Visited the Robotics & Mechanisms Laboratory (RoMeLa) at UCLA, led by Prof.Dennis Hong, to observe research on robotics and AI-based autonomous systems"
+          - "Explored the Stanford University campus to gain insight into Silicon Valley’s innovation ecosystem and global academic culture in electronics and computer engineering"
+          - "Visited Google headquarters to discuss industrial applications and future directions of artificial intelligence and deep learning with an engineering expert"
+          - "At Tesla headquarters, engaged with a Korean engineer working on autonomous driving systems and deepened understanding of computer vision and image processing technologies applied in real-world automotive systems"
 
       - name: Design Your Dream Corporate Experience Program
-        date: 2015-08
         issuer: Samsung Electronics
+        date: 2015-08
         logo: /assets/img/logo/samsung.png
+        summary: Completed the “Design Your Dream” university corporate experience camp organized by Samsung Electronics, Gwangju Volunteer Center
 
     Skills:
       - name: Julia
