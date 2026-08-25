@@ -1,0 +1,46 @@
+{% assign start_raw = include.entry.start_date | default: include.entry.startDate | append: '' | strip %}
+{% assign end_raw = include.entry.end_date | default: include.entry.endDate | append: '' | strip %}
+{% assign point_raw = include.entry.date | append: '' | strip %}
+
+{% if start_raw != '' %}
+  {% assign start_parts = start_raw | split: '-' %}
+  {% assign start_year = start_parts[0] %}
+  {% assign start_month = start_parts[1] %}
+
+  {% if start_month != blank %}
+    {% assign start_text = start_year | append: '.' | append: start_month %}
+  {% else %}
+    {% assign start_text = start_year %}
+  {% endif %}
+
+  {% assign end_lower = end_raw | downcase %}
+
+  {% if end_lower == 'present' or end_lower == 'current' %}
+    {% assign end_text = 'Present' %}
+  {% elsif end_raw != '' %}
+    {% assign end_parts = end_raw | split: '-' %}
+    {% assign end_year = end_parts[0] %}
+    {% assign end_month = end_parts[1] %}
+
+    {% if end_month != blank %}
+      {% assign end_text = end_year | append: '.' | append: end_month %}
+    {% else %}
+      {% assign end_text = end_year %}
+    {% endif %}
+  {% else %}
+    {% assign end_text = 'Present' %}
+  {% endif %}
+
+  {{ start_text }} – {{ end_text }}
+
+{% elsif point_raw != '' %}
+  {% assign point_parts = point_raw | split: '-' %}
+  {% assign point_year = point_parts[0] %}
+  {% assign point_month = point_parts[1] %}
+
+  {% if point_month != blank %}
+    {{ point_year }}.{{ point_month }}
+  {% else %}
+    {{ point_year }}
+  {% endif %}
+{% endif %}
