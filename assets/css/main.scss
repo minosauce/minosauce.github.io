@@ -164,9 +164,9 @@ samp {
 
 /* Section headings */
 .home-section-title {
-  margin-top: 1.5rem !important;
+  margin-top: 2.0rem !important;
   margin-bottom: 1.5rem !important;
-  padding-top: 1rem;
+  padding-top: 1.25rem;
 
   border-top: 1px solid var(--global-divider-color);
 }
@@ -235,10 +235,14 @@ samp {
 
   align-items: center;
 
-  padding: 0.6rem 0;
+  padding: 0.75rem 0;
 
-  border-bottom: 1px solid var(--global-divider-color);
+  border-bottom: 1px solid
+    color-mix(in srgb, var(--global-divider-color) 55%, transparent);
 }
+
+.news-item:last-child {
+  border-bottom: none;
 
 /* =========================================================
    News - Date
