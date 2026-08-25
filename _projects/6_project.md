@@ -1,10 +1,10 @@
 ---
 layout: page
 title: project 6
+date: 2024-11-01
+category: Independent
 description: a project with no image
 img:
-importance: 4
-category: Independent
 ---
 
 Every project has a beautiful feature showcase page.
