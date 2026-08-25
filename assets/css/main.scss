@@ -164,22 +164,27 @@ samp {
 
 .news-item {
   display: grid;
-  grid-template-columns: 110px 80px minmax(0, 1fr);
-  column-gap: 0.6rem;
-  align-items: center;
 
+  /* 날짜 | 이미지 자리 | 제목 */
+  grid-template-columns: 110px 100px minmax(0, 1fr);
+  column-gap: 1rem;
+
+  align-items: center;
   padding: 0.9rem 0;
+
   border-bottom: 1px solid var(--global-divider-color);
 }
 
-.news-content {
-  min-width: 0;
-  grid-column: 3;
+/* Posts 날짜와 동일한 스타일 */
+.news-date {
+  font-size: 1rem;
+  font-weight: 700;
+  white-space: nowrap;
 }
 
-.news-date {
-  font-size: 0.9rem;
-  white-space: nowrap;
+/* 이미지가 있으면 항상 2번째 열 */
+.news-thumbnail {
+  grid-column: 2;
 }
 
 .news-thumbnail img {
@@ -189,11 +194,12 @@ samp {
   height: 60px;
 
   object-fit: cover;
-
   border-radius: 6px;
 }
 
+/* 이미지 유무와 관계없이 제목은 항상 3번째 열 */
 .news-content {
+  grid-column: 3;
   min-width: 0;
 }
 
@@ -202,15 +208,24 @@ samp {
   line-height: 1.4;
 }
 
-/* Mobile */
+
+/* =========================================================
+   Mobile
+   ========================================================= */
+
 @media (max-width: 576px) {
   .news-item {
     grid-template-columns: 72px 80px minmax(0, 1fr);
-    column-gap: 0.4rem;
+    column-gap: 0.6rem;
   }
 
   .news-date {
-    font-size: 0.78rem;
+    font-size: 0.9rem;
+    font-weight: 700;
+  }
+
+  .news-thumbnail {
+    grid-column: 2;
   }
 
   .news-thumbnail img {
