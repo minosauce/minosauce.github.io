@@ -9,7 +9,7 @@ thumbnail_fit: contain
 related_publications: true
 ---
 
-** Managing Institution: Korea Institute of Energy Technology Evaluation and Planning (KETEP) **
+**Managing Institution: Korea Institute of Energy Technology Evaluation and Planning (KETEP)**
 
 <br>
 
