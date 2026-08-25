@@ -23,6 +23,7 @@ cv:
     Education:
       - institution: Sejong University
         location: Seoul, Republic of Korea
+        logo: /assets/img/ui/sejong.png
         area: Aerospace Engineering
         studyType: M.S.
         start_date: 2021-09
