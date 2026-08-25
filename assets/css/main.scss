@@ -286,3 +286,73 @@ samp {
     max-height: 42px;
   }
 }
+
+/* =========================================================
+   CV entry layout refinement
+   ========================================================= */
+
+/* 왼쪽 날짜 / 주소 / 로고 column 자체를 기준으로 정렬 */
+.cv .date-column,
+.post .date-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 날짜/주소 table이 내용 길이에 따라 폭이 바뀌지 않게 */
+.cv .date-column .table-cv,
+.post .date-column .table-cv {
+  width: 100% !important;
+  table-layout: fixed;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* 모든 cell을 column 전체 폭 기준으로 중앙정렬 */
+.cv .date-column .table-cv td,
+.post .date-column .table-cv td {
+  width: 100% !important;
+  text-align: center !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* 주소도 중앙 정렬 */
+.cv .date-column .location,
+.post .date-column .location {
+  width: 100%;
+  text-align: center !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+/* 로고 wrapper 역시 주소 문자열이 아니라 column 중심 기준 */
+.cv-logo-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin-top: 0.75rem;
+}
+
+.cv-entry-logo {
+  display: block;
+  width: auto !important;
+  height: auto !important;
+
+  max-width: 60px;
+  max-height: 48px;
+
+  object-fit: contain;
+
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+.cv .list-group-item,
+.post .list-group-item {
+  padding-top: 1.15rem;
+  padding-bottom: 1.15rem;
+}
