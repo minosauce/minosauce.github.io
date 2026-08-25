@@ -89,11 +89,11 @@ cv:
           - Gained interdisciplinary exposure to modern control theory and aerospace engineering, deepening understanding of autonomous systems and guidance technologies
 
     Professional Service:
-      - label: Peer Review
-        details: |
-          <ul>
-            <li>IEEE Access</li>
-          </ul>
+      - organization: IEEE Access
+        role: Peer Reviewer
+        logo: /assets/img/cv_logos/ieee_access.png
+        start_date: 2026.01
+        end_date: 2026.02
 
     Awards:
       - title: 2020 Capstone Design Competition
