@@ -1,8 +1,8 @@
 cv:
-  name: Minho Jang
-  label: Research Engineer
-  email: minho.jang.official@gmail.com
-  location: Daejeon, Republic of Korea
+  name: "Minho Jang"
+  label: "Research Engineer"
+  email: "minho.jang.official@gmail.com"
+  location: "Daejeon, Republic of Korea"
   image: ""
 
   social_networks:
