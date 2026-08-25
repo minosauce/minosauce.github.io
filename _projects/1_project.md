@@ -4,7 +4,7 @@ title: Safe Reinforcement Learning for Threat-Responsive Satellite Maneuvering
 date: 2025-10-01
 category: Funded
 description: "Funded by: National Research Foundation of Korea (NRF)"
-img: 
+img: /assets/img/projects/saferl.png
 related_publications: true
 ---
 
