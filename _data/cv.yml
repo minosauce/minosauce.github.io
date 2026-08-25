@@ -122,6 +122,7 @@ cv:
       - name: Industry–Academia Internship Program
         issuer: LIG Defense&Aerospace
         date: 2023-07
+        location: Yongin, Republic of Korea
         logo: /assets/img/logo/lig.png
         summary: "Future Space Navigation & Satellite Technology Research Center"
         highlights:
@@ -142,6 +143,7 @@ cv:
       - name: Design Your Dream Corporate Experience Program
         issuer: Samsung Electronics
         date: 2015-08
+        location: Gwangju, Republic of Korea
         logo: /assets/img/logo/samsung.png
         summary: Completed the “Design Your Dream” university corporate experience camp organized by Samsung Electronics, Gwangju Volunteer Center
 
