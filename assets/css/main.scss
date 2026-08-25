@@ -7,7 +7,7 @@
 @use "sass:string";
 
 @use "variables" with (
-  $max-content-width: {{site.max_width | default: "930px"}}
+  $max-content-width: {{ site.max_width | default: "930px" }}
 );
 
 @use "themes";
@@ -23,9 +23,9 @@
 @use "teachings";
 @use "typograms";
 
-/* ==================================================
+/* =========================================================
    Minho Jang - Custom Theme
-   ================================================== */
+   ========================================================= */
 
 /* KAIST-style blue */
 :root {
@@ -105,24 +105,20 @@ samp {
 
 #search-toggle .nav-link::before {
   content: "Search";
-  font-size: 1rem;
   font-family: "Times New Roman", Times, serif;
+  font-size: 1rem;
 }
 
 #search-toggle .nav-link i {
-  font-size: 0.9rem;
   margin-left: 0.25rem;
-}
-
-/* Bold paper titles in Latest Publications */
-.latest-publications .title {
-  font-weight: 700 !important;
+  font-size: 0.9rem;
 }
 
 /* =========================================================
-   Profile photo size
+   About page
    ========================================================= */
 
+/* Profile photo + biography */
 @media (min-width: 576px) {
   .profile {
     width: 20% !important;
@@ -139,16 +135,24 @@ samp {
   }
 }
 
+/* Section headings */
 .home-section-title {
   margin-top: 1.5rem !important;
   margin-bottom: 1.5rem !important;
   padding-top: 1rem;
+
   border-top: 1px solid var(--global-divider-color);
 }
 
-/* About page - Publications */
+/* About page publication titles */
 .home-publications .title,
 .home-publications .title a {
+  font-weight: 700 !important;
+}
+
+/* Fallback for Latest Publications */
+.latest-publications .title,
+.latest-publications .title a {
   font-weight: 700 !important;
 }
 
@@ -163,24 +167,25 @@ samp {
 .news-item {
   display: grid;
 
-  /* 날짜 | 이미지 자리 | 제목 */
+  /* Date | thumbnail | title */
   grid-template-columns: 110px 100px minmax(0, 1fr);
   column-gap: 1rem;
 
   align-items: center;
+
   padding: 0.9rem 0;
 
   border-bottom: 1px solid var(--global-divider-color);
 }
 
-/* Posts 날짜와 동일한 스타일 */
+/* Match Posts date typography */
 .news-date {
   font-size: 1rem;
   font-weight: 700;
   white-space: nowrap;
 }
 
-/* 이미지가 있으면 항상 2번째 열 */
+/* Thumbnail always occupies column 2 */
 .news-thumbnail {
   grid-column: 2;
 }
@@ -192,12 +197,14 @@ samp {
   height: 60px;
 
   object-fit: cover;
+
   border-radius: 6px;
 }
 
-/* 이미지 유무와 관계없이 제목은 항상 3번째 열 */
+/* Title always starts in column 3 */
 .news-content {
   grid-column: 3;
+
   min-width: 0;
 }
 
@@ -207,7 +214,7 @@ samp {
 }
 
 /* =========================================================
-   Mobile
+   News - Mobile
    ========================================================= */
 
 @media (max-width: 576px) {
@@ -246,19 +253,20 @@ samp {
 
 .cv-group-list {
   width: 100%;
+
   margin: 0;
   padding: 0;
 }
 
 /* =========================================================
-   Organization group
+   CV - Organization group
    ========================================================= */
 
 .cv-org-group {
   width: 100%;
 
-  padding: 1.35rem 0 1.55rem;
   margin: 0;
+  padding: 1.25rem 0 1.45rem;
 
   border-top: 1px solid var(--global-divider-color);
 }
@@ -268,26 +276,28 @@ samp {
 }
 
 /* =========================================================
-   Organization header
+   CV - Organization header
    ========================================================= */
 
 .cv-org-header {
   display: grid;
-  grid-template-columns: 70px minmax(0, 1fr);
-  column-gap: 1rem;
+
+  /* Logo | organization information */
+  grid-template-columns: 50px minmax(0, 1fr);
+  column-gap: 0.8rem;
 
   align-items: center;
 
-  margin-bottom: 1.15rem;
+  margin-bottom: 1rem;
 }
 
 .cv-org-logo-box {
-  width: 70px;
-  height: 55px;
-
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+
+  width: 50px;
+  height: 40px;
 }
 
 .cv-org-logo {
@@ -296,8 +306,10 @@ samp {
   width: auto !important;
   height: auto !important;
 
-  max-width: 64px;
-  max-height: 50px;
+  max-width: 44px !important;
+  max-height: 36px !important;
+
+  margin: 0 auto;
 
   object-fit: contain;
 }
@@ -307,7 +319,7 @@ samp {
 }
 
 .cv-org-name {
-  margin: 0 0 0.25rem;
+  margin: 0 0 0.2rem;
   padding: 0;
 
   color: var(--global-text-color);
@@ -336,19 +348,22 @@ samp {
 }
 
 /* =========================================================
-   Roles / Degrees / Awards / Service
+   CV - Roles / Degrees / Awards / Service
    ========================================================= */
 
 .cv-role-list {
   width: 100%;
+
+  margin: 0;
+  padding: 0;
 }
 
 .cv-role-row {
   display: grid;
 
-  /* Date | Main content */
-  grid-template-columns: 155px minmax(0, 1fr);
-  column-gap: 1.5rem;
+  /* Date | actual CV content */
+  grid-template-columns: 145px minmax(0, 1fr);
+  column-gap: 1.15rem;
 
   align-items: start;
 
@@ -361,7 +376,7 @@ samp {
 }
 
 /* =========================================================
-   Date
+   CV - Date
    ========================================================= */
 
 .cv-role-date {
@@ -378,7 +393,7 @@ samp {
 }
 
 /* =========================================================
-   Main content
+   CV - Main content
    ========================================================= */
 
 .cv-role-body {
@@ -389,8 +404,8 @@ samp {
 }
 
 /*
-  Date and title use exactly the same line-height
-  and start at the same top position.
+  Date and role/degree title have identical
+  top position and line-height.
 */
 .cv-role-title {
   margin: 0 0 0.4rem !important;
@@ -407,13 +422,20 @@ samp {
   color: inherit;
 }
 
-.cv-degree-area {
-  margin-left: 0.25rem;
+/* Education degree */
+.cv-degree-type {
+  font-weight: 700;
+}
 
-  font-weight: 400;
+/* Education major */
+.cv-degree-area {
+  margin-left: 0.8rem !important;
+
+  font-weight: 400 !important;
   font-style: italic;
 }
 
+/* Project Experience / secondary information */
 .cv-role-summary {
   margin: 0 0 0.45rem;
   padding: 0;
@@ -423,6 +445,7 @@ samp {
   line-height: 1.4;
 }
 
+/* Award description should not be italic */
 .cv-award-summary {
   font-style: normal;
 }
@@ -446,12 +469,12 @@ samp {
 
 /* =========================================================
    CV TOC sidebar
-   Reduce wasted left-side width
    ========================================================= */
 
 @media (min-width: 576px) {
   .container[role="main"] > .row:has(.cv) {
     display: grid !important;
+
     grid-template-columns: 180px minmax(0, 1fr);
     column-gap: 1.25rem;
   }
@@ -459,7 +482,9 @@ samp {
   .container[role="main"] > .row:has(.cv) > .col-sm-3 {
     width: auto !important;
     max-width: none !important;
+
     flex: none !important;
+
     padding-left: 0 !important;
     padding-right: 0.5rem !important;
   }
@@ -467,7 +492,9 @@ samp {
   .container[role="main"] > .row:has(.cv) > .col-sm-9 {
     width: auto !important;
     max-width: none !important;
+
     flex: none !important;
+
     padding-left: 0.5rem !important;
     padding-right: 0 !important;
   }
@@ -479,36 +506,36 @@ samp {
 }
 
 /* =========================================================
-   Mobile CV
+   CV - Mobile
    ========================================================= */
 
 @media (max-width: 576px) {
   .cv-org-group {
-    padding: 1.2rem 0 1.35rem;
+    padding: 1.1rem 0 1.3rem;
   }
 
   .cv-org-header {
-    grid-template-columns: 55px minmax(0, 1fr);
-    column-gap: 0.75rem;
+    grid-template-columns: 46px minmax(0, 1fr);
+    column-gap: 0.7rem;
 
-    margin-bottom: 1rem;
+    margin-bottom: 0.9rem;
   }
 
   .cv-org-logo-box {
-    width: 55px;
-    height: 46px;
+    width: 46px;
+    height: 38px;
   }
 
   .cv-org-logo {
-    max-width: 52px;
-    max-height: 43px;
+    max-width: 40px !important;
+    max-height: 32px !important;
   }
 
   .cv-role-row {
     grid-template-columns: 1fr;
     row-gap: 0.3rem;
 
-    padding-bottom: 1.2rem;
+    padding-bottom: 1.15rem;
   }
 
   .cv-role-date {
@@ -517,5 +544,9 @@ samp {
 
   .cv-role-title {
     font-size: 0.97rem;
+  }
+
+  .cv-degree-area {
+    margin-left: 0.65rem !important;
   }
 }
