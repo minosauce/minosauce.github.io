@@ -1,0 +1,67 @@
+<div class="cv-group-list">
+  {% assign organization_groups = entries | group_by: 'awarder' %}
+
+  {% for group in organization_groups %}
+    {% assign first_entry = group.items | first %}
+
+    <div class="cv-org-group">
+      <!-- Awarding organization -->
+      <div class="cv-org-header">
+        {% if first_entry.logo %}
+          <div class="cv-org-logo-box">
+            <img
+              class="cv-org-logo"
+              src="{{ first_entry.logo | relative_url }}"
+              alt="{{ group.name }} logo"
+              loading="lazy"
+            >
+          </div>
+        {% endif %}
+
+        <div class="cv-org-info">
+          <div class="cv-org-name">
+            {{ group.name }}
+          </div>
+
+          {% if first_entry.location %}
+            <div class="cv-org-location">
+              <i class="fa-solid fa-location-dot"></i>
+              <span>{{ first_entry.location }}</span>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+
+      <!-- Awards -->
+      <div class="cv-role-list">
+        {% for entry in group.items %}
+          <div class="cv-role-row">
+            <div class="cv-role-date">
+              {% include cv/date_range.liquid entry=entry %}
+            </div>
+
+            <div class="cv-role-body">
+              {% if entry.title %}
+                <div class="cv-role-title">
+                  {% if entry.url %}
+                    <a href="{{ entry.url }}" target="_blank" rel="noopener noreferrer">
+                      {{ entry.title }}
+                    </a>
+                  {% else %}
+                    {{ entry.title }}
+                  {% endif %}
+                </div>
+              {% endif %}
+
+              {% if entry.summary %}
+                <div class="cv-role-summary cv-award-summary">
+                  {{ entry.summary | markdownify | remove: '<p>' | remove: '</p>' }}
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  {% endfor %}
+</div>
