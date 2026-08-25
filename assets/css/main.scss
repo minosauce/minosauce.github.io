@@ -246,3 +246,43 @@ samp {
     font-size: 0.95rem;
   }
 }
+
+
+
+/* =========================================================
+   CV institution / company logos
+   ========================================================= */
+
+.cv-logo-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin-top: 0.7rem;
+  margin-bottom: 0.25rem;
+}
+
+.cv-entry-logo {
+  display: block;
+
+  width: auto !important;
+  height: auto !important;
+
+  max-width: 75px;
+  max-height: 55px;
+
+  object-fit: contain;
+}
+
+/* Mobile */
+@media (max-width: 576px) {
+  .cv-logo-wrapper {
+    margin-top: 0.5rem;
+  }
+
+  .cv-entry-logo {
+    max-width: 55px;
+    max-height: 42px;
+  }
+}
