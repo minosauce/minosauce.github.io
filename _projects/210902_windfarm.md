@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: project
 title: Development of Localization Technology for Wind Power Control Systems
 date: 2021-09-02
 category: Funded
