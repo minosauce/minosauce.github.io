@@ -2,6 +2,7 @@
 layout: project
 title: Development of Localization Technology for Wind Power Control Systems
 date: 2021-09-02
+end_date: 2025-04-31
 category: Funded
 description: "Funded by: Ministry of Trade, Industry and Energy (MOTIE)"
 img: /assets/img/projects/cover_windfarm.png
