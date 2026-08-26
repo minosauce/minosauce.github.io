@@ -15,7 +15,10 @@ related_publications: true
 
 # Project Overview
 
-![Wind Power Control Systems](/assets/img/projects/windfarm_mpc.png)
+<div class="project-figure">
+  <img src="/assets/img/projects/windfarm_mpc.png" alt="Wind Power Control Systems">
+</div>
+
 
 - Designed and deployed the FAST.Farm mid-fidelity simulator for wind farm dynamics, enabling online environmental modeling and data collection
 
