@@ -12,7 +12,10 @@ img: /assets/img/projects/cover_simSSile.png
 
 # Project Overview
 
-![Model Predictive Control-Based Guidance Law](/assets/img/projects/simSSile.png)
+<div class="project-figure">
+  <img src="/assets/img/projects/simSSile.png" alt="MPCG">
+</div>
+
 
 - Developed a 6-DOF missile defense simulation framework under an the WGS-84 Earth model, incorporating centrifugal and Coriolis accelerations as well as a zonal gravity model
 
