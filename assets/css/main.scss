@@ -600,6 +600,65 @@ samp {
   height: auto;
 }
 
+
+/* =========================================================
+   Repositories page - Compact card grid
+   ========================================================= */
+
+.repository-page-grid {
+  display: grid !important;
+
+  /*
+   * Two compact columns instead of spreading cards
+   * across the full content width.
+   */
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  column-gap: 1.5rem;
+  row-gap: 1rem;
+
+  width: 100%;
+  max-width: 760px;
+
+  margin: 0;
+  padding: 0;
+
+  justify-content: start;
+  align-items: stretch;
+}
+
+/*
+ * Override the default repository card width/margins.
+ */
+.repository-page-grid .repo {
+  width: 100% !important;
+  max-width: 100% !important;
+
+  margin: 0 !important;
+}
+
+/*
+ * Repository cards are generated as images/SVG cards.
+ */
+.repository-page-grid .repo img {
+  width: 100% !important;
+  max-width: 100% !important;
+
+  height: auto;
+}
+
+/* Mobile */
+@media (max-width: 576px) {
+  .repository-page-grid {
+    grid-template-columns: 1fr;
+
+    max-width: 100%;
+
+    row-gap: 0.9rem;
+  }
+}
+
+
 /* =========================================================
    About - Projects / Repositories Mobile
    ========================================================= */
