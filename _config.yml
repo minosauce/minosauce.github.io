@@ -199,7 +199,7 @@ collections:
     output: true
   news:
     defaults:
-      layout: post
+      layout: news-post
     output: true
   projects:
     output: true
