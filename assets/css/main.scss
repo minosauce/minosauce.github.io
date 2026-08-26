@@ -602,34 +602,30 @@ samp {
 
 
 /* =========================================================
-   Repositories page - Compact card grid
+   Repositories page - Card grid
    ========================================================= */
 
 .repository-page-grid {
   display: grid !important;
 
-  /*
-   * Two compact columns instead of spreading cards
-   * across the full content width.
-   */
+  /* 2-column layout */
   grid-template-columns: repeat(2, minmax(0, 1fr));
 
+  /* 카드 사이 간격 */
   column-gap: 1.5rem;
   row-gap: 1rem;
 
+  /* 전체 본문 폭을 그대로 사용 */
   width: 100%;
-  max-width: 760px;
+  max-width: none;
 
-  margin: 0;
+  margin: 0 0 2.25rem;
   padding: 0;
 
-  justify-content: start;
   align-items: stretch;
 }
 
-/*
- * Override the default repository card width/margins.
- */
+/* Repository card */
 .repository-page-grid .repo {
   width: 100% !important;
   max-width: 100% !important;
@@ -637,9 +633,7 @@ samp {
   margin: 0 !important;
 }
 
-/*
- * Repository cards are generated as images/SVG cards.
- */
+/* Repository card image */
 .repository-page-grid .repo img {
   width: 100% !important;
   max-width: 100% !important;
@@ -647,16 +641,37 @@ samp {
   height: auto;
 }
 
-/* Mobile */
+/* =========================================================
+   Repositories page - Section spacing
+   ========================================================= */
+
+/*
+ * GitHub Repositories와
+ * Open-Source Resources 제목 사이 여유 확보
+ */
+.repository-page-grid + h2 {
+  margin-top: 0.75rem;
+}
+
+/* =========================================================
+   Repositories page - Mobile
+   ========================================================= */
+
 @media (max-width: 576px) {
   .repository-page-grid {
     grid-template-columns: 1fr;
 
-    max-width: 100%;
-
+    column-gap: 0;
     row-gap: 0.9rem;
+
+    width: 100%;
+    max-width: none;
+
+    margin-bottom: 2rem;
   }
 }
+
+
 
 
 /* =========================================================
