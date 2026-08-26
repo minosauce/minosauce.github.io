@@ -2,7 +2,7 @@
 layout: project
 title: Development of Microsatellite Constellation System
 date: 2025-12-01
-end_date: ""
+end_date:
 category: Funded
 description: "Funded by: Korea AeroSpace Administration (KASA)"
 img: /assets/img/projects/cover_neonsat.png
