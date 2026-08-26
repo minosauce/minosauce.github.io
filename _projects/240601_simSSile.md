@@ -2,6 +2,7 @@
 layout: project
 title: Development of a 6-DOF Missile Defense System Simulation Framework
 date: 2024-06-01
+end_date: 2025-08-22
 category: Independent
 description: Independent Research
 img: /assets/img/projects/cover_simSSile.png
