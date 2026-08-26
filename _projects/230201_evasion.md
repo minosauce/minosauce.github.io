@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: project
 title: A Study on Missile Evasion Strategies for Unmanned Aircraft
 date: 2023-02-01
 category: Independent
