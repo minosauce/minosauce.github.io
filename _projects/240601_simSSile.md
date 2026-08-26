@@ -8,7 +8,6 @@ img: /assets/img/projects/cover_simSSile.png
 ---
 <small>Cover image — Copyright AP Photo</small>
 
-**2024.06**
 
 # Project Overview
 
