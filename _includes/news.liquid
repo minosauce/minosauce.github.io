@@ -23,9 +23,10 @@
             <span class="news-date-desktop">
               {{ item.date | date: '%b %d, %Y' }}
             </span>
-          
+
             <span class="news-date-mobile">
-              {{ item.date | date: '%b %d,' }}<br>
+              {{ item.date | date: '%b %d,' -}}
+              <br>
               {{ item.date | date: '%Y' }}
             </span>
           </div>

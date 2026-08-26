@@ -19,14 +19,14 @@ related_publications: false
   <img src="/assets/img/projects/neonsat.png" alt="neonsat">
 </div>
 
-This project aims to develop an **ITAR-free microsatellite constellation** capable of providing rapid and high-resolution Earth observation for **national security, disaster monitoring, and emergency response**. 
+This project aims to develop an **ITAR-free microsatellite constellation** capable of providing rapid and high-resolution Earth observation for **national security, disaster monitoring, and emergency response**.
 By operating multiple satellites as a constellation, the mission seeks to reduce revisit time over the Korean Peninsula and enable timely acquisition of imagery for detecting and monitoring events of interest.
 
 The program consists of **11 microsatellites weighing less than 100 kg**, each designed to provide approximately **1 m-class high-resolution imagery**, together with the ground and application systems required for constellation operations.
 
 Key development areas include:
 
-* Design and development of lightweight, low-power, and cost-efficient microsatellite platforms
-* Operation of an **11-satellite constellation** for frequent Earth observation
-* Ground systems for satellite command, control, data reception, processing, and storage
-* Satellite imagery applications including **change detection, area-of-interest monitoring, and geospatial database construction**
+- Design and development of lightweight, low-power, and cost-efficient microsatellite platforms
+- Operation of an **11-satellite constellation** for frequent Earth observation
+- Ground systems for satellite command, control, data reception, processing, and storage
+- Satellite imagery applications including **change detection, area-of-interest monitoring, and geospatial database construction**

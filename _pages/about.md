@@ -68,7 +68,7 @@ His current research focuses on the development of advanced guidance and control
 </h2>
 
 {% if site.data.repositories.github_repos %}
-  {% assign reversed_github_repos = site.data.repositories.github_repos | reverse %}
+{% assign reversed_github_repos = site.data.repositories.github_repos | reverse %}
 
   <div class="home-repositories">
     {% for repo in reversed_github_repos limit: 2 %}

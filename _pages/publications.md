@@ -87,8 +87,6 @@ nav_order: 20
 </div>
 {% endif %}
 
-
-
 {% if conference_count > 0 %}
 
 <div class="publication-section conference-section">

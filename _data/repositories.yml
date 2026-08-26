@@ -8,7 +8,6 @@ github_repos:
   - minosauce/Kalman-Filter
   - minosauce/LMPC.jl
   - minosauce/HNN.jl
-  
 
 open_repos:
   # Recommended research repositories

@@ -249,8 +249,7 @@ samp {
 
   padding: 0.75rem 0;
 
-  border-bottom: 1px solid
-    color-mix(in srgb, var(--global-divider-color) 55%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--global-divider-color) 55%, transparent);
 }
 
 .news-item:last-child {
@@ -272,7 +271,6 @@ samp {
 
   white-space: nowrap;
 }
-
 
 /* Desktop */
 .news-date-mobile {
@@ -424,7 +422,6 @@ samp {
   }
 }
 
-
 .news-post-image {
   width: auto;
   height: auto;
@@ -441,7 +438,6 @@ samp {
     max-height: 65vh;
   }
 }
-
 
 /* =========================================================
    News previous / next navigation
@@ -490,7 +486,6 @@ samp {
   color: var(--global-theme-color);
 }
 
-
 /* Mobile */
 @media (max-width: 576px) {
   .news-navigation {
@@ -504,8 +499,6 @@ samp {
     line-height: 1.35;
   }
 }
-
-
 
 /* =========================================================
    About - Recent Projects
@@ -600,7 +593,6 @@ samp {
   height: auto;
 }
 
-
 /* =========================================================
    Repositories page - Card grid
    ========================================================= */
@@ -670,9 +662,6 @@ samp {
     margin-bottom: 2rem;
   }
 }
-
-
-
 
 /* =========================================================
    About - Projects / Repositories Mobile
@@ -1158,8 +1147,6 @@ html[data-theme="dark"] .cv-role-dot {
   }
 }
 
-
-
 /* =========================================================
    Publications - Journal / Conference divider
    ========================================================= */
@@ -1170,8 +1157,6 @@ html[data-theme="dark"] .cv-role-dot {
 
   border-top: 1px solid var(--global-divider-color);
 }
-
-
 
 /* =========================================================
    Project detail page
@@ -1346,7 +1331,6 @@ html[data-theme="dark"] .cv-role-dot {
   pointer-events: none;
 }
 
-
 /* =========================================================
    Project previous / next navigation
    ========================================================= */
@@ -1393,7 +1377,6 @@ html[data-theme="dark"] .cv-role-dot {
   color: var(--global-theme-color);
 }
 
-
 /* Mobile */
 @media (max-width: 576px) {
   .project-navigation {
@@ -1411,7 +1394,6 @@ html[data-theme="dark"] .cv-role-dot {
     font-size: 0.9rem;
   }
 }
-
 
 /* =========================================================
    Project detail - Research figures

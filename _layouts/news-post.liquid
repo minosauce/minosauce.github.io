@@ -1,12 +1,11 @@
 ---
 layout: post
 ---
-
 {{ content }}
 
-{% assign news_posts = site.news | where_exp: "item", "item.inline != true" | sort: "date" %}
+{% assign news_posts = site.news | where_exp: 'item', 'item.inline != true' | sort: 'date' %}
 
-{% assign current_index = nil %}
+{% assign current_index = null %}
 
 {% for item in news_posts %}
   {% if item.url == page.url %}
@@ -14,12 +13,11 @@ layout: post
   {% endif %}
 {% endfor %}
 
-{% if current_index != nil %}
+{% if current_index != null %}
   {% assign prev_index = current_index | minus: 1 %}
   {% assign next_index = current_index | plus: 1 %}
 
   <nav class="news-navigation">
-
     <div class="news-nav-prev">
       {% if prev_index >= 0 %}
         {% assign prev_post = news_posts[prev_index] %}
@@ -41,6 +39,5 @@ layout: post
         </a>
       {% endif %}
     </div>
-
   </nav>
 {% endif %}

@@ -19,7 +19,6 @@ related_publications: true
   <img src="/assets/img/projects/windfarm_mpc.png" alt="Wind Power Control Systems">
 </div>
 
-
 - Designed and deployed the FAST.Farm mid-fidelity simulator for wind farm dynamics, enabling online environmental modeling and data collection
 
 - Applied dynamic mode decomposition (DMD) to reduce the dimensionality of high-fidelity wind flow field data from FAST.Farm, improving computational efficiency for control algorithms

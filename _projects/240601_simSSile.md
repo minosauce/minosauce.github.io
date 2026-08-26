@@ -7,15 +7,14 @@ category: Independent
 description: Independent Research
 img: /assets/img/projects/cover_simSSile.png
 ---
-<small>Cover image — Copyright AP Photo</small>
 
+<small>Cover image — Copyright AP Photo</small>
 
 # Project Overview
 
 <div class="project-figure">
   <img src="/assets/img/projects/simSSile.png" alt="simSSile">
 </div>
-
 
 - Developed a 6-DOF missile defense simulation framework under an the WGS-84 Earth model, incorporating centrifugal and Coriolis accelerations as well as a zonal gravity model
 
