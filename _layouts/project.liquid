@@ -1,5 +1,100 @@
 ---
-layout: page
+layout: default
 ---
 
-{{ content }}
+{% if page._styles %}
+  <!-- Page/Post style -->
+  <style type="text/css">
+    {{ page._styles }}
+  </style>
+{% endif %}
+
+<div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">{{ page.title }}</h1>
+    <p class="post-description">{{ page.description }}</p>
+  </header>
+
+  <article>
+    {{ content }}
+  </article>
+
+  {% if page.related_publications %}
+    <h2>References</h2>
+
+    <div class="publications">
+      {% bibliography --cited_in_order %}
+    </div>
+  {% endif %}
+
+
+  <!-- =====================================================
+       Previous / Next Project
+       Same category + date descending
+       ===================================================== -->
+
+  {% assign project_posts = site.projects
+    | where: "category", page.category
+    | sort: "date"
+    | reverse
+  %}
+
+  {% assign current_index = nil %}
+
+  {% for item in project_posts %}
+    {% if item.url == page.url %}
+      {% assign current_index = forloop.index0 %}
+    {% endif %}
+  {% endfor %}
+
+  {% if current_index != nil %}
+
+    {% assign prev_index = current_index | minus: 1 %}
+    {% assign next_index = current_index | plus: 1 %}
+
+    <nav class="project-navigation">
+
+      <div class="project-nav-prev">
+        {% if prev_index >= 0 %}
+          {% assign prev_project = project_posts[prev_index] %}
+
+          <a href="{{ prev_project.url | relative_url }}">
+            <span class="project-nav-label">
+              ← Previous Project
+            </span>
+
+            <span class="project-nav-title">
+              {{ prev_project.title }}
+            </span>
+          </a>
+        {% endif %}
+      </div>
+
+
+      <div class="project-nav-next">
+        {% if next_index < project_posts.size %}
+          {% assign next_project = project_posts[next_index] %}
+
+          <a href="{{ next_project.url | relative_url }}">
+            <span class="project-nav-label">
+              Next Project →
+            </span>
+
+            <span class="project-nav-title">
+              {{ next_project.title }}
+            </span>
+          </a>
+        {% endif %}
+      </div>
+
+    </nav>
+
+  {% endif %}
+
+
+  {% if site.plugins contains 'al_comments' %}
+    {% include plugins/al_comments.liquid %}
+  {% endif %}
+
+</div>
