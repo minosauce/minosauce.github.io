@@ -13,7 +13,7 @@ img: /assets/img/projects/cover_simSSile.png
 # Project Overview
 
 <div class="project-figure">
-  <img src="/assets/img/projects/simSSile.png" alt="MPCG">
+  <img src="/assets/img/projects/simSSile.png" alt="simSSile">
 </div>
 
 
