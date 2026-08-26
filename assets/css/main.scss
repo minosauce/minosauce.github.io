@@ -1411,3 +1411,40 @@ html[data-theme="dark"] .cv-role-dot {
     font-size: 0.9rem;
   }
 }
+
+
+/* =========================================================
+   Project detail - Research figures
+   ========================================================= */
+
+.project-figure {
+  width: 100%;
+  max-width: 1000px;
+
+  margin: 2rem auto;
+
+  overflow: hidden;
+
+  text-align: center;
+}
+
+.project-figure img {
+  display: block;
+
+  width: 100%;
+  height: auto;
+
+  max-width: 100%;
+
+  margin: 0 auto;
+
+  object-fit: contain;
+}
+
+/* Mobile */
+@media (max-width: 576px) {
+  .project-figure {
+    width: 100%;
+    margin: 1.5rem auto;
+  }
+}
