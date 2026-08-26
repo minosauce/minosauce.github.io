@@ -1,0 +1,46 @@
+---
+layout: post
+---
+
+{{ content }}
+
+{% assign news_posts = site.news | where_exp: "item", "item.inline != true" | sort: "date" %}
+
+{% assign current_index = nil %}
+
+{% for item in news_posts %}
+  {% if item.url == page.url %}
+    {% assign current_index = forloop.index0 %}
+  {% endif %}
+{% endfor %}
+
+{% if current_index != nil %}
+  {% assign prev_index = current_index | minus: 1 %}
+  {% assign next_index = current_index | plus: 1 %}
+
+  <nav class="news-navigation">
+
+    <div class="news-nav-prev">
+      {% if prev_index >= 0 %}
+        {% assign prev_post = news_posts[prev_index] %}
+
+        <a href="{{ prev_post.url | relative_url }}">
+          <span class="news-nav-label">← Previous</span>
+          <span class="news-nav-title">{{ prev_post.title }}</span>
+        </a>
+      {% endif %}
+    </div>
+
+    <div class="news-nav-next">
+      {% if next_index < news_posts.size %}
+        {% assign next_post = news_posts[next_index] %}
+
+        <a href="{{ next_post.url | relative_url }}">
+          <span class="news-nav-label">Next →</span>
+          <span class="news-nav-title">{{ next_post.title }}</span>
+        </a>
+      {% endif %}
+    </div>
+
+  </nav>
+{% endif %}
