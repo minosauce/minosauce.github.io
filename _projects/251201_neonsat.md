@@ -6,7 +6,6 @@ end_date:
 category: Funded
 description: "Funded by: Korea AeroSpace Administration (KASA)"
 img: /assets/img/projects/cover_neonsat.png
-related_publications: false
 ---
 
 **Managing Institution: KAIST SaTRec**
