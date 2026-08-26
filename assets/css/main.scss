@@ -1253,3 +1253,69 @@ html[data-theme="dark"] .cv-role-dot {
 
   pointer-events: none;
 }
+
+
+/* =========================================================
+   Project previous / next navigation
+   ========================================================= */
+
+.project-navigation {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+
+  border-top: 1px solid var(--global-divider-color);
+}
+
+.project-nav-prev,
+.project-nav-next {
+  min-width: 0;
+}
+
+.project-nav-next {
+  text-align: right;
+}
+
+.project-navigation a {
+  text-decoration: none;
+}
+
+.project-nav-label {
+  display: block;
+  margin-bottom: 0.25rem;
+
+  font-size: 0.8rem;
+  color: var(--global-text-color-light);
+}
+
+.project-nav-title {
+  display: block;
+
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1.4;
+
+  color: var(--global-theme-color);
+}
+
+
+/* Mobile */
+@media (max-width: 576px) {
+  .project-navigation {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+
+    margin-top: 2.5rem;
+  }
+
+  .project-nav-next {
+    text-align: right;
+  }
+
+  .project-nav-title {
+    font-size: 0.9rem;
+  }
+}
