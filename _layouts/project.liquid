@@ -17,13 +17,14 @@ layout: default
     {% if page.date %}
       <p class="post-meta project-date">
         {{ page.date | date: "%B %Y" }}
-        {% if page.end_date %}
-          – {{ page.end_date | date: "%B %Y" }}
+        {% if page.end_date %} &ndash; {{ page.end_date | date: "%B %Y" }}
         {% endif %}
       </p>
     {% endif %}
   
-    <p class="post-description">{{ page.description }}</p>
+    {% if page.description %}
+      <p class="post-description">{{ page.description }}</p>
+    {% endif %}
   </header>
 
   <article>
