@@ -66,9 +66,10 @@ He is currently working as a satellite system engineer at the Satellite Technolo
 </h2>
 
 {% if site.data.repositories.github_repos %}
+  {% assign reversed_github_repos = site.data.repositories.github_repos | reverse %}
 
   <div class="home-repositories">
-    {% for repo in site.data.repositories.github_repos limit: 2 %}
+    {% for repo in reversed_github_repos limit: 2 %}
       <div class="home-repository-item">
         {% include repository/repo.liquid repository=repo %}
       </div>
