@@ -5,9 +5,10 @@ repo_description_lines_max: 2
 
 github_repos:
   # My repositories
-  - minosauce/HNN.jl
-  - minosauce/LMPC.jl
   - minosauce/Kalman-Filter
+  - minosauce/LMPC.jl
+  - minosauce/HNN.jl
+  
 
 open_repos:
   # Recommended research repositories
