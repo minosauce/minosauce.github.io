@@ -1158,6 +1158,21 @@ html[data-theme="dark"] .cv-role-dot {
   }
 }
 
+
+
+/* =========================================================
+   Publications - Journal / Conference divider
+   ========================================================= */
+
+.conference-section {
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+
+  border-top: 1px solid var(--global-divider-color);
+}
+
+
+
 /* =========================================================
    Project detail page
    ========================================================= */
