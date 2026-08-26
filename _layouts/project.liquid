@@ -15,8 +15,11 @@ layout: default
     <h1 class="post-title">{{ page.title }}</h1>
   
     {% if page.date %}
-      <p class="post-meta">
+      <p class="post-meta project-date">
         {{ page.date | date: "%B %Y" }}
+        {% if page.end_date %}
+          – {{ page.end_date | date: "%B %Y" }}
+        {% endif %}
       </p>
     {% endif %}
   
