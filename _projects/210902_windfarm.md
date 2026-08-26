@@ -6,7 +6,6 @@ end_date: 2025-04-30
 category: Funded
 description: "Funded by: Ministry of Trade, Industry and Energy (MOTIE)"
 img: /assets/img/projects/cover_windfarm.png
-thumbnail_fit: contain
 related_publications: true
 ---
 
