@@ -1,0 +1,472 @@
+/* =========================================================
+   Showcase Carousel
+   About / Projects / Repositories
+   ========================================================= */
+
+
+/* =========================================================
+   Base
+   ========================================================= */
+
+.showcase-section,
+.about-showcase-section {
+  width: 100%;
+}
+
+.showcase-carousel {
+  position: relative;
+
+  width: 100%;
+
+  margin: 0;
+}
+
+
+/* =========================================================
+   Non-JavaScript fallback
+   ========================================================= */
+
+.showcase-source {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      var(--showcase-fallback-columns, 3),
+      minmax(0, 1fr)
+    );
+
+  gap: 1.25rem;
+
+  width: 100%;
+}
+
+
+/*
+ * Once JavaScript creates the paged carousel,
+ * the original source grid is hidden.
+ */
+
+.showcase-carousel.is-enhanced .showcase-source {
+  display: none;
+}
+
+
+/* =========================================================
+   Carousel track
+   ========================================================= */
+
+.showcase-track {
+  display: none;
+
+  width: 100%;
+
+  gap: 1rem;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  padding: 0.15rem 0 0.55rem;
+
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+
+  overscroll-behavior-x: contain;
+
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  -webkit-overflow-scrolling: touch;
+}
+
+.showcase-carousel.is-enhanced .showcase-track {
+  display: flex;
+}
+
+.showcase-track::-webkit-scrollbar {
+  display: none;
+}
+
+
+/* =========================================================
+   One carousel page
+   ========================================================= */
+
+.showcase-page {
+  flex: 0 0 100%;
+
+  width: 100%;
+  min-width: 0;
+
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+.showcase-page-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      var(--showcase-columns, 3),
+      minmax(0, 1fr)
+    );
+
+  gap: 1.25rem;
+
+  width: 100%;
+
+  align-items: stretch;
+}
+
+
+/* =========================================================
+   Items
+   ========================================================= */
+
+.showcase-item {
+  min-width: 0;
+  width: 100%;
+}
+
+
+/* =========================================================
+   Project cards
+   ========================================================= */
+
+.showcase-project-host {
+  width: 100%;
+  height: 100%;
+
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+
+/*
+ * projects.liquid outputs Bootstrap .col.
+ * Remove Bootstrap column sizing inside our carousel.
+ */
+
+.showcase-project-host > .col {
+  width: 100% !important;
+  max-width: 100% !important;
+
+  flex: 0 0 100% !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.showcase-project-host .project-card {
+  width: 100%;
+  height: 100%;
+}
+
+
+/* =========================================================
+   Repository cards
+   ========================================================= */
+
+.showcase-repo-host {
+  display: block !important;
+
+  width: 100%;
+  height: 100%;
+
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.showcase-repo-host .repo {
+  width: 100% !important;
+  max-width: 100% !important;
+
+  margin: 0 !important;
+}
+
+
+/*
+ * Do NOT force display:block here.
+ * al-folio may use light/dark repository images.
+ */
+
+.showcase-repo-host .repo img {
+  width: 100% !important;
+  max-width: 100% !important;
+
+  height: auto;
+}
+
+
+/* =========================================================
+   Navigation arrows
+   ========================================================= */
+
+.showcase-arrow {
+  position: absolute;
+
+  top: 50%;
+  z-index: 30;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 40px;
+  height: 40px;
+
+  padding: 0;
+
+  color: var(--global-text-color);
+  background: var(--global-bg-color);
+
+  border: 1px solid var(--global-divider-color);
+  border-radius: 50%;
+
+  box-shadow: 0 3px 12px rgb(0 0 0 / 16%);
+
+  font-family: Arial, sans-serif;
+  font-size: 1.8rem;
+  font-weight: 300;
+  line-height: 1;
+
+  cursor: pointer;
+
+  transform: translateY(-50%);
+
+  transition:
+    color 0.15s ease,
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    opacity 0.15s ease,
+    transform 0.15s ease;
+}
+
+.showcase-prev {
+  left: -20px;
+}
+
+.showcase-next {
+  right: -20px;
+}
+
+.showcase-arrow:hover:not(:disabled) {
+  color: var(--global-theme-color);
+
+  border-color: var(--global-theme-color);
+
+  transform: translateY(-50%) scale(1.06);
+}
+
+.showcase-arrow:disabled {
+  opacity: 0.2;
+
+  cursor: default;
+
+  transform: translateY(-50%);
+}
+
+.showcase-arrow[hidden] {
+  display: none !important;
+}
+
+
+/* =========================================================
+   Large page sections
+   Projects / Repositories pages
+   ========================================================= */
+
+.project-category-section,
+.repository-section {
+  width: 100%;
+}
+
+.project-category-section + .project-category-section {
+  margin-top: 3rem;
+}
+
+.repository-section + .repository-section {
+  margin-top: 3rem;
+}
+
+.showcase-large-carousel {
+  margin-top: 1.25rem;
+}
+
+
+/* =========================================================
+   About Publications Pagination
+   ========================================================= */
+
+.publication-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 0.3rem;
+
+  width: 100%;
+
+  margin-top: 1.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.publication-pagination button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 34px;
+  height: 34px;
+
+  padding: 0 0.55rem;
+
+  color: var(--global-text-color);
+  background: transparent;
+
+  border: 0;
+  border-radius: 50%;
+
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 400;
+  line-height: 1;
+
+  cursor: pointer;
+
+  transition:
+    color 0.15s ease,
+    background-color 0.15s ease,
+    opacity 0.15s ease;
+}
+
+.publication-pagination button:hover:not(:disabled) {
+  color: var(--global-theme-color);
+
+  background:
+    color-mix(
+      in srgb,
+      var(--global-theme-color) 10%,
+      transparent
+    );
+}
+
+.publication-pagination button.active {
+  color: #fff;
+  background: var(--global-theme-color);
+
+  font-weight: 600;
+}
+
+.publication-pagination .publication-pagination-arrow {
+  font-size: 1.35rem;
+}
+
+.publication-pagination button:disabled {
+  opacity: 0.25;
+
+  cursor: default;
+}
+
+
+/* =========================================================
+   Tablet
+   ========================================================= */
+
+@media (max-width: 991px) {
+  .showcase-source {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .showcase-page-grid {
+    gap: 1rem;
+  }
+
+  .showcase-prev {
+    left: -15px;
+  }
+
+  .showcase-next {
+    right: -15px;
+  }
+}
+
+
+/* =========================================================
+   Mobile
+   One card at a time
+   ========================================================= */
+
+@media (max-width: 576px) {
+  .showcase-source {
+    grid-template-columns: 1fr;
+
+    gap: 0.9rem;
+  }
+
+
+  /*
+   * Swipe is the primary navigation on mobile.
+   */
+
+  .showcase-track {
+    gap: 0.85rem;
+
+    padding-right: 8%;
+  }
+
+
+  /*
+   * 92% width leaves a small portion of the next card
+   * visible, indicating that users can swipe.
+   */
+
+  .showcase-page {
+    flex-basis: 92%;
+    width: 92%;
+  }
+
+  .showcase-page-grid {
+    grid-template-columns: 1fr !important;
+
+    gap: 0.9rem;
+  }
+
+
+  /*
+   * Hide desktop arrows.
+   */
+
+  .showcase-arrow {
+    display: none !important;
+  }
+
+
+  /*
+   * Slightly tighter pagination on mobile.
+   */
+
+  .publication-pagination {
+    gap: 0.2rem;
+
+    margin-top: 1.4rem;
+  }
+
+  .publication-pagination button {
+    min-width: 32px;
+    height: 32px;
+
+    padding: 0 0.45rem;
+
+    font-size: 0.9rem;
+  }
+
+  .publication-pagination .publication-pagination-arrow {
+    font-size: 1.25rem;
+  }
+
+
+  .project-category-section + .project-category-section,
+  .repository-section + .repository-section {
+    margin-top: 2.25rem;
+  }
+}
