@@ -10,7 +10,7 @@ nav_order: 20
 <div
   class="publications publications-page"
   data-publications-pagination
-  data-per-page="10"
+  data-per-page="5"
 >
   {% include bib_search.liquid %}
 
