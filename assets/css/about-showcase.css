@@ -16,6 +16,10 @@
   width: 100%;
 }
 
+.about-publication-hidden {
+  display: none !important;
+}
+
 
 /* =========================================================
    Publication pagination
