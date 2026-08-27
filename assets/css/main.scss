@@ -134,6 +134,14 @@ samp {
   --publication-marker-gap: 2.0rem;
 }
 
+/* =========================================================
+   Publications page - spacing below filter
+   ========================================================= */
+
+.publications-page .journal-section {
+  margin-top: 1.5rem;
+}
+
 /* About */
 .about-paginated-publications ol.bibliography > li {
   padding-left: calc(
