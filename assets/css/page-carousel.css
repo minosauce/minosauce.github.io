@@ -1,16 +1,15 @@
 /* =========================================================
    Page Carousel
 
-   Used on:
-   - /projects/
-   - /repositories/
+   /projects/
+   /repositories/
 
    Desktop:
-   Projects     = 2 rows x 3 columns = 6 items
-   Repositories = 3 rows x 2 columns = 6 items
+   Projects     = 2 rows x 3 columns
+   Repositories = 3 rows x 2 columns
 
-   Carousel navigation appears only when
-   more than 6 items exist.
+   Mobile:
+   One card at a time + horizontal swipe
    ========================================================= */
 
 
@@ -27,7 +26,7 @@
 }
 
 
-/* Original items before JS builds pages */
+/* Source elements are used by JavaScript only */
 
 .page-carousel-source[hidden] {
   display: none !important;
@@ -35,7 +34,7 @@
 
 
 /* =========================================================
-   Horizontal page track
+   Carousel track
    ========================================================= */
 
 .page-carousel-track {
@@ -55,6 +54,8 @@
 
   overscroll-behavior-x: contain;
 
+  touch-action: pan-x pan-y;
+
   scrollbar-width: none;
   -ms-overflow-style: none;
 
@@ -67,7 +68,7 @@
 
 
 /* =========================================================
-   One carousel page
+   One page
    ========================================================= */
 
 .page-carousel-page {
@@ -82,7 +83,7 @@
 
 
 /* =========================================================
-   Common grid
+   Page grid
    ========================================================= */
 
 .page-carousel-page-grid {
@@ -98,15 +99,15 @@
 
 /* =========================================================
    Projects
-   Desktop = 3 columns x 2 rows
+   Desktop: 3 columns x 2 rows
    ========================================================= */
 
-.page-project-carousel .page-carousel-page-grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+.page-project-carousel
+  .page-carousel-page-grid {
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
 }
 
-
-/* Project item */
 
 .page-project-item {
   display: flex;
@@ -138,15 +139,15 @@
 
 /* =========================================================
    Repositories
-   Desktop = 2 columns x 3 rows
+   Desktop: 2 columns x 3 rows
    ========================================================= */
 
-.page-repository-carousel .page-carousel-page-grid {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+.page-repository-carousel
+  .page-carousel-page-grid {
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
 }
 
-
-/* Repository item */
 
 .page-repository-item {
   min-width: 0;
@@ -200,10 +201,13 @@
   color: var(--global-text-color);
   background: var(--global-bg-color);
 
-  border: 1px solid var(--global-divider-color);
+  border: 1px solid
+    var(--global-divider-color);
+
   border-radius: 50%;
 
-  box-shadow: 0 3px 12px rgb(0 0 0 / 18%);
+  box-shadow:
+    0 3px 12px rgb(0 0 0 / 18%);
 
   font-family: Arial, sans-serif;
   font-size: 1.8rem;
@@ -234,9 +238,11 @@
 .page-carousel-arrow:hover:not(:disabled) {
   color: var(--global-theme-color);
 
-  border-color: var(--global-theme-color);
+  border-color:
+    var(--global-theme-color);
 
-  transform: translateY(-50%) scale(1.06);
+  transform:
+    translateY(-50%) scale(1.06);
 }
 
 
@@ -249,12 +255,10 @@
 }
 
 
-/*
- * One page only:
- * do not show navigation at all.
- */
+/* One page only */
 
-.page-carousel.no-scroll .page-carousel-arrow {
+.page-carousel.no-scroll
+  .page-carousel-arrow {
   display: none;
 }
 
@@ -277,29 +281,24 @@
 
 /* =========================================================
    Tablet
-   Same 6 items per page,
-   but fewer columns
    ========================================================= */
 
-@media (max-width: 991px) {
+@media (max-width: 991px)
+  and (min-width: 577px) {
+
   .page-carousel-page-grid {
     gap: 1.25rem;
   }
 
   /*
-   * Projects:
-   * 2 columns x up to 3 rows
+   * Six items are still one page,
+   * but displayed as 2 columns.
    */
-  .page-project-carousel .page-carousel-page-grid {
-    grid-template-columns:
-      repeat(2, minmax(0, 1fr));
-  }
 
-  /*
-   * Repositories:
-   * still 2 columns
-   */
-  .page-repository-carousel .page-carousel-page-grid {
+  .page-project-carousel
+    .page-carousel-page-grid,
+  .page-repository-carousel
+    .page-carousel-page-grid {
     grid-template-columns:
       repeat(2, minmax(0, 1fr));
   }
@@ -308,33 +307,71 @@
 
 /* =========================================================
    Mobile
-   Same 6 items per page,
-   displayed vertically
+   One card per swipe
    ========================================================= */
 
 @media (max-width: 576px) {
+
   .page-carousel {
     overflow: visible;
   }
 
-  .page-carousel-track {
-    gap: 1rem;
-  }
-
-  .page-project-carousel .page-carousel-page-grid,
-  .page-repository-carousel .page-carousel-page-grid {
-    grid-template-columns: 1fr;
-
-    gap: 1rem;
-  }
 
   /*
-   * Mobile users can swipe whole 6-item pages.
-   * Arrows are hidden.
+   * Native horizontal swipe.
    */
+
+  .page-carousel-track {
+    gap: 0.9rem;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    /*
+     * A small part of the next card is visible.
+     */
+    padding-right: 12%;
+
+    scroll-snap-type: x mandatory;
+
+    touch-action: pan-x;
+
+    -webkit-overflow-scrolling: touch;
+  }
+
+
+  /*
+   * Each JS-generated page contains exactly
+   * one Project or Repository.
+   */
+
+  .page-carousel-page {
+    flex: 0 0 88%;
+
+    width: 88%;
+    min-width: 88%;
+  }
+
+
+  .page-project-carousel
+    .page-carousel-page-grid,
+  .page-repository-carousel
+    .page-carousel-page-grid {
+    grid-template-columns: 1fr;
+
+    gap: 0;
+  }
+
+
+  /*
+   * Mobile = swipe first.
+   * Hide arrows.
+   */
+
   .page-carousel-arrow {
     display: none;
   }
+
 
   .repository-carousel-section {
     margin-bottom: 2.25rem;
