@@ -115,6 +115,33 @@
    2 cards visible on desktop
    ========================================================= */
 
+.page-repository-slide {
+  width: calc((100% - 1.5rem) / 2);
+}
+
+.page-repository-slide .repositories {
+  display: block !important;
+
+  width: 100%;
+
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.page-repository-slide .repo {
+  width: 100% !important;
+  max-width: 100% !important;
+
+  margin: 0 !important;
+}
+
+.page-repository-slide .repo img {
+  width: 100% !important;
+  max-width: 100% !important;
+
+  height: auto;
+}
+
 
 /* =========================================================
    Navigation arrows
@@ -210,6 +237,16 @@
    Repository section spacing
    ========================================================= */
 
+.repository-carousel-section {
+  width: 100%;
+
+  margin-bottom: 2.5rem;
+}
+
+.repository-carousel-section + .repository-carousel-section {
+  margin-top: 1.75rem;
+}
+
 
 /* =========================================================
    Tablet
@@ -223,6 +260,10 @@
   }
 
   .page-project-slide {
+    width: calc((100% - 1.25rem) / 2);
+  }
+
+  .page-repository-slide {
     width: calc((100% - 1.25rem) / 2);
   }
 }
@@ -251,7 +292,8 @@
     padding-right: 12%;
   }
 
-  .page-project-slide {
+  .page-project-slide,
+  .page-repository-slide {
     width: 88%;
   }
 
@@ -260,5 +302,9 @@
    */
   .page-carousel-arrow {
     display: none;
+  }
+
+  .repository-carousel-section {
+    margin-bottom: 2rem;
   }
 }
