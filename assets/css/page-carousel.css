@@ -1,0 +1,97 @@
+/* =========================================================
+   Page Carousel
+
+   Used on:
+   - /projects/
+   - /repositories/
+
+   Card appearance itself is controlled by main.scss.
+   This file controls only:
+   - horizontal layout
+   - navigation arrows
+   - responsive card count
+   - mobile swipe
+   ========================================================= */
+
+
+/* =========================================================
+   Base
+   ========================================================= */
+
+
+/* Horizontal track */
+
+
+/* Individual slide */
+
+
+/* =========================================================
+   Projects page
+   3 cards visible on desktop
+   ========================================================= */
+
+
+/*
+ * projects.liquid outputs Bootstrap .col.
+ * Neutralize Bootstrap column sizing inside carousel.
+ */
+
+
+/*
+ * main.scss controls actual project-card dimensions.
+ * Here we only make it occupy the full carousel slide.
+ */
+
+
+/* =========================================================
+   Repositories page
+   2 cards visible on desktop
+   ========================================================= */
+
+
+/* =========================================================
+   Navigation arrows
+   ========================================================= */
+
+
+/* Previous */
+
+
+/* Next */
+
+
+/* Hover */
+
+
+/* Beginning / end */
+
+
+/*
+ * If there is nothing to scroll,
+ * JS adds this class and removes both arrows completely.
+ */
+
+
+/* =========================================================
+   Repository section spacing
+   ========================================================= */
+
+
+/* =========================================================
+   Tablet
+   Projects: 2
+   Repositories: 2
+   ========================================================= */
+
+
+/* =========================================================
+   Mobile
+   Swipe interaction
+   ========================================================= */
+
+@media (max-width: 576px) {
+
+  /*
+   * Mobile navigation is touch-first.
+   */
+}
