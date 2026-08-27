@@ -1,110 +1,119 @@
 {% comment %}
-  News list
+  Custom News List
 
-  Usage:
+  Desktop:
+  Aug 24, 2026 | News title | Thumbnail
 
-  Full News page:
-  {% include news.liquid per_page=15 %}
+  Mobile:
+  Aug 24,       | News title | Thumbnail
+  2026
 
-  About page:
-  {% include news.liquid per_page=5 %}
+  Supported image fields:
+  img:
+  image:
+  thumbnail:
+  preview:
 {% endcomment %}
 
-{% assign sorted_news = site.news | sort: 'date' | reverse %}
+{% assign news_items = site.news | sort: 'date' | reverse %}
 
-{% assign news_per_page = include.per_page | default: 15 %}
+{% if include.limit %}
+  {% if page.announcements.limit %}
+    {% assign news_limit = page.announcements.limit %}
+  {% else %}
+    {% assign news_limit = 5 %}
+  {% endif %}
+{% else %}
+  {% assign news_limit = news_items.size %}
+{% endif %}
 
-<div
-  class="news-pagination-container"
-  data-news-pagination
-  data-per-page="{{ news_per_page }}"
->
-  <div class="news-list-custom">
-    {% for item in sorted_news %}
+<div class="news-list-custom">
 
-      {% assign news_image = item.img | default: item.image | default: item.thumbnail %}
+  {% for item in news_items limit: news_limit %}
 
-      {% if news_image %}
-        <div class="news-item">
+    {% assign preview_image = item.img %}
 
-          <div class="news-date">
-            {{ item.date | date: "%b %d, %Y" }}
+    {% unless preview_image %}
+      {% assign preview_image = item.image %}
+    {% endunless %}
+
+    {% unless preview_image %}
+      {% assign preview_image = item.thumbnail %}
+    {% endunless %}
+
+    {% unless preview_image %}
+      {% assign preview_image = item.preview %}
+    {% endunless %}
+
+    <div
+      class="
+        news-item
+        {% unless preview_image %}
+          news-item-no-preview
+        {% endunless %}
+      "
+    >
+
+      <!-- Date -->
+      <time
+        class="news-date"
+        datetime="{{ item.date | date: '%Y-%m-%d' }}"
+      >
+        <span class="news-date-main">
+          {{ item.date | date: "%b %-d," }}
+        </span>
+        <span class="news-date-year">
+          {{ item.date | date: "%Y" }}
+        </span>
+      </time>
+
+      <!-- Title / inline news -->
+      <div class="news-content">
+
+        {% if item.inline %}
+
+          <div class="news-title">
+            {{ item.content | remove: '<p>' | remove: '</p>' | emojify }}
           </div>
 
-          <div class="news-content">
-            <div class="news-title">
-              {% if item.redirect %}
-                <a
-                  href="{{ item.redirect }}"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {{ item.title }}
-                </a>
-              {% else %}
-                <a href="{{ item.url | relative_url }}">
-                  {{ item.title }}
-                </a>
-              {% endif %}
-            </div>
-          </div>
+        {% else %}
 
-          <div class="news-thumbnail">
-            {% if item.redirect %}
-              <a
-                href="{{ item.redirect }}"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img
-                  src="{{ news_image | relative_url }}"
-                  alt="{{ item.title }}"
-                  loading="lazy"
-                >
-              </a>
-            {% else %}
-              <a href="{{ item.url | relative_url }}">
-                <img
-                  src="{{ news_image | relative_url }}"
-                  alt="{{ item.title }}"
-                  loading="lazy"
-                >
-              </a>
-            {% endif %}
-          </div>
+          <a
+            class="news-title"
+            href="{{ item.url | relative_url }}"
+          >
+            {{ item.title }}
+          </a>
 
-        </div>
+        {% endif %}
 
-      {% else %}
+      </div>
 
-        <div class="news-item news-item-no-preview">
+      <!-- Thumbnail -->
+      {% if preview_image %}
 
-          <div class="news-date">
-            {{ item.date | date: "%b %d, %Y" }}
-          </div>
+        {% assign image_src = preview_image %}
 
-          <div class="news-content">
-            <div class="news-title">
-              {% if item.redirect %}
-                <a
-                  href="{{ item.redirect }}"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {{ item.title }}
-                </a>
-              {% else %}
-                <a href="{{ item.url | relative_url }}">
-                  {{ item.title }}
-                </a>
-              {% endif %}
-            </div>
-          </div>
+        {% unless preview_image contains '://' %}
+          {% assign image_src = preview_image | relative_url %}
+        {% endunless %}
 
-        </div>
+        <a
+          class="news-thumbnail"
+          href="{{ item.url | relative_url }}"
+          aria-label="{{ item.title }}"
+        >
+          <img
+            src="{{ image_src }}"
+            alt="{{ item.title }}"
+            loading="lazy"
+          >
+        </a>
 
       {% endif %}
 
-    {% endfor %}
-  </div>
+    </div>
+
+  {% endfor %}
+
 </div>
