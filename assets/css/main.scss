@@ -134,13 +134,21 @@ samp {
   --publication-marker-gap: 2.0rem;
 }
 
-.pub-numbered ol.bibliography > li {
-  position: relative;
-
+/* About */
+.about-paginated-publications ol.bibliography > li {
   padding-left: calc(
     var(--publication-marker-width) +
     var(--publication-marker-gap)
-  ) !important;
+  );
+}
+
+
+/* Full Publications page */
+.publications-page .pub-numbered ol.bibliography > li {
+  padding-left: calc(
+    var(--publication-marker-width) +
+    var(--publication-marker-gap)
+  );
 }
 
 .pub-numbered ol.bibliography > li::before {
