@@ -301,35 +301,221 @@ function initializeAboutPublicationPagination() {
    About - Projects / Repositories Carousel
    ========================================================= */
 
-function initializeAboutCarousels() {
-  const carousels =
-    document.querySelectorAll(
-      "[data-about-carousel]",
-    );
-
-  carousels.forEach((carousel) => {
-    const track =
-      carousel.querySelector(
-        "[data-carousel-track]",
+    function initializeAboutCarousels() {
+      const carousels = document.querySelectorAll(
+        "[data-about-carousel]",
       );
-
-    const previousButton =
-      carousel.querySelector(
-        ".about-carousel-prev",
-      );
-
-    const nextButton =
-      carousel.querySelector(
-        ".about-carousel-next",
-      );
-
-    if (
-      !track ||
-      !previousButton ||
-      !nextButton
-    ) {
-      return;
+    
+      carousels.forEach((carousel) => {
+        const track = carousel.querySelector(
+          "[data-carousel-track]",
+        );
+    
+        const previousButton = carousel.querySelector(
+          ".about-carousel-prev",
+        );
+    
+        const nextButton = carousel.querySelector(
+          ".about-carousel-next",
+        );
+    
+        if (!track || !previousButton || !nextButton) {
+          return;
+        }
+    
+        const slides = Array.from(
+          track.querySelectorAll(".about-carousel-slide"),
+        );
+    
+        if (slides.length === 0) {
+          return;
+        }
+    
+        const isProjectCarousel = Boolean(
+          carousel.querySelector(".about-project-slide"),
+        );
+    
+        const isRepositoryCarousel = Boolean(
+          carousel.querySelector(".about-repository-slide"),
+        );
+    
+        /*
+         * 한 번에 이동할 카드 수
+         */
+        function getStep() {
+          if (isProjectCarousel) {
+            if (window.innerWidth > 991) {
+              return 3;
+            }
+    
+            if (window.innerWidth > 576) {
+              return 2;
+            }
+    
+            return 1;
+          }
+    
+          if (isRepositoryCarousel) {
+            if (window.innerWidth > 576) {
+              return 2;
+            }
+    
+            return 1;
+          }
+    
+          return 1;
+        }
+    
+        /*
+         * 특정 카드의 정확한 scrollLeft 위치 계산
+         */
+        function getSlidePosition(index) {
+          const slide = slides[index];
+    
+          if (!slide) {
+            return 0;
+          }
+    
+          const trackRect =
+            track.getBoundingClientRect();
+    
+          const slideRect =
+            slide.getBoundingClientRect();
+    
+          return (
+            track.scrollLeft +
+            slideRect.left -
+            trackRect.left
+          );
+        }
+    
+        /*
+         * 현재 가장 왼쪽에 가까운 카드 index
+         */
+        function getCurrentIndex() {
+          let closestIndex = 0;
+          let closestDistance = Infinity;
+    
+          const trackRect =
+            track.getBoundingClientRect();
+    
+          slides.forEach((slide, index) => {
+            const slideRect =
+              slide.getBoundingClientRect();
+    
+            const distance = Math.abs(
+              slideRect.left - trackRect.left,
+            );
+    
+            if (distance < closestDistance) {
+              closestDistance = distance;
+              closestIndex = index;
+            }
+          });
+    
+          return closestIndex;
+        }
+    
+        /*
+         * 카드 index로 정확하게 이동
+         */
+        function scrollToIndex(index) {
+          const step = getStep();
+    
+          const maxStartIndex = Math.max(
+            0,
+            slides.length - step,
+          );
+    
+          const targetIndex = Math.max(
+            0,
+            Math.min(index, maxStartIndex),
+          );
+    
+          track.scrollTo({
+            left: getSlidePosition(targetIndex),
+            behavior: "smooth",
+          });
+        }
+    
+        /*
+         * 화살표 활성 / 비활성
+         */
+        function updateButtons() {
+          const maxScrollLeft =
+            track.scrollWidth - track.clientWidth;
+    
+          const hasOverflow = maxScrollLeft > 3;
+    
+          carousel.classList.toggle(
+            "no-scroll",
+            !hasOverflow,
+          );
+    
+          if (!hasOverflow) {
+            previousButton.disabled = true;
+            nextButton.disabled = true;
+            return;
+          }
+    
+          previousButton.disabled =
+            track.scrollLeft <= 3;
+    
+          nextButton.disabled =
+            track.scrollLeft >= maxScrollLeft - 3;
+        }
+    
+        /*
+         * Previous
+         */
+        previousButton.addEventListener(
+          "click",
+          () => {
+            const step = getStep();
+            const currentIndex =
+              getCurrentIndex();
+    
+            scrollToIndex(
+              currentIndex - step,
+            );
+          },
+        );
+    
+        /*
+         * Next
+         */
+        nextButton.addEventListener(
+          "click",
+          () => {
+            const step = getStep();
+            const currentIndex =
+              getCurrentIndex();
+    
+            scrollToIndex(
+              currentIndex + step,
+            );
+          },
+        );
+    
+        track.addEventListener(
+          "scroll",
+          updateButtons,
+          {
+            passive: true,
+          },
+        );
+    
+        window.addEventListener(
+          "resize",
+          updateButtons,
+        );
+    
+        requestAnimationFrame(
+          updateButtons,
+        );
+      });
     }
+
 
 
     /* -------------------------------------------------------
