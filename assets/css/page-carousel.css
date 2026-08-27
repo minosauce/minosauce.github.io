@@ -148,6 +148,35 @@
 
 /* Repository item */
 
+.page-repository-item {
+  min-width: 0;
+
+  width: 100%;
+}
+
+.page-repository-item .repositories {
+  display: block !important;
+
+  width: 100%;
+
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.page-repository-item .repo {
+  width: 100% !important;
+  max-width: 100% !important;
+
+  margin: 0 !important;
+}
+
+.page-repository-item .repo img {
+  width: 100% !important;
+  max-width: 100% !important;
+
+  height: auto;
+}
+
 
 /* =========================================================
    Navigation arrows
