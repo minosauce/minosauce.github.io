@@ -21,74 +21,6 @@
    Publication pagination
    ========================================================= */
 
-.about-publication-pagination {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  gap: 0.35rem;
-
-  width: 100%;
-
-  margin-top: 1.6rem;
-  margin-bottom: 0.4rem;
-}
-
-.about-publication-pagination button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  min-width: 34px;
-  height: 34px;
-
-  padding: 0 0.55rem;
-
-  color: var(--global-text-color);
-  background: transparent;
-
-  border: 0;
-  border-radius: 50%;
-
-  font-family: inherit;
-  font-size: 0.95rem;
-  font-weight: 400;
-  line-height: 1;
-
-  cursor: pointer;
-
-  transition:
-    color 0.15s ease,
-    background-color 0.15s ease,
-    opacity 0.15s ease;
-}
-
-.about-publication-pagination button:hover:not(:disabled) {
-  color: var(--global-theme-color);
-
-  background: color-mix(
-    in srgb,
-    var(--global-theme-color) 10%,
-    transparent
-  );
-}
-
-.about-publication-pagination button.active {
-  color: #fff;
-  background: var(--global-theme-color);
-
-  font-weight: 600;
-}
-
-.about-publication-pagination .pagination-arrow {
-  font-size: 1.35rem;
-}
-
-.about-publication-pagination button:disabled {
-  opacity: 0.25;
-  cursor: default;
-}
-
 
 /* =========================================================
    Carousel
@@ -303,22 +235,5 @@
 
   .about-carousel-arrow {
     display: none;
-  }
-
-  .about-publication-pagination {
-    gap: 0.25rem;
-
-    margin-top: 1.35rem;
-  }
-
-  .about-publication-pagination button {
-    min-width: 32px;
-    height: 32px;
-
-    font-size: 0.9rem;
-  }
-
-  .about-publication-pagination .pagination-arrow {
-    font-size: 1.25rem;
   }
 }
