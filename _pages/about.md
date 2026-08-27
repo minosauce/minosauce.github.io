@@ -35,46 +35,4 @@ His current research focuses on the development of advanced guidance and control
 
 <div style="clear: both;"></div>
 
-<h2 class="home-section-title">
-  <a href="{{ '/publications/' | relative_url }}" style="color: inherit">
-    Publications
-  </a>
-</h2>
-
-<div class="publications home-publications">
-  {% bibliography --max 5 %}
-</div>
-
-<h2 class="home-section-title">
-  <a href="{{ '/projects/' | relative_url }}" style="color: inherit">
-    Projects
-  </a>
-</h2>
-
-<div class="projects home-projects">
-  {% assign recent_projects = site.projects | sort: 'date' | reverse %}
-
-  <div class="row row-cols-1 row-cols-md-3">
-    {% for project in recent_projects limit: 3 %}
-      {% include projects.liquid %}
-    {% endfor %}
-  </div>
-</div>
-
-<h2 class="home-section-title">
-  <a href="{{ '/repositories/' | relative_url }}" style="color: inherit">
-    Repositories
-  </a>
-</h2>
-
-{% if site.data.repositories.github_repos %}
-{% assign reversed_github_repos = site.data.repositories.github_repos | reverse %}
-
-  <div class="home-repositories">
-    {% for repo in reversed_github_repos limit: 2 %}
-      <div class="home-repository-item">
-        {% include repository/repo.liquid repository=repo %}
-      </div>
-    {% endfor %}
-  </div>
-{% endif %}
+{% include about_showcase.liquid %}
