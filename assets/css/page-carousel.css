@@ -66,16 +66,40 @@
    One carousel page
    ========================================================= */
 
+.page-carousel-page {
+  flex: 0 0 100%;
+
+  width: 100%;
+  min-width: 100%;
+
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
 
 /* =========================================================
    Common grid
    ========================================================= */
+
+.page-carousel-page-grid {
+  display: grid;
+
+  width: 100%;
+
+  gap: 1.5rem;
+
+  align-items: stretch;
+}
 
 
 /* =========================================================
    Projects
    Desktop = 3 columns x 2 rows
    ========================================================= */
+
+.page-project-carousel .page-carousel-page-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
 
 
 /* Project item */
@@ -85,6 +109,10 @@
    Repositories
    Desktop = 2 columns x 3 rows
    ========================================================= */
+
+.page-repository-carousel .page-carousel-page-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
 
 
 /* Repository item */
@@ -194,16 +222,27 @@
    ========================================================= */
 
 @media (max-width: 991px) {
+  .page-carousel-page-grid {
+    gap: 1.25rem;
+  }
 
   /*
    * Projects:
    * 2 columns x up to 3 rows
    */
+  .page-project-carousel .page-carousel-page-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
 
   /*
    * Repositories:
    * still 2 columns
    */
+  .page-repository-carousel .page-carousel-page-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
 }
 
 
@@ -219,6 +258,13 @@
   }
 
   .page-carousel-track {
+    gap: 1rem;
+  }
+
+  .page-project-carousel .page-carousel-page-grid,
+  .page-repository-carousel .page-carousel-page-grid {
+    grid-template-columns: 1fr;
+
     gap: 1rem;
   }
 
