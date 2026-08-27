@@ -219,7 +219,7 @@ samp {
    ========================================================= */
 
 .about-page .post-title {
-  font-family: "Times New Roman", Times, serif, "Noto Serif KR";
+  font-family: "Times New Roman", Times, "Noto Serif KR", serif !important;
 }
 
 
@@ -237,8 +237,94 @@ samp {
 }
 
 /* =========================================================
+   Publications - Shared marker geometry
+   Shared marker geometry
+   ========================================================= */
+
+:root {
+  /*
+   * Publication page의 [J.1] / [C.1]과
+   * About의 bullet이 같은 marker column을 사용한다.
+   */
+  --publication-marker-width: 2.85rem;
+  --publication-marker-gap: 0.75rem;
+}
+
+
+/*
+ * Publication page:
+ * [J.1]    Paper
+ *
+ * About:
+ *     •    Paper
+ *
+ * 두 영역 모두 본문 시작점과 marker gap을 동일하게 맞춘다.
+ */
+
+.pub-numbered ol.bibliography > li,
+.about-page .home-publications ol.bibliography > li {
+  position: relative;
+
+  padding-left: calc(
+    var(--publication-marker-width) +
+    var(--publication-marker-gap)
+  ) !important;
+}
+
+
+/*
+ * Existing J/C numbering pseudo-element
+ * 위치만 통일한다.
+ *
+ * 기존 content: "[J.1]" 등의 설정은 건드리지 않는다.
+ */
+
+.pub-numbered ol.bibliography > li::before,
+.about-page .home-publications ol.bibliography > li::before {
+  position: absolute !important;
+
+  top: 0.05rem !important;
+  left: 0 !important;
+
+  width: var(--publication-marker-width) !important;
+
+  margin: 0 !important;
+
+  text-align: right !important;
+}
+
+
+/*
+ * About page에서는 번호 대신 bullet을 표시한다.
+ */
+
+.about-page .home-publications ol.bibliography > li::before {
+  content: "•" !important;
+
+  color: var(--global-text-color);
+
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+
+/*
+ * About publication item spacing
+ */
+
+.about-page .home-publications ol.bibliography > li {
+  margin-top: 0.35rem;
+  margin-bottom: 1.35rem;
+}
+
+.about-page .home-publications ol.bibliography > li:last-child {
+  margin-bottom: 0.6rem;
+}
+
+/* =========================================================
    News
-   Date | Title | Thumbnail
+   Desktop
    ========================================================= */
 
 .news-list-custom {
@@ -248,34 +334,48 @@ samp {
 .news-item {
   display: grid;
 
-  /*
-   * Date | Title | Thumbnail
-   *
-   * 20% date column matches About Posts.
-   */
-  grid-template-columns: 20% minmax(0, 1fr) 100px;
+  grid-template-columns:
+    20%
+    minmax(0, 1fr)
+    100px;
+
+  column-gap: 0.6rem;
 
   align-items: center;
 
-  min-height: 90px;
+  min-height: 88px;
 
   padding: 0.75rem 0;
 
-  border-bottom: 1px solid color-mix(in srgb, var(--global-divider-color) 55%, transparent);
+  border-bottom: 1px solid
+    color-mix(
+      in srgb,
+      var(--global-divider-color) 55%,
+      transparent
+    );
+}
+
+.news-item-no-preview {
+  grid-template-columns:
+    20%
+    minmax(0, 1fr);
 }
 
 .news-item:last-child {
   border-bottom: none;
 }
 
-/* =========================================================
-   News - Date
-   ========================================================= */
+
+/* Date */
 
 .news-date {
   grid-column: 1;
 
+  min-width: 0;
+
   padding: 0.3rem;
+
+  color: var(--global-text-color);
 
   font-size: 1rem;
   font-weight: 400;
@@ -284,33 +384,13 @@ samp {
   white-space: nowrap;
 }
 
-/* Desktop */
-.news-date-mobile {
-  display: none;
+.news-date-main,
+.news-date-year {
+  display: inline;
 }
 
-/* Mobile */
-@media (max-width: 576px) {
-  .news-date-desktop {
-    display: none;
-  }
 
-  .news-date-mobile {
-    display: inline;
-    line-height: 1.2;
-  }
-
-  .news-date {
-    width: 55px;
-    min-width: 55px;
-    white-space: nowrap;
-    flex-shrink: 0;
-  }
-}
-
-/* =========================================================
-   News - Title
-   ========================================================= */
+/* News title */
 
 .news-content {
   grid-column: 2;
@@ -323,32 +403,19 @@ samp {
 .news-title {
   font-size: 1rem;
   line-height: 1.4;
+
+  overflow-wrap: anywhere;
 }
 
-/*
- * If there is no thumbnail,
- * preserve the same title starting position.
- */
-.news-item-no-preview .news-content {
-  grid-column: 2;
-}
 
-/* =========================================================
-   News - Fixed thumbnail
-   Applies to:
-   - About page News
-   - /news/ page
-   ========================================================= */
-
-/*
- * All News thumbnails use exactly the same visible size,
- * regardless of the original image aspect ratio.
- */
+/* Thumbnail */
 
 .news-thumbnail {
   grid-column: 3;
 
   justify-self: end;
+
+  display: block;
 
   width: 100px;
   height: 64px;
@@ -361,17 +428,7 @@ samp {
   border-radius: 7px;
 }
 
-/*
- * figure.liquid may generate:
- *
- * figure
- *   picture
- *     img
- *
- * All wrappers therefore need to fill
- * the fixed thumbnail container.
- */
-
+/* Support both direct <img> and figure.liquid output */
 .news-thumbnail figure,
 .news-thumbnail picture {
   display: block;
@@ -401,36 +458,84 @@ samp {
   border-radius: 0 !important;
 }
 
+
 /* =========================================================
    News - Mobile
    ========================================================= */
 
 @media (max-width: 576px) {
   .news-item {
-    grid-template-columns: 20% minmax(0, 1fr) 80px;
+    /*
+     * 날짜 칸을 고정 폭으로 잡는다.
+     * 제목 영역을 침범하지 않는다.
+     */
+    grid-template-columns:
+      72px
+      minmax(0, 1fr)
+      72px;
 
-    min-height: 73px;
+    column-gap: 0.4rem;
 
-    padding: 0.55rem 0;
+    min-height: 72px;
+
+    padding: 0.6rem 0;
   }
+
+  .news-item-no-preview {
+    grid-template-columns:
+      72px
+      minmax(0, 1fr);
+  }
+
+
+  /*
+   * Mobile에서는 날짜를 두 줄로 표시:
+   *
+   * Aug 24,
+   * 2026
+   */
 
   .news-date {
-    padding: 0.3rem;
+    width: 72px;
 
-    font-size: 0.9rem;
+    padding: 0.2rem;
+
+    font-size: 0.88rem;
+    line-height: 1.25;
+
+    white-space: normal;
   }
 
+  .news-date-main,
+  .news-date-year {
+    display: block;
+  }
+
+
   .news-content {
-    padding: 0.3rem;
+    min-width: 0;
+
+    padding: 0.2rem;
   }
 
   .news-title {
-    font-size: 0.95rem;
+    display: block;
+
+    min-width: 0;
+
+    font-size: 0.94rem;
+    line-height: 1.35;
+
+    overflow-wrap: anywhere;
+    word-break: normal;
   }
 
+
   .news-thumbnail {
-    width: 80px;
-    height: 55px;
+    width: 72px;
+    height: 50px;
+
+    border-radius: 6px;
   }
 }
 
@@ -513,99 +618,6 @@ samp {
 }
 
 /* =========================================================
-   About - Recent Projects
-   ========================================================= */
-
-.home-project-list {
-  width: 100%;
-
-  margin: 0;
-  padding: 0;
-}
-
-.home-project-item {
-  display: flex;
-  align-items: baseline;
-  gap: 0.4rem;
-
-  width: 100%;
-
-  padding: 0.5rem 0.3rem;
-
-  overflow: hidden;
-
-  border-bottom: 1px solid var(--global-divider-color);
-}
-
-.home-project-item:first-child {
-  border-top: 1px solid var(--global-divider-color);
-}
-
-.home-project-title {
-  flex: 0 0 auto;
-
-  color: var(--global-text-color);
-
-  font-size: 1rem;
-  font-weight: 700;
-
-  white-space: nowrap;
-}
-
-.home-project-description {
-  min-width: 0;
-
-  overflow: hidden;
-
-  color: var(--global-text-color);
-
-  font-size: 1rem;
-  font-weight: 400;
-
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
-/* =========================================================
-   About - Repositories
-   ========================================================= */
-
-.home-repositories {
-  display: grid !important;
-
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1rem;
-
-  width: 100%;
-
-  margin: 0;
-  padding: 0;
-}
-
-.home-repository-item {
-  min-width: 0;
-  width: 100%;
-}
-
-.home-repository-item .repo {
-  width: 100% !important;
-  max-width: 100% !important;
-
-  margin: 0 !important;
-}
-
-/*
- * Do NOT force display:block.
- * al-folio uses light/dark image variants.
- */
-.home-repository-item .repo img {
-  width: 100% !important;
-  max-width: 100% !important;
-
-  height: auto;
-}
-
-/* =========================================================
    Repositories page - Card grid
    ========================================================= */
 
@@ -672,26 +684,6 @@ samp {
     max-width: none;
 
     margin-bottom: 2rem;
-  }
-}
-
-/* =========================================================
-   About - Projects / Repositories Mobile
-   ========================================================= */
-
-@media (max-width: 576px) {
-  .home-project-item {
-    gap: 0.3rem;
-  }
-
-  .home-project-title,
-  .home-project-description {
-    font-size: 0.95rem;
-  }
-
-  .home-repositories {
-    grid-template-columns: 1fr;
-    gap: 0.8rem;
   }
 }
 
@@ -1193,558 +1185,6 @@ html[data-theme="dark"] .cv-role-dot {
 
 /* =========================================================
    Projects - Cards
-   ========================================================= */
-
-.projects .project-card {
-  height: 100%;
-
-  overflow: hidden;
-}
-
-/* =========================================================
-   Projects - Consistent thumbnail container
-   ========================================================= */
-
-.projects .project-thumbnail-wrapper {
-  position: relative;
-
-  width: 100%;
-
-  aspect-ratio: 16 / 9;
-
-  overflow: hidden;
-
-  background-color: #fff;
-}
-
-.projects .project-thumbnail-wrapper figure,
-.projects .project-thumbnail-wrapper picture {
-  display: block;
-
-  width: 100%;
-  height: 100%;
-
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
-/* Common thumbnail dimensions */
-.projects .project-thumbnail {
-  display: block;
-
-  width: 100% !important;
-  height: 100% !important;
-
-  margin: 0 !important;
-}
-
-/* =========================================================
-   Projects - Thumbnail fit
-   ========================================================= */
-
-/* Normal photographs */
-.projects .project-thumbnail-cover {
-  object-fit: cover;
-  object-position: center;
-}
-
-/* PDF previews / diagrams / posters */
-.projects .project-thumbnail-contain {
-  object-fit: contain;
-  object-position: center;
-
-  padding: 0.35rem;
-}
-
-/* =========================================================
-   Projects - Card content
-   ========================================================= */
-
-.projects .project-card .card-body {
-  display: flex;
-  flex-direction: column;
-
-  width: 100%;
-}
-
-.projects .project-card .card-title {
-  margin-bottom: 0.75rem;
-}
-
-.projects .project-card .card-title a {
-  color: inherit;
-}
-
-/* =========================================================
-   Projects - GitHub
-   ========================================================= */
-
-.projects .project-github {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-
-  margin-top: auto;
-  padding-top: 0.75rem;
-
-  font-size: 0.9rem;
-}
-
-.projects .github-stars {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.25rem;
-}
-
-/* =========================================================
-   Projects - Thumbnail index
-   ========================================================= */
-
-/*
- * Modern semi-transparent project number badge.
- *
- * Numbers are passed automatically from the
- * reverse-date-sorted Projects loop.
- */
-
-.projects .project-index {
-  position: absolute;
-
-  top: 0.8rem;
-  left: 0.8rem;
-
-  z-index: 10;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  min-width: 34px;
-  height: 34px;
-
-  padding: 0 0.55rem;
-
-  color: #fff;
-  background: rgb(20 20 20 / 58%);
-
-  border: 1px solid rgb(255 255 255 / 22%);
-  border-radius: 8px;
-
-  box-shadow: 0 2px 10px rgb(0 0 0 / 12%);
-
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-
-  font-size: 0.9rem;
-  font-weight: 600;
-  font-variant-numeric: tabular-nums;
-  line-height: 1;
-
-  pointer-events: none;
-}
-
-/* =========================================================
-   Project previous / next navigation
-   ========================================================= */
-
-.project-navigation {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-
-  margin-top: 3rem;
-  padding-top: 1.5rem;
-
-  border-top: 1px solid var(--global-divider-color);
-}
-
-.project-nav-prev,
-.project-nav-next {
-  min-width: 0;
-}
-
-.project-nav-next {
-  text-align: right;
-}
-
-.project-navigation a {
-  text-decoration: none;
-}
-
-.project-nav-label {
-  display: block;
-  margin-bottom: 0.25rem;
-
-  font-size: 0.8rem;
-  color: var(--global-text-color-light);
-}
-
-.project-nav-title {
-  display: block;
-
-  font-size: 0.95rem;
-  font-weight: 500;
-  line-height: 1.4;
-
-  color: var(--global-theme-color);
-}
-
-/* Mobile */
-@media (max-width: 576px) {
-  .project-navigation {
-    grid-template-columns: 1fr;
-    gap: 1.25rem;
-
-    margin-top: 2.5rem;
-  }
-
-  .project-nav-next {
-    text-align: right;
-  }
-
-  .project-nav-title {
-    font-size: 0.9rem;
-  }
-}
-
-/* =========================================================
-   Project detail - Research figures
-   ========================================================= */
-
-.project-figure {
-  width: 100%;
-  max-width: 1000px;
-
-  margin: 2rem auto;
-
-  overflow: hidden;
-
-  text-align: center;
-}
-
-.project-figure img {
-  display: block;
-
-  width: 100%;
-  height: auto;
-
-  max-width: 100%;
-
-  margin: 0 auto;
-
-  object-fit: contain;
-}
-
-/* Mobile */
-@media (max-width: 576px) {
-  .project-figure {
-    width: 100%;
-    margin: 1.5rem auto;
-  }
-}
-
-
-/* =========================================================
-   FINAL UI OVERRIDES
-   Publications / News / Projects
-   ========================================================= */
-
-
-/* =========================================================
-   1. Publications
-   Shared marker geometry
-   ========================================================= */
-
-:root {
-  /*
-   * Publication page의 [J.1] / [C.1]과
-   * About의 bullet이 같은 marker column을 사용한다.
-   */
-  --publication-marker-width: 2.85rem;
-  --publication-marker-gap: 0.75rem;
-}
-
-
-/*
- * Publication page:
- * [J.1]    Paper
- *
- * About:
- *     •    Paper
- *
- * 두 영역 모두 본문 시작점과 marker gap을 동일하게 맞춘다.
- */
-
-.pub-numbered ol.bibliography > li,
-.about-page .home-publications ol.bibliography > li {
-  position: relative;
-
-  padding-left: calc(
-    var(--publication-marker-width) +
-    var(--publication-marker-gap)
-  ) !important;
-}
-
-
-/*
- * Existing J/C numbering pseudo-element
- * 위치만 통일한다.
- *
- * 기존 content: "[J.1]" 등의 설정은 건드리지 않는다.
- */
-
-.pub-numbered ol.bibliography > li::before,
-.about-page .home-publications ol.bibliography > li::before {
-  position: absolute !important;
-
-  top: 0.05rem !important;
-  left: 0 !important;
-
-  width: var(--publication-marker-width) !important;
-
-  margin: 0 !important;
-
-  text-align: right !important;
-}
-
-
-/*
- * About page에서는 번호 대신 bullet을 표시한다.
- */
-
-.about-page .home-publications ol.bibliography > li::before {
-  content: "•" !important;
-
-  color: var(--global-text-color);
-
-  font-size: 1.1rem;
-  font-weight: 600;
-  line-height: 1.4;
-}
-
-
-/*
- * About publication item spacing
- */
-
-.about-page .home-publications ol.bibliography > li {
-  margin-top: 0.35rem;
-  margin-bottom: 1.35rem;
-}
-
-.about-page .home-publications ol.bibliography > li:last-child {
-  margin-bottom: 0.6rem;
-}
-
-
-/* =========================================================
-   2. News
-   Desktop
-   ========================================================= */
-
-.news-list-custom {
-  width: 100%;
-}
-
-.news-item {
-  display: grid;
-
-  grid-template-columns:
-    20%
-    minmax(0, 1fr)
-    100px;
-
-  column-gap: 0.6rem;
-
-  align-items: center;
-
-  min-height: 88px;
-
-  padding: 0.75rem 0;
-
-  border-bottom: 1px solid
-    color-mix(
-      in srgb,
-      var(--global-divider-color) 55%,
-      transparent
-    );
-}
-
-.news-item-no-preview {
-  grid-template-columns:
-    20%
-    minmax(0, 1fr);
-}
-
-.news-item:last-child {
-  border-bottom: none;
-}
-
-
-/* Date */
-
-.news-date {
-  grid-column: 1;
-
-  min-width: 0;
-
-  padding: 0.3rem;
-
-  color: var(--global-text-color);
-
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.4;
-
-  white-space: nowrap;
-}
-
-.news-date-main,
-.news-date-year {
-  display: inline;
-}
-
-
-/* News title */
-
-.news-content {
-  grid-column: 2;
-
-  min-width: 0;
-
-  padding: 0.3rem;
-}
-
-.news-title {
-  font-size: 1rem;
-  line-height: 1.4;
-
-  overflow-wrap: anywhere;
-}
-
-
-/* Thumbnail */
-
-.news-thumbnail {
-  grid-column: 3;
-
-  justify-self: end;
-
-  display: block;
-
-  width: 100px;
-  height: 64px;
-
-  margin: 0;
-  padding: 0;
-
-  overflow: hidden;
-
-  border-radius: 7px;
-}
-
-.news-thumbnail img {
-  display: block !important;
-
-  width: 100% !important;
-  height: 100% !important;
-
-  min-width: 100% !important;
-  max-width: none !important;
-
-  margin: 0 !important;
-  padding: 0 !important;
-
-  object-fit: cover !important;
-  object-position: center !important;
-
-  border-radius: 0 !important;
-}
-
-
-/* =========================================================
-   News - Mobile
-   ========================================================= */
-
-@media (max-width: 576px) {
-  .news-item {
-    /*
-     * 날짜 칸을 고정 폭으로 잡는다.
-     * 제목 영역을 침범하지 않는다.
-     */
-    grid-template-columns:
-      72px
-      minmax(0, 1fr)
-      72px;
-
-    column-gap: 0.4rem;
-
-    min-height: 72px;
-
-    padding: 0.6rem 0;
-  }
-
-  .news-item-no-preview {
-    grid-template-columns:
-      72px
-      minmax(0, 1fr);
-  }
-
-
-  /*
-   * Mobile에서는 날짜를 두 줄로 표시:
-   *
-   * Aug 24,
-   * 2026
-   */
-
-  .news-date {
-    width: 72px;
-
-    padding: 0.2rem;
-
-    font-size: 0.88rem;
-    line-height: 1.25;
-
-    white-space: normal;
-  }
-
-  .news-date-main,
-  .news-date-year {
-    display: block;
-  }
-
-
-  .news-content {
-    min-width: 0;
-
-    padding: 0.2rem;
-  }
-
-  .news-title {
-    display: block;
-
-    min-width: 0;
-
-    font-size: 0.94rem;
-    line-height: 1.35;
-
-    overflow-wrap: anywhere;
-    word-break: normal;
-  }
-
-
-  .news-thumbnail {
-    width: 72px;
-    height: 50px;
-
-    border-radius: 6px;
-  }
-}
-
-
-/* =========================================================
-   3. Projects
    Shared between About and /projects/
    ========================================================= */
 
@@ -1756,6 +1196,7 @@ html[data-theme="dark"] .cv-role-dot {
   flex-direction: column;
 
   width: 100%;
+  height: 100%;
 
   overflow: hidden;
 }
@@ -2029,5 +1470,105 @@ html[data-theme="dark"] .cv-role-dot {
 
   .projects .project-card .card-text {
     font-size: 0.9rem;
+  }
+}
+
+/* =========================================================
+   Project previous / next navigation
+   ========================================================= */
+
+.project-navigation {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+
+  border-top: 1px solid var(--global-divider-color);
+}
+
+.project-nav-prev,
+.project-nav-next {
+  min-width: 0;
+}
+
+.project-nav-next {
+  text-align: right;
+}
+
+.project-navigation a {
+  text-decoration: none;
+}
+
+.project-nav-label {
+  display: block;
+  margin-bottom: 0.25rem;
+
+  font-size: 0.8rem;
+  color: var(--global-text-color-light);
+}
+
+.project-nav-title {
+  display: block;
+
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1.4;
+
+  color: var(--global-theme-color);
+}
+
+/* Mobile */
+@media (max-width: 576px) {
+  .project-navigation {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+
+    margin-top: 2.5rem;
+  }
+
+  .project-nav-next {
+    text-align: right;
+  }
+
+  .project-nav-title {
+    font-size: 0.9rem;
+  }
+}
+
+/* =========================================================
+   Project detail - Research figures
+   ========================================================= */
+
+.project-figure {
+  width: 100%;
+  max-width: 1000px;
+
+  margin: 2rem auto;
+
+  overflow: hidden;
+
+  text-align: center;
+}
+
+.project-figure img {
+  display: block;
+
+  width: 100%;
+  height: auto;
+
+  max-width: 100%;
+
+  margin: 0 auto;
+
+  object-fit: contain;
+}
+
+/* Mobile */
+@media (max-width: 576px) {
+  .project-figure {
+    width: 100%;
+    margin: 1.5rem auto;
   }
 }
