@@ -67,3 +67,7 @@ nav_order: 20
 <script
   src="{{ '/assets/js/publications-pagination.js' | relative_url }}"
 ></script>
+
+<script
+  src="{{ '/assets/js/pagination-stability.js' | relative_url }}"
+></script>
