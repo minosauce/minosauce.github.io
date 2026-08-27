@@ -29,6 +29,10 @@
 
 /* Original items before JS builds pages */
 
+.page-carousel-source[hidden] {
+  display: none !important;
+}
+
 
 /* =========================================================
    Horizontal page track
@@ -103,6 +107,33 @@
 
 
 /* Project item */
+
+.page-project-item {
+  display: flex;
+
+  min-width: 0;
+  height: 100%;
+}
+
+.page-project-item .projects {
+  width: 100%;
+  height: 100%;
+}
+
+.page-project-item .projects > .col {
+  width: 100% !important;
+  max-width: 100% !important;
+
+  flex: 0 0 100% !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.page-project-item .project-card {
+  width: 100%;
+  height: 100%;
+}
 
 
 /* =========================================================
