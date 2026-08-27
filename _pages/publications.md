@@ -7,96 +7,52 @@ nav: true
 nav_order: 20
 ---
 
-{% include bib_search.liquid %}
+<div
+  class="publications publications-page"
+  data-publications-pagination
+  data-per-page="10"
+>
+  {% include bib_search.liquid %}
 
-{% capture journal_count_raw %}{% bibliography_count --query @article %}{% endcapture %}
-{% assign journal_count = journal_count_raw | strip | plus: 0 %}
-{% assign journal_start = journal_count | plus: 1 %}
+  {% assign journal_count = site.bibliography | where_exp: "item", "item.type == 'article'" | size %}
+  {% assign conference_count = site.bibliography | where_exp: "item", "item.type == 'inproceedings'" | size %}
 
-{% capture conference_count_raw %}{% bibliography_count --query @inproceedings %}{% endcapture %}
-{% assign conference_count = conference_count_raw | strip | plus: 0 %}
-{% assign conference_start = conference_count | plus: 1 %}
+  {% if journal_count > 0 %}
+    <div class="publication-section journal-section" data-publication-section>
+      <h2>Journal</h2>
 
-<style>
-  .pub-numbered ol.bibliography {
-    list-style: none;
-    padding-left: 0;
-  }
+      <div
+        class="publications pub-numbered journal-pubs"
+        style="--journal-start: {{ journal_count }};"
+      >
+        {% bibliography --query @article %}
+      </div>
+    </div>
+  {% endif %}
 
-  .journal-pubs {
-    counter-reset: journal-counter var(--journal-start);
-  }
+  {% if conference_count > 0 %}
+    <div class="publication-section conference-section" data-publication-section>
+      <h2>Conference</h2>
 
-  .journal-pubs ol.bibliography > li {
-    counter-increment: journal-counter -1;
-    position: relative;
-    padding-left: 4.0rem;
-  }
+      <div
+        class="publications pub-numbered conference-pubs"
+        style="--conference-start: {{ conference_count }};"
+      >
+        {% bibliography --query @inproceedings %}
+      </div>
+    </div>
+  {% endif %}
 
-  .journal-pubs ol.bibliography > li::before {
-    content: "[J." counter(journal-counter) "]";
-    position: absolute;
-    left: 0;
-    top: 0;
-    font-weight: 400;
-  }
-
-  .conference-pubs {
-    counter-reset: conference-counter var(--conference-start);
-  }
-
-  .conference-pubs ol.bibliography > li {
-    counter-increment: conference-counter -1;
-    position: relative;
-    padding-left: 4.0rem;
-  }
-
-  .conference-pubs ol.bibliography > li::before {
-    content: "[C." counter(conference-counter) "]";
-    position: absolute;
-    left: 0;
-    top: 0;
-    font-weight: 400;
-  }
-
-  .publication-section {
-    margin-top: 2rem;
-    margin-bottom: 3rem;
-  }
-
-  .publication-section h2 {
-    margin-bottom: 1.5rem;
-  }
-
-  .publications ol.bibliography li .title {
-  font-weight: 700 !important;
-}
-</style>
-
-{% if journal_count > 0 %}
-
-<div class="publication-section">
-  <h2>Journal</h2>
-
-  <div
-    class="publications pub-numbered journal-pubs"
-    style="--journal-start: {{ journal_start }};"
-  >
-    {% bibliography --query @article %}
-  </div>
+  <nav
+    class="publications-pagination"
+    data-publications-pagination-nav
+    aria-label="Publications pagination"
+  ></nav>
 </div>
-{% endif %}
 
-{% if conference_count > 0 %}
+<link
+  rel="stylesheet"
+  href="{{ '/assets/css/publications-pagination.css' | relative_url }}"
+>
 
-<div class="publication-section conference-section">
-  <h2>Conference</h2>
-
-  <div
-    class="publications pub-numbered conference-pubs"
-    style="--conference-start: {{ conference_start }};"
-  >
-    {% bibliography --query @inproceedings %}
-  </div>
-</div>
-{% endif %}
+<script src="{{ '/assets/js/publications-pagination.js' | relative_url }}"></script>
