@@ -65,10 +65,25 @@ layout: default
 
     <!-- News -->
     {% if page.announcements and page.announcements.enabled %}
+    
+      <link
+        rel="stylesheet"
+        href="{{ '/assets/css/news-pagination.css' | relative_url }}"
+      >
+    
       <h2 class="home-section-title">
-        <a href="{{ '/news/' | relative_url }}" style="color: inherit">News</a>
+        <a
+          href="{{ '/news/' | relative_url }}"
+          style="color: inherit"
+        >
+          News
+        </a>
       </h2>
-      {% include news.liquid limit=true %}
+    
+      {% include news.liquid per_page=5 %}
+    
+      <script src="{{ '/assets/js/news-pagination.js' | relative_url }}"></script>
+    
     {% endif %}
 
     <!-- Latest posts -->
