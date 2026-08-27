@@ -1,0 +1,159 @@
+/* =========================================================
+   Publications page pagination
+   ========================================================= */
+
+
+/* Hide publications outside current page */
+
+.publication-page-hidden {
+  display: none !important;
+}
+
+
+/*
+ * If a page contains no publication from a section,
+ * hide that section heading as well.
+ */
+
+.publication-section-hidden {
+  display: none !important;
+}
+
+
+/* =========================================================
+   Pagination
+   ========================================================= */
+
+.publications-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 0.75rem;
+
+  width: 100%;
+
+  margin-top: 2.5rem;
+  margin-bottom: 2rem;
+}
+
+
+/* =========================================================
+   Number buttons
+   ========================================================= */
+
+.publications-pagination-button,
+.publications-pagination-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 42px;
+  height: 42px;
+
+  margin: 0;
+  padding: 0;
+
+  color: var(--global-text-color);
+  background: transparent;
+
+  border: none;
+  border-radius: 50%;
+
+  font-family:
+    "Times New Roman",
+    Times,
+    serif;
+
+  font-size: 1rem;
+  line-height: 1;
+
+  cursor: pointer;
+
+  transition:
+    color 0.15s ease,
+    background-color 0.15s ease,
+    opacity 0.15s ease;
+}
+
+
+/* Active page */
+
+.publications-pagination-button.active {
+  color: #fff;
+
+  background-color:
+    var(--global-theme-color);
+}
+
+
+/* Hover */
+
+.publications-pagination-button:hover:not(.active),
+.publications-pagination-arrow:hover:not(:disabled) {
+  color:
+    var(--global-theme-color);
+}
+
+
+/* Previous / next arrows */
+
+.publications-pagination-arrow {
+  font-size: 1.65rem;
+}
+
+
+/* Disabled arrow */
+
+.publications-pagination-arrow:disabled {
+  opacity: 0.25;
+
+  cursor: default;
+}
+
+
+/* Ellipsis */
+
+.publications-pagination-ellipsis {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 24px;
+  height: 42px;
+
+  color: var(--global-text-color);
+
+  font-size: 1rem;
+  line-height: 1;
+}
+
+
+/* =========================================================
+   Mobile
+   ========================================================= */
+
+@media (max-width: 576px) {
+  .publications-pagination {
+    gap: 0.35rem;
+
+    margin-top: 2rem;
+  }
+
+  .publications-pagination-button,
+  .publications-pagination-arrow {
+    width: 36px;
+    height: 36px;
+
+    font-size: 0.95rem;
+  }
+
+  .publications-pagination-arrow {
+    font-size: 1.5rem;
+  }
+
+  .publications-pagination-ellipsis {
+    min-width: 18px;
+    height: 36px;
+  }
+}
