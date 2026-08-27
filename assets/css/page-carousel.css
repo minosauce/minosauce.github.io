@@ -5,12 +5,12 @@
    - /projects/
    - /repositories/
 
-   Card appearance itself is controlled by main.scss.
-   This file controls only:
-   - horizontal layout
-   - navigation arrows
-   - responsive card count
-   - mobile swipe
+   Desktop:
+   Projects     = 2 rows x 3 columns = 6 items
+   Repositories = 3 rows x 2 columns = 6 items
+
+   Carousel navigation appears only when
+   more than 6 items exist.
    ========================================================= */
 
 
@@ -23,11 +23,16 @@
 
   width: 100%;
 
-  margin: 0 0 2.5rem;
+  margin: 0 0 2.75rem;
 }
 
 
-/* Horizontal track */
+/* Original items before JS builds pages */
+
+
+/* =========================================================
+   Horizontal page track
+   ========================================================= */
 
 .page-carousel-track {
   display: flex;
@@ -57,90 +62,32 @@
 }
 
 
-/* Individual slide */
-
-.page-carousel-slide {
-  flex: 0 0 auto;
-
-  min-width: 0;
-
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
-}
+/* =========================================================
+   One carousel page
+   ========================================================= */
 
 
 /* =========================================================
-   Projects page
-   3 cards visible on desktop
+   Common grid
    ========================================================= */
-
-.page-project-slide {
-  width: calc((100% - 3rem) / 3);
-}
-
-
-/*
- * projects.liquid outputs Bootstrap .col.
- * Neutralize Bootstrap column sizing inside carousel.
- */
-
-.page-project-slide .projects {
-  width: 100%;
-  height: 100%;
-}
-
-.page-project-slide .projects > .col {
-  width: 100% !important;
-  max-width: 100% !important;
-
-  flex: 0 0 100% !important;
-
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
-
-/*
- * main.scss controls actual project-card dimensions.
- * Here we only make it occupy the full carousel slide.
- */
-
-.page-project-slide .project-card {
-  width: 100%;
-}
 
 
 /* =========================================================
-   Repositories page
-   2 cards visible on desktop
+   Projects
+   Desktop = 3 columns x 2 rows
    ========================================================= */
 
-.page-repository-slide {
-  width: calc((100% - 1.5rem) / 2);
-}
 
-.page-repository-slide .repositories {
-  display: block !important;
+/* Project item */
 
-  width: 100%;
 
-  margin: 0 !important;
-  padding: 0 !important;
-}
+/* =========================================================
+   Repositories
+   Desktop = 2 columns x 3 rows
+   ========================================================= */
 
-.page-repository-slide .repo {
-  width: 100% !important;
-  max-width: 100% !important;
 
-  margin: 0 !important;
-}
-
-.page-repository-slide .repo img {
-  width: 100% !important;
-  max-width: 100% !important;
-
-  height: auto;
-}
+/* Repository item */
 
 
 /* =========================================================
@@ -187,21 +134,14 @@
 }
 
 
-/* Previous */
-
 .page-carousel-prev {
   left: -20px;
 }
-
-
-/* Next */
 
 .page-carousel-next {
   right: -20px;
 }
 
-
-/* Hover */
 
 .page-carousel-arrow:hover:not(:disabled) {
   color: var(--global-theme-color);
@@ -211,8 +151,6 @@
   transform: translateY(-50%) scale(1.06);
 }
 
-
-/* Beginning / end */
 
 .page-carousel-arrow:disabled {
   opacity: 0.18;
@@ -224,8 +162,8 @@
 
 
 /*
- * If there is nothing to scroll,
- * JS adds this class and removes both arrows completely.
+ * One page only:
+ * do not show navigation at all.
  */
 
 .page-carousel.no-scroll .page-carousel-arrow {
@@ -240,71 +178,59 @@
 .repository-carousel-section {
   width: 100%;
 
-  margin-bottom: 2.5rem;
+  margin-bottom: 3rem;
 }
 
-.repository-carousel-section + .repository-carousel-section {
-  margin-top: 1.75rem;
+.repository-carousel-section
+  + .repository-carousel-section {
+  margin-top: 2rem;
 }
 
 
 /* =========================================================
    Tablet
-   Projects: 2
-   Repositories: 2
+   Same 6 items per page,
+   but fewer columns
    ========================================================= */
 
 @media (max-width: 991px) {
-  .page-carousel-track {
-    gap: 1.25rem;
-  }
 
-  .page-project-slide {
-    width: calc((100% - 1.25rem) / 2);
-  }
+  /*
+   * Projects:
+   * 2 columns x up to 3 rows
+   */
 
-  .page-repository-slide {
-    width: calc((100% - 1.25rem) / 2);
-  }
+  /*
+   * Repositories:
+   * still 2 columns
+   */
 }
 
 
 /* =========================================================
    Mobile
-   Swipe interaction
+   Same 6 items per page,
+   displayed vertically
    ========================================================= */
 
 @media (max-width: 576px) {
   .page-carousel {
-    /*
-     * Do not clip touch scrolling.
-     */
     overflow: visible;
   }
 
   .page-carousel-track {
-    gap: 0.9rem;
-
-    /*
-     * Show a small piece of the next card.
-     * This visually tells users the section is swipeable.
-     */
-    padding-right: 12%;
-  }
-
-  .page-project-slide,
-  .page-repository-slide {
-    width: 88%;
+    gap: 1rem;
   }
 
   /*
-   * Mobile navigation is touch-first.
+   * Mobile users can swipe whole 6-item pages.
+   * Arrows are hidden.
    */
   .page-carousel-arrow {
     display: none;
   }
 
   .repository-carousel-section {
-    margin-bottom: 2rem;
+    margin-bottom: 2.25rem;
   }
 }
