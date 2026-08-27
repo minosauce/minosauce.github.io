@@ -317,7 +317,7 @@ if (maximumHeight > 0) {
     ) || 16;
 
   const reduction =
-    3 * rootFontSize;
+    5 * rootFontSize;
 
   const stableHeight =
     Math.max(
