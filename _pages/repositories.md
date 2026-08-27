@@ -7,25 +7,29 @@ nav: true
 nav_order: 40
 ---
 
+
 <link
   rel="stylesheet"
-  href="{{ '/assets/css/showcase-carousel.css' | relative_url }}"
+  href="{{ '/assets/css/page-carousel.css' | relative_url }}"
 >
 
 
 {% if site.data.repositories.github_users %}
 
-<h2 class="repository-main-heading">
-  GitHub Users
-</h2>
+## GitHub Users
 
 <div class="repositories d-flex flex-wrap flex-md-row flex-column align-items-start">
+
   {% for user in site.data.repositories.github_users %}
     {% include repository/repo_user.liquid username=user %}
   {% endfor %}
+
 </div>
 
+---
+
 {% if site.repo_trophies.enabled %}
+
   {% for user in site.data.repositories.github_users %}
 
     {% if site.data.repositories.github_users.size > 1 %}
@@ -36,7 +40,10 @@ nav_order: 40
       {% include repository/repo_trophies.liquid username=user %}
     </div>
 
+    ---
+
   {% endfor %}
+
 {% endif %}
 
 {% endif %}
@@ -44,134 +51,126 @@ nav_order: 40
 
 <!-- =========================================================
      GitHub Repositories
-     Desktop: 2 columns × 3 rows = 6 repositories
-     Mobile: 1 repository per swipe
      ========================================================= -->
 
 {% if site.data.repositories.github_repos %}
 
-<section class="showcase-section repository-section">
+  <section class="repository-carousel-section">
 
-  <h2 class="repository-section-title">
-    GitHub Repositories
-  </h2>
+    <h2>
+      GitHub Repositories
+    </h2>
 
-  {% assign reversed_github_repos = site.data.repositories.github_repos | reverse %}
-
-  <div
-    class="showcase-carousel showcase-large-carousel repository-page-carousel"
-    data-paged-carousel
-    data-desktop-items="6"
-    data-desktop-columns="2"
-    data-tablet-items="4"
-    data-tablet-columns="2"
-    data-mobile-items="1"
-    data-mobile-columns="1"
-  >
-    <button
-      class="showcase-arrow showcase-prev"
-      type="button"
-      aria-label="Previous GitHub repositories"
-    >
-      ‹
-    </button>
+    {% assign reversed_github_repos = site.data.repositories.github_repos | reverse %}
 
     <div
-      class="showcase-source"
-      data-carousel-source
-      style="--showcase-fallback-columns: 2;"
+      class="page-carousel page-repository-carousel"
+      data-page-carousel
     >
-      {% for repo in reversed_github_repos %}
-        <div class="showcase-item">
-          <div class="repositories showcase-repo-host">
-            {% include repository/repo.liquid repository=repo %}
+
+      <button
+        class="page-carousel-arrow page-carousel-prev"
+        type="button"
+        aria-label="Previous GitHub repositories"
+      >
+        ‹
+      </button>
+
+      <div
+        class="page-carousel-track"
+        data-page-carousel-track
+      >
+
+        {% for repo in reversed_github_repos %}
+
+          <div class="page-carousel-slide page-repository-slide">
+
+            <div class="repositories">
+
+              {% include repository/repo.liquid repository=repo %}
+
+            </div>
+
           </div>
-        </div>
-      {% endfor %}
+
+        {% endfor %}
+
+      </div>
+
+      <button
+        class="page-carousel-arrow page-carousel-next"
+        type="button"
+        aria-label="Next GitHub repositories"
+      >
+        ›
+      </button>
+
     </div>
 
-    <div
-      class="showcase-track"
-      data-carousel-track
-    ></div>
-
-    <button
-      class="showcase-arrow showcase-next"
-      type="button"
-      aria-label="Next GitHub repositories"
-    >
-      ›
-    </button>
-  </div>
-
-</section>
+  </section>
 
 {% endif %}
 
 
 <!-- =========================================================
      Open-Source Resources
-     Desktop: 2 columns × 3 rows = 6 repositories
-     Mobile: 1 repository per swipe
      ========================================================= -->
 
 {% if site.data.repositories.open_repos %}
 
-<section class="showcase-section repository-section">
+  <section class="repository-carousel-section">
 
-  <h2 class="repository-section-title">
-    Open-Source Resources
-  </h2>
-
-  <div
-    class="showcase-carousel showcase-large-carousel repository-page-carousel"
-    data-paged-carousel
-    data-desktop-items="6"
-    data-desktop-columns="2"
-    data-tablet-items="4"
-    data-tablet-columns="2"
-    data-mobile-items="1"
-    data-mobile-columns="1"
-  >
-    <button
-      class="showcase-arrow showcase-prev"
-      type="button"
-      aria-label="Previous open-source repositories"
-    >
-      ‹
-    </button>
+    <h2>
+      Open-Source Resources
+    </h2>
 
     <div
-      class="showcase-source"
-      data-carousel-source
-      style="--showcase-fallback-columns: 2;"
+      class="page-carousel page-repository-carousel"
+      data-page-carousel
     >
-      {% for repo in site.data.repositories.open_repos %}
-        <div class="showcase-item">
-          <div class="repositories showcase-repo-host">
-            {% include repository/repo.liquid repository=repo %}
+
+      <button
+        class="page-carousel-arrow page-carousel-prev"
+        type="button"
+        aria-label="Previous open-source repositories"
+      >
+        ‹
+      </button>
+
+      <div
+        class="page-carousel-track"
+        data-page-carousel-track
+      >
+
+        {% for repo in site.data.repositories.open_repos %}
+
+          <div class="page-carousel-slide page-repository-slide">
+
+            <div class="repositories">
+
+              {% include repository/repo.liquid repository=repo %}
+
+            </div>
+
           </div>
-        </div>
-      {% endfor %}
+
+        {% endfor %}
+
+      </div>
+
+      <button
+        class="page-carousel-arrow page-carousel-next"
+        type="button"
+        aria-label="Next open-source repositories"
+      >
+        ›
+      </button>
+
     </div>
 
-    <div
-      class="showcase-track"
-      data-carousel-track
-    ></div>
-
-    <button
-      class="showcase-arrow showcase-next"
-      type="button"
-      aria-label="Next open-source repositories"
-    >
-      ›
-    </button>
-  </div>
-
-</section>
+  </section>
 
 {% endif %}
 
 
-<script src="{{ '/assets/js/showcase-carousel.js' | relative_url }}"></script>
+<script src="{{ '/assets/js/page-carousel.js' | relative_url }}"></script>
