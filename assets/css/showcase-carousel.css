@@ -8,7 +8,8 @@
    Base
    ========================================================= */
 
-.showcase-section {
+.showcase-section,
+.about-showcase-section {
   width: 100%;
 }
 
@@ -45,6 +46,10 @@
  * the original source grid is hidden.
  */
 
+.showcase-carousel.is-enhanced .showcase-source {
+  display: none;
+}
+
 
 /* =========================================================
    Carousel track
@@ -73,6 +78,10 @@
   -webkit-overflow-scrolling: touch;
 }
 
+.showcase-carousel.is-enhanced .showcase-track {
+  display: flex;
+}
+
 .showcase-track::-webkit-scrollbar {
   display: none;
 }
@@ -81,6 +90,32 @@
 /* =========================================================
    One carousel page
    ========================================================= */
+
+.showcase-page {
+  flex: 0 0 100%;
+
+  width: 100%;
+  min-width: 0;
+
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+.showcase-page-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      var(--showcase-columns, 3),
+      minmax(0, 1fr)
+    );
+
+  gap: 1.25rem;
+
+  width: 100%;
+
+  align-items: stretch;
+}
 
 
 /* =========================================================
@@ -262,6 +297,76 @@
    About Publications Pagination
    ========================================================= */
 
+.publication-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 0.3rem;
+
+  width: 100%;
+
+  margin-top: 1.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.publication-pagination button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 34px;
+  height: 34px;
+
+  padding: 0 0.55rem;
+
+  color: var(--global-text-color);
+  background: transparent;
+
+  border: 0;
+  border-radius: 50%;
+
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 400;
+  line-height: 1;
+
+  cursor: pointer;
+
+  transition:
+    color 0.15s ease,
+    background-color 0.15s ease,
+    opacity 0.15s ease;
+}
+
+.publication-pagination button:hover:not(:disabled) {
+  color: var(--global-theme-color);
+
+  background:
+    color-mix(
+      in srgb,
+      var(--global-theme-color) 10%,
+      transparent
+    );
+}
+
+.publication-pagination button.active {
+  color: #fff;
+  background: var(--global-theme-color);
+
+  font-weight: 600;
+}
+
+.publication-pagination .publication-pagination-arrow {
+  font-size: 1.35rem;
+}
+
+.publication-pagination button:disabled {
+  opacity: 0.25;
+
+  cursor: default;
+}
+
 
 /* =========================================================
    Tablet
@@ -270,6 +375,10 @@
 @media (max-width: 991px) {
   .showcase-source {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .showcase-page-grid {
+    gap: 1rem;
   }
 
   .showcase-prev {
@@ -311,6 +420,17 @@
    * visible, indicating that users can swipe.
    */
 
+  .showcase-page {
+    flex-basis: 92%;
+    width: 92%;
+  }
+
+  .showcase-page-grid {
+    grid-template-columns: 1fr !important;
+
+    gap: 0.9rem;
+  }
+
 
   /*
    * Hide desktop arrows.
@@ -324,6 +444,25 @@
   /*
    * Slightly tighter pagination on mobile.
    */
+
+  .publication-pagination {
+    gap: 0.2rem;
+
+    margin-top: 1.4rem;
+  }
+
+  .publication-pagination button {
+    min-width: 32px;
+    height: 32px;
+
+    padding: 0 0.45rem;
+
+    font-size: 0.9rem;
+  }
+
+  .publication-pagination .publication-pagination-arrow {
+    font-size: 1.25rem;
+  }
 
 
   .project-category-section + .project-category-section,
