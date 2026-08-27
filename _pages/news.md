@@ -1,9 +1,16 @@
 ---
 layout: page
 title: News
+permalink: /news/
 nav: true
 nav_order: 50
-permalink: /news/
 ---
 
-{% include news.liquid %}
+<link
+  rel="stylesheet"
+  href="{{ '/assets/css/news-pagination.css' | relative_url }}"
+>
+
+{% include news.liquid per_page=15 %}
+
+<script src="{{ '/assets/js/news-pagination.js' | relative_url }}"></script>
