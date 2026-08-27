@@ -334,32 +334,68 @@ function initializeAboutCarousels() {
 
     /* -------------------------------------------------------
        한 번 클릭할 때 이동할 거리
-       = 카드 1개 너비 + gap
+       = 카드 1개 너비 + gap (3개씩 넘기기)
        ------------------------------------------------------- */
 
     function getScrollAmount() {
-      const slide =
-        track.querySelector(
-          ".about-carousel-slide",
-        );
-
+      const slide = track.querySelector(".about-carousel-slide");
+    
       if (!slide) {
         return track.clientWidth;
       }
-
-      const trackStyle =
-        window.getComputedStyle(track);
-
+    
+      const style = window.getComputedStyle(track);
+    
       const gap =
         parseFloat(
-          trackStyle.columnGap ||
-            trackStyle.gap,
+          style.columnGap || style.gap
         ) || 0;
-
-      return (
-        slide.getBoundingClientRect()
-          .width + gap
-      );
+    
+      const slideWidth =
+        slide.getBoundingClientRect().width;
+    
+      /*
+       * Projects
+       *
+       * Desktop : 3 cards visible -> move 3 cards
+       * Tablet  : 2 cards visible -> move 2 cards
+       * Mobile  : 1 card per swipe
+       */
+      if (
+        carousel.querySelector(
+          ".about-project-slide"
+        )
+      ) {
+        if (window.innerWidth > 991) {
+          return (slideWidth + gap) * 3;
+        }
+    
+        if (window.innerWidth > 576) {
+          return (slideWidth + gap) * 2;
+        }
+    
+        return slideWidth + gap;
+      }
+    
+      /*
+       * Repositories
+       *
+       * Desktop / Tablet : 2 cards visible -> move 2 cards
+       * Mobile           : 1 card per swipe
+       */
+      if (
+        carousel.querySelector(
+          ".about-repository-slide"
+        )
+      ) {
+        if (window.innerWidth > 576) {
+          return (slideWidth + gap) * 2;
+        }
+    
+        return slideWidth + gap;
+      }
+    
+      return slideWidth + gap;
     }
 
 
