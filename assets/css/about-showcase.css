@@ -1,0 +1,323 @@
+/* =========================================================
+   About Showcase
+   Publications / Projects / Repositories
+   ========================================================= */
+
+
+/* =========================================================
+   Publications
+   ========================================================= */
+
+.about-publication-block {
+  width: 100%;
+}
+
+.about-paginated-publications {
+  width: 100%;
+}
+
+
+/* =========================================================
+   Publication pagination
+   ========================================================= */
+
+.about-publication-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 0.35rem;
+
+  width: 100%;
+
+  margin-top: 1.6rem;
+  margin-bottom: 0.4rem;
+}
+
+.about-publication-pagination button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 34px;
+  height: 34px;
+
+  padding: 0 0.55rem;
+
+  color: var(--global-text-color);
+  background: transparent;
+
+  border: 0;
+  border-radius: 50%;
+
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 400;
+  line-height: 1;
+
+  cursor: pointer;
+
+  transition:
+    color 0.15s ease,
+    background-color 0.15s ease,
+    opacity 0.15s ease;
+}
+
+.about-publication-pagination button:hover:not(:disabled) {
+  color: var(--global-theme-color);
+
+  background: color-mix(
+    in srgb,
+    var(--global-theme-color) 10%,
+    transparent
+  );
+}
+
+.about-publication-pagination button.active {
+  color: #fff;
+  background: var(--global-theme-color);
+
+  font-weight: 600;
+}
+
+.about-publication-pagination .pagination-arrow {
+  font-size: 1.35rem;
+}
+
+.about-publication-pagination button:disabled {
+  opacity: 0.25;
+  cursor: default;
+}
+
+
+/* =========================================================
+   Carousel
+   ========================================================= */
+
+.about-carousel-section {
+  width: 100%;
+}
+
+.about-carousel {
+  position: relative;
+
+  width: 100%;
+}
+
+.about-carousel-track {
+  display: flex;
+
+  width: 100%;
+
+  gap: 1.5rem;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  padding: 0.15rem 0 0.55rem;
+
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+
+  overscroll-behavior-x: contain;
+
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  -webkit-overflow-scrolling: touch;
+}
+
+.about-carousel-track::-webkit-scrollbar {
+  display: none;
+}
+
+.about-carousel-slide {
+  flex: 0 0 auto;
+
+  min-width: 0;
+
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+
+/* =========================================================
+   Projects
+   3 cards on desktop
+   ========================================================= */
+
+.about-project-slide {
+  width: calc((100% - 3rem) / 3);
+}
+
+.about-project-card-host {
+  width: 100%;
+}
+
+.about-project-card-host > .col {
+  width: 100% !important;
+  max-width: 100% !important;
+
+  flex: 0 0 100% !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+
+/* =========================================================
+   Repositories
+   2 cards on desktop
+   ========================================================= */
+
+.about-repository-slide {
+  width: calc((100% - 1.5rem) / 2);
+}
+
+.about-repository-card-host {
+  display: block !important;
+
+  width: 100%;
+
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.about-repository-card-host .repo {
+  width: 100% !important;
+  max-width: 100% !important;
+
+  margin: 0 !important;
+}
+
+.about-repository-card-host .repo img {
+  width: 100% !important;
+  max-width: 100% !important;
+
+  height: auto;
+}
+
+
+/* =========================================================
+   Carousel arrows
+   ========================================================= */
+
+.about-carousel-arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 20;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 40px;
+  height: 40px;
+
+  padding: 0;
+
+  color: var(--global-text-color);
+  background: var(--global-bg-color);
+
+  border: 1px solid var(--global-divider-color);
+  border-radius: 50%;
+
+  box-shadow: 0 3px 12px rgb(0 0 0 / 18%);
+
+  font-family: Arial, sans-serif;
+  font-size: 1.8rem;
+  font-weight: 300;
+  line-height: 1;
+
+  cursor: pointer;
+
+  transform: translateY(-50%);
+
+  transition:
+    color 0.15s ease,
+    border-color 0.15s ease,
+    opacity 0.15s ease,
+    transform 0.15s ease;
+}
+
+.about-carousel-prev {
+  left: -20px;
+}
+
+.about-carousel-next {
+  right: -20px;
+}
+
+.about-carousel-arrow:hover:not(:disabled) {
+  color: var(--global-theme-color);
+
+  border-color: var(--global-theme-color);
+
+  transform: translateY(-50%) scale(1.06);
+}
+
+.about-carousel-arrow:disabled {
+  opacity: 0.18;
+
+  cursor: default;
+
+  transform: translateY(-50%);
+}
+
+
+/* =========================================================
+   Tablet
+   ========================================================= */
+
+@media (max-width: 991px) {
+  .about-project-slide {
+    width: calc((100% - 1.25rem) / 2);
+  }
+
+  .about-repository-slide {
+    width: calc((100% - 1.25rem) / 2);
+  }
+
+  .about-carousel-track {
+    gap: 1.25rem;
+  }
+}
+
+
+/* =========================================================
+   Mobile
+   ========================================================= */
+
+@media (max-width: 576px) {
+  .about-carousel-track {
+    gap: 0.9rem;
+
+    padding-right: 12%;
+  }
+
+  .about-project-slide,
+  .about-repository-slide {
+    width: 88%;
+  }
+
+  .about-carousel-arrow {
+    display: none;
+  }
+
+  .about-publication-pagination {
+    gap: 0.25rem;
+
+    margin-top: 1.35rem;
+  }
+
+  .about-publication-pagination button {
+    min-width: 32px;
+    height: 32px;
+
+    font-size: 0.9rem;
+  }
+
+  .about-publication-pagination .pagination-arrow {
+    font-size: 1.25rem;
+  }
+}
