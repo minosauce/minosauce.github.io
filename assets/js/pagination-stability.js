@@ -321,15 +321,16 @@ if (maximumHeight > 0) {
 
   const stableHeight =
     Math.max(
-      0,
+      6,
       Math.ceil(maximumHeight) -
         reduction
     );
 
   list.style.minHeight =
     `${stableHeight}px`;
-}
-
+   }
+  }
+   
   /* =======================================================
      Measure all paginated sections
      ======================================================= */
