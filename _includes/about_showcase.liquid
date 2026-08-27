@@ -1,0 +1,172 @@
+<!-- =========================================================
+     About Showcase
+     Publications / Projects / Repositories
+     ========================================================= -->
+
+<link
+  rel="stylesheet"
+  href="{{ '/assets/css/showcase-carousel.css' | relative_url }}"
+>
+
+
+<!-- =========================================================
+     Publications
+     ========================================================= -->
+
+<section class="about-showcase-section">
+  <h2 class="home-section-title">
+    <a
+      href="{{ '/publications/' | relative_url }}"
+      style="color: inherit"
+    >
+      Publications
+    </a>
+  </h2>
+
+  <div
+    class="publications home-publications"
+    data-publication-pagination
+    data-per-page="5"
+  >
+    {% bibliography %}
+  </div>
+</section>
+
+
+<!-- =========================================================
+     Projects
+     Desktop: 3 per page
+     Tablet: 2 per page
+     Mobile: 1 per page
+     ========================================================= -->
+
+<section class="about-showcase-section">
+  <h2 class="home-section-title">
+    <a
+      href="{{ '/projects/' | relative_url }}"
+      style="color: inherit"
+    >
+      Projects
+    </a>
+  </h2>
+
+  {% assign recent_projects = site.projects | sort: 'date' | reverse %}
+
+  <div
+    class="showcase-carousel"
+    data-paged-carousel
+    data-desktop-items="3"
+    data-desktop-columns="3"
+    data-tablet-items="2"
+    data-tablet-columns="2"
+    data-mobile-items="1"
+    data-mobile-columns="1"
+  >
+    <button
+      class="showcase-arrow showcase-prev"
+      type="button"
+      aria-label="Previous projects"
+    >
+      ‹
+    </button>
+
+    <div
+      class="showcase-source"
+      data-carousel-source
+      style="--showcase-fallback-columns: 3;"
+    >
+      {% for project in recent_projects %}
+        <div class="showcase-item">
+          <div class="projects showcase-project-host">
+            {% include projects.liquid project=project %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
+    <div
+      class="showcase-track"
+      data-carousel-track
+    ></div>
+
+    <button
+      class="showcase-arrow showcase-next"
+      type="button"
+      aria-label="Next projects"
+    >
+      ›
+    </button>
+  </div>
+</section>
+
+
+<!-- =========================================================
+     Repositories
+     Desktop: 2 per page
+     Tablet: 2 per page
+     Mobile: 1 per page
+     ========================================================= -->
+
+{% if site.data.repositories.github_repos %}
+  <section class="about-showcase-section">
+    <h2 class="home-section-title">
+      <a
+        href="{{ '/repositories/' | relative_url }}"
+        style="color: inherit"
+      >
+        Repositories
+      </a>
+    </h2>
+
+    {% assign reversed_github_repos = site.data.repositories.github_repos | reverse %}
+
+    <div
+      class="showcase-carousel"
+      data-paged-carousel
+      data-desktop-items="2"
+      data-desktop-columns="2"
+      data-tablet-items="2"
+      data-tablet-columns="2"
+      data-mobile-items="1"
+      data-mobile-columns="1"
+    >
+      <button
+        class="showcase-arrow showcase-prev"
+        type="button"
+        aria-label="Previous repositories"
+      >
+        ‹
+      </button>
+
+      <div
+        class="showcase-source"
+        data-carousel-source
+        style="--showcase-fallback-columns: 2;"
+      >
+        {% for repo in reversed_github_repos %}
+          <div class="showcase-item">
+            <div class="repositories showcase-repo-host">
+              {% include repository/repo.liquid repository=repo %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+
+      <div
+        class="showcase-track"
+        data-carousel-track
+      ></div>
+
+      <button
+        class="showcase-arrow showcase-next"
+        type="button"
+        aria-label="Next repositories"
+      >
+        ›
+      </button>
+    </div>
+  </section>
+{% endif %}
+
+
+<script src="{{ '/assets/js/showcase-carousel.js' | relative_url }}"></script>
