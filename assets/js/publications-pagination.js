@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => {
+function initializePublicationsPagination() {
   const container = document.querySelector(
     "[data-publications-pagination]"
   );
@@ -21,21 +21,13 @@ document.addEventListener("DOMContentLoaded", () => {
       'input[placeholder="Type to filter"]'
     );
 
+
   /*
-   * -------------------------------------------------------
-   * 표시할 페이지 번호 계산
-   * -------------------------------------------------------
-   *
-   * 페이지가 적으면:
-   *
-   *   1 2 3 4
-   *
-   * 많아지면:
-   *
-   *   1 2 3 4 5 … 10
-   *   1 … 4 5 6 … 10
-   *   1 … 6 7 8 9 10
+   * =======================================================
+   * Visible page-number calculation
+   * =======================================================
    */
+
   function getVisiblePages(
     currentPage,
     totalPages
@@ -84,9 +76,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   /*
-   * -------------------------------------------------------
-   * 각각의 Journal / Conference section 초기화
-   * -------------------------------------------------------
+   * =======================================================
+   * Initialize each section independently
+   * =======================================================
    */
 
   const pagers = sections.map((section) => {
@@ -100,9 +92,44 @@ document.addEventListener("DOMContentLoaded", () => {
       "[data-publications-pagination-nav]"
     );
 
-    if (!pagination) {
-      return null;
-    }
+    if (!pagination) return null;
+
+    const prefix =
+      section.dataset.publicationPrefix || "";
+
+    const totalPublications =
+      publications.length;
+
+
+    /*
+     * -------------------------------------------------------
+     * Publication numbering
+     *
+     * Latest first:
+     *
+     * Journal:
+     * [J.11]
+     * [J.10]
+     * ...
+     * [J.1]
+     *
+     * Conference:
+     * [C.15]
+     * ...
+     * [C.1]
+     * -------------------------------------------------------
+     */
+
+    publications.forEach(
+      (publication, index) => {
+        const number =
+          totalPublications - index;
+
+        publication.dataset.publicationLabel =
+          `[${prefix}.${number}]`;
+      }
+    );
+
 
     const totalPages = Math.max(
       1,
@@ -115,8 +142,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /*
-     * 현재 페이지 표시
+     * -------------------------------------------------------
+     * Show page
+     * -------------------------------------------------------
      */
+
     function showPage(
       page,
       shouldScroll = false
@@ -158,8 +188,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /*
-     * 페이지 버튼
+     * -------------------------------------------------------
+     * Page-number button
+     * -------------------------------------------------------
      */
+
     function createPageButton(page) {
       const button =
         document.createElement("button");
@@ -191,31 +224,30 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    /*
-     * ...
-     */
     function createEllipsis() {
-      const ellipsis =
+      const span =
         document.createElement("span");
 
-      ellipsis.className =
+      span.className =
         "publications-pagination-ellipsis";
 
-      ellipsis.textContent = "…";
+      span.textContent = "…";
 
-      return ellipsis;
+      return span;
     }
 
 
     /*
-     * pagination 렌더링
+     * -------------------------------------------------------
+     * Render pagination
+     * -------------------------------------------------------
      */
+
     function renderPagination() {
       pagination.innerHTML = "";
 
       /*
-       * publication이 5개 이하라면
-       * pagination 자체를 표시하지 않는다.
+       * 5개 이하라면 pagination 없음
        */
       if (totalPages <= 1) {
         pagination.hidden = true;
@@ -318,7 +350,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /*
-     * 검색할 때 사용할 함수
+     * Search mode
      */
     function showAllForSearch() {
       publications.forEach(
@@ -334,7 +366,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /*
-     * 초기 상태
+     * Initial page
      */
     showPage(1);
 
@@ -342,15 +374,14 @@ document.addEventListener("DOMContentLoaded", () => {
     return {
       showPage,
       showAllForSearch,
-      pagination,
     };
   }).filter(Boolean);
 
 
   /*
-   * -------------------------------------------------------
-   * Bib search와 pagination 연동
-   * -------------------------------------------------------
+   * =======================================================
+   * Bib Search compatibility
+   * =======================================================
    */
 
   if (searchInput) {
@@ -358,19 +389,8 @@ document.addEventListener("DOMContentLoaded", () => {
       "input",
       () => {
         const hasQuery =
-          searchInput.value
-            .trim()
-            .length > 0;
+          searchInput.value.trim().length > 0;
 
-        /*
-         * 검색 중
-         *
-         * pagination 때문에 숨겨둔 항목을
-         * 모두 다시 노출한다.
-         *
-         * 실제 검색 결과 필터링은
-         * al-folio bibsearch가 담당한다.
-         */
         if (hasQuery) {
           pagers.forEach((pager) => {
             pager.showAllForSearch();
@@ -379,16 +399,26 @@ document.addEventListener("DOMContentLoaded", () => {
           return;
         }
 
-
-        /*
-         * 검색창을 다시 비우면
-         * Journal / Conference 모두
-         * 각각 1페이지로 복귀
-         */
         pagers.forEach((pager) => {
           pager.showPage(1);
         });
       }
     );
   }
-});
+}
+
+
+/*
+ * Works whether the script is loaded
+ * before or after DOMContentLoaded.
+ */
+
+if (document.readyState === "loading") {
+  document.addEventListener(
+    "DOMContentLoaded",
+    initializePublicationsPagination,
+    { once: true }
+  );
+} else {
+  initializePublicationsPagination();
+}
