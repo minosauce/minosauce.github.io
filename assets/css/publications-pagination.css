@@ -1,4 +1,35 @@
 /* =========================================================
+   Journal / Conference publication labels
+   ========================================================= */
+
+.pub-numbered ol.bibliography {
+  list-style: none !important;
+  padding-left: 0 !important;
+}
+
+.pub-numbered ol.bibliography > li {
+  position: relative;
+}
+
+.pub-numbered ol.bibliography > li::before {
+  content: attr(data-publication-label);
+
+  position: absolute;
+
+  top: 0.05rem;
+  left: 0;
+
+  width: 4.5rem;
+
+  text-align: right;
+
+  font-weight: 600;
+
+  color: var(--global-text-color);
+}
+
+
+/* =========================================================
    Publications page pagination
    ========================================================= */
 
