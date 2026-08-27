@@ -14,3 +14,8 @@ nav_order: 50
 {% include news.liquid per_page=15 %}
 
 <script src="{{ '/assets/js/news-pagination.js' | relative_url }}"></script>
+
+
+<script
+  src="{{ '/assets/js/pagination-stability.js' | relative_url }}"
+></script>
