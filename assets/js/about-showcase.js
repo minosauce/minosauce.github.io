@@ -1,12 +1,30 @@
-document.addEventListener("DOMContentLoaded", () => {
+/* =========================================================
+   About Showcase
+
+   - Publications: 5 items per page
+   - Projects carousel: 3 / 2 / 1 cards per click
+   - Repositories carousel: 2 / 2 / 1 cards per click
+   ========================================================= */
+
+function initializeAboutShowcase() {
   initializeAboutPublicationPagination();
   initializeAboutCarousels();
-});
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener(
+    "DOMContentLoaded",
+    initializeAboutShowcase,
+    { once: true },
+  );
+} else {
+  initializeAboutShowcase();
+}
 
 
 /* =========================================================
    About - Publications Pagination
-   5 publications per page
+   Journal + Conference combined / 5 publications per page
    ========================================================= */
 
 function initializeAboutPublicationPagination() {
@@ -15,6 +33,10 @@ function initializeAboutPublicationPagination() {
   );
 
   publicationSections.forEach((section) => {
+    if (section.dataset.paginationInitialized === "true") {
+      return;
+    }
+
     const bibliography = section.querySelector(
       "ol.bibliography",
     );
@@ -31,6 +53,8 @@ function initializeAboutPublicationPagination() {
       return;
     }
 
+    section.dataset.paginationInitialized = "true";
+
     const itemsPerPage =
       Number(section.dataset.perPage) || 5;
 
@@ -38,14 +62,27 @@ function initializeAboutPublicationPagination() {
       publications.length / itemsPerPage,
     );
 
+
     /*
-     * 5개 이하이면 페이지네이션을 만들지 않는다.
+     * 5개 이하이면
+     * pagination을 만들지 않고 전부 표시
      */
     if (totalPages <= 1) {
+      publications.forEach((publication) => {
+        publication.hidden = false;
+        publication.style.display = "";
+      });
+
       return;
     }
 
+
     let currentPage = 1;
+
+
+    /* =====================================================
+       Pagination container
+       ===================================================== */
 
     const pagination =
       document.createElement("nav");
@@ -59,9 +96,9 @@ function initializeAboutPublicationPagination() {
     );
 
 
-    /* -------------------------------------------------------
-       Previous button
-       ------------------------------------------------------- */
+    /* -----------------------------------------------------
+       Previous
+       ----------------------------------------------------- */
 
     const previousButton =
       document.createElement("button");
@@ -71,7 +108,7 @@ function initializeAboutPublicationPagination() {
     previousButton.className =
       "pagination-arrow pagination-prev";
 
-    previousButton.innerHTML = "‹";
+    previousButton.textContent = "‹";
 
     previousButton.setAttribute(
       "aria-label",
@@ -81,9 +118,9 @@ function initializeAboutPublicationPagination() {
     pagination.appendChild(previousButton);
 
 
-    /* -------------------------------------------------------
-       Page number buttons
-       ------------------------------------------------------- */
+    /* -----------------------------------------------------
+       Page numbers
+       ----------------------------------------------------- */
 
     const pageButtons = [];
 
@@ -100,9 +137,11 @@ function initializeAboutPublicationPagination() {
       button.className =
         "pagination-number";
 
-      button.dataset.page = page;
+      button.dataset.page =
+        String(page);
 
-      button.textContent = page;
+      button.textContent =
+        String(page);
 
       button.setAttribute(
         "aria-label",
@@ -115,9 +154,9 @@ function initializeAboutPublicationPagination() {
     }
 
 
-    /* -------------------------------------------------------
-       Next button
-       ------------------------------------------------------- */
+    /* -----------------------------------------------------
+       Next
+       ----------------------------------------------------- */
 
     const nextButton =
       document.createElement("button");
@@ -127,7 +166,7 @@ function initializeAboutPublicationPagination() {
     nextButton.className =
       "pagination-arrow pagination-next";
 
-    nextButton.innerHTML = "›";
+    nextButton.textContent = "›";
 
     nextButton.setAttribute(
       "aria-label",
@@ -138,30 +177,34 @@ function initializeAboutPublicationPagination() {
 
 
     /*
-     * Publications 목록 바로 아래에 삽입
+     * bibliography 바로 아래에 pagination 삽입
      */
     section.appendChild(pagination);
 
 
-    /* -------------------------------------------------------
-       Render page
-       ------------------------------------------------------- */
+    /* =====================================================
+       Render Page
+       ===================================================== */
 
     function renderPage(
       page,
       shouldScroll = false,
     ) {
-      currentPage = page;
+      currentPage = Math.max(
+        1,
+        Math.min(page, totalPages),
+      );
 
       const start =
-        (currentPage - 1) * itemsPerPage;
+        (currentPage - 1) *
+        itemsPerPage;
 
       const end =
         start + itemsPerPage;
 
 
       /*
-       * 선택된 페이지의 논문만 표시
+       * 현재 페이지의 논문 5개만 표시
        */
       publications.forEach(
         (publication, index) => {
@@ -169,7 +212,8 @@ function initializeAboutPublicationPagination() {
             index >= start &&
             index < end;
 
-          publication.hidden = !visible;
+          publication.hidden =
+            !visible;
 
           publication.style.display =
             visible ? "" : "none";
@@ -178,47 +222,52 @@ function initializeAboutPublicationPagination() {
 
 
       /*
-       * 현재 페이지 버튼 표시
+       * Active page 표시
        */
-      pageButtons.forEach((button) => {
-        const buttonPage =
-          Number(button.dataset.page);
+      pageButtons.forEach(
+        (button) => {
+          const buttonPage =
+            Number(
+              button.dataset.page,
+            );
 
-        const active =
-          buttonPage === currentPage;
+          const active =
+            buttonPage ===
+            currentPage;
 
-        button.classList.toggle(
-          "active",
-          active,
-        );
-
-        if (active) {
-          button.setAttribute(
-            "aria-current",
-            "page",
+          button.classList.toggle(
+            "active",
+            active,
           );
-        } else {
-          button.removeAttribute(
-            "aria-current",
-          );
-        }
-      });
+
+          if (active) {
+            button.setAttribute(
+              "aria-current",
+              "page",
+            );
+          } else {
+            button.removeAttribute(
+              "aria-current",
+            );
+          }
+        },
+      );
 
 
       /*
-       * 첫 페이지 / 마지막 페이지에서
-       * 화살표 비활성화
+       * 첫/마지막 페이지 화살표
        */
       previousButton.disabled =
         currentPage === 1;
 
       nextButton.disabled =
-        currentPage === totalPages;
+        currentPage ===
+        totalPages;
 
 
       /*
-       * 페이지 번호를 누른 뒤
-       * Publications 영역 위쪽으로 부드럽게 이동
+       * pagination 클릭 후
+       * Publications 제목 부근으로 이동
        */
       if (shouldScroll) {
         const publicationBlock =
@@ -226,36 +275,38 @@ function initializeAboutPublicationPagination() {
             ".about-publication-block",
           );
 
-        if (publicationBlock) {
-          publicationBlock.scrollIntoView({
-            behavior: "smooth",
-            block: "start",
-          });
-        }
+        const scrollTarget =
+          publicationBlock ||
+          section;
+
+        scrollTarget.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
       }
     }
 
 
-    /* -------------------------------------------------------
-       Page number events
-       ------------------------------------------------------- */
+    /* =====================================================
+       Page events
+       ===================================================== */
 
-    pageButtons.forEach((button) => {
-      button.addEventListener(
-        "click",
-        () => {
-          const page =
-            Number(button.dataset.page);
+    pageButtons.forEach(
+      (button) => {
+        button.addEventListener(
+          "click",
+          () => {
+            renderPage(
+              Number(
+                button.dataset.page,
+              ),
+              true,
+            );
+          },
+        );
+      },
+    );
 
-          renderPage(page, true);
-        },
-      );
-    });
-
-
-    /* -------------------------------------------------------
-       Previous
-       ------------------------------------------------------- */
 
     previousButton.addEventListener(
       "click",
@@ -270,15 +321,12 @@ function initializeAboutPublicationPagination() {
     );
 
 
-    /* -------------------------------------------------------
-       Next
-       ------------------------------------------------------- */
-
     nextButton.addEventListener(
       "click",
       () => {
         if (
-          currentPage < totalPages
+          currentPage <
+          totalPages
         ) {
           renderPage(
             currentPage + 1,
@@ -290,7 +338,8 @@ function initializeAboutPublicationPagination() {
 
 
     /*
-     * 첫 화면 = 최신 논문 5개
+     * 첫 화면:
+     * 최근 publication 5개
      */
     renderPage(1);
   });
@@ -299,387 +348,409 @@ function initializeAboutPublicationPagination() {
 
 /* =========================================================
    About - Projects / Repositories Carousel
+
+   Projects
+   Desktop (>991px) : 3 cards
+   Tablet  (>576px) : 2 cards
+   Mobile  (<=576px): 1 card
+
+   Repositories
+   Desktop / Tablet (>576px): 2 cards
+   Mobile           (<=576px): 1 card
    ========================================================= */
 
-    function initializeAboutCarousels() {
-      const carousels = document.querySelectorAll(
-        "[data-about-carousel]",
-      );
-    
-      carousels.forEach((carousel) => {
-        const track = carousel.querySelector(
+function initializeAboutCarousels() {
+  const carousels =
+    document.querySelectorAll(
+      "[data-about-carousel]",
+    );
+
+  carousels.forEach(
+    (carousel) => {
+      if (
+        carousel.dataset
+          .carouselInitialized ===
+        "true"
+      ) {
+        return;
+      }
+
+
+      const track =
+        carousel.querySelector(
           "[data-carousel-track]",
         );
-    
-        const previousButton = carousel.querySelector(
+
+      const previousButton =
+        carousel.querySelector(
           ".about-carousel-prev",
         );
-    
-        const nextButton = carousel.querySelector(
+
+      const nextButton =
+        carousel.querySelector(
           ".about-carousel-next",
         );
-    
-        if (!track || !previousButton || !nextButton) {
-          return;
-        }
-    
-        const slides = Array.from(
-          track.querySelectorAll(".about-carousel-slide"),
-        );
-    
-        if (slides.length === 0) {
-          return;
-        }
-    
-        const isProjectCarousel = Boolean(
-          carousel.querySelector(".about-project-slide"),
-        );
-    
-        const isRepositoryCarousel = Boolean(
-          carousel.querySelector(".about-repository-slide"),
-        );
-    
-        /*
-         * 한 번에 이동할 카드 수
-         */
-        function getStep() {
-          if (isProjectCarousel) {
-            if (window.innerWidth > 991) {
-              return 3;
-            }
-    
-            if (window.innerWidth > 576) {
-              return 2;
-            }
-    
-            return 1;
-          }
-    
-          if (isRepositoryCarousel) {
-            if (window.innerWidth > 576) {
-              return 2;
-            }
-    
-            return 1;
-          }
-    
-          return 1;
-        }
-    
-        /*
-         * 특정 카드의 정확한 scrollLeft 위치 계산
-         */
-        function getSlidePosition(index) {
-          const slide = slides[index];
-    
-          if (!slide) {
-            return 0;
-          }
-    
-          const trackRect =
-            track.getBoundingClientRect();
-    
-          const slideRect =
-            slide.getBoundingClientRect();
-    
-          return (
-            track.scrollLeft +
-            slideRect.left -
-            trackRect.left
-          );
-        }
-    
-        /*
-         * 현재 가장 왼쪽에 가까운 카드 index
-         */
-        function getCurrentIndex() {
-          let closestIndex = 0;
-          let closestDistance = Infinity;
-    
-          const trackRect =
-            track.getBoundingClientRect();
-    
-          slides.forEach((slide, index) => {
-            const slideRect =
-              slide.getBoundingClientRect();
-    
-            const distance = Math.abs(
-              slideRect.left - trackRect.left,
-            );
-    
-            if (distance < closestDistance) {
-              closestDistance = distance;
-              closestIndex = index;
-            }
-          });
-    
-          return closestIndex;
-        }
-    
-        /*
-         * 카드 index로 정확하게 이동
-         */
-        function scrollToIndex(index) {
-          const step = getStep();
-    
-          const maxStartIndex = Math.max(
-            0,
-            slides.length - step,
-          );
-    
-          const targetIndex = Math.max(
-            0,
-            Math.min(index, maxStartIndex),
-          );
-    
-          track.scrollTo({
-            left: getSlidePosition(targetIndex),
-            behavior: "smooth",
-          });
-        }
-    
-        /*
-         * 화살표 활성 / 비활성
-         */
-        function updateButtons() {
-          const maxScrollLeft =
-            track.scrollWidth - track.clientWidth;
-    
-          const hasOverflow = maxScrollLeft > 3;
-    
-          carousel.classList.toggle(
-            "no-scroll",
-            !hasOverflow,
-          );
-    
-          if (!hasOverflow) {
-            previousButton.disabled = true;
-            nextButton.disabled = true;
-            return;
-          }
-    
-          previousButton.disabled =
-            track.scrollLeft <= 3;
-    
-          nextButton.disabled =
-            track.scrollLeft >= maxScrollLeft - 3;
-        }
-    
-        /*
-         * Previous
-         */
-        previousButton.addEventListener(
-          "click",
-          () => {
-            const step = getStep();
-            const currentIndex =
-              getCurrentIndex();
-    
-            scrollToIndex(
-              currentIndex - step,
-            );
-          },
-        );
-    
-        /*
-         * Next
-         */
-        nextButton.addEventListener(
-          "click",
-          () => {
-            const step = getStep();
-            const currentIndex =
-              getCurrentIndex();
-    
-            scrollToIndex(
-              currentIndex + step,
-            );
-          },
-        );
-    
-        track.addEventListener(
-          "scroll",
-          updateButtons,
-          {
-            passive: true,
-          },
-        );
-    
-        window.addEventListener(
-          "resize",
-          updateButtons,
-        );
-    
-        requestAnimationFrame(
-          updateButtons,
-        );
-      });
-    }
 
 
-
-    /* -------------------------------------------------------
-       한 번 클릭할 때 이동할 거리
-       = 카드 1개 너비 + gap (3개씩 넘기기)
-       ------------------------------------------------------- */
-
-    function getScrollAmount() {
-      const slide = track.querySelector(".about-carousel-slide");
-    
-      if (!slide) {
-        return track.clientWidth;
-      }
-    
-      const style = window.getComputedStyle(track);
-    
-      const gap =
-        parseFloat(
-          style.columnGap || style.gap
-        ) || 0;
-    
-      const slideWidth =
-        slide.getBoundingClientRect().width;
-    
-      /*
-       * Projects
-       *
-       * Desktop : 3 cards visible -> move 3 cards
-       * Tablet  : 2 cards visible -> move 2 cards
-       * Mobile  : 1 card per swipe
-       */
       if (
-        carousel.querySelector(
-          ".about-project-slide"
-        )
+        !track ||
+        !previousButton ||
+        !nextButton
       ) {
-        if (window.innerWidth > 991) {
-          return (slideWidth + gap) * 3;
-        }
-    
-        if (window.innerWidth > 576) {
-          return (slideWidth + gap) * 2;
-        }
-    
-        return slideWidth + gap;
+        return;
       }
-    
-      /*
-       * Repositories
-       *
-       * Desktop / Tablet : 2 cards visible -> move 2 cards
-       * Mobile           : 1 card per swipe
-       */
+
+
+      const slides =
+        Array.from(
+          track.querySelectorAll(
+            ".about-carousel-slide",
+          ),
+        );
+
+
       if (
-        carousel.querySelector(
-          ".about-repository-slide"
-        )
+        slides.length === 0
       ) {
-        if (window.innerWidth > 576) {
-          return (slideWidth + gap) * 2;
-        }
-    
-        return slideWidth + gap;
-      }
-    
-      return slideWidth + gap;
-    }
+        carousel.classList.add(
+          "no-scroll",
+        );
 
+        previousButton.disabled =
+          true;
 
-    /* -------------------------------------------------------
-       Arrow 상태
-       ------------------------------------------------------- */
-
-    function updateButtons() {
-      const maxScrollLeft =
-        track.scrollWidth -
-        track.clientWidth;
-
-      const hasOverflow =
-        maxScrollLeft > 3;
-
-      /*
-       * 카드 수가 적어서 넘길 필요가 없으면
-       * 화살표를 숨긴다.
-       */
-      carousel.classList.toggle(
-        "no-scroll",
-        !hasOverflow,
-      );
-
-      if (!hasOverflow) {
-        previousButton.disabled = true;
-        nextButton.disabled = true;
+        nextButton.disabled =
+          true;
 
         return;
       }
 
-      previousButton.disabled =
-        track.scrollLeft <= 3;
 
-      nextButton.disabled =
-        track.scrollLeft >=
-        maxScrollLeft - 3;
-    }
+      carousel.dataset
+        .carouselInitialized =
+        "true";
 
 
-    /* -------------------------------------------------------
-       Previous
-       ------------------------------------------------------- */
+      const isProjectCarousel =
+        slides.some(
+          (slide) =>
+            slide.classList.contains(
+              "about-project-slide",
+            ),
+        );
 
-    previousButton.addEventListener(
-      "click",
-      () => {
-        track.scrollBy({
-          left: -getScrollAmount(),
+
+      const isRepositoryCarousel =
+        slides.some(
+          (slide) =>
+            slide.classList.contains(
+              "about-repository-slide",
+            ),
+        );
+
+
+      /*
+       * CSS에
+       *
+       * scroll-snap-stop: always;
+       *
+       * 가 남아 있어도
+       * 중간 카드에서 멈추지 않도록 처리
+       */
+      slides.forEach(
+        (slide) => {
+          slide.style.scrollSnapStop =
+            "normal";
+        },
+      );
+
+
+      /* ===================================================
+         한 번 클릭할 때 이동할 카드 개수
+         =================================================== */
+
+      function getStep() {
+        /*
+         * Projects
+         */
+        if (
+          isProjectCarousel
+        ) {
+          if (
+            window.innerWidth >
+            991
+          ) {
+            return 3;
+          }
+
+          if (
+            window.innerWidth >
+            576
+          ) {
+            return 2;
+          }
+
+          return 1;
+        }
+
+
+        /*
+         * Repositories
+         */
+        if (
+          isRepositoryCarousel
+        ) {
+          if (
+            window.innerWidth >
+            576
+          ) {
+            return 2;
+          }
+
+          return 1;
+        }
+
+
+        return 1;
+      }
+
+
+      /* ===================================================
+         특정 카드의 정확한 scroll 위치
+         =================================================== */
+
+      function getSlidePosition(
+        index,
+      ) {
+        const slide =
+          slides[index];
+
+        if (!slide) {
+          return 0;
+        }
+
+        const trackRect =
+          track.getBoundingClientRect();
+
+        const slideRect =
+          slide.getBoundingClientRect();
+
+        return (
+          track.scrollLeft +
+          slideRect.left -
+          trackRect.left
+        );
+      }
+
+
+      /* ===================================================
+         현재 가장 왼쪽 카드 index
+         =================================================== */
+
+      function getCurrentIndex() {
+        const trackRect =
+          track.getBoundingClientRect();
+
+        let closestIndex = 0;
+
+        let closestDistance =
+          Infinity;
+
+
+        slides.forEach(
+          (slide, index) => {
+            const slideRect =
+              slide.getBoundingClientRect();
+
+            const distance =
+              Math.abs(
+                slideRect.left -
+                trackRect.left,
+              );
+
+            if (
+              distance <
+              closestDistance
+            ) {
+              closestDistance =
+                distance;
+
+              closestIndex =
+                index;
+            }
+          },
+        );
+
+
+        return closestIndex;
+      }
+
+
+      /* ===================================================
+         마지막으로 시작 가능한 index
+         =================================================== */
+
+      function getMaxStartIndex() {
+        const step =
+          getStep();
+
+        return Math.max(
+          0,
+          slides.length - step,
+        );
+      }
+
+
+      /* ===================================================
+         카드 index 기준 정확히 이동
+         =================================================== */
+
+      function scrollToIndex(
+        index,
+      ) {
+        const targetIndex =
+          Math.max(
+            0,
+            Math.min(
+              index,
+              getMaxStartIndex(),
+            ),
+          );
+
+
+        track.scrollTo({
+          left:
+            getSlidePosition(
+              targetIndex,
+            ),
+
           behavior: "smooth",
         });
-      },
-    );
+      }
 
 
-    /* -------------------------------------------------------
-       Next
-       ------------------------------------------------------- */
+      /* ===================================================
+         Arrow 상태
+         =================================================== */
 
-    nextButton.addEventListener(
-      "click",
-      () => {
-        track.scrollBy({
-          left: getScrollAmount(),
-          behavior: "smooth",
-        });
-      },
-    );
+      function updateButtons() {
+        const maxScrollLeft =
+          Math.max(
+            0,
 
-
-    /* -------------------------------------------------------
-       Mouse scroll / mobile swipe
-       ------------------------------------------------------- */
-
-    track.addEventListener(
-      "scroll",
-      updateButtons,
-      {
-        passive: true,
-      },
-    );
+            track.scrollWidth -
+              track.clientWidth,
+          );
 
 
-    /* -------------------------------------------------------
-       Window resize
-       ------------------------------------------------------- */
-
-    window.addEventListener(
-      "resize",
-      updateButtons,
-    );
+        const hasOverflow =
+          maxScrollLeft > 3;
 
 
-    /*
-     * 최초 화살표 상태 계산
-     */
-    requestAnimationFrame(
-      updateButtons,
-    );
-  });
+        carousel.classList.toggle(
+          "no-scroll",
+          !hasOverflow,
+        );
+
+
+        if (!hasOverflow) {
+          previousButton.disabled =
+            true;
+
+          nextButton.disabled =
+            true;
+
+          return;
+        }
+
+
+        previousButton.disabled =
+          track.scrollLeft <= 3;
+
+
+        nextButton.disabled =
+          track.scrollLeft >=
+          maxScrollLeft - 3;
+      }
+
+
+      /* ===================================================
+         Previous
+         =================================================== */
+
+      previousButton.addEventListener(
+        "click",
+        () => {
+          const currentIndex =
+            getCurrentIndex();
+
+          const step =
+            getStep();
+
+
+          scrollToIndex(
+            currentIndex -
+              step,
+          );
+        },
+      );
+
+
+      /* ===================================================
+         Next
+         =================================================== */
+
+      nextButton.addEventListener(
+        "click",
+        () => {
+          const currentIndex =
+            getCurrentIndex();
+
+          const step =
+            getStep();
+
+
+          scrollToIndex(
+            currentIndex +
+              step,
+          );
+        },
+      );
+
+
+      /* ===================================================
+         Scroll
+         =================================================== */
+
+      track.addEventListener(
+        "scroll",
+        updateButtons,
+        {
+          passive: true,
+        },
+      );
+
+
+      /* ===================================================
+         Resize
+         =================================================== */
+
+      window.addEventListener(
+        "resize",
+        () => {
+          requestAnimationFrame(
+            updateButtons,
+          );
+        },
+      );
+
+
+      /*
+       * 최초 상태
+       */
+      requestAnimationFrame(
+        updateButtons,
+      );
+    },
+  );
 }
