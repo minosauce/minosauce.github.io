@@ -312,7 +312,7 @@ function initializePaginationStability() {
        list.matches("ol.bibliography");
    
      const extraHeight =
-       isPublicationList ? 80 : 0;
+       isPublicationList ? 120 : 0;
    
      list.style.minHeight =
        `${Math.ceil(maximumHeight) + extraHeight}px`;
