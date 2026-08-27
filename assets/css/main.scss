@@ -23,6 +23,8 @@
 @use "teachings";
 @use "typograms";
 
+@import url("https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600;700&display=swap");
+
 /* =========================================================
    Minho Jang - Custom Theme
    ========================================================= */
@@ -210,6 +212,28 @@ samp {
   padding-top: 1.2rem !important;
   padding-bottom: 1.2rem !important;
 }
+
+
+/* =========================================================
+   About - Name
+   ========================================================= */
+
+.about-page .name-en {
+  font-family: "Times New Roman", Times, serif;
+  font-weight: 700;
+}
+
+.about-page .name-divider {
+  margin: 0 0.12em;
+  font-family: "Times New Roman", Times, serif;
+  font-weight: 400;
+}
+
+.about-page .name-ko {
+  font-family: "Noto Serif KR", serif;
+  font-weight: 500;
+}
+
 
 /* =========================================================
    Publications - Vertical spacing
