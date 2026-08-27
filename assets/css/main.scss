@@ -967,3 +967,27 @@ samp {
     margin: 1.5rem auto;
   }
 }
+
+
+/* =========================================================
+   Pagination - Layout stability
+   ========================================================= */
+
+/*
+ * 높이 측정용 clone은
+ * 화면과 사용자 interaction에 영향 없음
+ */
+.pagination-measurement-clone {
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+
+/*
+ * Pagination control 자체의 높이도 일정하게 유지
+ */
+.about-publication-pagination,
+.publications-pagination,
+.news-pagination {
+  min-height: 4rem;
+}
