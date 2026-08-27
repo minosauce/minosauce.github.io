@@ -1,0 +1,126 @@
+/* =========================================================
+   News Pagination
+   ========================================================= */
+
+.news-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 0.3rem;
+
+  width: 100%;
+
+  margin-top: 1.75rem;
+  margin-bottom: 0.5rem;
+}
+
+
+/* =========================================================
+   Pagination buttons
+   ========================================================= */
+
+.news-pagination button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 34px;
+  height: 34px;
+
+  padding: 0 0.55rem;
+
+  color: var(--global-text-color);
+  background: transparent;
+
+  border: 0;
+  border-radius: 50%;
+
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 400;
+  line-height: 1;
+
+  cursor: pointer;
+
+  transition:
+    color 0.15s ease,
+    background-color 0.15s ease,
+    opacity 0.15s ease;
+}
+
+
+/* =========================================================
+   Hover
+   ========================================================= */
+
+.news-pagination button:hover:not(:disabled) {
+  color: var(--global-theme-color);
+
+  background:
+    color-mix(
+      in srgb,
+      var(--global-theme-color) 10%,
+      transparent
+    );
+}
+
+
+/* =========================================================
+   Current page
+   ========================================================= */
+
+.news-pagination button.active {
+  color: #fff;
+
+  background:
+    var(--global-theme-color);
+
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   Previous / Next
+   ========================================================= */
+
+.news-pagination-arrow {
+  font-size: 1.35rem !important;
+}
+
+
+/* =========================================================
+   Disabled
+   ========================================================= */
+
+.news-pagination button:disabled {
+  opacity: 0.25;
+
+  cursor: default;
+}
+
+
+/* =========================================================
+   Mobile
+   ========================================================= */
+
+@media (max-width: 576px) {
+  .news-pagination {
+    gap: 0.2rem;
+
+    margin-top: 1.4rem;
+  }
+
+  .news-pagination button {
+    min-width: 32px;
+    height: 32px;
+
+    padding: 0 0.45rem;
+
+    font-size: 0.9rem;
+  }
+
+  .news-pagination-arrow {
+    font-size: 1.25rem !important;
+  }
+}
