@@ -35,9 +35,6 @@ nav_order: 20
   </section>
 
 
-  <hr class="publication-section-divider">
-
-
   <!-- Conference -->
   <section
     class="publication-section conference-section"
