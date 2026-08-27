@@ -1,7 +1,7 @@
 {% comment %}
   Project Card
 
-  Supported front matter:
+  Supported:
   title:
   date:
   end_date:
@@ -74,45 +74,53 @@
 
     <div class="card-body">
 
-      <!-- Project title -->
-      <h2 class="card-title">
-        <a
-          href="{{ project_link }}"
-          title="{{ project_item.title }}"
-          {% if external_project_link %}
-            target="_blank"
-            rel="noopener noreferrer"
-          {% endif %}
-        >
-          {{ project_item.title }}
-        </a>
-      </h2>
+      <!-- 1. Title -->
+      <div class="project-title-zone">
+        <h2 class="card-title">
+          <a
+            href="{{ project_link }}"
+            title="{{ project_item.title }}"
+            {% if external_project_link %}
+              target="_blank"
+              rel="noopener noreferrer"
+            {% endif %}
+          >
+            {{ project_item.title }}
+          </a>
+        </h2>
+      </div>
 
-      <!-- Project period -->
-      {% if project_item.date %}
-        <div class="project-period">
-          <time datetime="{{ project_item.date | date: '%Y-%m-%d' }}">
-            {{ project_item.date | date: "%b %Y" }}
-          </time>
+      <!-- 2. Period -->
+      <div class="project-period-zone">
+        {% if project_item.date %}
+          <div class="project-period">
 
-          {% if project_item.end_date %}
-            <span class="project-period-separator">&ndash;</span>
-
-            <time datetime="{{ project_item.end_date | date: '%Y-%m-%d' }}">
-              {{ project_item.end_date | date: "%b %Y" }}
+            <time datetime="{{ project_item.date | date: '%Y-%m-%d' }}">
+              {{ project_item.date | date: "%b %Y" }}
             </time>
-          {% endif %}
-        </div>
-      {% endif %}
 
-      <!-- Description -->
-      {% if project_item.description %}
-        <p class="card-text">
-          {{ project_item.description }}
-        </p>
-      {% endif %}
+            {% if project_item.end_date %}
+              <span class="project-period-separator">&ndash;</span>
 
-      <!-- Optional GitHub link -->
+              <time datetime="{{ project_item.end_date | date: '%Y-%m-%d' }}">
+                {{ project_item.end_date | date: "%b %Y" }}
+              </time>
+            {% endif %}
+
+          </div>
+        {% endif %}
+      </div>
+
+      <!-- 3. Description -->
+      <div class="project-description-zone">
+        {% if project_item.description %}
+          <p class="card-text">
+            {{ project_item.description }}
+          </p>
+        {% endif %}
+      </div>
+
+      <!-- Optional GitHub -->
       {% if project_item.github %}
         <div class="project-github">
           <a
