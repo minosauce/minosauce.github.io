@@ -307,10 +307,16 @@ function initializePaginationStability() {
      * the same vertical position when the
      * user changes pages.
      */
-    if (maximumHeight > 0) {
-      list.style.minHeight =
-        `${Math.ceil(maximumHeight)}px`;
-    }
+       if (maximumHeight > 0) {
+     const isPublicationList =
+       list.matches("ol.bibliography");
+   
+     const extraHeight =
+       isPublicationList ? 80 : 0;
+   
+     list.style.minHeight =
+       `${Math.ceil(maximumHeight) + extraHeight}px`;
+   }
   }
 
 
