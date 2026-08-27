@@ -11,23 +11,83 @@
   position: relative;
 }
 
+
+/* =========================================================
+   Publication numbering
+   [J.1], [J.2], [C.1], [C.2] ...
+   ========================================================= */
+
+.pub-numbered ol.bibliography {
+  list-style: none !important;
+  padding-left: 0 !important;
+}
+
+
+/* ---------------------------------------------------------
+   각 publication
+   --------------------------------------------------------- */
+
+.pub-numbered ol.bibliography > li {
+  position: relative;
+
+  /*
+   * 번호 영역 + 번호와 제목 사이 간격
+   */
+  padding-left: 6rem !important;
+}
+
+
+/* ---------------------------------------------------------
+   [J.n] / [C.n]
+   --------------------------------------------------------- */
+
 .pub-numbered ol.bibliography > li::before {
   content: attr(data-publication-label);
 
   position: absolute;
 
-  top: 0.05rem;
+  /*
+   * publication 제목의 첫 줄과 정확하게 맞춤
+   */
+  top: 0;
   left: 0;
 
   width: 4.5rem;
 
   text-align: right;
 
-  font-weight: 600;
+  /*
+   * 번호는 일반체
+   */
+  font-weight: 400 !important;
+  font-style: normal !important;
+
+  font-size: inherit;
+  line-height: inherit;
 
   color: var(--global-text-color);
 }
 
+
+/* ---------------------------------------------------------
+   Publication title
+   --------------------------------------------------------- */
+
+.pub-numbered ol.bibliography > li .title {
+  /*
+   * 논문 제목은 Bold
+   */
+  font-weight: 700 !important;
+
+  /*
+   * 번호와 첫 줄 높이를 정확하게 맞추기 위해
+   * 불필요한 상단 여백 제거
+   */
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+
+  line-height: inherit;
+}
 
 /* =========================================================
    Publications page pagination
