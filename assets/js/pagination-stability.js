@@ -300,20 +300,35 @@ function initializePaginationStability() {
     clone.remove();
 
 
-    /*
-     * 소수점 pixel / 브라우저 rounding용
-     * 2px safety margin
-     */
-    if (
-      maximumHeight > 0
-    ) {
-      list.style.minHeight =
-        `${Math.ceil(
-          maximumHeight,
-        ) + 2}px`;
-    }
-  }
+if (maximumHeight > 0) {
+  /*
+   * tallest page 높이를 그대로 예약하면
+   * 마지막 페이지에서 빈 공간이 너무 커지므로
+   * 약 6rem만큼 예약 높이를 줄인다.
+   *
+   * 실제 content가 이보다 높으면
+   * CSS가 자동으로 늘어나므로 내용이 잘리지는 않는다.
+   */
+  const rootFontSize =
+    parseFloat(
+      getComputedStyle(
+        document.documentElement
+      ).fontSize
+    ) || 16;
 
+  const reduction =
+    6 * rootFontSize;
+
+  const stableHeight =
+    Math.max(
+      0,
+      Math.ceil(maximumHeight) -
+        reduction
+    );
+
+  list.style.minHeight =
+    `${stableHeight}px`;
+}
 
   /* =======================================================
      Measure all paginated sections
