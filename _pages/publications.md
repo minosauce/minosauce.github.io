@@ -14,34 +14,21 @@ nav_order: 20
 >
   {% include bib_search.liquid %}
 
-  {% assign journal_count = site.bibliography | where_exp: "item", "item.type == 'article'" | size %}
-  {% assign conference_count = site.bibliography | where_exp: "item", "item.type == 'inproceedings'" | size %}
+  <div class="publication-section journal-section" data-publication-section>
+    <h2>Journal</h2>
 
-  {% if journal_count > 0 %}
-    <div class="publication-section journal-section" data-publication-section>
-      <h2>Journal</h2>
-
-      <div
-        class="publications pub-numbered journal-pubs"
-        style="--journal-start: {{ journal_count }};"
-      >
-        {% bibliography --query @article %}
-      </div>
+    <div class="publications pub-numbered journal-pubs">
+      {% bibliography --query @article %}
     </div>
-  {% endif %}
+  </div>
 
-  {% if conference_count > 0 %}
-    <div class="publication-section conference-section" data-publication-section>
-      <h2>Conference</h2>
+  <div class="publication-section conference-section" data-publication-section>
+    <h2>Conference</h2>
 
-      <div
-        class="publications pub-numbered conference-pubs"
-        style="--conference-start: {{ conference_count }};"
-      >
-        {% bibliography --query @inproceedings %}
-      </div>
+    <div class="publications pub-numbered conference-pubs">
+      {% bibliography --query @inproceedings %}
     </div>
-  {% endif %}
+  </div>
 
   <nav
     class="publications-pagination"
