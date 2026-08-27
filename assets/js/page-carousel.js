@@ -2,28 +2,25 @@ document.addEventListener("DOMContentLoaded", () => {
   initializePageCarousels();
 });
 
-
 /* =========================================================
    Page Carousels
 
-   Projects:
-   6 projects per carousel page
+   Desktop / Tablet:
+   - 6 items per page
 
-   Repositories:
-   6 repositories per carousel page
+   Mobile:
+   - 1 item per page
+   - native horizontal swipe
    ========================================================= */
 
 function initializePageCarousels() {
   const carousels =
-    document.querySelectorAll(
-      "[data-page-carousel]",
-    );
+    document.querySelectorAll("[data-page-carousel]");
 
   carousels.forEach((carousel) => {
     initializePageCarousel(carousel);
   });
 }
-
 
 function initializePageCarousel(carousel) {
   const source =
@@ -46,7 +43,6 @@ function initializePageCarousel(carousel) {
       ".page-carousel-next",
     );
 
-
   if (
     !source ||
     !track ||
@@ -56,38 +52,64 @@ function initializePageCarousel(carousel) {
     return;
   }
 
-
-  /* =======================================================
-     Settings
-     ======================================================= */
-
-  const itemsPerPage = 6;
-
-  const items =
-    Array.from(source.children);
-
+  /*
+   * Original card elements.
+   * We keep references so they can be rebuilt
+   * when the viewport changes.
+   */
+  const items = Array.from(source.children);
 
   if (items.length === 0) {
-    carousel.classList.add(
-      "no-scroll",
-    );
-
+    carousel.classList.add("no-scroll");
     return;
   }
 
+  let currentLayout = "";
 
   /* =======================================================
-     Build 6-item pages
+     Responsive layout
      ======================================================= */
 
-  function buildPages() {
-    track.innerHTML = "";
+  function getLayout() {
+    if (window.innerWidth <= 576) {
+      return {
+        name: "mobile",
+        itemsPerPage: 1,
+      };
+    }
 
+    return {
+      name: "desktop",
+      itemsPerPage: 6,
+    };
+  }
+
+  /* =======================================================
+     Build pages
+     ======================================================= */
+
+  function buildPages(force = false) {
+    const layout = getLayout();
+
+    if (
+      !force &&
+      layout.name === currentLayout
+    ) {
+      return;
+    }
+
+    currentLayout = layout.name;
+
+    /*
+     * Existing generated pages are removed.
+     * Original item references remain in `items`.
+     */
+    track.innerHTML = "";
 
     for (
       let index = 0;
       index < items.length;
-      index += itemsPerPage
+      index += layout.itemsPerPage
     ) {
       const page =
         document.createElement("div");
@@ -95,31 +117,25 @@ function initializePageCarousel(carousel) {
       page.className =
         "page-carousel-page";
 
-
       const grid =
         document.createElement("div");
 
       grid.className =
         "page-carousel-page-grid";
 
-
       const pageItems =
         items.slice(
           index,
-          index + itemsPerPage,
+          index + layout.itemsPerPage,
         );
-
 
       pageItems.forEach((item) => {
         grid.appendChild(item);
       });
 
-
       page.appendChild(grid);
-
       track.appendChild(page);
     }
-
 
     track.scrollLeft = 0;
 
@@ -128,22 +144,19 @@ function initializePageCarousel(carousel) {
     );
   }
 
-
   /* =======================================================
-     Scroll distance
-     One complete 6-item page
+     Scroll amount
      ======================================================= */
 
   function getScrollAmount() {
-    const firstPage =
+    const page =
       track.querySelector(
         ".page-carousel-page",
       );
 
-    if (!firstPage) {
+    if (!page) {
       return track.clientWidth;
     }
-
 
     const trackStyle =
       window.getComputedStyle(track);
@@ -154,13 +167,11 @@ function initializePageCarousel(carousel) {
           trackStyle.gap,
       ) || 0;
 
-
     return (
-      firstPage.getBoundingClientRect()
-        .width + gap
+      page.getBoundingClientRect().width +
+      gap
     );
   }
-
 
   /* =======================================================
      Arrow state
@@ -175,38 +186,31 @@ function initializePageCarousel(carousel) {
     const hasMultiplePages =
       pages.length > 1;
 
-
     carousel.classList.toggle(
       "no-scroll",
       !hasMultiplePages,
     );
 
-
     if (!hasMultiplePages) {
       previousButton.disabled = true;
       nextButton.disabled = true;
-
       return;
     }
-
 
     const maxScrollLeft =
       track.scrollWidth -
       track.clientWidth;
 
-
     previousButton.disabled =
       track.scrollLeft <= 3;
-
 
     nextButton.disabled =
       track.scrollLeft >=
       maxScrollLeft - 3;
   }
 
-
   /* =======================================================
-     Previous page
+     Previous
      ======================================================= */
 
   previousButton.addEventListener(
@@ -219,9 +223,8 @@ function initializePageCarousel(carousel) {
     },
   );
 
-
   /* =======================================================
-     Next page
+     Next
      ======================================================= */
 
   nextButton.addEventListener(
@@ -234,9 +237,8 @@ function initializePageCarousel(carousel) {
     },
   );
 
-
   /* =======================================================
-     Mouse / touch scrolling
+     Native mobile swipe / track scroll
      ======================================================= */
 
   track.addEventListener(
@@ -247,24 +249,26 @@ function initializePageCarousel(carousel) {
     },
   );
 
-
   /* =======================================================
-     Resize
+     Responsive rebuild
      ======================================================= */
+
+  let resizeTimer;
 
   window.addEventListener(
     "resize",
     () => {
-      requestAnimationFrame(
-        updateButtons,
-      );
+      clearTimeout(resizeTimer);
+
+      resizeTimer = setTimeout(() => {
+        buildPages();
+      }, 150);
     },
   );
-
 
   /* =======================================================
      Initial build
      ======================================================= */
 
-  buildPages();
+  buildPages(true);
 }
