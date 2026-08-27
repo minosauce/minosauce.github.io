@@ -3,17 +3,13 @@ document.addEventListener("DOMContentLoaded", () => {
     "[data-publications-pagination]",
   );
 
-  if (!container) {
-    return;
-  }
+  if (!container) return;
 
   const pagination = container.querySelector(
     "[data-publications-pagination-nav]",
   );
 
-  if (!pagination) {
-    return;
-  }
+  if (!pagination) return;
 
   const sections = Array.from(
     container.querySelectorAll(
@@ -21,32 +17,42 @@ document.addEventListener("DOMContentLoaded", () => {
     ),
   );
 
-  const publications = sections.flatMap(
-    (section) =>
-      Array.from(
-        section.querySelectorAll(
-          "ol.bibliography > li",
-        ),
-      ),
-  );
-
   const perPage =
-    Number(container.dataset.perPage) || 10;
+    Number(container.dataset.perPage) || 5;
 
-  const totalPages = Math.ceil(
-    publications.length / perPage,
+  /*
+   * Journal / Conference를 서로 독립된 목록으로 보관한다.
+   *
+   * 예:
+   * sectionData[0] = Journal publications
+   * sectionData[1] = Conference publications
+   */
+  const sectionData = sections.map((section) => ({
+    section,
+    publications: Array.from(
+      section.querySelectorAll(
+        "ol.bibliography > li",
+      ),
+    ),
+  }));
+
+  /*
+   * 가장 publication 수가 많은 section을 기준으로
+   * 전체 페이지 수를 결정한다.
+   *
+   * Journal 10개 / Conference 16개라면:
+   * Journal    = 2 pages
+   * Conference = 4 pages
+   * totalPages = 4
+   */
+  const totalPages = Math.max(
+    1,
+    ...sectionData.map(({ publications }) =>
+      Math.ceil(publications.length / perPage),
+    ),
   );
 
   let currentPage = 1;
-
-  /* =======================================================
-     Nothing to paginate
-     ======================================================= */
-
-  if (totalPages <= 1) {
-    pagination.hidden = true;
-    return;
-  }
 
   /* =======================================================
      Search box
@@ -62,34 +68,12 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
   /* =======================================================
-     Show / hide publication sections
-     ======================================================= */
-
-  function updateSections() {
-    sections.forEach((section) => {
-      const items = Array.from(
-        section.querySelectorAll(
-          "ol.bibliography > li",
-        ),
-      );
-
-      const hasVisibleItem =
-        items.some(
-          (item) =>
-            !item.classList.contains(
-              "publication-page-hidden",
-            ),
-        );
-
-      section.classList.toggle(
-        "publication-section-hidden",
-        !hasVisibleItem,
-      );
-    });
-  }
-
-  /* =======================================================
      Show page
+
+     한 페이지에서:
+       Journal    최대 5개
+       Conference 최대 5개
+     를 각각 표시한다.
      ======================================================= */
 
   function showPage(page) {
@@ -101,18 +85,39 @@ document.addEventListener("DOMContentLoaded", () => {
     const start =
       (currentPage - 1) * perPage;
 
-    const end = start + perPage;
+    const end =
+      start + perPage;
 
-    publications.forEach(
-      (publication, index) => {
-        publication.classList.toggle(
-          "publication-page-hidden",
-          index < start || index >= end,
+    sectionData.forEach(
+      ({ section, publications }) => {
+        publications.forEach(
+          (publication, index) => {
+            publication.classList.toggle(
+              "publication-page-hidden",
+              index < start || index >= end,
+            );
+          },
+        );
+
+        /*
+         * 현재 페이지에 표시할 publication이
+         * 하나도 없는 section만 숨긴다.
+         */
+        const hasVisiblePublication =
+          publications.some(
+            (publication) =>
+              !publication.classList.contains(
+                "publication-page-hidden",
+              ),
+          );
+
+        section.classList.toggle(
+          "publication-section-hidden",
+          !hasVisiblePublication,
         );
       },
     );
 
-    updateSections();
     renderPagination();
   }
 
@@ -176,16 +181,6 @@ document.addEventListener("DOMContentLoaded", () => {
      ======================================================= */
 
   function getVisiblePages() {
-    /*
-     * 1 2 3 4 5
-     *
-     * or:
-     *
-     * 1 2 3 … 8
-     * 1 … 3 4 5 … 8
-     * 1 … 6 7 8
-     */
-
     if (totalPages <= 7) {
       return Array.from(
         { length: totalPages },
@@ -237,6 +232,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function renderPagination() {
     pagination.innerHTML = "";
+
+    if (totalPages <= 1) {
+      pagination.hidden = true;
+      return;
+    }
+
     pagination.hidden = false;
 
     /*
@@ -278,7 +279,7 @@ document.addEventListener("DOMContentLoaded", () => {
     pagination.appendChild(previous);
 
     /*
-     * Numbers
+     * Page numbers
      */
 
     getVisiblePages().forEach(
@@ -337,8 +338,9 @@ document.addEventListener("DOMContentLoaded", () => {
   /* =======================================================
      Search compatibility
 
-     검색 중에는 pagination을 해제하여
-     전체 bibliography를 검색 대상으로 둔다.
+     검색하는 동안에는 pagination 제한을 해제해서
+     모든 Journal / Conference publication을
+     bibsearch가 검색할 수 있도록 한다.
      ======================================================= */
 
   if (searchInput) {
@@ -349,16 +351,16 @@ document.addEventListener("DOMContentLoaded", () => {
           searchInput.value.trim().length > 0;
 
         if (hasQuery) {
-          publications.forEach(
-            (publication) => {
-              publication.classList.remove(
-                "publication-page-hidden",
+          sectionData.forEach(
+            ({ section, publications }) => {
+              publications.forEach(
+                (publication) => {
+                  publication.classList.remove(
+                    "publication-page-hidden",
+                  );
+                },
               );
-            },
-          );
 
-          sections.forEach(
-            (section) => {
               section.classList.remove(
                 "publication-section-hidden",
               );
