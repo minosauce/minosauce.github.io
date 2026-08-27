@@ -10,134 +10,130 @@ display_categories:
   - Independent
 ---
 
+
+
 <link
   rel="stylesheet"
-  href="{{ '/assets/css/showcase-carousel.css' | relative_url }}"
+  href="{{ '/assets/css/page-carousel.css' | relative_url }}"
 >
 
-<div class="projects projects-page">
+<div class="projects">
+
   {% if page.display_categories %}
+
     {% for category in page.display_categories %}
+
+      <h2 class="category">
+        {{ category }}
+      </h2>
 
       {% assign categorized_projects = site.projects | where: 'category', category %}
       {% assign sorted_projects = categorized_projects | sort: 'date' | reverse %}
 
-      {% if sorted_projects.size > 0 %}
-        <section class="showcase-section project-category-section">
-
-          <h2 class="category">
-            {{ category }}
-          </h2>
-
-          <div
-            class="showcase-carousel showcase-large-carousel"
-            data-paged-carousel
-            data-desktop-items="6"
-            data-desktop-columns="3"
-            data-tablet-items="4"
-            data-tablet-columns="2"
-            data-mobile-items="1"
-            data-mobile-columns="1"
-          >
-            <button
-              class="showcase-arrow showcase-prev"
-              type="button"
-              aria-label="Previous {{ category }} projects"
-            >
-              ‹
-            </button>
-
-            <div
-              class="showcase-source"
-              data-carousel-source
-              style="--showcase-fallback-columns: 3;"
-            >
-              {% for project in sorted_projects %}
-                <div class="showcase-item">
-                  <div class="projects showcase-project-host">
-                    {% include projects.liquid
-                      project=project
-                      project_number=forloop.rindex
-                    %}
-                  </div>
-                </div>
-              {% endfor %}
-            </div>
-
-            <div
-              class="showcase-track"
-              data-carousel-track
-            ></div>
-
-            <button
-              class="showcase-arrow showcase-next"
-              type="button"
-              aria-label="Next {{ category }} projects"
-            >
-              ›
-            </button>
-          </div>
-
-        </section>
-      {% endif %}
-
-    {% endfor %}
-  {% else %}
-
-    {% assign sorted_projects = site.projects | sort: 'date' | reverse %}
-
-    <section class="showcase-section">
       <div
-        class="showcase-carousel showcase-large-carousel"
-        data-paged-carousel
-        data-desktop-items="6"
-        data-desktop-columns="3"
-        data-tablet-items="4"
-        data-tablet-columns="2"
-        data-mobile-items="1"
-        data-mobile-columns="1"
+        class="page-carousel page-project-carousel"
+        data-page-carousel
       >
+
         <button
-          class="showcase-arrow showcase-prev"
+          class="page-carousel-arrow page-carousel-prev"
           type="button"
-          aria-label="Previous projects"
+          aria-label="Previous {{ category }} projects"
         >
           ‹
         </button>
 
         <div
-          class="showcase-source"
-          data-carousel-source
-          style="--showcase-fallback-columns: 3;"
+          class="page-carousel-track"
+          data-page-carousel-track
         >
+
           {% for project in sorted_projects %}
-            <div class="showcase-item">
-              <div class="projects showcase-project-host">
+
+            <div class="page-carousel-slide page-project-slide">
+
+              <div class="projects">
+
                 {% include projects.liquid
                   project=project
                   project_number=forloop.rindex
                 %}
+
               </div>
+
             </div>
+
           {% endfor %}
+
         </div>
 
-        <div
-          class="showcase-track"
-          data-carousel-track
-        ></div>
-
         <button
-          class="showcase-arrow showcase-next"
+          class="page-carousel-arrow page-carousel-next"
           type="button"
-          aria-label="Next projects"
+          aria-label="Next {{ category }} projects"
         >
           ›
         </button>
+
       </div>
-    </section>
+
+    {% endfor %}
+
+
+  {% else %}
+
+
+    {% assign sorted_projects = site.projects | sort: 'date' | reverse %}
+
+    <div
+      class="page-carousel page-project-carousel"
+      data-page-carousel
+    >
+
+      <button
+        class="page-carousel-arrow page-carousel-prev"
+        type="button"
+        aria-label="Previous projects"
+      >
+        ‹
+      </button>
+
+      <div
+        class="page-carousel-track"
+        data-page-carousel-track
+      >
+
+        {% for project in sorted_projects %}
+
+          <div class="page-carousel-slide page-project-slide">
+
+            <div class="projects">
+
+              {% include projects.liquid
+                project=project
+                project_number=forloop.rindex
+              %}
+
+            </div>
+
+          </div>
+
+        {% endfor %}
+
+      </div>
+
+      <button
+        class="page-carousel-arrow page-carousel-next"
+        type="button"
+        aria-label="Next projects"
+      >
+        ›
+      </button>
+
+    </div>
 
   {% endif %}
+
 </div>
 
-<script src="{{ '/assets/js/showcase-carousel.js' | relative_url }}"></script>
+<script src="{{ '/assets/js/page-carousel.js' | relative_url }}"></script>
