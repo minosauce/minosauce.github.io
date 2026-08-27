@@ -1012,16 +1012,39 @@ samp {
  * 위 → 아래로 등간격 배치한다.
  */
 
-/* About - Publications */
-.about-paginated-publications ol.bibliography,
+/* =========================================================
+   Publications - Fixed virtual slots
+   ========================================================= */
 
-/* Full Publications page - Journal / Conference */
-.publications-page
-.publication-section
-ol.bibliography {
+.about-paginated-publications ol.bibliography,
+.publications-page .publication-section ol.bibliography {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+
+  /*
+   * pagination-stability.js가 계산해서 넣어주는 값
+   */
+  min-height: calc(
+    var(--publication-slot-height, 8rem) * 5
+  );
+}
+
+.about-paginated-publications ol.bibliography > li,
+.publications-page .publication-section ol.bibliography > li {
+  /*
+   * 논문 하나당 하나의 고정 슬롯
+   */
+  min-height: var(
+    --publication-slot-height,
+    8rem
+  );
+
+  flex: 0 0 var(
+    --publication-slot-height,
+    8rem
+  );
+
+  margin: 0 !important;
 }
 
 
