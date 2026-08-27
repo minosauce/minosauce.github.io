@@ -1,30 +1,31 @@
 {% comment %}
-  ============================================================
   Project Card
-  ============================================================
 
   Supported front matter:
-
   title:
+  date:
+  end_date:
   description:
   img:
   thumbnail_fit: cover | contain
   redirect:
   github:
   github_stars:
-
-  Default thumbnail behavior:
-  - cover   : photographs
-  - contain : diagrams, PDF previews, posters, slides
 {% endcomment %}
 
-{% assign project_link = project.url | relative_url %}
-
-{% if project.redirect %}
-  {% assign project_link = project.redirect %}
+{% if include.project %}
+  {% assign project_item = include.project %}
+{% else %}
+  {% assign project_item = project %}
 {% endif %}
 
-{% assign thumbnail_fit = project.thumbnail_fit | default: 'cover' %}
+{% assign project_link = project_item.url | relative_url %}
+
+{% if project_item.redirect %}
+  {% assign project_link = project_item.redirect %}
+{% endif %}
+
+{% assign thumbnail_fit = project_item.thumbnail_fit | default: 'cover' %}
 
 {% if thumbnail_fit == 'contain' %}
   {% assign thumbnail_class = 'card-img-top project-thumbnail project-thumbnail-contain' %}
@@ -39,8 +40,9 @@
 {% endif %}
 
 <div class="col">
-  <div class="card h-100 hoverable project-card">
-    {% if project.img %}
+  <div class="card hoverable project-card">
+
+    {% if project_item.img %}
       <a
         href="{{ project_link }}"
         {% if external_project_link %}
@@ -50,6 +52,7 @@
         class="project-thumbnail-link"
       >
         <div class="project-thumbnail-wrapper">
+
           {% if include.project_number %}
             <div class="project-index">
               {{ include.project_number }}
@@ -59,54 +62,78 @@
           {%
             include figure.liquid
             loading="eager"
-            path=project.img
+            path=project_item.img
             sizes="(min-width: 768px) 33vw, 100vw"
-            alt=project.title
+            alt=project_item.title
             class=thumbnail_class
           %}
+
         </div>
       </a>
     {% endif %}
 
     <div class="card-body">
+
+      <!-- Project title -->
       <h2 class="card-title">
         <a
           href="{{ project_link }}"
+          title="{{ project_item.title }}"
           {% if external_project_link %}
             target="_blank"
             rel="noopener noreferrer"
           {% endif %}
         >
-          {{ project.title }}
+          {{ project_item.title }}
         </a>
       </h2>
 
-      {% if project.description %}
+      <!-- Project period -->
+      {% if project_item.date %}
+        <div class="project-period">
+          <time datetime="{{ project_item.date | date: '%Y-%m-%d' }}">
+            {{ project_item.date | date: "%b %Y" }}
+          </time>
+
+          {% if project_item.end_date %}
+            <span class="project-period-separator">&ndash;</span>
+
+            <time datetime="{{ project_item.end_date | date: '%Y-%m-%d' }}">
+              {{ project_item.end_date | date: "%b %Y" }}
+            </time>
+          {% endif %}
+        </div>
+      {% endif %}
+
+      <!-- Description -->
+      {% if project_item.description %}
         <p class="card-text">
-          {{ project.description }}
+          {{ project_item.description }}
         </p>
       {% endif %}
 
-      {% if project.github %}
+      <!-- Optional GitHub link -->
+      {% if project_item.github %}
         <div class="project-github">
           <a
-            href="{{ project.github }}"
+            href="{{ project_item.github }}"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="GitHub repository for {{ project.title }}"
+            aria-label="GitHub repository for {{ project_item.title }}"
           >
             <i class="fa-brands fa-github"></i>
             GitHub
           </a>
 
-          {% if project.github_stars %}
+          {% if project_item.github_stars %}
             <span class="github-stars">
               <i class="fa-solid fa-star"></i>
-              <span id="{{ project.github | split: '/' | last }}-stars"></span>
+              <span id="{{ project_item.github | split: '/' | last }}-stars"></span>
             </span>
           {% endif %}
         </div>
       {% endif %}
+
     </div>
   </div>
 </div>
