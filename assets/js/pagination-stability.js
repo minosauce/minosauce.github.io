@@ -1,7 +1,17 @@
 /* =========================================================
    Pagination Layout Stability
 
-   Prevents vertical layout shift when switching pages.
+   Publications:
+   - Use fixed virtual publication slots.
+   - Each page always occupies 5 publication slots.
+   - If a page contains fewer than 5 publications,
+     the remaining slots stay empty at the bottom.
+   - Pagination therefore stays at the same Y position.
+   - Publications themselves do NOT spread apart.
+
+   News:
+   - Measure every page.
+   - Use the tallest page as min-height.
 
    Applied to:
    1. About - Publications
@@ -9,13 +19,20 @@
    3. /news/
    4. /publications/ - Journal
    5. /publications/ - Conference
-
-   Strategy:
-   - Measure every page invisibly.
-   - Find the tallest page.
-   - Set that height directly as min-height
-     of the content area.
    ========================================================= */
+
+
+/*
+ * Publication 하나의 slot 아래쪽에
+ * 추가할 기본 여백.
+ *
+ * 1.0  = 좁게
+ * 1.25 = 추천
+ * 1.5  = 조금 넓게
+ * 2.0  = 많이 넓게
+ */
+const PUBLICATION_SLOT_GAP_REM = 1.25;
+
 
 function initializePaginationStability() {
   const targets = [];
@@ -40,8 +57,13 @@ function initializePaginationStability() {
       }
 
       targets.push({
+        type: "publication",
+
         list,
-        itemSelector: ":scope > li",
+
+        itemSelector:
+          ":scope > li",
+
         perPage:
           Number(
             container.dataset.perPage,
@@ -75,8 +97,13 @@ function initializePaginationStability() {
         );
 
       targets.push({
+        type: "publication",
+
         list,
-        itemSelector: ":scope > li",
+
+        itemSelector:
+          ":scope > li",
+
         perPage:
           Number(
             pageContainer?.dataset
@@ -106,9 +133,13 @@ function initializePaginationStability() {
       }
 
       targets.push({
+        type: "news",
+
         list,
+
         itemSelector:
           ":scope > .news-item",
+
         perPage:
           Number(
             container.dataset.perPage,
@@ -133,10 +164,98 @@ function initializePaginationStability() {
 
 
   /* =======================================================
-     Measure tallest page
+     Utility
      ======================================================= */
 
-  function measureTallestPage(
+  function getRootFontSize() {
+    return (
+      parseFloat(
+        getComputedStyle(
+          document.documentElement,
+        ).fontSize,
+      ) || 16
+    );
+  }
+
+
+  /* =======================================================
+     Reset JS-generated publication layout
+
+     resize 후 다시 측정할 때 이전 slot 크기가
+     새 측정에 영향을 주지 않도록 한다.
+     ======================================================= */
+
+  function resetPublicationLayout(
+    list,
+    itemSelector,
+  ) {
+    list.style.removeProperty(
+      "min-height",
+    );
+
+    list.style.removeProperty(
+      "display",
+    );
+
+    list.style.removeProperty(
+      "flex-direction",
+    );
+
+    list.style.removeProperty(
+      "justify-content",
+    );
+
+    list.style.removeProperty(
+      "gap",
+    );
+
+
+    const items =
+      Array.from(
+        list.querySelectorAll(
+          itemSelector,
+        ),
+      );
+
+
+    items.forEach((item) => {
+      item.style.removeProperty(
+        "min-height",
+      );
+
+      item.style.removeProperty(
+        "flex-basis",
+      );
+
+      item.style.removeProperty(
+        "flex-grow",
+      );
+
+      item.style.removeProperty(
+        "flex-shrink",
+      );
+
+      item.style.removeProperty(
+        "box-sizing",
+      );
+
+      item.style.removeProperty(
+        "margin-top",
+      );
+
+      item.style.removeProperty(
+        "margin-bottom",
+      );
+    });
+  }
+
+
+  /* =======================================================
+     Publications
+     Fixed virtual slot system
+     ======================================================= */
+
+  function measurePublicationSlots(
     list,
     itemSelector,
     perPage,
@@ -145,17 +264,46 @@ function initializePaginationStability() {
       list.getBoundingClientRect()
         .width;
 
+
     if (originalWidth <= 0) {
       return;
     }
 
 
+    const liveItems =
+      Array.from(
+        list.querySelectorAll(
+          itemSelector,
+        ),
+      );
+
+
+    if (
+      liveItems.length === 0
+    ) {
+      return;
+    }
+
+
     /*
-     * Create an invisible clone so that
-     * measurement does not affect the live page.
+     * Publication이 perPage 이하라면
+     * pagination 자체가 필요 없으므로
+     * 굳이 5개 slot 높이를 만들지 않는다.
      */
+    if (
+      liveItems.length <= perPage
+    ) {
+      return;
+    }
+
+
+    /* -----------------------------------------------------
+       Invisible measurement clone
+       ----------------------------------------------------- */
+
     const clone =
       list.cloneNode(true);
+
 
     clone.removeAttribute("id");
 
@@ -173,16 +321,355 @@ function initializePaginationStability() {
       clone.style,
       {
         position: "absolute",
+
         visibility: "hidden",
+
         pointerEvents: "none",
 
         left: "0",
+
         top: "0",
 
         width:
           `${originalWidth}px`,
 
         minHeight: "0",
+
+        height: "auto",
+
+        zIndex: "-9999",
+      },
+    );
+
+
+    /*
+     * 기존 CSS의
+     *
+     * display:flex;
+     * justify-content:space-between;
+     *
+     * 같은 설정이 측정에 영향을 주지 않도록
+     * clone은 일반 block layout으로 측정.
+     */
+    clone.style.setProperty(
+      "display",
+      "block",
+      "important",
+    );
+
+    clone.style.setProperty(
+      "min-height",
+      "0",
+      "important",
+    );
+
+    clone.style.setProperty(
+      "height",
+      "auto",
+      "important",
+    );
+
+
+    const parent =
+      list.parentElement;
+
+
+    if (!parent) {
+      return;
+    }
+
+
+    parent.appendChild(clone);
+
+
+    const cloneItems =
+      Array.from(
+        clone.querySelectorAll(
+          itemSelector,
+        ),
+      );
+
+
+    if (
+      cloneItems.length === 0
+    ) {
+      clone.remove();
+      return;
+    }
+
+
+    /* -----------------------------------------------------
+       모든 publication을 자연 상태로 복원
+       ----------------------------------------------------- */
+
+    cloneItems.forEach((item) => {
+      item.hidden = false;
+
+
+      item.classList.remove(
+        "publication-page-hidden",
+        "about-publication-hidden",
+        "pagination-hidden",
+      );
+
+
+      item.style.removeProperty(
+        "display",
+      );
+
+
+      /*
+       * publication 자체의 자연 높이만
+       * 측정하기 위해 margin 제거.
+       */
+      item.style.setProperty(
+        "margin-top",
+        "0",
+        "important",
+      );
+
+      item.style.setProperty(
+        "margin-bottom",
+        "0",
+        "important",
+      );
+
+
+      item.style.removeProperty(
+        "min-height",
+      );
+
+      item.style.removeProperty(
+        "height",
+      );
+
+      item.style.removeProperty(
+        "flex-basis",
+      );
+    });
+
+
+    /* -----------------------------------------------------
+       가장 높은 publication 하나를 찾는다.
+       ----------------------------------------------------- */
+
+    let maximumItemHeight = 0;
+
+
+    cloneItems.forEach((item) => {
+      const height =
+        item.getBoundingClientRect()
+          .height;
+
+
+      maximumItemHeight =
+        Math.max(
+          maximumItemHeight,
+          height,
+        );
+    });
+
+
+    clone.remove();
+
+
+    if (
+      maximumItemHeight <= 0
+    ) {
+      return;
+    }
+
+
+    /* -----------------------------------------------------
+       하나의 virtual slot 높이
+
+       가장 높은 publication
+       +
+       publication 사이의 기본 여백
+       ----------------------------------------------------- */
+
+    const slotGap =
+      PUBLICATION_SLOT_GAP_REM *
+      getRootFontSize();
+
+
+    const slotHeight =
+      Math.ceil(
+        maximumItemHeight +
+        slotGap,
+      );
+
+
+    /*
+     * 5개짜리 페이지라면:
+     *
+     * slot × 5
+     *
+     * 3개짜리 마지막 페이지도
+     * 전체 list 높이는 동일하게 유지된다.
+     */
+    const listHeight =
+      slotHeight * perPage;
+
+
+    /* -----------------------------------------------------
+       Live list에 virtual slots 적용
+       ----------------------------------------------------- */
+
+    /*
+     * 기존 space-between을 무력화.
+     *
+     * 모든 publication은 위쪽부터
+     * 고정 slot 단위로 차례대로 배치된다.
+     */
+    list.style.setProperty(
+      "display",
+      "flex",
+      "important",
+    );
+
+    list.style.setProperty(
+      "flex-direction",
+      "column",
+      "important",
+    );
+
+    list.style.setProperty(
+      "justify-content",
+      "flex-start",
+      "important",
+    );
+
+    list.style.setProperty(
+      "gap",
+      "0",
+      "important",
+    );
+
+
+    /*
+     * 항상 perPage 개수만큼
+     * virtual slot 공간 확보
+     */
+    list.style.setProperty(
+      "min-height",
+      `${listHeight}px`,
+    );
+
+
+    liveItems.forEach((item) => {
+      /*
+       * 기존 margin 대신
+       * slot 자체가 논문 간격까지 담당.
+       */
+      item.style.setProperty(
+        "margin-top",
+        "0",
+        "important",
+      );
+
+      item.style.setProperty(
+        "margin-bottom",
+        "0",
+        "important",
+      );
+
+
+      item.style.setProperty(
+        "box-sizing",
+        "border-box",
+        "important",
+      );
+
+
+      /*
+       * 각 publication이 정확히
+       * 한 slot을 차지한다.
+       */
+      item.style.setProperty(
+        "min-height",
+        `${slotHeight}px`,
+        "important",
+      );
+
+
+      item.style.setProperty(
+        "flex-basis",
+        `${slotHeight}px`,
+        "important",
+      );
+
+
+      item.style.setProperty(
+        "flex-grow",
+        "0",
+        "important",
+      );
+
+
+      item.style.setProperty(
+        "flex-shrink",
+        "0",
+        "important",
+      );
+    });
+  }
+
+
+  /* =======================================================
+     News
+     Tallest page measurement
+     ======================================================= */
+
+  function measureTallestNewsPage(
+    list,
+    itemSelector,
+    perPage,
+  ) {
+    const originalWidth =
+      list.getBoundingClientRect()
+        .width;
+
+
+    if (originalWidth <= 0) {
+      return;
+    }
+
+
+    const clone =
+      list.cloneNode(true);
+
+
+    clone.removeAttribute("id");
+
+    clone.setAttribute(
+      "aria-hidden",
+      "true",
+    );
+
+    clone.classList.add(
+      "pagination-measurement-clone",
+    );
+
+
+    Object.assign(
+      clone.style,
+      {
+        position: "absolute",
+
+        visibility: "hidden",
+
+        pointerEvents: "none",
+
+        left: "0",
+
+        top: "0",
+
+        width:
+          `${originalWidth}px`,
+
+        minHeight: "0",
+
         height: "auto",
 
         zIndex: "-9999",
@@ -193,9 +680,11 @@ function initializePaginationStability() {
     const parent =
       list.parentElement;
 
+
     if (!parent) {
       return;
     }
+
 
     parent.appendChild(clone);
 
@@ -208,25 +697,26 @@ function initializePaginationStability() {
       );
 
 
-    if (items.length === 0) {
+    if (
+      items.length === 0
+    ) {
       clone.remove();
       return;
     }
 
 
     /*
-     * Remove any pagination-hidden state
-     * from the cloned elements.
+     * 기존 pagination hidden state 제거
      */
     items.forEach((item) => {
       item.hidden = false;
 
+
       item.classList.remove(
-        "publication-page-hidden",
-        "about-publication-hidden",
         "news-page-hidden",
         "pagination-hidden",
       );
+
 
       item.style.removeProperty(
         "display",
@@ -239,12 +729,13 @@ function initializePaginationStability() {
         items.length / perPage,
       );
 
+
     let maximumHeight = 0;
 
 
-    /* =====================================================
-       Measure each page independently
-       ===================================================== */
+    /* -----------------------------------------------------
+       News page 하나씩 측정
+       ----------------------------------------------------- */
 
     for (
       let page = 0;
@@ -263,6 +754,7 @@ function initializePaginationStability() {
           const visible =
             index >= start &&
             index < end;
+
 
           if (visible) {
             item.hidden = false;
@@ -294,52 +786,72 @@ function initializePaginationStability() {
     }
 
 
-    /*
-     * Remove measurement clone.
-     */
     clone.remove();
 
 
     /*
-     * Use the tallest page height directly.
-     *
-     * This keeps the pagination control at
-     * the same vertical position when the
-     * user changes pages.
+     * News는 기존 방식 유지:
+     * 가장 높은 page의 높이를 그대로 사용.
      */
-       if (maximumHeight > 0) {
-     const isPublicationList =
-       list.matches("ol.bibliography");
-   
-     const extraHeight =
-       isPublicationList ? 120 : 0;
-   
-     list.style.minHeight =
-       `${Math.ceil(maximumHeight) + extraHeight}px`;
-   }
+    if (
+      maximumHeight > 0
+    ) {
+      list.style.minHeight =
+        `${Math.ceil(
+          maximumHeight,
+        )}px`;
+    }
   }
 
 
   /* =======================================================
-     Measure all paginated sections
+     Measure / update everything
      ======================================================= */
 
   function updateAllHeights() {
     uniqueTargets.forEach(
       ({
+        type,
         list,
         itemSelector,
         perPage,
       }) => {
-        /*
-         * Remove the previous measurement first
-         * so it cannot affect re-measurement.
-         */
+
+
+        /* --------------------------------------------------
+           Publications
+           -------------------------------------------------- */
+
+        if (
+          type === "publication"
+        ) {
+          resetPublicationLayout(
+            list,
+            itemSelector,
+          );
+
+
+          measurePublicationSlots(
+            list,
+            itemSelector,
+            perPage,
+          );
+
+
+          return;
+        }
+
+
+        /* --------------------------------------------------
+           News
+           -------------------------------------------------- */
+
         list.style.removeProperty(
           "min-height",
         );
 
-        measureTallestPage(
+
+        measureTallestNewsPage(
           list,
           itemSelector,
           perPage,
@@ -368,12 +880,14 @@ function initializePaginationStability() {
 
   let resizeTimer = null;
 
+
   window.addEventListener(
     "resize",
     () => {
       clearTimeout(
         resizeTimer,
       );
+
 
       resizeTimer =
         setTimeout(
@@ -385,10 +899,12 @@ function initializePaginationStability() {
 
 
   /* =======================================================
-     Re-measure after web fonts are ready
+     Re-measure after fonts are ready
      ======================================================= */
 
-  if (document.fonts?.ready) {
+  if (
+    document.fonts?.ready
+  ) {
     document.fonts.ready.then(
       () => {
         updateAllHeights();
@@ -398,7 +914,7 @@ function initializePaginationStability() {
 
 
   /* =======================================================
-     Re-measure after all resources are loaded
+     Re-measure after all resources loaded
      ======================================================= */
 
   window.addEventListener(
