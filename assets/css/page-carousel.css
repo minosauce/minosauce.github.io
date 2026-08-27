@@ -1,0 +1,310 @@
+/* =========================================================
+   Page Carousel
+
+   Used on:
+   - /projects/
+   - /repositories/
+
+   Card appearance itself is controlled by main.scss.
+   This file controls only:
+   - horizontal layout
+   - navigation arrows
+   - responsive card count
+   - mobile swipe
+   ========================================================= */
+
+
+/* =========================================================
+   Base
+   ========================================================= */
+
+.page-carousel {
+  position: relative;
+
+  width: 100%;
+
+  margin: 0 0 2.5rem;
+}
+
+
+/* Horizontal track */
+
+.page-carousel-track {
+  display: flex;
+
+  width: 100%;
+
+  gap: 1.5rem;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  padding: 0.15rem 0 0.65rem;
+
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+
+  overscroll-behavior-x: contain;
+
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  -webkit-overflow-scrolling: touch;
+}
+
+.page-carousel-track::-webkit-scrollbar {
+  display: none;
+}
+
+
+/* Individual slide */
+
+.page-carousel-slide {
+  flex: 0 0 auto;
+
+  min-width: 0;
+
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+
+/* =========================================================
+   Projects page
+   3 cards visible on desktop
+   ========================================================= */
+
+.page-project-slide {
+  width: calc((100% - 3rem) / 3);
+}
+
+
+/*
+ * projects.liquid outputs Bootstrap .col.
+ * Neutralize Bootstrap column sizing inside carousel.
+ */
+
+.page-project-slide .projects {
+  width: 100%;
+  height: 100%;
+}
+
+.page-project-slide .projects > .col {
+  width: 100% !important;
+  max-width: 100% !important;
+
+  flex: 0 0 100% !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+
+/*
+ * main.scss controls actual project-card dimensions.
+ * Here we only make it occupy the full carousel slide.
+ */
+
+.page-project-slide .project-card {
+  width: 100%;
+}
+
+
+/* =========================================================
+   Repositories page
+   2 cards visible on desktop
+   ========================================================= */
+
+.page-repository-slide {
+  width: calc((100% - 1.5rem) / 2);
+}
+
+.page-repository-slide .repositories {
+  display: block !important;
+
+  width: 100%;
+
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.page-repository-slide .repo {
+  width: 100% !important;
+  max-width: 100% !important;
+
+  margin: 0 !important;
+}
+
+.page-repository-slide .repo img {
+  width: 100% !important;
+  max-width: 100% !important;
+
+  height: auto;
+}
+
+
+/* =========================================================
+   Navigation arrows
+   ========================================================= */
+
+.page-carousel-arrow {
+  position: absolute;
+
+  top: 50%;
+  z-index: 20;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 40px;
+  height: 40px;
+
+  padding: 0;
+
+  color: var(--global-text-color);
+  background: var(--global-bg-color);
+
+  border: 1px solid var(--global-divider-color);
+  border-radius: 50%;
+
+  box-shadow: 0 3px 12px rgb(0 0 0 / 18%);
+
+  font-family: Arial, sans-serif;
+  font-size: 1.8rem;
+  font-weight: 300;
+  line-height: 1;
+
+  cursor: pointer;
+
+  transform: translateY(-50%);
+
+  transition:
+    color 0.15s ease,
+    border-color 0.15s ease,
+    opacity 0.15s ease,
+    transform 0.15s ease;
+}
+
+
+/* Previous */
+
+.page-carousel-prev {
+  left: -20px;
+}
+
+
+/* Next */
+
+.page-carousel-next {
+  right: -20px;
+}
+
+
+/* Hover */
+
+.page-carousel-arrow:hover:not(:disabled) {
+  color: var(--global-theme-color);
+
+  border-color: var(--global-theme-color);
+
+  transform: translateY(-50%) scale(1.06);
+}
+
+
+/* Beginning / end */
+
+.page-carousel-arrow:disabled {
+  opacity: 0.18;
+
+  cursor: default;
+
+  transform: translateY(-50%);
+}
+
+
+/*
+ * If there is nothing to scroll,
+ * JS adds this class and removes both arrows completely.
+ */
+
+.page-carousel.no-scroll .page-carousel-arrow {
+  display: none;
+}
+
+
+/* =========================================================
+   Repository section spacing
+   ========================================================= */
+
+.repository-carousel-section {
+  width: 100%;
+
+  margin-bottom: 2.5rem;
+}
+
+.repository-carousel-section + .repository-carousel-section {
+  margin-top: 1.75rem;
+}
+
+
+/* =========================================================
+   Tablet
+   Projects: 2
+   Repositories: 2
+   ========================================================= */
+
+@media (max-width: 991px) {
+  .page-carousel-track {
+    gap: 1.25rem;
+  }
+
+  .page-project-slide {
+    width: calc((100% - 1.25rem) / 2);
+  }
+
+  .page-repository-slide {
+    width: calc((100% - 1.25rem) / 2);
+  }
+}
+
+
+/* =========================================================
+   Mobile
+   Swipe interaction
+   ========================================================= */
+
+@media (max-width: 576px) {
+  .page-carousel {
+    /*
+     * Do not clip touch scrolling.
+     */
+    overflow: visible;
+  }
+
+  .page-carousel-track {
+    gap: 0.9rem;
+
+    /*
+     * Show a small piece of the next card.
+     * This visually tells users the section is swipeable.
+     */
+    padding-right: 12%;
+  }
+
+  .page-project-slide,
+  .page-repository-slide {
+    width: 88%;
+  }
+
+  /*
+   * Mobile navigation is touch-first.
+   */
+  .page-carousel-arrow {
+    display: none;
+  }
+
+  .repository-carousel-section {
+    margin-bottom: 2rem;
+  }
+}
