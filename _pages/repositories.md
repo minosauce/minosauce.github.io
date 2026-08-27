@@ -49,6 +49,7 @@ nav_order: 40
 {% endif %}
 
 
+
 <!-- =========================================================
      GitHub Repositories
      ========================================================= -->
@@ -63,6 +64,7 @@ nav_order: 40
 
     {% assign reversed_github_repos = site.data.repositories.github_repos | reverse %}
 
+
     <div
       class="page-carousel page-repository-carousel"
       data-page-carousel
@@ -76,14 +78,16 @@ nav_order: 40
         ‹
       </button>
 
+
       <div
-        class="page-carousel-track"
-        data-page-carousel-track
+        class="page-carousel-source"
+        data-page-carousel-source
+        hidden
       >
 
         {% for repo in reversed_github_repos %}
 
-          <div class="page-carousel-slide page-repository-slide">
+          <div class="page-repository-item">
 
             <div class="repositories">
 
@@ -96,6 +100,13 @@ nav_order: 40
         {% endfor %}
 
       </div>
+
+
+      <div
+        class="page-carousel-track"
+        data-page-carousel-track
+      ></div>
+
 
       <button
         class="page-carousel-arrow page-carousel-next"
@@ -112,6 +123,7 @@ nav_order: 40
 {% endif %}
 
 
+
 <!-- =========================================================
      Open-Source Resources
      ========================================================= -->
@@ -123,6 +135,7 @@ nav_order: 40
     <h2>
       Open-Source Resources
     </h2>
+
 
     <div
       class="page-carousel page-repository-carousel"
@@ -137,14 +150,16 @@ nav_order: 40
         ‹
       </button>
 
+
       <div
-        class="page-carousel-track"
-        data-page-carousel-track
+        class="page-carousel-source"
+        data-page-carousel-source
+        hidden
       >
 
         {% for repo in site.data.repositories.open_repos %}
 
-          <div class="page-carousel-slide page-repository-slide">
+          <div class="page-repository-item">
 
             <div class="repositories">
 
@@ -157,6 +172,13 @@ nav_order: 40
         {% endfor %}
 
       </div>
+
+
+      <div
+        class="page-carousel-track"
+        data-page-carousel-track
+      ></div>
+
 
       <button
         class="page-carousel-arrow page-carousel-next"
