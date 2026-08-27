@@ -1,317 +1,1325 @@
+@charset "utf-8";
+
+@use "sass:math";
+@use "sass:string";
+
+@use "variables" with (
+  $max-content-width: 1000px
+);
+
+@use "themes";
+@use "layout";
+@use "typography";
+@use "navbar";
+@use "footer";
+@use "blog";
+@use "publications";
+@use "components";
+@use "utilities";
+@use "tabs";
+@use "teachings";
+@use "typograms";
+
+@import url("https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600;700&display=swap");
+
 /* =========================================================
-   Showcase Carousel
-   About / Projects / Repositories
+   Minho Jang - Custom Theme
    ========================================================= */
 
+:root {
+  --global-theme-color: #004294;
+  --global-hover-color: #00346f;
+}
+
+html[data-theme="dark"] {
+  --global-theme-color: #0097dc;
+  --global-hover-color: #0097dc;
+}
 
 /* =========================================================
-   Base
+   Typography
    ========================================================= */
 
-.showcase-section,
-.about-showcase-section {
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+li,
+a,
+td,
+th,
+input,
+textarea,
+button {
+  font-family: "Times New Roman", Times, serif !important;
+}
+
+/* Keep source code monospaced */
+code,
+pre,
+kbd {
+  font-family: "Courier New", Courier, monospace !important;
+}
+
+/* =========================================================
+   Social icons below profile photo
+   Maximum 3 items per row
+   ========================================================= */
+
+.profile .profile-social {
+  margin-top: 0.9rem;
+  margin-bottom: 0.9rem;
+
+  text-align: center;
+}
+
+.profile .profile-social .contact-icons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  width: 100%;
+  max-width: 190px;
+
+  margin: 0 auto;
+
+  row-gap: 0.75rem;
+
+  font-size: 1.35rem;
+}
+
+.profile .profile-social .contact-icons > a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex: 0 0 33.333%;
+
+  margin: 0 !important;
+  padding: 0;
+
+  text-align: center;
+}
+
+.profile .profile-social .contact-icons i,
+.profile .profile-social .contact-icons svg {
+  font-size: 1.35rem;
+}
+
+/* =========================================================
+   Search button
+   ========================================================= */
+
+#search-toggle .nav-link {
+  font-size: 0;
+}
+
+#search-toggle .nav-link::before {
+  content: "Search";
+
+  font-family: "Times New Roman", Times, serif;
+  font-size: 1rem;
+}
+
+#search-toggle .nav-link i {
+  margin-left: 0.25rem;
+
+  font-size: 0.9rem;
+}
+
+/* =========================================================
+   About page
+   ========================================================= */
+
+@media (min-width: 576px) {
+  .profile {
+    width: 20% !important;
+
+    margin-right: 3rem !important;
+  }
+
+  .profile img {
+    width: 100% !important;
+    height: auto !important;
+  }
+}
+
+/* =========================================================
+   About - Major section headings
+   ========================================================= */
+
+.home-section-title {
+  margin-top: 2rem !important;
+  margin-bottom: 1.5rem !important;
+
+  padding-top: 1.25rem;
+
+  border-top: 1px solid var(--global-divider-color);
+}
+
+/* Posts is slightly closer to News */
+.posts-section-title {
+  margin-top: 1.1rem !important;
+
+  padding-top: 0.9rem !important;
+}
+
+/* =========================================================
+   About - Publications
+   ========================================================= */
+
+.home-publications .title,
+.home-publications .title a {
+  font-weight: 700 !important;
+}
+
+/* =========================================================
+   About - News / Posts dates
+   ========================================================= */
+
+.about-page .news-date {
+  font-weight: 400 !important;
+}
+
+.about-page .table th {
+  font-weight: 400 !important;
+}
+
+/* =========================================================
+   About - Posts vertical spacing
+   ========================================================= */
+
+.about-page .table.table-sm.table-borderless th,
+.about-page .table.table-sm.table-borderless td {
+  padding-top: 1.2rem !important;
+  padding-bottom: 1.2rem !important;
+}
+
+
+/* =========================================================
+   About - Name
+   ========================================================= */
+
+.about-page .post-title {
+  font-family: "Times New Roman", Times, "Noto Serif KR", serif !important;
+}
+
+
+/* =========================================================
+   Publications - Vertical spacing
+   ========================================================= */
+
+.publications ol.bibliography > li {
+  margin-top: 0.35rem;
+  margin-bottom: 1.35rem;
+}
+
+.publications ol.bibliography > li:last-child {
+  margin-bottom: 0.6rem;
+}
+
+/* =========================================================
+   Publications - Shared marker geometry
+   Shared marker geometry
+   ========================================================= */
+
+:root {
+  /*
+   * Publication page의 [J.1] / [C.1]과
+   * About의 bullet이 같은 marker column을 사용한다.
+   */
+  --publication-marker-width: 2.85rem;
+  --publication-marker-gap: 0.75rem;
+}
+
+
+/*
+ * Publication page:
+ * [J.1]    Paper
+ *
+ * About:
+ *     •    Paper
+ *
+ * 두 영역 모두 본문 시작점과 marker gap을 동일하게 맞춘다.
+ */
+
+.pub-numbered ol.bibliography > li,
+.about-page .home-publications ol.bibliography > li {
+  position: relative;
+
+  padding-left: calc(
+    var(--publication-marker-width) +
+    var(--publication-marker-gap)
+  ) !important;
+}
+
+
+/*
+ * Existing J/C numbering pseudo-element
+ * 위치만 통일한다.
+ *
+ * 기존 content: "[J.1]" 등의 설정은 건드리지 않는다.
+ */
+
+.pub-numbered ol.bibliography > li::before,
+.about-page .home-publications ol.bibliography > li::before {
+  position: absolute !important;
+
+  top: 0.05rem !important;
+  left: 0 !important;
+
+  width: var(--publication-marker-width) !important;
+
+  margin: 0 !important;
+
+  text-align: right !important;
+}
+
+
+/*
+ * About page에서는 번호 대신 bullet을 표시한다.
+ */
+
+.about-page .home-publications ol.bibliography > li::before {
+  content: "•" !important;
+
+  color: var(--global-text-color);
+
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+
+/*
+ * About publication item spacing
+ */
+
+.about-page .home-publications ol.bibliography > li {
+  margin-top: 0.35rem;
+  margin-bottom: 1.35rem;
+}
+
+.about-page .home-publications ol.bibliography > li:last-child {
+  margin-bottom: 0.6rem;
+}
+
+/* =========================================================
+   News
+   Desktop
+   ========================================================= */
+
+.news-list-custom {
   width: 100%;
 }
 
-.showcase-carousel {
-  position: relative;
+.news-item {
+  display: grid;
 
+  grid-template-columns:
+    20%
+    minmax(0, 1fr)
+    100px;
+
+  column-gap: 0.6rem;
+
+  align-items: center;
+
+  min-height: 88px;
+
+  padding: 0.75rem 0;
+
+  border-bottom: 1px solid
+    color-mix(
+      in srgb,
+      var(--global-divider-color) 55%,
+      transparent
+    );
+}
+
+.news-item-no-preview {
+  grid-template-columns:
+    20%
+    minmax(0, 1fr);
+}
+
+.news-item:last-child {
+  border-bottom: none;
+}
+
+
+/* Date */
+
+.news-date {
+  grid-column: 1;
+
+  min-width: 0;
+
+  padding: 0.3rem;
+
+  color: var(--global-text-color);
+
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.4;
+
+  white-space: nowrap;
+}
+
+.news-date-main,
+.news-date-year {
+  display: inline;
+}
+
+
+/* News title */
+
+.news-content {
+  grid-column: 2;
+
+  min-width: 0;
+
+  padding: 0.3rem;
+}
+
+.news-title {
+  font-size: 1rem;
+  line-height: 1.4;
+
+  overflow-wrap: anywhere;
+}
+
+
+/* Thumbnail */
+
+.news-thumbnail {
+  grid-column: 3;
+
+  justify-self: end;
+
+  display: block;
+
+  width: 100px;
+  height: 64px;
+
+  margin: 0;
+  padding: 0;
+
+  overflow: hidden;
+
+  border-radius: 7px;
+}
+
+/* Support both direct <img> and figure.liquid output */
+.news-thumbnail figure,
+.news-thumbnail picture {
+  display: block;
+
+  width: 100% !important;
+  height: 100% !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.news-thumbnail img {
+  display: block !important;
+
+  width: 100% !important;
+  height: 100% !important;
+
+  min-width: 100% !important;
+  max-width: none !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  object-fit: cover !important;
+  object-position: center !important;
+
+  border-radius: 0 !important;
+}
+
+
+/* =========================================================
+   News - Mobile
+   ========================================================= */
+
+@media (max-width: 576px) {
+  .news-item {
+    /*
+     * 날짜 칸을 고정 폭으로 잡는다.
+     * 제목 영역을 침범하지 않는다.
+     */
+    grid-template-columns:
+      72px
+      minmax(0, 1fr)
+      72px;
+
+    column-gap: 0.4rem;
+
+    min-height: 72px;
+
+    padding: 0.6rem 0;
+  }
+
+  .news-item-no-preview {
+    grid-template-columns:
+      72px
+      minmax(0, 1fr);
+  }
+
+
+  /*
+   * Mobile에서는 날짜를 두 줄로 표시:
+   *
+   * Aug 24,
+   * 2026
+   */
+
+  .news-date {
+    width: 72px;
+
+    padding: 0.2rem;
+
+    font-size: 0.88rem;
+    line-height: 1.25;
+
+    white-space: normal;
+  }
+
+  .news-date-main,
+  .news-date-year {
+    display: block;
+  }
+
+
+  .news-content {
+    min-width: 0;
+
+    padding: 0.2rem;
+  }
+
+  .news-title {
+    display: block;
+
+    min-width: 0;
+
+    font-size: 0.94rem;
+    line-height: 1.35;
+
+    overflow-wrap: anywhere;
+    word-break: normal;
+  }
+
+
+  .news-thumbnail {
+    width: 72px;
+    height: 50px;
+
+    border-radius: 6px;
+  }
+}
+
+.news-post-image {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 500px;
+
+  display: block;
+  margin: 0 auto;
+}
+
+@media (max-width: 576px) {
+  .news-post-image {
+    max-width: 100%;
+    max-height: 65vh;
+  }
+}
+
+/* =========================================================
+   News previous / next navigation
+   ========================================================= */
+
+.news-navigation {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+
+  margin-top: 3rem;
+  margin-bottom: 4rem;
+
+  padding-top: 1.5rem;
+
+  border-top: 1px solid var(--global-divider-color);
+}
+
+.news-nav-prev,
+.news-nav-next {
+  min-width: 0;
+}
+
+.news-nav-next {
+  text-align: right;
+}
+
+.news-navigation a {
+  text-decoration: none;
+}
+
+.news-nav-label {
+  display: block;
+
+  margin-bottom: 0.25rem;
+
+  font-size: 0.8rem;
+  color: var(--global-text-color-light);
+}
+
+.news-nav-title {
+  display: block;
+
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--global-theme-color);
+}
+
+/* Mobile */
+@media (max-width: 576px) {
+  .news-navigation {
+    gap: 1rem;
+    margin-top: 2.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .news-nav-title {
+    font-size: 0.85rem;
+    line-height: 1.35;
+  }
+}
+
+/* =========================================================
+   Repositories page - Card grid
+   ========================================================= */
+
+/* Repository card */
+
+/* Repository card image */
+
+/* =========================================================
+   Repositories page - Section spacing
+   ========================================================= */
+
+/*
+ * GitHub Repositories와
+ * Open-Source Resources 제목 사이 여유 확보
+ */
+
+/* =========================================================
+   Repositories page - Mobile
+   ========================================================= */
+
+/* =========================================================
+   CV - Grouped layout
+   ========================================================= */
+
+.cv-group-list {
   width: 100%;
 
   margin: 0;
+  padding: 0;
 }
 
-
 /* =========================================================
-   Non-JavaScript fallback
+   CV - Organization group
    ========================================================= */
 
-.showcase-source {
+.cv-org-group {
+  width: 100%;
+
+  margin: 0;
+  padding: 1.25rem 0 1.45rem;
+
+  border-top: 1px solid var(--global-divider-color);
+}
+
+.cv-org-group:last-child {
+  border-bottom: 1px solid var(--global-divider-color);
+}
+
+/* =========================================================
+   CV - Organization header
+   ========================================================= */
+
+.cv-org-header {
   display: grid;
 
-  grid-template-columns:
-    repeat(
-      var(--showcase-fallback-columns, 3),
-      minmax(0, 1fr)
-    );
+  grid-template-columns: 56px minmax(0, 1fr);
+  column-gap: 0.85rem;
 
-  gap: 1.25rem;
+  align-items: center;
 
-  width: 100%;
+  margin-bottom: 1.05rem;
 }
 
-
-/*
- * Once JavaScript creates the paged carousel,
- * the original source grid is hidden.
- */
-
-.showcase-carousel.is-enhanced .showcase-source {
-  display: none;
-}
-
-
-/* =========================================================
-   Carousel track
-   ========================================================= */
-
-.showcase-track {
-  display: none;
-
-  width: 100%;
-
-  gap: 1rem;
-
-  overflow-x: auto;
-  overflow-y: hidden;
-
-  padding: 0.15rem 0 0.55rem;
-
-  scroll-behavior: smooth;
-  scroll-snap-type: x mandatory;
-
-  overscroll-behavior-x: contain;
-
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-
-  -webkit-overflow-scrolling: touch;
-}
-
-.showcase-carousel.is-enhanced .showcase-track {
+.cv-org-logo-box {
   display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 56px;
+  height: 46px;
 }
 
-.showcase-track::-webkit-scrollbar {
-  display: none;
+.cv-org-logo {
+  display: block;
+
+  width: auto !important;
+  height: auto !important;
+
+  max-width: 50px !important;
+  max-height: 40px !important;
+
+  margin: 0 auto;
+
+  object-fit: contain;
 }
 
+.cv-org-info {
+  min-width: 0;
+}
+
+.cv-org-name {
+  margin: 0 0 0.2rem;
+  padding: 0;
+
+  color: var(--global-text-color);
+
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.cv-org-location {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+
+  margin: 0;
+  padding: 0;
+
+  color: var(--global-text-color);
+
+  font-size: 0.82rem;
+  line-height: 1.3;
+}
+
+.cv-org-location i {
+  color: var(--global-text-color) !important;
+}
 
 /* =========================================================
-   One carousel page
+   CV - Role list
    ========================================================= */
 
-.showcase-page {
-  flex: 0 0 100%;
-
+.cv-role-list {
   width: 100%;
-  min-width: 0;
 
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
+  margin: 0;
+  padding: 0;
 }
 
-.showcase-page-grid {
+/*
+ * Common columns:
+ *
+ * 18px  = timeline
+ * 125px = date
+ * rest  = content
+ */
+
+.cv-role-row {
   display: grid;
 
-  grid-template-columns:
-    repeat(
-      var(--showcase-columns, 3),
-      minmax(0, 1fr)
-    );
+  grid-template-columns: 18px 125px minmax(0, 1fr);
+  column-gap: 0.5rem;
 
-  gap: 1.25rem;
+  align-items: start;
 
-  width: 100%;
-
-  align-items: stretch;
+  margin: 0;
+  padding: 0 0 1.35rem;
 }
 
+.cv-role-row:last-child {
+  padding-bottom: 0;
+}
+
+.cv-role-rail {
+  grid-column: 1;
+}
+
+.cv-role-date {
+  grid-column: 2;
+}
+
+.cv-role-body {
+  grid-column: 3;
+}
 
 /* =========================================================
-   Items
+   CV - LinkedIn-style timeline
    ========================================================= */
 
-.showcase-item {
+.cv-role-rail {
+  position: relative;
+
+  align-self: stretch;
+
+  min-width: 18px;
+  min-height: 1.35rem;
+}
+
+.cv-role-dot {
+  position: absolute;
+
+  top: 0.34rem;
+  left: 50%;
+
+  z-index: 2;
+
+  width: 8px;
+  height: 8px;
+
+  transform: translateX(-50%);
+
+  background-color: #aaa;
+
+  border-radius: 50%;
+}
+
+.cv-role-line {
+  position: absolute;
+
+  top: 0.9rem;
+  bottom: -1.35rem;
+  left: 50%;
+
+  width: 2px;
+
+  transform: translateX(-50%);
+
+  background-color: var(--global-divider-color);
+}
+
+html[data-theme="dark"] .cv-role-dot {
+  background-color: #999;
+}
+
+/* =========================================================
+   CV - Date
+   ========================================================= */
+
+.cv-role-date {
+  margin: 0;
+  padding: 0;
+
+  color: var(--global-text-color) !important;
+
+  font-size: 0.9rem;
+  font-weight: 400;
+  line-height: 1.35;
+
+  white-space: nowrap;
+}
+
+/* =========================================================
+   CV - Main content
+   ========================================================= */
+
+.cv-role-body {
   min-width: 0;
-  width: 100%;
+
+  margin: 0;
+  padding: 0;
 }
 
+.cv-role-title {
+  margin: 0 0 0.4rem !important;
+  padding: 0 !important;
+
+  color: var(--global-text-color);
+
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.cv-role-title a {
+  color: inherit;
+}
 
 /* =========================================================
-   Project cards
+   CV - Education
    ========================================================= */
 
-.showcase-project-host {
-  width: 100%;
-  height: 100%;
+.cv-degree-title {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
 
-  margin: 0 !important;
-  padding: 0 !important;
+  margin-top: 0 !important;
+  padding-top: 0 !important;
 }
 
+.cv-degree-type {
+  font-weight: 700 !important;
+}
 
 /*
- * projects.liquid outputs Bootstrap .col.
- * Remove Bootstrap column sizing inside our carousel.
+ * Example:
+ *
+ * M.S.   Aerospace Engineering
+ *
+ * Degree = bold
+ * Major  = bold + italic
  */
 
-.showcase-project-host > .col {
-  width: 100% !important;
-  max-width: 100% !important;
+.cv-degree-area {
+  margin-left: 0.8rem !important;
 
-  flex: 0 0 100% !important;
-
-  margin: 0 !important;
-  padding: 0 !important;
+  font-weight: 700 !important;
+  font-style: italic !important;
 }
-
-.showcase-project-host .project-card {
-  width: 100%;
-  height: 100%;
-}
-
 
 /* =========================================================
-   Repository cards
+   CV - Secondary text
    ========================================================= */
 
-.showcase-repo-host {
-  display: block !important;
+.cv-role-summary {
+  margin: 0 0 0.45rem;
+  padding: 0;
 
+  font-size: 0.94rem;
+  font-style: italic;
+  line-height: 1.4;
+}
+
+.cv-award-summary,
+.cv-certificate-summary {
+  font-style: normal;
+}
+
+.cv-role-detail {
+  margin: 0 0 0.4rem;
+
+  font-size: 0.9rem;
+  line-height: 1.35;
+}
+
+/* =========================================================
+   CV - Highlights
+   ========================================================= */
+
+.cv-role-highlights {
+  margin: 0.45rem 0 0;
+
+  padding-left: 1.15rem;
+}
+
+.cv-role-highlights li {
+  margin: 0 0 0.25rem;
+
+  padding-left: 0.1rem;
+}
+
+/* =========================================================
+   CV - Interests
+   ========================================================= */
+
+.cv-interests-list {
   width: 100%;
-  height: 100%;
 
-  margin: 0 !important;
-  padding: 0 !important;
+  margin: 0;
+  padding: 0;
 }
 
-.showcase-repo-host .repo {
-  width: 100% !important;
-  max-width: 100% !important;
+.cv-interest-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.55rem;
 
-  margin: 0 !important;
+  margin-bottom: 1.15rem;
 }
 
+.cv-interest-item:last-child {
+  margin-bottom: 0;
+}
 
-/*
- * Do NOT force display:block here.
- * al-folio may use light/dark repository images.
- */
+.cv-interest-icon {
+  flex: 0 0 auto;
 
-.showcase-repo-host .repo img {
-  width: 100% !important;
-  max-width: 100% !important;
+  margin-top: 0.18rem;
+
+  color: var(--global-text-color);
+
+  font-size: 0.9rem;
+}
+
+.cv-interest-name {
+  color: var(--global-text-color);
+
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+/* =========================================================
+   CV - TOC sidebar
+   ========================================================= */
+
+@media (min-width: 576px) {
+  .container[role="main"] > .row:has(.cv) {
+    display: grid !important;
+
+    grid-template-columns: 180px minmax(0, 1fr);
+    column-gap: 1.25rem;
+  }
+
+  .container[role="main"] > .row:has(.cv) > .col-sm-3 {
+    width: auto !important;
+    max-width: none !important;
+
+    flex: none !important;
+
+    padding-left: 0 !important;
+    padding-right: 0.5rem !important;
+  }
+
+  .container[role="main"] > .row:has(.cv) > .col-sm-9 {
+    width: auto !important;
+    max-width: none !important;
+
+    flex: none !important;
+
+    padding-left: 0.5rem !important;
+    padding-right: 0 !important;
+  }
+
+  #toc-sidebar {
+    width: 170px;
+    max-width: 170px;
+  }
+}
+
+/* =========================================================
+   CV - Mobile
+   ========================================================= */
+
+@media (max-width: 576px) {
+  .cv-org-group {
+    padding: 1.1rem 0 1.3rem;
+  }
+
+  .cv-org-header {
+    grid-template-columns: 50px minmax(0, 1fr);
+    column-gap: 0.7rem;
+
+    margin-bottom: 0.95rem;
+  }
+
+  .cv-org-logo-box {
+    width: 50px;
+    height: 42px;
+  }
+
+  .cv-org-logo {
+    max-width: 44px !important;
+    max-height: 36px !important;
+  }
+
+  /*
+   * Mobile:
+   *
+   * [timeline] [date]
+   *            [content]
+   */
+
+  .cv-role-row {
+    grid-template-columns: 16px minmax(0, 1fr);
+    column-gap: 0.55rem;
+    row-gap: 0.25rem;
+
+    padding-bottom: 1.2rem;
+  }
+
+  .cv-role-rail {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+
+    min-width: 16px;
+  }
+
+  .cv-role-date {
+    grid-column: 2;
+    grid-row: 1;
+
+    font-size: 0.82rem;
+  }
+
+  .cv-role-body {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  .cv-role-title {
+    font-size: 0.97rem;
+  }
+
+  .cv-role-line {
+    bottom: -1.2rem;
+  }
+
+  .cv-degree-area {
+    margin-left: 0.65rem !important;
+  }
+}
+
+/* =========================================================
+   Publications - Journal / Conference divider
+   ========================================================= */
+
+.conference-section {
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+
+  border-top: 1px solid var(--global-divider-color);
+}
+
+/* =========================================================
+   Project detail page
+   ========================================================= */
+
+.post img {
+  max-width: 100%;
 
   height: auto;
 }
 
+/* Markdown / HTML bold */
+.post strong,
+.post b {
+  font-weight: 700 !important;
+}
+
+/* Hide citation inserted only for Related Publications */
+.hidden-project-citation {
+  display: none;
+}
 
 /* =========================================================
-   Navigation arrows
+   Projects - Cards
+   Shared between About and /projects/
    ========================================================= */
 
-.showcase-arrow {
-  position: absolute;
 
-  top: 50%;
-  z-index: 30;
+/* Card */
 
+.projects .project-card {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  height: 100%;
+
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   Project thumbnail
+   ========================================================= */
+
+.projects .project-thumbnail-wrapper {
+  position: relative;
+
+  width: 100%;
+
+  /*
+   * 모든 프로젝트 이미지 영역이 동일한 비율
+   */
+  aspect-ratio: 16 / 9;
+
+  overflow: hidden;
+
+  background-color: #fff;
+}
+
+.projects .project-thumbnail-wrapper figure,
+.projects .project-thumbnail-wrapper picture {
+  display: block;
+
+  width: 100% !important;
+  height: 100% !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.projects .project-thumbnail {
+  display: block;
+
+  width: 100% !important;
+  height: 100% !important;
+
+  margin: 0 !important;
+}
+
+
+/* Photo / rendered image */
+
+.projects .project-thumbnail-cover {
+  object-fit: cover;
+  object-position: center;
+}
+
+
+/* Diagram / paper / PDF-style thumbnail */
+
+
+/* =========================================================
+   Project card body
+   Fixed height
+   ========================================================= */
+
+.projects .project-card .card-body {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+
+  /*
+   * 제목 길이와 description 길이에 관계없이
+   * 모든 카드 본문 높이를 동일하게 유지
+   */
+  height: 210px;
+  min-height: 210px;
+  max-height: 210px;
+
+  flex: 0 0 210px;
+
+  padding: 1rem 1.15rem;
+
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   Project title
+   Modern 2-line clamp
+   ========================================================= */
+
+.projects .project-card .card-title {
+  display: -webkit-box;
+
+  min-height: 3.05rem;
+  max-height: 3.05rem;
+
+  margin: 0 0 0.45rem !important;
+  padding: 0 !important;
+
+  overflow: hidden;
+
+  font-size: 1.05rem;
+  font-weight: 600;
+  line-height: 1.45;
+
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+
+  line-clamp: 2;
+}
+
+.projects .project-card .card-title a {
+  color: inherit;
+
+  text-decoration: none;
+}
+
+
+/* =========================================================
+   Project period
+   ========================================================= */
+
+.projects .project-period {
   display: flex;
   align-items: center;
-  justify-content: center;
+  flex-wrap: nowrap;
 
-  width: 40px;
-  height: 40px;
+  min-height: 1.25rem;
 
-  padding: 0;
+  margin: 0 0 0.55rem;
 
   color: var(--global-text-color);
-  background: var(--global-bg-color);
 
-  border: 1px solid var(--global-divider-color);
-  border-radius: 50%;
+  font-size: 0.86rem;
+  font-weight: 400;
+  line-height: 1.3;
 
-  box-shadow: 0 3px 12px rgb(0 0 0 / 16%);
+  opacity: 0.68;
 
-  font-family: Arial, sans-serif;
-  font-size: 1.8rem;
-  font-weight: 300;
-  line-height: 1;
+  white-space: nowrap;
 
-  cursor: pointer;
-
-  transform: translateY(-50%);
-
-  transition:
-    color 0.15s ease,
-    background-color 0.15s ease,
-    border-color 0.15s ease,
-    opacity 0.15s ease,
-    transform 0.15s ease;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.showcase-prev {
-  left: -20px;
-}
-
-.showcase-next {
-  right: -20px;
-}
-
-.showcase-arrow:hover:not(:disabled) {
-  color: var(--global-theme-color);
-
-  border-color: var(--global-theme-color);
-
-  transform: translateY(-50%) scale(1.06);
-}
-
-.showcase-arrow:disabled {
-  opacity: 0.2;
-
-  cursor: default;
-
-  transform: translateY(-50%);
-}
-
-.showcase-arrow[hidden] {
-  display: none !important;
+.projects .project-period-separator {
+  margin: 0 0.35rem;
 }
 
 
 /* =========================================================
-   Large page sections
-   Projects / Repositories pages
+   Project description
    ========================================================= */
 
-.project-category-section,
-.repository-section {
-  width: 100%;
-}
+.projects .project-card .card-text {
+  display: -webkit-box;
 
-.project-category-section + .project-category-section {
-  margin-top: 3rem;
-}
+  margin: 0;
 
-.repository-section + .repository-section {
-  margin-top: 3rem;
-}
+  overflow: hidden;
 
-.showcase-large-carousel {
-  margin-top: 1.25rem;
+  font-size: 0.92rem;
+  line-height: 1.4;
+
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+
+  line-clamp: 2;
 }
 
 
 /* =========================================================
-   About Publications Pagination
+   GitHub
    ========================================================= */
 
-.publication-pagination {
+
+/* =========================================================
+   Project number badge
+   ========================================================= */
+
+.projects .project-index {
+  position: absolute;
+
+  top: 0.8rem;
+  left: 0.8rem;
+
+  z-index: 10;
+
   display: flex;
-  align-items: center;
-  justify-content: center;
-
-  gap: 0.3rem;
-
-  width: 100%;
-
-  margin-top: 1.75rem;
-  margin-bottom: 0.5rem;
-}
-
-.publication-pagination button {
-  display: inline-flex;
   align-items: center;
   justify-content: center;
 
@@ -320,285 +1328,157 @@
 
   padding: 0 0.55rem;
 
-  color: var(--global-text-color);
-  background: transparent;
+  color: #fff;
 
-  border: 0;
-  border-radius: 50%;
+  background: rgb(20 20 20 / 58%);
 
-  font-family: inherit;
-  font-size: 0.95rem;
-  font-weight: 400;
+  border: 1px solid rgb(255 255 255 / 22%);
+  border-radius: 8px;
+
+  box-shadow: 0 2px 10px rgb(0 0 0 / 12%);
+
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  font-size: 0.9rem;
+  font-weight: 600;
+
+  font-variant-numeric: tabular-nums;
+
   line-height: 1;
 
-  cursor: pointer;
-
-  transition:
-    color 0.15s ease,
-    background-color 0.15s ease,
-    opacity 0.15s ease;
-}
-
-.publication-pagination button:hover:not(:disabled) {
-  color: var(--global-theme-color);
-
-  background:
-    color-mix(
-      in srgb,
-      var(--global-theme-color) 10%,
-      transparent
-    );
-}
-
-.publication-pagination button.active {
-  color: #fff;
-  background: var(--global-theme-color);
-
-  font-weight: 600;
-}
-
-.publication-pagination .publication-pagination-arrow {
-  font-size: 1.35rem;
-}
-
-.publication-pagination button:disabled {
-  opacity: 0.25;
-
-  cursor: default;
+  pointer-events: none;
 }
 
 
 /* =========================================================
-   Tablet
-   ========================================================= */
-
-@media (max-width: 991px) {
-  .showcase-source {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .showcase-page-grid {
-    gap: 1rem;
-  }
-
-  .showcase-prev {
-    left: -15px;
-  }
-
-  .showcase-next {
-    right: -15px;
-  }
-}
-
-
-/* =========================================================
-   Mobile
-   One card at a time
+   Project mobile
    ========================================================= */
 
 @media (max-width: 576px) {
-  .showcase-source {
-    grid-template-columns: 1fr;
+  .projects .project-card .card-body {
+    height: 205px;
+    min-height: 205px;
+    max-height: 205px;
 
-    gap: 0.9rem;
+    flex-basis: 205px;
+
+    padding: 0.95rem 1rem;
   }
 
+  .projects .project-card .card-title {
+    min-height: 2.9rem;
+    max-height: 2.9rem;
 
-  /*
-   * Swipe is the primary navigation on mobile.
-   */
-
-  .showcase-track {
-    gap: 0.85rem;
-
-    padding-right: 8%;
+    font-size: 1rem;
+    line-height: 1.4;
   }
 
-
-  /*
-   * 92% width leaves a small portion of the next card
-   * visible, indicating that users can swipe.
-   */
-
-  .showcase-page {
-    flex-basis: 92%;
-    width: 92%;
+  .projects .project-period {
+    font-size: 0.84rem;
   }
 
-  .showcase-page-grid {
-    grid-template-columns: 1fr !important;
-
-    gap: 0.9rem;
-  }
-
-
-  /*
-   * Hide desktop arrows.
-   */
-
-  .showcase-arrow {
-    display: none !important;
-  }
-
-
-  /*
-   * Slightly tighter pagination on mobile.
-   */
-
-  .publication-pagination {
-    gap: 0.2rem;
-
-    margin-top: 1.4rem;
-  }
-
-  .publication-pagination button {
-    min-width: 32px;
-    height: 32px;
-
-    padding: 0 0.45rem;
-
+  .projects .project-card .card-text {
     font-size: 0.9rem;
   }
-
-  .publication-pagination .publication-pagination-arrow {
-    font-size: 1.25rem;
-  }
-
-
-  .project-category-section + .project-category-section,
-  .repository-section + .repository-section {
-    margin-top: 2.25rem;
-  }
 }
-
-
 
 /* =========================================================
-   Repositories page
-   Desktop: 2 columns × 3 rows
+   Project previous / next navigation
    ========================================================= */
 
-.repository-main-heading,
-.repository-section-title {
-  margin-top: 1.5rem;
-  margin-bottom: 1.25rem;
-}
+.project-navigation {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
 
-.repository-section {
-  width: 100%;
-}
-
-.repository-section + .repository-section {
   margin-top: 3rem;
+  padding-top: 1.5rem;
+
+  border-top: 1px solid var(--global-divider-color);
 }
 
-
-/* Repository carousel itself */
-
-.repository-page-carousel {
-  width: 100%;
-  max-width: none;
-}
-
-
-/*
- * Repository page must use two columns on desktop.
- * This also restores the wider, original-looking cards.
- */
-
-.repository-page-carousel .showcase-page-grid {
-  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-
-  column-gap: 1.5rem;
-  row-gap: 1.15rem;
-}
-
-
-/* Fallback before JavaScript runs */
-
-.repository-page-carousel .showcase-source {
-  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-
-  column-gap: 1.5rem;
-  row-gap: 1.15rem;
-}
-
-
-/* Repository card container */
-
-.repository-page-carousel .showcase-item {
-  width: 100%;
+.project-nav-prev,
+.project-nav-next {
   min-width: 0;
 }
 
-.repository-page-carousel .showcase-repo-host {
-  display: block !important;
-
-  width: 100% !important;
-  max-width: none !important;
-
-  margin: 0 !important;
-  padding: 0 !important;
+.project-nav-next {
+  text-align: right;
 }
 
-
-/* Actual repository card */
-
-.repository-page-carousel .showcase-repo-host .repo {
-  width: 100% !important;
-  max-width: 100% !important;
-
-  margin: 0 !important;
+.project-navigation a {
+  text-decoration: none;
 }
 
+.project-nav-label {
+  display: block;
+  margin-bottom: 0.25rem;
 
-/*
- * Keep al-folio light/dark image handling intact.
- * Do not set display:block here.
- */
-
-.repository-page-carousel .showcase-repo-host .repo img {
-  width: 100% !important;
-  max-width: 100% !important;
-
-  height: auto;
+  font-size: 0.8rem;
+  color: var(--global-text-color-light);
 }
 
+.project-nav-title {
+  display: block;
 
-/* =========================================================
-   Tablet
-   ========================================================= */
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1.4;
 
-@media (max-width: 991px) {
-  .repository-page-carousel .showcase-page-grid,
-  .repository-page-carousel .showcase-source {
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-
-    column-gap: 1rem;
-    row-gap: 1rem;
-  }
+  color: var(--global-theme-color);
 }
 
-
-/* =========================================================
-   Mobile
-   One repository per swipe
-   ========================================================= */
-
+/* Mobile */
 @media (max-width: 576px) {
-  .repository-page-carousel .showcase-page-grid,
-  .repository-page-carousel .showcase-source {
-    grid-template-columns: 1fr !important;
+  .project-navigation {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
 
-    gap: 0.9rem;
+    margin-top: 2.5rem;
   }
 
-  .repository-page-carousel .showcase-page {
-    flex-basis: 92%;
-    width: 92%;
+  .project-nav-next {
+    text-align: right;
   }
 
-  .repository-section + .repository-section {
-    margin-top: 2.25rem;
+  .project-nav-title {
+    font-size: 0.9rem;
+  }
+}
+
+/* =========================================================
+   Project detail - Research figures
+   ========================================================= */
+
+.project-figure {
+  width: 100%;
+  max-width: 1000px;
+
+  margin: 2rem auto;
+
+  overflow: hidden;
+
+  text-align: center;
+}
+
+.project-figure img {
+  display: block;
+
+  width: 100%;
+  height: auto;
+
+  max-width: 100%;
+
+  margin: 0 auto;
+
+  object-fit: contain;
+}
+
+/* Mobile */
+@media (max-width: 576px) {
+  .project-figure {
+    width: 100%;
+    margin: 1.5rem auto;
   }
 }
