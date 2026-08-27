@@ -1047,17 +1047,3 @@ samp {
   margin: 0 !important;
 }
 
-
-/*
- * 기존 li의 margin-bottom이 남아 있으면
- * space-between 간격이 정확히 균등하지 않으므로 제거.
- */
-.about-paginated-publications
-ol.bibliography > li,
-
-.publications-page
-.publication-section
-ol.bibliography > li {
-  margin-top: 0 !important;
-  margin-bottom: 0 !important;
-}
