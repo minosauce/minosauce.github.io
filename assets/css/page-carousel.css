@@ -24,6 +24,15 @@
 
 /* Individual slide */
 
+.page-carousel-slide {
+  flex: 0 0 auto;
+
+  min-width: 0;
+
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
 
 /* =========================================================
    Projects page
@@ -56,8 +65,16 @@
 
 /* Previous */
 
+.page-carousel-prev {
+  left: -20px;
+}
+
 
 /* Next */
+
+.page-carousel-next {
+  right: -20px;
+}
 
 
 /* Hover */
