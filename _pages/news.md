@@ -11,7 +11,7 @@ nav_order: 50
   href="{{ '/assets/css/news-pagination.css' | relative_url }}"
 >
 
-{% include news.liquid per_page=5 %}
+{% include news.liquid per_page=8 %}
 
 <script src="{{ '/assets/js/news-pagination.js' | relative_url }}"></script>
 
