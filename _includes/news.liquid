@@ -17,19 +17,25 @@
 
 {% assign news_items = site.news | sort: 'date' | reverse %}
 
-{% if include.limit %}
-  {% if page.announcements.limit %}
-    {% assign news_limit = page.announcements.limit %}
-  {% else %}
-    {% assign news_limit = 5 %}
-  {% endif %}
+{% if include.per_page %}
+  {% assign news_per_page = include.per_page %}
+{% elsif include.limit %}
+  {% assign news_per_page = page.announcements.limit | default: 5 %}
 {% else %}
-  {% assign news_limit = news_items.size %}
+  {% assign news_per_page = 0 %}
+{% endif %}
+
+{% if news_per_page > 0 %}
+<div
+  data-news-pagination
+  data-per-page="{{ news_per_page }}"
+>
 {% endif %}
 
 <div class="news-list-custom">
 
-  {% for item in news_items limit: news_limit %}
+
+  {% for item in news_items %}
 
     {% assign preview_image = item.img %}
 
@@ -117,3 +123,7 @@
   {% endfor %}
 
 </div>
+
+{% if news_per_page > 0 %}
+</div>
+{% endif %}
