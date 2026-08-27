@@ -1,71 +1,110 @@
-<div class="news">
-  {% if site.news != blank %}
-    {% assign news_size = site.news | size %}
+{% comment %}
+  News list
 
-    <div
-      class="news-list-custom"
-      {% if include.limit and page.announcements.scrollable and news_size > 3 %}
-        style="max-height: 60vw; overflow-y: auto;"
-      {% endif %}
-    >
-      {% assign news = site.news | reverse %}
+  Usage:
 
-      {% if include.limit and page.announcements.limit %}
-        {% assign news_limit = page.announcements.limit %}
-      {% else %}
-        {% assign news_limit = news_size %}
-      {% endif %}
+  Full News page:
+  {% include news.liquid per_page=15 %}
 
-      {% for item in news limit: news_limit %}
-        <div class="news-item{% unless item.preview %} news-item-no-preview{% endunless %}">
-          <!-- Date -->
+  About page:
+  {% include news.liquid per_page=5 %}
+{% endcomment %}
+
+{% assign sorted_news = site.news | sort: 'date' | reverse %}
+
+{% assign news_per_page = include.per_page | default: 15 %}
+
+<div
+  class="news-pagination-container"
+  data-news-pagination
+  data-per-page="{{ news_per_page }}"
+>
+  <div class="news-list-custom">
+    {% for item in sorted_news %}
+
+      {% assign news_image = item.img | default: item.image | default: item.thumbnail %}
+
+      {% if news_image %}
+        <div class="news-item">
+
           <div class="news-date">
-            <span class="news-date-desktop">
-              {{ item.date | date: '%b %d, %Y' }}
-            </span>
-
-            <span class="news-date-mobile">
-              {{ item.date | date: '%b %d,' -}}
-              <br>
-              {{ item.date | date: '%Y' }}
-            </span>
+            {{ item.date | date: "%b %d, %Y" }}
           </div>
 
-          <!-- Title / content -->
           <div class="news-content">
-            {% if item.inline %}
-              {{ item.content | remove: '<p>' | remove: '</p>' | emojify }}
+            <div class="news-title">
+              {% if item.redirect %}
+                <a
+                  href="{{ item.redirect }}"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {{ item.title }}
+                </a>
+              {% else %}
+                <a href="{{ item.url | relative_url }}">
+                  {{ item.title }}
+                </a>
+              {% endif %}
+            </div>
+          </div>
+
+          <div class="news-thumbnail">
+            {% if item.redirect %}
+              <a
+                href="{{ item.redirect }}"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  src="{{ news_image | relative_url }}"
+                  alt="{{ item.title }}"
+                  loading="lazy"
+                >
+              </a>
             {% else %}
-              <a class="news-title" href="{{ item.url | relative_url }}">
-                {{ item.title }}
+              <a href="{{ item.url | relative_url }}">
+                <img
+                  src="{{ news_image | relative_url }}"
+                  alt="{{ item.title }}"
+                  loading="lazy"
+                >
               </a>
             {% endif %}
           </div>
 
-          <!-- Thumbnail -->
-          {% if item.preview %}
-            <div class="news-thumbnail">
-              {% if item.inline %}
-                <img
-                  src="{{ item.preview | relative_url }}"
-                  alt="{{ item.title | default: 'News image' }}"
-                  loading="lazy"
+        </div>
+
+      {% else %}
+
+        <div class="news-item news-item-no-preview">
+
+          <div class="news-date">
+            {{ item.date | date: "%b %d, %Y" }}
+          </div>
+
+          <div class="news-content">
+            <div class="news-title">
+              {% if item.redirect %}
+                <a
+                  href="{{ item.redirect }}"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
+                  {{ item.title }}
+                </a>
               {% else %}
                 <a href="{{ item.url | relative_url }}">
-                  <img
-                    src="{{ item.preview | relative_url }}"
-                    alt="{{ item.title }}"
-                    loading="lazy"
-                  >
+                  {{ item.title }}
                 </a>
               {% endif %}
             </div>
-          {% endif %}
+          </div>
+
         </div>
-      {% endfor %}
-    </div>
-  {% else %}
-    <p>No news so far...</p>
-  {% endif %}
+
+      {% endif %}
+
+    {% endfor %}
+  </div>
 </div>
