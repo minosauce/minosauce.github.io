@@ -13,7 +13,8 @@
    Strategy:
    - Measure every page invisibly.
    - Find the tallest page.
-   - Set that height as min-height of the content area.
+   - Set that height directly as min-height
+     of the content area.
    ========================================================= */
 
 function initializePaginationStability() {
@@ -116,9 +117,10 @@ function initializePaginationStability() {
     });
 
 
-  /*
-   * 중복 target 제거
-   */
+  /* =======================================================
+     Remove duplicate targets
+     ======================================================= */
+
   const uniqueTargets =
     targets.filter(
       (target, index, array) =>
@@ -131,7 +133,7 @@ function initializePaginationStability() {
 
 
   /* =======================================================
-     Make one measurement copy
+     Measure tallest page
      ======================================================= */
 
   function measureTallestPage(
@@ -143,17 +145,14 @@ function initializePaginationStability() {
       list.getBoundingClientRect()
         .width;
 
-    if (
-      originalWidth <= 0
-    ) {
+    if (originalWidth <= 0) {
       return;
     }
 
 
     /*
-     * 실제 화면을 건드리지 않고
-     * 같은 위치/같은 CSS context에서
-     * invisible clone으로 측정
+     * Create an invisible clone so that
+     * measurement does not affect the live page.
      */
     const clone =
       list.cloneNode(true);
@@ -209,17 +208,15 @@ function initializePaginationStability() {
       );
 
 
-    if (
-      items.length === 0
-    ) {
+    if (items.length === 0) {
       clone.remove();
       return;
     }
 
 
     /*
-     * 기존 pagination JS가 적용한
-     * 숨김 상태를 clone에서는 전부 해제
+     * Remove any pagination-hidden state
+     * from the cloned elements.
      */
     items.forEach((item) => {
       item.hidden = false;
@@ -245,10 +242,10 @@ function initializePaginationStability() {
     let maximumHeight = 0;
 
 
-    /*
-     * 각 page를 하나씩 실제 rendering해서
-     * 높이를 측정
-     */
+    /* =====================================================
+       Measure each page independently
+       ===================================================== */
+
     for (
       let page = 0;
       page < totalPages;
@@ -297,40 +294,26 @@ function initializePaginationStability() {
     }
 
 
+    /*
+     * Remove measurement clone.
+     */
     clone.remove();
 
 
-if (maximumHeight > 0) {
-  /*
-   * tallest page 높이를 그대로 예약하면
-   * 마지막 페이지에서 빈 공간이 너무 커지므로
-   * 약 6rem만큼 예약 높이를 줄인다.
-   *
-   * 실제 content가 이보다 높으면
-   * CSS가 자동으로 늘어나므로 내용이 잘리지는 않는다.
-   */
-  const rootFontSize =
-    parseFloat(
-      getComputedStyle(
-        document.documentElement
-      ).fontSize
-    ) || 16;
-
-  const reduction =
-    0 * rootFontSize;
-
-  const stableHeight =
-    Math.max(
-      0,
-      Math.ceil(maximumHeight) -
-        reduction
-    );
-
-  list.style.minHeight =
-    `${stableHeight}px`;
-   }
+    /*
+     * Use the tallest page height directly.
+     *
+     * This keeps the pagination control at
+     * the same vertical position when the
+     * user changes pages.
+     */
+    if (maximumHeight > 0) {
+      list.style.minHeight =
+        `${Math.ceil(maximumHeight)}px`;
+    }
   }
-   
+
+
   /* =======================================================
      Measure all paginated sections
      ======================================================= */
@@ -343,8 +326,8 @@ if (maximumHeight > 0) {
         perPage,
       }) => {
         /*
-         * 이전 측정값이 width 계산에
-         * 영향을 주지 않도록 일시 해제
+         * Remove the previous measurement first
+         * so it cannot affect re-measurement.
          */
         list.style.removeProperty(
           "min-height",
@@ -360,9 +343,10 @@ if (maximumHeight > 0) {
   }
 
 
-  /*
-   * 최초 측정
-   */
+  /* =======================================================
+     Initial measurement
+     ======================================================= */
+
   requestAnimationFrame(
     () => {
       requestAnimationFrame(
@@ -395,7 +379,7 @@ if (maximumHeight > 0) {
 
 
   /* =======================================================
-     Web font rendering 완료 후 재측정
+     Re-measure after web fonts are ready
      ======================================================= */
 
   if (document.fonts?.ready) {
@@ -407,10 +391,10 @@ if (maximumHeight > 0) {
   }
 
 
-  /*
-   * 이미지 등 모든 resource가 로드된 뒤
-   * 마지막으로 한 번 재측정
-   */
+  /* =======================================================
+     Re-measure after all resources are loaded
+     ======================================================= */
+
   window.addEventListener(
     "load",
     updateAllHeights,
