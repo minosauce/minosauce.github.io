@@ -264,6 +264,10 @@
   transform: translateY(-50%);
 }
 
+.about-carousel.no-scroll .about-carousel-arrow {
+  display: none;
+}
+
 
 /* =========================================================
    Tablet
