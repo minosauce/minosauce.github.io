@@ -470,3 +470,135 @@
     margin-top: 2.25rem;
   }
 }
+
+
+
+/* =========================================================
+   Repositories page
+   Desktop: 2 columns × 3 rows
+   ========================================================= */
+
+.repository-main-heading,
+.repository-section-title {
+  margin-top: 1.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.repository-section {
+  width: 100%;
+}
+
+.repository-section + .repository-section {
+  margin-top: 3rem;
+}
+
+
+/* Repository carousel itself */
+
+.repository-page-carousel {
+  width: 100%;
+  max-width: none;
+}
+
+
+/*
+ * Repository page must use two columns on desktop.
+ * This also restores the wider, original-looking cards.
+ */
+
+.repository-page-carousel .showcase-page-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+
+  column-gap: 1.5rem;
+  row-gap: 1.15rem;
+}
+
+
+/* Fallback before JavaScript runs */
+
+.repository-page-carousel .showcase-source {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+
+  column-gap: 1.5rem;
+  row-gap: 1.15rem;
+}
+
+
+/* Repository card container */
+
+.repository-page-carousel .showcase-item {
+  width: 100%;
+  min-width: 0;
+}
+
+.repository-page-carousel .showcase-repo-host {
+  display: block !important;
+
+  width: 100% !important;
+  max-width: none !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+
+/* Actual repository card */
+
+.repository-page-carousel .showcase-repo-host .repo {
+  width: 100% !important;
+  max-width: 100% !important;
+
+  margin: 0 !important;
+}
+
+
+/*
+ * Keep al-folio light/dark image handling intact.
+ * Do not set display:block here.
+ */
+
+.repository-page-carousel .showcase-repo-host .repo img {
+  width: 100% !important;
+  max-width: 100% !important;
+
+  height: auto;
+}
+
+
+/* =========================================================
+   Tablet
+   ========================================================= */
+
+@media (max-width: 991px) {
+  .repository-page-carousel .showcase-page-grid,
+  .repository-page-carousel .showcase-source {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+
+    column-gap: 1rem;
+    row-gap: 1rem;
+  }
+}
+
+
+/* =========================================================
+   Mobile
+   One repository per swipe
+   ========================================================= */
+
+@media (max-width: 576px) {
+  .repository-page-carousel .showcase-page-grid,
+  .repository-page-carousel .showcase-source {
+    grid-template-columns: 1fr !important;
+
+    gap: 0.9rem;
+  }
+
+  .repository-page-carousel .showcase-page {
+    flex-basis: 92%;
+    width: 92%;
+  }
+
+  .repository-section + .repository-section {
+    margin-top: 2.25rem;
+  }
+}
