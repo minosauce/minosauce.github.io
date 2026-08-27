@@ -11,7 +11,6 @@ display_categories:
 ---
 
 
-
 <link
   rel="stylesheet"
   href="{{ '/assets/css/page-carousel.css' | relative_url }}"
@@ -30,6 +29,7 @@ display_categories:
       {% assign categorized_projects = site.projects | where: 'category', category %}
       {% assign sorted_projects = categorized_projects | sort: 'date' | reverse %}
 
+
       <div
         class="page-carousel page-project-carousel"
         data-page-carousel
@@ -43,14 +43,16 @@ display_categories:
           ‹
         </button>
 
+
         <div
-          class="page-carousel-track"
-          data-page-carousel-track
+          class="page-carousel-source"
+          data-page-carousel-source
+          hidden
         >
 
           {% for project in sorted_projects %}
 
-            <div class="page-carousel-slide page-project-slide">
+            <div class="page-project-item">
 
               <div class="projects">
 
@@ -66,6 +68,13 @@ display_categories:
           {% endfor %}
 
         </div>
+
+
+        <div
+          class="page-carousel-track"
+          data-page-carousel-track
+        ></div>
+
 
         <button
           class="page-carousel-arrow page-carousel-next"
@@ -85,6 +94,7 @@ display_categories:
 
     {% assign sorted_projects = site.projects | sort: 'date' | reverse %}
 
+
     <div
       class="page-carousel page-project-carousel"
       data-page-carousel
@@ -98,14 +108,16 @@ display_categories:
         ‹
       </button>
 
+
       <div
-        class="page-carousel-track"
-        data-page-carousel-track
+        class="page-carousel-source"
+        data-page-carousel-source
+        hidden
       >
 
         {% for project in sorted_projects %}
 
-          <div class="page-carousel-slide page-project-slide">
+          <div class="page-project-item">
 
             <div class="projects">
 
@@ -122,6 +134,13 @@ display_categories:
 
       </div>
 
+
+      <div
+        class="page-carousel-track"
+        data-page-carousel-track
+      ></div>
+
+
       <button
         class="page-carousel-arrow page-carousel-next"
         type="button"
@@ -135,5 +154,6 @@ display_categories:
   {% endif %}
 
 </div>
+
 
 <script src="{{ '/assets/js/page-carousel.js' | relative_url }}"></script>
