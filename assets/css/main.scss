@@ -109,10 +109,27 @@ samp {
 
 
 /* =========================================================
-   Publications - Shared marker geometry
+   Publications - Marker geometry
    ========================================================= */
 
-:root {
+
+/* ---------------------------------------------------------
+   About - Publications
+   Bullet (•) marker
+   --------------------------------------------------------- */
+
+.about-paginated-publications {
+  --publication-marker-width: 1.5rem;
+  --publication-marker-gap: 2.0rem;
+}
+
+
+/* ---------------------------------------------------------
+   Publications Page
+   [J.n] / [C.n] marker
+   --------------------------------------------------------- */
+
+.publications-page {
   --publication-marker-width: 4.5rem;
   --publication-marker-gap: 2.0rem;
 }
