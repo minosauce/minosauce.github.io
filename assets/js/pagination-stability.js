@@ -31,7 +31,7 @@
  * 1.5  = 조금 넓게
  * 2.0  = 많이 넓게
  */
-const PUBLICATION_SLOT_GAP_REM = 1.5;
+const PUBLICATION_SLOT_GAP_REM = 1.0;
 
 
 function initializePaginationStability() {
@@ -512,108 +512,117 @@ function initializePaginationStability() {
       slotHeight * perPage;
 
 
-    /* -----------------------------------------------------
-       Live list에 virtual slots 적용
-       ----------------------------------------------------- */
+   /* -----------------------------------------------------
+      Apply virtual publication slots
+   
+      핵심:
+      - slotHeight는 "최소 높이"일 뿐이다.
+      - 내용이 길면 publication 자체가 자연스럽게 더 커진다.
+      - 따라서 모바일 줄바꿈에서도 겹치지 않는다.
+      ----------------------------------------------------- */
+   
+   /*
+    * flex 기반 space-between을 사용하지 않는다.
+    *
+    * 일반적인 위→아래 document flow로 배치한다.
+    */
+   list.style.setProperty(
+     "display",
+     "block",
+     "important",
+   );
+   
+   list.style.removeProperty(
+     "flex-direction",
+   );
+   
+   list.style.removeProperty(
+     "justify-content",
+   );
+   
+   list.style.removeProperty(
+     "gap",
+   );
+   
+   
+   /*
+    * 항상 perPage개의 가상 slot이 존재하는 것처럼
+    * 전체 최소 높이를 확보한다.
+    *
+    * 예:
+    * slotHeight = 150px
+    * perPage = 5
+    *
+    * min-height = 750px
+    */
+   list.style.setProperty(
+     "min-height",
+     `${listHeight}px`,
+   );
+   
+   
+   liveItems.forEach((item) => {
+     /*
+      * 기존 margin 대신 slotHeight가
+      * publication 간 기본 세로 간격을 담당한다.
+      */
+     item.style.setProperty(
+       "margin-top",
+       "0",
+       "important",
+     );
+   
+     item.style.setProperty(
+       "margin-bottom",
+       "0",
+       "important",
+     );
+   
+     item.style.setProperty(
+       "box-sizing",
+       "border-box",
+       "important",
+     );
+   
+   
+     /*
+      * 중요:
+      *
+      * height나 flex-basis를 고정하지 않는다.
+      *
+      * publication 내용이 짧으면
+      * slotHeight만큼 공간을 차지하고,
+      *
+      * 모바일에서 내용이 여러 줄로 길어지면
+      * slotHeight보다 더 크게 자동 확장된다.
+      */
+     item.style.setProperty(
+       "min-height",
+       `${slotHeight}px`,
+       "important",
+     );
+   
+     item.style.removeProperty(
+       "height",
+     );
+   
+     item.style.removeProperty(
+       "flex-basis",
+     );
+   
+     item.style.removeProperty(
+       "flex-grow",
+     );
+   
+     item.style.removeProperty(
+       "flex-shrink",
+     );
+   });
 
-    /*
-     * 기존 space-between을 무력화.
-     *
-     * 모든 publication은 위쪽부터
-     * 고정 slot 단위로 차례대로 배치된다.
-     */
-    list.style.setProperty(
-      "display",
-      "flex",
-      "important",
-    );
-
-    list.style.setProperty(
-      "flex-direction",
-      "column",
-      "important",
-    );
-
-    list.style.setProperty(
-      "justify-content",
-      "flex-start",
-      "important",
-    );
-
-    list.style.setProperty(
-      "gap",
-      "0",
-      "important",
-    );
 
 
-    /*
-     * 항상 perPage 개수만큼
-     * virtual slot 공간 확보
-     */
-    list.style.setProperty(
-      "min-height",
-      `${listHeight}px`,
-    );
 
-
-    liveItems.forEach((item) => {
-      /*
-       * 기존 margin 대신
-       * slot 자체가 논문 간격까지 담당.
-       */
-      item.style.setProperty(
-        "margin-top",
-        "0",
-        "important",
-      );
-
-      item.style.setProperty(
-        "margin-bottom",
-        "0",
-        "important",
-      );
-
-
-      item.style.setProperty(
-        "box-sizing",
-        "border-box",
-        "important",
-      );
-
-
-      /*
-       * 각 publication이 정확히
-       * 한 slot을 차지한다.
-       */
-      item.style.setProperty(
-        "min-height",
-        `${slotHeight}px`,
-        "important",
-      );
-
-
-      item.style.setProperty(
-        "flex-basis",
-        `${slotHeight}px`,
-        "important",
-      );
-
-
-      item.style.setProperty(
-        "flex-grow",
-        "0",
-        "important",
-      );
-
-
-      item.style.setProperty(
-        "flex-shrink",
-        "0",
-        "important",
-      );
-    });
-  }
+     
 
 
   /* =======================================================
