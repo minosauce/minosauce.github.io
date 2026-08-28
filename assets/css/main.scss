@@ -159,14 +159,6 @@ samp {
   );
 }
 
-/* Full Publications page */
-.publications-page .pub-numbered ol.bibliography > li {
-  padding-left: calc(
-    var(--publication-marker-width) +
-    var(--publication-marker-gap)
-  );
-}
-
 .publications-page .pub-numbered ol.bibliography > li::before {
   position: absolute !important;
 
@@ -1001,49 +993,16 @@ samp {
 }
 
 /* =========================================================
-   Paginated Publications - Equal vertical distribution
+   Paginated Publications
    ========================================================= */
 
 /*
- * 가장 큰 페이지 높이는 pagination-stability.js가
- * min-height로 고정한다.
+ * Publication page height stabilization is handled by
+ * assets/js/pagination-stability.js.
  *
- * 그 고정된 높이 안에서 현재 페이지의 publication들을
- * 위 → 아래로 등간격 배치한다.
+ * Do not force fixed li heights, flex-basis, or
+ * justify-content: space-between here.
+ *
+ * Each publication keeps its natural content height,
+ * while the JS keeps the overall paginated list height stable.
  */
-
-/* =========================================================
-   Publications - Fixed virtual slots
-   ========================================================= */
-
-.about-paginated-publications ol.bibliography,
-.publications-page .publication-section ol.bibliography {
-  display: flex;
-  flex-direction: column;
-
-  /*
-   * pagination-stability.js가 계산해서 넣어주는 값
-   */
-  min-height: calc(
-    var(--publication-slot-height, 8rem) * 5
-  );
-}
-
-.about-paginated-publications ol.bibliography > li,
-.publications-page .publication-section ol.bibliography > li {
-  /*
-   * 논문 하나당 하나의 고정 슬롯
-   */
-  min-height: var(
-    --publication-slot-height,
-    8rem
-  );
-
-  flex: 0 0 var(
-    --publication-slot-height,
-    8rem
-  );
-
-  margin: 0 !important;
-}
-
