@@ -31,7 +31,7 @@
  * 1.5  = 조금 넓게
  * 2.0  = 많이 넓게
  */
-const PUBLICATION_SLOT_GAP_REM = 1.0;
+const PUBLICATION_SLOT_GAP_REM = 0.75;
 
 
 function initializePaginationStability() {
