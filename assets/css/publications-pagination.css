@@ -250,82 +250,71 @@
 }
 
 
+
+
+
 /* ============================================================
    Under Review
    ============================================================ */
 
 
 /* ------------------------------------------------------------
-   Spacing:
    Search box -> Under Review
    ------------------------------------------------------------ */
 
 .publications-page .under-review-section {
-  margin-top: 2.5rem;
-}
-
-
-/* ------------------------------------------------------------
-   Spacing:
-   Under Review heading -> review publications
-   ------------------------------------------------------------ */
-
-.publications-page .under-review-section h2 {
-  margin-bottom: 2.25rem;
-}
-
-
-/* ------------------------------------------------------------
-   Spacing:
-   Under Review -> Journal
-   ------------------------------------------------------------ */
-
-.publications-page .journal-section {
   margin-top: 3.5rem;
 }
 
 
 /* ------------------------------------------------------------
-   Under Review numbering
-   [R.1], [R.2], ...
+   Under Review heading -> publications
    ------------------------------------------------------------ */
+
+.publications-page .under-review-section h2 {
+  margin-bottom: 2.5rem;
+}
+
+
+/* ------------------------------------------------------------
+   Under Review -> Journal
+   ------------------------------------------------------------ */
+
+.publications-page .journal-section {
+  margin-top: 4.5rem;
+}
+
+
+/* ============================================================
+   Under Review numbering
+   Reuse the exact same publication layout as Journal.
+   Only replace the label with [R.x].
+   ============================================================ */
 
 .publications-page .under-review-pubs .bibliography {
   counter-reset: review-counter;
 }
 
-
-/*
-  Journal publication titles already begin farther to the right
-  because they have the [J.x] number column.
-
-  Give Under Review the same left number column so that
-  the title text begins at the same horizontal position.
-*/
 .publications-page .under-review-pubs .bibliography > li {
   counter-increment: review-counter;
-
-  position: relative;
-
-  /*
-    This is the number-column width.
-    Adjust this value only if your Journal title column
-    uses a slightly different horizontal offset.
-  */
-  padding-left: 6.5rem;
 }
 
 
-/* [R.1] label */
+/* [R.1], [R.2], ... */
 .publications-page .under-review-pubs .bibliography > li::before {
-  content: "[R." counter(review-counter) "]";
+  content: "[R." counter(review-counter) "]" !important;
 
-  position: absolute;
-  left: 0;
-  top: 0;
+  /* regular font */
+  font-weight: 400 !important;
+}
 
-  width: 4.5rem;
 
-  font-weight: 600;
-  white-space: nowrap;
+/* ============================================================
+   Under Review title
+   Same bold style as Journal titles
+   ============================================================ */
+
+.publications-page .under-review-pubs .title,
+.publications-page .under-review-pubs .title a {
+  font-weight: 700 !important;
 }
