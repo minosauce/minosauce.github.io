@@ -20,7 +20,7 @@ nav_order: 20
     <h2>Under Review</h2>
 
     <div class="publications under-review-pubs">
-      {% bibliography --query @review %}
+      {% bibliography --query @article[status=review] %}
     </div>
   </section>
 
@@ -34,7 +34,7 @@ nav_order: 20
     <h2>Journal</h2>
 
     <div class="publications pub-numbered journal-pubs">
-      {% bibliography --query @article %}
+      {% bibliography --query @article[status!=review] %}
     </div>
 
     <nav
