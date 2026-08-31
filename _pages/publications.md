@@ -15,16 +15,16 @@ nav_order: 20
   {% include bib_search.liquid %}
 
 
-  <!-- =========================================================
-       Under Review
-       ========================================================= -->
-  <section class="publication-section under-review-section">
-    <h2>Under Review</h2>
+<!-- =========================================================
+     Under Review
+     ========================================================= -->
+<section class="publication-section under-review-section">
+  <h2>Under Review</h2>
 
-    <div class="publications under-review-pubs">
-      {% bibliography --query @article[status=review] %}
-    </div>
-  </section>
+  <div class="publications pub-numbered under-review-pubs">
+    {% bibliography --query @article[status=review] %}
+  </div>
+</section>
 
 
   <!-- =========================================================
