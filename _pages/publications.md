@@ -15,7 +15,9 @@ nav_order: 20
   {% include bib_search.liquid %}
 
 
-  <!-- Under Review -->
+  <!-- =========================================================
+       Under Review
+       ========================================================= -->
   <section class="publication-section under-review-section">
     <h2>Under Review</h2>
 
@@ -25,7 +27,9 @@ nav_order: 20
   </section>
 
 
-  <!-- Journal -->
+  <!-- =========================================================
+       Journal
+       ========================================================= -->
   <section
     class="publication-section journal-section"
     data-publication-section
@@ -45,7 +49,9 @@ nav_order: 20
   </section>
 
 
-  <!-- Conference -->
+  <!-- =========================================================
+       Conference
+       ========================================================= -->
   <section
     class="publication-section conference-section"
     data-publication-section
