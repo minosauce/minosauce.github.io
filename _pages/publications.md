@@ -2,7 +2,7 @@
 layout: page
 permalink: /publications/
 title: Publications
-description: Journal and conference publications.
+description: Journal, conference, and under-review publications.
 nav: true
 nav_order: 20
 ---
@@ -13,6 +13,16 @@ nav_order: 20
   data-per-page="5"
 >
   {% include bib_search.liquid %}
+
+
+  <!-- Under Review -->
+  <section class="publication-section under-review-section">
+    <h2>Under Review</h2>
+
+    <div class="publications under-review-pubs">
+      {% bibliography --query @review %}
+    </div>
+  </section>
 
 
   <!-- Journal -->
