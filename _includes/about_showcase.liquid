@@ -24,7 +24,7 @@
     data-publication-pagination
     data-per-page="5"
   >
-    {% bibliography %}
+    {% bibliography --query @*[status!=review] %}
   </div>
 
 </section>
