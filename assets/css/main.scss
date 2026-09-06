@@ -1006,3 +1006,102 @@ samp {
  * Each publication keeps its natural content height,
  * while the JS keeps the overall paginated list height stable.
  */
+
+
+
+/* =========================================================
+   Publications — subtle card / semi-box style
+   ========================================================= */
+
+.publications-page .pub-numbered ol.bibliography > li {
+  position: relative;
+
+  /* 카드의 핵심 */
+  border: 1px solid var(--global-divider-color);
+  border-radius: 6px;
+
+  /* 완전한 카드처럼 보이지 않도록 배경은 유지 */
+  background: transparent;
+
+  /* 내부 공간 */
+  padding-top: 1.05rem !important;
+  padding-right: 1.15rem !important;
+  padding-bottom: 1.05rem !important;
+
+  /*
+   [J.1], [C.1] 번호가 들어가는 왼쪽 공간.
+   네 기존 marker 설정을 유지하기 위한 값.
+  */
+  padding-left:
+    calc(
+      var(--publication-marker-width)
+      + var(--publication-marker-gap)
+      + 1rem
+    ) !important;
+
+  /* 논문 사이 간격 */
+  margin-top: 0.85rem !important;
+  margin-bottom: 0.85rem !important;
+
+  transition:
+    border-color 0.18s ease,
+    box-shadow 0.18s ease,
+    transform 0.18s ease;
+}
+
+
+/* [J.1], [C.1] 위치 */
+.publications-page .pub-numbered ol.bibliography > li::before {
+  left: 0.9rem !important;
+  top: 1.05rem !important;
+
+  width: var(--publication-marker-width) !important;
+  text-align: right !important;
+
+  font-weight: 600;
+}
+
+
+/* hover: 매우 약하게만 */
+.publications-page .pub-numbered ol.bibliography > li:hover {
+  border-color: var(--global-theme-color);
+
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.045);
+
+  transform: translateY(-1px);
+}
+
+
+/* 논문 제목은 카드 안에서 약간 강조 */
+.publications-page
+.pub-numbered
+ol.bibliography
+> li
+.title {
+  line-height: 1.4;
+}
+
+
+/* 모바일 */
+@media (max-width: 576px) {
+  .publications-page .pub-numbered ol.bibliography > li {
+    padding-top: 0.9rem !important;
+    padding-right: 0.8rem !important;
+    padding-bottom: 0.9rem !important;
+
+    padding-left:
+      calc(
+        var(--publication-marker-width)
+        + var(--publication-marker-gap)
+        + 0.65rem
+      ) !important;
+
+    border-radius: 5px;
+  }
+
+  .publications-page .pub-numbered ol.bibliography > li::before {
+    left: 0.55rem !important;
+    top: 0.9rem !important;
+  }
+}
