@@ -1008,40 +1008,33 @@ samp {
  */
 
 
-
 /* =========================================================
-   Publications — subtle card / semi-box style
+   Publications — semi-box hybrid style
    ========================================================= */
 
-.publications-page .pub-numbered ol.bibliography > li {
+.publications .pub-numbered ol.bibliography > li {
   position: relative;
 
-  /* 카드의 핵심 */
+  /* Subtle card */
   border: 1px solid var(--global-divider-color);
-  border-radius: 6px;
+  border-left: 3px solid var(--global-theme-color);
+  border-radius: 5px;
 
-  /* 완전한 카드처럼 보이지 않도록 배경은 유지 */
   background: transparent;
 
-  /* 내부 공간 */
-  padding-top: 1.05rem !important;
-  padding-right: 1.15rem !important;
-  padding-bottom: 1.05rem !important;
-
-  /*
-   [J.1], [C.1] 번호가 들어가는 왼쪽 공간.
-   네 기존 marker 설정을 유지하기 위한 값.
-  */
-  padding-left:
+  /* Internal spacing */
+  padding:
+    1rem
+    1.1rem
+    1rem
     calc(
       var(--publication-marker-width)
       + var(--publication-marker-gap)
       + 1rem
     ) !important;
 
-  /* 논문 사이 간격 */
-  margin-top: 0.85rem !important;
-  margin-bottom: 0.85rem !important;
+  /* Space between publications */
+  margin: 0.9rem 0 !important;
 
   transition:
     border-color 0.18s ease,
@@ -1050,20 +1043,26 @@ samp {
 }
 
 
-/* [J.1], [C.1] 위치 */
-.publications-page .pub-numbered ol.bibliography > li::before {
+/* =========================================================
+   Publication number: [J.1], [J.2], [C.1] ...
+   ========================================================= */
+
+.publications .pub-numbered ol.bibliography > li::before {
   left: 0.9rem !important;
-  top: 1.05rem !important;
+  top: 1rem !important;
 
   width: var(--publication-marker-width) !important;
-  text-align: right !important;
 
+  text-align: right !important;
   font-weight: 600;
 }
 
 
-/* hover: 매우 약하게만 */
-.publications-page .pub-numbered ol.bibliography > li:hover {
+/* =========================================================
+   Hover effect
+   ========================================================= */
+
+.publications .pub-numbered ol.bibliography > li:hover {
   border-color: var(--global-theme-color);
 
   box-shadow:
@@ -1073,8 +1072,11 @@ samp {
 }
 
 
-/* 논문 제목은 카드 안에서 약간 강조 */
-.publications-page
+/* =========================================================
+   Publication title
+   ========================================================= */
+
+.publications
 .pub-numbered
 ol.bibliography
 > li
@@ -1083,25 +1085,47 @@ ol.bibliography
 }
 
 
-/* 모바일 */
-@media (max-width: 576px) {
-  .publications-page .pub-numbered ol.bibliography > li {
-    padding-top: 0.9rem !important;
-    padding-right: 0.8rem !important;
-    padding-bottom: 0.9rem !important;
+/* =========================================================
+   Publication buttons
+   DOI / arXiv / PDF / Bib etc.
+   ========================================================= */
 
-    padding-left:
+.publications
+.pub-numbered
+ol.bibliography
+> li
+.links {
+  margin-top: 0.45rem;
+}
+
+
+/* =========================================================
+   Mobile
+   ========================================================= */
+
+@media (max-width: 576px) {
+
+  .publications .pub-numbered ol.bibliography > li {
+    padding:
+      0.9rem
+      0.8rem
+      0.9rem
       calc(
         var(--publication-marker-width)
         + var(--publication-marker-gap)
         + 0.65rem
       ) !important;
 
+    margin: 0.75rem 0 !important;
+
+    border-left-width: 3px;
     border-radius: 5px;
   }
 
-  .publications-page .pub-numbered ol.bibliography > li::before {
+
+  .publications .pub-numbered ol.bibliography > li::before {
     left: 0.55rem !important;
     top: 0.9rem !important;
   }
+
 }
