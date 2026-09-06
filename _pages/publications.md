@@ -60,7 +60,7 @@ nav_order: 20
     <h2>Conference</h2>
 
     <div class="publications pub-numbered conference-pubs">
-      {% bibliography --query @inproceedings %}
+      {% bibliography --template bib_conference --query @inproceedings %}
     </div>
 
     <nav
