@@ -1172,6 +1172,21 @@ ol.bibliography
 
 
 
+/* =========================================================
+   Publications — use full card width
+   ========================================================= */
+
+.publications-page
+.pub-numbered
+ol.bibliography
+> li
+.row
+> .col-sm-10 {
+  flex: 0 0 100% !important;
+  max-width: 100% !important;
+  width: 100% !important;
+}
+
 
 
 
