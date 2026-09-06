@@ -1078,7 +1078,10 @@ samp {
    Hover effect
    ========================================================= */
 
-.publications-page .pub-numbered ol.bibliography > li:hover {
+.publications-page
+.pub-numbered
+ol.bibliography
+> li.publication-card-clickable:hover {
   border-color: var(--global-theme-color);
 
   box-shadow:
@@ -1154,6 +1157,22 @@ ol.bibliography
   }
 
 }
+
+/* =========================================================
+   Clickable publication card
+   ========================================================= */
+
+.publications-page
+.pub-numbered
+ol.bibliography
+> li.publication-card-clickable {
+  cursor: pointer;
+}
+
+
+
+
+
 
 
 
