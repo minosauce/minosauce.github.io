@@ -1008,21 +1008,22 @@ samp {
  */
 
 
+
 /* =========================================================
    Publications — semi-box hybrid style
    ========================================================= */
 
-.publications .pub-numbered ol.bibliography > li {
+.publications-page .pub-numbered ol.bibliography > li {
   position: relative;
 
-  /* Subtle card */
+  /* 얇은 카드 + 왼쪽 포인트 라인 */
   border: 1px solid var(--global-divider-color);
   border-left: 3px solid var(--global-theme-color);
   border-radius: 5px;
 
   background: transparent;
 
-  /* Internal spacing */
+  /* 내부 여백 */
   padding:
     1rem
     1.1rem
@@ -1033,7 +1034,7 @@ samp {
       + 1rem
     ) !important;
 
-  /* Space between publications */
+  /* 논문 사이 간격 */
   margin: 0.9rem 0 !important;
 
   transition:
@@ -1047,7 +1048,7 @@ samp {
    Publication number: [J.1], [J.2], [C.1] ...
    ========================================================= */
 
-.publications .pub-numbered ol.bibliography > li::before {
+.publications-page .pub-numbered ol.bibliography > li::before {
   left: 0.9rem !important;
   top: 1rem !important;
 
@@ -1062,7 +1063,7 @@ samp {
    Hover effect
    ========================================================= */
 
-.publications .pub-numbered ol.bibliography > li:hover {
+.publications-page .pub-numbered ol.bibliography > li:hover {
   border-color: var(--global-theme-color);
 
   box-shadow:
@@ -1076,7 +1077,7 @@ samp {
    Publication title
    ========================================================= */
 
-.publications
+.publications-page
 .pub-numbered
 ol.bibliography
 > li
@@ -1086,11 +1087,11 @@ ol.bibliography
 
 
 /* =========================================================
-   Publication buttons
-   DOI / arXiv / PDF / Bib etc.
+   Publication links
+   DOI / arXiv / PDF / Bib ...
    ========================================================= */
 
-.publications
+.publications-page
 .pub-numbered
 ol.bibliography
 > li
@@ -1105,7 +1106,7 @@ ol.bibliography
 
 @media (max-width: 576px) {
 
-  .publications .pub-numbered ol.bibliography > li {
+  .publications-page .pub-numbered ol.bibliography > li {
     padding:
       0.9rem
       0.8rem
@@ -1123,7 +1124,7 @@ ol.bibliography
   }
 
 
-  .publications .pub-numbered ol.bibliography > li::before {
+  .publications-page .pub-numbered ol.bibliography > li::before {
     left: 0.55rem !important;
     top: 0.9rem !important;
   }
