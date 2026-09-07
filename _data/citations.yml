@@ -1,11 +1,15 @@
 metadata:
-  last_updated: '2026-08-28'
+  last_updated: '2026-09-07'
 papers:
+  zclnGlsAAAAJ:d1gkVwhDpl0C:
+    citations: 0
+    title: Nonlinear Model Predictive Control for Guidance Law with Target Input Estimation
+    year: '2026'
   zclnGlsAAAAJ:u-x6o8ySG0sC:
-    citations: 1
+    citations: 2
     title: Capturability Analysis of the Composite Pursuit Guidance Law
     year: '2025'
   zclnGlsAAAAJ:u5HHmVD_uO8C:
-    citations: 9
+    citations: 10
     title: A data-driven model predictive control for wind farm power maximization
     year: '2024'
