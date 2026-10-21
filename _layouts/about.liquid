@@ -84,20 +84,24 @@ layout: default
     
     {% endif %}
 
+
     <!-- Latest posts -->
     {% if page.latest_posts and page.latest_posts.enabled %}
-      <h2 class="home-section-title posts-section-title">
-        <a
-          href="https://velog.io/@minosauce"
-          target="_blank"
-          rel="noopener noreferrer"
-          style="color: inherit"
-        >
-          Posts
-        </a>
-      </h2>
-      {% include latest_posts.liquid %}
+      <section class="about-posts-band">
+        <h2 class="home-section-title posts-section-title">
+          <a
+            href="https://velog.io/@minosauce"
+            target="_blank"
+            rel="noopener noreferrer"
+            style="color: inherit"
+          >
+            Posts
+          </a>
+        </h2>
+        {% include latest_posts.liquid %}
+      </section>
     {% endif %}
+
 
     <!-- Selected papers -->
     {% if page.selected_papers %}
