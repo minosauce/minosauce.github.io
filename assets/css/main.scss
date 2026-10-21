@@ -1384,3 +1384,32 @@ html[data-theme="dark"]
 .projects .section-band > h2.category {
   color: #ffffff !important;
 }
+
+
+/* ==========================================
+   CV & Publications - Remove Section Dividers
+   ========================================== */
+
+/* CV: remove section-level bottom lines */
+.cv-page .cv > .card,
+.cv-page .cv > .card > .card-title {
+  border-bottom: none !important;
+}
+
+/* Publications: remove section-level lines */
+.publications-page > .publication-section,
+.publications-page > .publication-section > h2 {
+  border-bottom: none !important;
+}
+
+/* Remove decorative bottom lines */
+.cv-page .cv > .card::after,
+.publications-page > .publication-section::after {
+  content: none !important;
+}
+
+/* Remove standalone horizontal separators */
+.cv-page .cv > .card > hr,
+.publications-page > .publication-section > hr {
+  display: none !important;
+}
