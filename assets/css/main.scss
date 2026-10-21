@@ -1341,3 +1341,29 @@ html[data-theme="dark"]
   display: none !important;
 }
 
+
+
+
+
+/* ==========================================
+   Journal Cards - Dark Mode Contrast
+   ========================================== */
+
+html[data-theme="dark"]
+.publications-page
+.journal-section
+.journal-pubs ol.bibliography > li {
+  background-color: #292e36;
+  border-color: #758191;
+  border-left-color: var(--global-theme-color);
+}
+
+/* Hover */
+html[data-theme="dark"]
+.publications-page
+.journal-section
+.journal-pubs ol.bibliography
+> li.publication-card-clickable:hover {
+  background-color: #313844;
+  border-color: var(--global-theme-color);
+}
