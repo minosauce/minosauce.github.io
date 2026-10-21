@@ -1367,3 +1367,20 @@ html[data-theme="dark"]
   background-color: #313844;
   border-color: var(--global-theme-color);
 }
+
+
+
+/* ==========================================
+   Projects - Category Title Colors
+   ========================================== */
+
+/* Light Mode */
+.projects .section-band > h2.category {
+  color: #000000 !important;
+}
+
+/* Dark Mode */
+html[data-theme="dark"]
+.projects .section-band > h2.category {
+  color: #ffffff !important;
+}
