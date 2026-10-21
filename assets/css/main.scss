@@ -1219,75 +1219,68 @@ ol.bibliography
 
 
 
+
 /* ==========================================
    Global alternating section backgrounds
+   Full-width background
    ========================================== */
 
 :root {
-  --section-bg: var(--global-bg-color);
   --section-alt-bg: #f5f6f8;
 }
 
 html[data-theme="dark"] {
-  --section-bg: var(--global-bg-color);
   --section-alt-bg: #282b32;
 }
 
-/* Reusable section */
+/* Section layout */
 .section-band {
-  background-color: var(--section-bg);
-  padding: 1.5rem;
+  padding: 1.75rem 0;
   margin-block: 1.5rem;
+  background: transparent;
 }
 
-.section-band--alt {
-  background-color: var(--section-alt-bg);
-}
-
-/* About */
-.about-page .about-publication-block,
-.about-page .about-carousel-section:has(.about-repository-carousel),
-.about-page .about-posts-band {
-  background-color: var(--section-alt-bg);
-  padding: 1.5rem;
-  margin: 1.5rem 0;
-}
-
-/* CV: alternate section cards */
-.cv-page .cv > .card:nth-of-type(even) {
-  background-color: var(--section-alt-bg);
-}
-
-/* Publications: alternate categories */
-.publications-page > .publication-section:nth-child(
-  even of .publication-section
+/* Alternate sections */
+:is(
+  .section-band--alt,
+  .about-page .about-publication-block,
+  .about-page .about-carousel-section:has(.about-repository-carousel),
+  .about-page .about-posts-band,
+  .publications-page > .publication-section:nth-child(even of .publication-section),
+  .repository-carousel-section:nth-of-type(odd),
+  .cv-page .cv > .card:nth-of-type(even)
 ) {
-  background-color: var(--section-alt-bg);
-  padding: 1.5rem;
+  position: relative;
+  z-index: 0;
+  isolation: isolate;
+
+  background: transparent;
+  padding: 1.75rem 0;
+  border-radius: 0;
 }
 
-/* News: alternate individual rows */
-.news-list-custom > .news-item:nth-child(even) {
+/* Full-width background layer */
+:is(
+  .section-band--alt,
+  .about-page .about-publication-block,
+  .about-page .about-carousel-section:has(.about-repository-carousel),
+  .about-page .about-posts-band,
+  .publications-page > .publication-section:nth-child(even of .publication-section),
+  .repository-carousel-section:nth-of-type(odd),
+  .cv-page .cv > .card:nth-of-type(even)
+)::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+
   background-color: var(--section-alt-bg);
-  padding-inline: 1rem;
+  box-shadow: 0 0 0 100vmax var(--section-alt-bg);
+  clip-path: inset(0 -100vmax);
 }
 
-/* Smooth theme switching */
-.section-band,
-.about-publication-block,
-.about-carousel-section,
-.about-posts-band,
-.cv-page .card,
-.publication-section,
-.news-item {
-  transition: background-color 0.2s ease;
-}
-
-
-
-/* Repositories alternating sections */
-.repository-carousel-section:nth-of-type(odd) {
-  background-color: var(--section-alt-bg);
-  padding: 1.5rem;
-  border-radius: 4px;
+/* News items: preserve original background */
+.news-list-custom > .news-item {
+  background: transparent;
+  padding-inline: 0;
 }
