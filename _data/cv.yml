@@ -169,8 +169,12 @@ cv:
         keywords: "Missile DATCOM, FAST.Farm, OpenFAST, ZeroMQ"
 
     Languages:
+      - name~: Korean
+        summary: "Native"
+        
       - name: English
         summary: "Fluent"
+
 
     Interests:
       - name: "Guidance, Navigation, and Control of Missile and Satellite Systems"
