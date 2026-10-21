@@ -169,7 +169,7 @@ cv:
         keywords: "Missile DATCOM, FAST.Farm, OpenFAST, ZeroMQ"
 
     Languages:
-      - name~: Korean
+      - name: Korean
         summary: "Native"
         
       - name: English
