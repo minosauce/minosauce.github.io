@@ -1413,3 +1413,19 @@ html[data-theme="dark"]
 .publications-page > .publication-section > hr {
   display: none !important;
 }
+
+
+
+
+/* ==========================================
+   CV - Remove Organization Divider Lines
+   ========================================== */
+
+.cv-page .cv .cv-org-group {
+  border-top: none !important;
+  border-bottom: none !important;
+}
+
+.cv-page .cv .cv-org-group:last-child {
+  border-bottom: none !important;
+}
