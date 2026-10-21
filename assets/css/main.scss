@@ -1284,3 +1284,33 @@ html[data-theme="dark"] {
   background: transparent;
   padding-inline: 0;
 }
+
+
+
+
+/* ==========================================
+   CV - Seamless Full-width Sections
+   ========================================== */
+
+.cv-page .cv > .card {
+  background: transparent !important;
+
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+
+  margin: 0 !important;
+  padding: 1.75rem 1rem !important;
+}
+
+/* Preserve alternating full-width backgrounds */
+.cv-page .cv > .card:nth-of-type(even) {
+  background: transparent !important;
+}
+
+/* Dark mode - SNU logo contrast */
+html[data-theme="dark"]
+.cv-page
+.cv-org-logo[src*="/snu.png"] {
+  filter: brightness(0) invert(1);
+}
