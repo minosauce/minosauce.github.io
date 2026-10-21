@@ -1214,3 +1214,72 @@ ol.bibliography
   font-size: 1.10rem !important;
   line-height: 1.10;
 }
+
+
+
+
+
+/* ==========================================
+   Global alternating section backgrounds
+   ========================================== */
+
+:root {
+  --section-bg: var(--global-bg-color);
+  --section-alt-bg: #f5f6f8;
+}
+
+html[data-theme="dark"] {
+  --section-bg: var(--global-bg-color);
+  --section-alt-bg: #282b32;
+}
+
+/* Reusable section */
+.section-band {
+  background-color: var(--section-bg);
+  padding: 1.5rem;
+  margin-block: 1.5rem;
+}
+
+.section-band--alt {
+  background-color: var(--section-alt-bg);
+}
+
+/* About */
+.about-page .about-publication-block,
+.about-page .about-carousel-section:has(.about-repository-carousel),
+.about-page .about-posts-band {
+  background-color: var(--section-alt-bg);
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+/* CV: alternate section cards */
+.cv-page .cv > .card:nth-of-type(even) {
+  background-color: var(--section-alt-bg);
+}
+
+/* Publications: alternate categories */
+.publications-page > .publication-section:nth-child(
+  even of .publication-section
+) {
+  background-color: var(--section-alt-bg);
+  padding: 1.5rem;
+}
+
+/* News: alternate individual rows */
+.news-list-custom > .news-item:nth-child(even) {
+  background-color: var(--section-alt-bg);
+  padding-inline: 1rem;
+}
+
+/* Smooth theme switching */
+.section-band,
+.about-publication-block,
+.about-carousel-section,
+.about-posts-band,
+.cv-page .card,
+.publication-section,
+.news-item {
+  transition: background-color 0.2s ease;
+}
+
