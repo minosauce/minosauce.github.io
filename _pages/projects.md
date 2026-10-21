@@ -22,7 +22,9 @@ display_categories:
 
     {% for category in page.display_categories %}
 
-    <section class="section-band{% if forloop.even %} section-band--alt{% endif %}">
+    {% assign section_index = forloop.index0 | modulo: 2 %}
+    <section class="section-band{% if section_index == 1 %} section-band--alt{% endif %}">
+
 
       <h2 class="category">
         {{ category }}
