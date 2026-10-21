@@ -22,6 +22,8 @@ display_categories:
 
     {% for category in page.display_categories %}
 
+    <section class="section-band{% if forloop.even %} section-band--alt{% endif %}">
+
       <h2 class="category">
         {{ category }}
       </h2>
@@ -85,6 +87,8 @@ display_categories:
         </button>
 
       </div>
+
+    </section>
 
     {% endfor %}
 
