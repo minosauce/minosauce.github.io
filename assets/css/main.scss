@@ -1314,3 +1314,30 @@ html[data-theme="dark"]
 .cv-org-logo[src*="/snu.png"] {
   filter: brightness(0) invert(1);
 }
+
+
+
+/* ==========================================
+   About - Remove section divider lines
+   ========================================== */
+
+/* Remove section borders */
+.about-page .home-section-title,
+.about-page .about-publication-block,
+.about-page .about-carousel-section,
+.about-page .about-posts-band {
+  border-top: none !important;
+  border-bottom: none !important;
+}
+
+/* Remove decorative lines on headings */
+.about-page .home-section-title::before,
+.about-page .home-section-title::after {
+  content: none !important;
+}
+
+/* Remove standalone section separators */
+.about-page article > hr {
+  display: none !important;
+}
+
