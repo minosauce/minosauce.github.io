@@ -1283,3 +1283,11 @@ html[data-theme="dark"] {
   transition: background-color 0.2s ease;
 }
 
+
+
+/* Repositories alternating sections */
+.repository-carousel-section:nth-of-type(odd) {
+  background-color: var(--section-alt-bg);
+  padding: 1.5rem;
+  border-radius: 4px;
+}
