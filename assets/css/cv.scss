@@ -13,18 +13,14 @@
    CV - Organization group
    ========================================================= */
 
+
 .cv-org-group {
   width: 100%;
-
   margin: 0;
   padding: 1.25rem 0 1.45rem;
-
-  border-top: 1px solid var(--global-divider-color);
+  border: none;
 }
 
-.cv-org-group:last-child {
-  border-bottom: 1px solid var(--global-divider-color);
-}
 
 /* =========================================================
    CV - Organization header
