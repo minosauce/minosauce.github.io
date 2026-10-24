@@ -1,3 +1,4 @@
+
 /* =========================================================
    About Showcase
 
@@ -7,6 +8,7 @@
    ========================================================= */
 
 function initializeAboutShowcase() {
+  removeAboutConferenceInPrefix();
   initializeAboutPublicationPagination();
   initializeAboutCarousels();
 }
@@ -19,6 +21,40 @@ if (document.readyState === "loading") {
   );
 } else {
   initializeAboutShowcase();
+}
+
+
+/* =========================================================
+   About - Remove "In" before conference names
+   (This only changes text shown in the About publications.)
+   ========================================================= */
+
+function removeAboutConferenceInPrefix() {
+  const periodicals = document.querySelectorAll(
+    ".about-publication-block .periodical",
+  );
+
+  periodicals.forEach((periodical) => {
+    // Find the first non-whitespace text node, including nested elements.
+    const walker = document.createTreeWalker(
+      periodical,
+      NodeFilter.SHOW_TEXT,
+    );
+
+    let node;
+    while ((node = walker.nextNode())) {
+      if (!node.textContent.trim()) {
+        continue;
+      }
+
+      // Remove only the standalone leading word "In" (not "International").
+      node.textContent = node.textContent.replace(
+        /^(\s*)In(?=\s|$)\s*/,
+        "$1",
+      );
+      break;
+    }
+  });
 }
 
 
