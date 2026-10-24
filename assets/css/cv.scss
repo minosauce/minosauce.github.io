@@ -356,7 +356,7 @@ html[data-theme="dark"] .cv-role-dot {
     display: grid !important;
 
     grid-template-columns: 180px minmax(0, 1fr);
-    column-gap: 4.0rem;
+    column-gap: 6.0rem;
   }
 
   .container[role="main"] > .row:has(.cv) > .col-sm-3 {
