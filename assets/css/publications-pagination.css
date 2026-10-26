@@ -322,10 +322,30 @@
   padding-right: 8rem !important;
 }
 
+.publications-page .publication-date {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 7rem;
+
+  text-align: right;
+  white-space: nowrap;
+  font-weight: 400;
+  color: var(--global-text-color);
+}
+
 /* Mobile */
 @media (max-width: 768px) {
   .publications-page .pub-numbered ol.bibliography > li {
     padding-right: 0 !important;
+  }
+
+  .publications-page .publication-date {
+    position: static;
+    display: block;
+    width: auto;
+    text-align: left;
+    margin: 0.25rem 0;
   }
 }
 
