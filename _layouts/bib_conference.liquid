@@ -20,6 +20,23 @@
       {{ entry.title }}
     </div>
 
+    
+    {% if entry.year %}
+      <div class="publication-date">
+        <span class="publication-year">
+          {{ entry.year }}
+        </span>
+    
+        {% if entry.month %}
+          {% assign month_abbr = entry.month | slice: 0, 3 | capitalize %}
+          <span class="publication-month">
+            {{ month_abbr }}{% unless month_abbr == 'May' %}.{% endunless %}
+          </span>
+        {% endif %}
+      </div>
+    {% endif %}
+
+
 
     <!-- =========================================================
          Authors
