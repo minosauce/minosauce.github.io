@@ -89,3 +89,42 @@ nav_order: 20
 <script
   src="{{ '/assets/js/publication-card-links.js' | relative_url }}"
 ></script>
+
+
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const datePattern =
+    /(?:,\s*)?((?:(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec)[a-z]*\.?\s+)?(?:19|20)\d{2})\s*$/i;
+
+  document.querySelectorAll(
+    ".publications-page .pub-numbered ol.bibliography > li"
+  ).forEach((item) => {
+    const periodical = item.querySelector(".periodical");
+    const title = item.querySelector(".title");
+
+    if (!periodical || !title) return;
+    if (item.querySelector(".publication-date")) return;
+
+    const html = periodical.innerHTML;
+    const match = html.match(datePattern);
+
+    if (!match) return;
+
+    // Remove date from journal/conference name
+    periodical.innerHTML = html
+      .slice(0, match.index)
+      .replace(/,\s*$/, "")
+      .trimEnd();
+
+    // Create independent date element
+    const date = document.createElement("span");
+    date.className = "publication-date";
+    date.textContent = match[1].trim();
+
+    // Position next to title on mobile;
+    // CSS aligns it to the far right on desktop.
+    title.insertAdjacentElement("afterend", date);
+  });
+});
+</script>
