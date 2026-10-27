@@ -326,3 +326,36 @@
     font-size: 1.25rem;
   }
 }
+
+
+/* ==========================================
+   About - Publication Author Styling
+   ========================================== */
+
+/* Coauthor links: blue without dotted underline */
+.about-page .about-publication-block .author a,
+.about-page .about-publication-block .author a:visited,
+.about-page .about-publication-block .author a:hover,
+.about-page .about-publication-block .author a:focus {
+  color: var(--global-theme-color) !important;
+  text-decoration: none !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
+  background-image: none !important;
+}
+
+/* Minho Jang: bold, non-italic, no underline */
+.about-page .about-publication-block .author em {
+  font-style: normal !important;
+  font-weight: 700 !important;
+  text-decoration: none !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
+  background-image: none !important;
+}
+
+/* Add an asterisk after Minho Jang */
+.about-page .about-publication-block .author em::after {
+  content: "*";
+  font-weight: 700;
+}
