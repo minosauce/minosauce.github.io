@@ -1432,3 +1432,29 @@ html[data-theme="dark"]
 .cv-page .cv .cv-org-group:last-child {
   border-bottom: none !important;
 }
+
+
+
+
+
+/* Publications - Compact mobile cards */
+
+@media (max-width: 576px) {
+  .publications-page {
+    --publication-marker-width: 2.5rem;
+    --publication-marker-gap: 0.3rem;
+  }
+
+  .publications-page .pub-numbered
+  ol.bibliography > li {
+    padding: 0.75rem 0.6rem 0.75rem 3.5rem !important;
+  }
+
+  .publications-page .pub-numbered
+  ol.bibliography > li::before {
+    left: 0.35rem !important;
+    top: 0.8rem !important;
+    width: 2.5rem !important;
+    font-size: 0.9rem !important;
+  }
+}
