@@ -446,3 +446,38 @@ ol.bibliography > li .row > .col-sm-10 {
     line-height: 1.3 !important;
   }
 }
+
+
+
+
+
+/* ==========================================
+   Publications - Author Styling
+   ========================================== */
+
+/* Coauthor links: blue text, no underline */
+.publications-page .author a,
+.publications-page .author a:visited,
+.publications-page .author a:hover,
+.publications-page .author a:focus {
+  color: var(--global-theme-color) !important;
+  text-decoration: none !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
+  background-image: none !important;
+}
+
+/* Minho Jang: bold, no underline or italic */
+.publications-page .author em {
+  font-style: normal !important;
+  font-weight: 700 !important;
+  text-decoration: none !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
+}
+
+/* Append asterisk to Minho Jang */
+.publications-page .author em::after {
+  content: "*";
+  font-weight: 700;
+}
